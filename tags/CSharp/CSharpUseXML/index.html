@@ -128,43 +128,43 @@
 <h2 id="创建xml文档">创建XML文档</h2>
 <p><strong>首先引用<code>System.Xml</code>命名空间</strong></p>
 <h3 id="1初始化一个实例">1.初始化一个实例</h3>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612696838809">复制</button>XmlDocument xd = <span class="hljs-keyword">new</span> XmlDocument();
-<b class="name">cs</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612696838809">XmlDocument xd = new XmlDocument();
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612696060249">复制</button>XmlDocument xd = <span class="hljs-keyword">new</span> XmlDocument();
+<b class="name">cs</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612696060249">XmlDocument xd = new XmlDocument();
 </textarea>
 <h3 id="2创建xml头文件声明">2.创建XML头文件声明</h3>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612697909944">复制</button>XmlDeclaration xdt = xd.CreateXmlDeclaration(<span class="hljs-string">&quot;1.0&quot;</span>, <span class="hljs-string">&quot;utf-8&quot;</span>, <span class="hljs-literal">null</span>);
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612695817566">复制</button>XmlDeclaration xdt = xd.CreateXmlDeclaration(<span class="hljs-string">&quot;1.0&quot;</span>, <span class="hljs-string">&quot;utf-8&quot;</span>, <span class="hljs-literal">null</span>);
 xd.AppendChild(xdt);
-<b class="name">cs</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612697909944">XmlDeclaration xdt = xd.CreateXmlDeclaration("1.0", "utf-8", null);
+<b class="name">cs</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612695817566">XmlDeclaration xdt = xd.CreateXmlDeclaration("1.0", "utf-8", null);
 xd.AppendChild(xdt);
 </textarea>
 <h3 id="3创建唯一根节点">3.创建唯一根节点</h3>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612699169044">复制</button>XmlElement Students = xd.CreateElement(<span class="hljs-string">&quot;Students&quot;</span>);
-<b class="name">cs</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612699169044">XmlElement Students = xd.CreateElement("Students");
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612698567929">复制</button>XmlElement Students = xd.CreateElement(<span class="hljs-string">&quot;Students&quot;</span>);
+<b class="name">cs</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612698567929">XmlElement Students = xd.CreateElement("Students");
 </textarea>
 <h3 id="4给根节点添加属性也可以不添加">4.给根节点添加属性(也可以不添加)</h3>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612700220800">复制</button>Students.SetAttribute(<span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;学生信息&quot;</span>);
-<b class="name">cs</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612700220800">Students.SetAttribute("name", "学生信息");
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612696171476">复制</button>Students.SetAttribute(<span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;学生信息&quot;</span>);
+<b class="name">cs</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612696171476">Students.SetAttribute("name", "学生信息");
 </textarea>
 <h3 id="5将根节点加入到xml文件中">5.将根节点加入到XML文件中</h3>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612695766121">复制</button>xd.AppendChild(Students);
-<b class="name">cs</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612695766121">xd.AppendChild(Students);
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612698657390">复制</button>xd.AppendChild(Students);
+<b class="name">cs</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612698657390">xd.AppendChild(Students);
 </textarea>
 <h3 id="6创建二级节点">6.创建二级节点</h3>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612698517203">复制</button>XmlElement student = xd.CreateElement(<span class="hljs-string">&quot;student&quot;</span>);
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612700780311">复制</button>XmlElement student = xd.CreateElement(<span class="hljs-string">&quot;student&quot;</span>);
 student.SetAttribute(<span class="hljs-string">&quot;stuNum&quot;</span>, <span class="hljs-string">&quot;100100100&quot;</span>);
 Students.AppendChild(student);
-<b class="name">cs</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612698517203">XmlElement student = xd.CreateElement("student");
+<b class="name">cs</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612700780311">XmlElement student = xd.CreateElement("student");
 student.SetAttribute("stuNum", "100100100");
 Students.AppendChild(student);
 </textarea>
 <h3 id="7给二级节点填充值">7.给二级节点填充值</h3>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612695372125">复制</button>XmlElement name = xd.CreateElement(<span class="hljs-string">&quot;name&quot;</span>);
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612699210617">复制</button>XmlElement name = xd.CreateElement(<span class="hljs-string">&quot;name&quot;</span>);
 name.InnerText = <span class="hljs-string">&quot;小明&quot;</span>;
 XmlElement sex = xd.CreateElement(<span class="hljs-string">&quot;sex&quot;</span>);
 sex.InnerText = <span class="hljs-string">&quot;男&quot;</span>;
 student.AppendChild(name);
 student.AppendChild(sex);
-<b class="name">cs</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612695372125">XmlElement name = xd.CreateElement("name");
+<b class="name">cs</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612699210617">XmlElement name = xd.CreateElement("name");
 name.InnerText = "小明";
 XmlElement sex = xd.CreateElement("sex");
 sex.InnerText = "男";
@@ -172,18 +172,18 @@ student.AppendChild(name);
 student.AppendChild(sex);
 </textarea>
 <h3 id="8保存">8.保存</h3>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612697220428">复制</button>xd.Save(<span class="hljs-string">&quot;StuMS.xml&quot;</span>);
-<b class="name">cs</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612697220428">xd.Save("StuMS.xml");
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612701440020">复制</button>xd.Save(<span class="hljs-string">&quot;StuMS.xml&quot;</span>);
+<b class="name">cs</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612701440020">xd.Save("StuMS.xml");
 </textarea>
 <h3 id="9结果">9.结果</h3>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612702023318">复制</button><span class="hljs-meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612702981801">复制</button><span class="hljs-meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">Students</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;学生信息&quot;</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">student</span> <span class="hljs-attr">stuNum</span>=<span class="hljs-string">&quot;100100100&quot;</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>小明<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">sex</span>&gt;</span>男<span class="hljs-tag">&lt;/<span class="hljs-name">sex</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">student</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">Students</span>&gt;</span>
-<b class="name">xml</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612702023318"><?xml version="1.0" encoding="utf-8"?>
+<b class="name">xml</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612702981801"><?xml version="1.0" encoding="utf-8"?>
 <Students name="学生信息">
   <student stuNum="100100100">
     <name>小明</name>
@@ -193,23 +193,23 @@ student.AppendChild(sex);
 </textarea>
 <h2 id="读取xml文档里的信息">读取XML文档里的信息</h2>
 <p><strong>首先要先加载XML文档</strong></p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612697394910">复制</button>XmlDocument xd = <span class="hljs-keyword">new</span> XmlDocument();
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612698137067">复制</button>XmlDocument xd = <span class="hljs-keyword">new</span> XmlDocument();
 xd.Load(<span class="hljs-string">&quot;StuMS.xml&quot;</span>);
-<b class="name">cs</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612697394910">XmlDocument xd = new XmlDocument();
+<b class="name">cs</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612698137067">XmlDocument xd = new XmlDocument();
 xd.Load("StuMS.xml");
 </textarea>
 <h3 id="1利用索引器读取">1.利用索引器读取</h3>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612699009104">复制</button><span class="hljs-comment">//查找标签值</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612700460729">复制</button><span class="hljs-comment">//查找标签值</span>
 <span class="hljs-built_in">string</span> Name = stuNode.ChildNodes[<span class="hljs-number">0</span>].InnerText;
 <span class="hljs-comment">//查找标签属性</span>
 <span class="hljs-built_in">string</span> StuNum = stuNode.Attributes[<span class="hljs-number">0</span>].Value;
-<b class="name">cs</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612699009104">//查找标签值
+<b class="name">cs</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612700460729">//查找标签值
 string Name = stuNode.ChildNodes[0].InnerText;
 //查找标签属性
 string StuNum = stuNode.Attributes[0].Value;
 </textarea>
 <h3 id="2利用xpath查询">2.利用Xpath查询</h3>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612696543174">复制</button><span class="hljs-comment">// 常用查询方式</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612703056713">复制</button><span class="hljs-comment">// 常用查询方式</span>
 <span class="hljs-comment">//1. &quot;根节点/父节点/子节点&quot;</span>
 <span class="hljs-comment">//2. &quot;//节点&quot;</span>
 <span class="hljs-comment">//3. &quot;根节点/父节点[@父节点属性 = &#x27;value&#x27; ]&quot;</span>
@@ -217,7 +217,7 @@ string StuNum = stuNode.Attributes[0].Value;
 
 XmlNode stuNode = xd.SelectSingleNode(<span class="hljs-string">&quot;Students/student[@stuNum =&quot;</span> + stuNum + <span class="hljs-string">&quot;]&quot;</span>);<span class="hljs-comment">//可以获得指定stuNum的一个节点</span>
 XmlNodeList stuNodeList = xd.SelectNodes(<span class="hljs-string">&quot;Students/student[sex = &#x27;男&#x27; ]&quot;</span>);<span class="hljs-comment">//可以获得指定性别的集合</span>
-<b class="name">cs</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612696543174">// 常用查询方式
+<b class="name">cs</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612703056713">// 常用查询方式
 //1. "根节点/父节点/子节点"
 //2. "//节点"
 //3. "根节点/父节点[@父节点属性 = 'value' ]"
@@ -228,12 +228,12 @@ XmlNodeList stuNodeList = xd.SelectNodes("Students/student[sex = '男' ]");//可
 </textarea>
 <h2 id="修改xml文档里的信息">修改XML文档里的信息</h2>
 <p>找到-&gt;修改-&gt;<strong>保存</strong></p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612696784094">复制</button><span class="hljs-comment">//节点信息修改</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612705070675">复制</button><span class="hljs-comment">//节点信息修改</span>
 stuNode.SelectSingleNode(<span class="hljs-string">&quot;name&quot;</span>).InnerText = <span class="hljs-keyword">value</span>;
 stuNode.SelectSingleNode(<span class="hljs-string">&quot;name&quot;</span>).InnerXml = <span class="hljs-keyword">value</span>;
 <span class="hljs-comment">//属性信息修改</span>
 student.Attributes[<span class="hljs-string">&quot;stuNum&quot;</span>].Value = <span class="hljs-keyword">value</span>;
-<b class="name">cs</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612696784094">//节点信息修改
+<b class="name">cs</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612705070675">//节点信息修改
 stuNode.SelectSingleNode("name").InnerText = value;
 stuNode.SelectSingleNode("name").InnerXml = value;
 //属性信息修改
@@ -242,11 +242,11 @@ student.Attributes["stuNum"].Value = value;
 <p>InnerText只显示内容<code>小明 男</code><br>
 InnerXml将标签一同显示出来<code> &lt;name&gt;小明&lt;/name&gt;&lt;sex&gt;男&lt;/sex&gt;</code></p>
 <h2 id="删除xml文档里的信息">删除XML文档里的信息</h2>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612695270333">复制</button><span class="hljs-comment">//从当前节点获取父节点，从父节点删除当前节点</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612701853923">复制</button><span class="hljs-comment">//从当前节点获取父节点，从父节点删除当前节点</span>
 stuNode.ParentNode.RemoveChild(studentNode);
 <span class="hljs-comment">//从父节点直接删除子节点</span>
 stuNode.RemoveChild(studentNode)
-<b class="name">cs</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612695270333">//从当前节点获取父节点，从父节点删除当前节点
+<b class="name">cs</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612701853923">//从当前节点获取父节点，从父节点删除当前节点
 stuNode.ParentNode.RemoveChild(studentNode);
 //从父节点直接删除子节点
 stuNode.RemoveChild(studentNode)

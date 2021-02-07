@@ -86,8 +86,7 @@ a:hover {
 }
 
 .tool {
-  /* display: none; */
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   position: fixed;
@@ -124,6 +123,9 @@ main {
 @media (max-width: 750px) {
   main {
     padding: 1.5rem 1rem 1.5rem 1rem;
+  }
+  .tool {
+    display: flex;
   }
 }
 
