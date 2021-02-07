@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="author" content="Tuzilow">
+    <meta name="description" content="想要成为大佬">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.5.0/styles/default.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.5.0/styles/github-gist.min.css">
+    <link rel="stylesheet" href="/assets/lib/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/css/layout.css" />
+    <script defer src="https://cdn.bootcdn.net/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"></script>
+    <script defer src="/assets/js/copyCode.js"></script>
+    <script defer src="/assets/js/backTop.js"></script>
+
+    
+  <link rel="stylesheet" href="/assets/css/page.css" />
+  <link rel="stylesheet" href="/assets/css/sidebar.css" />
+  <link rel="stylesheet" href="/assets/css/footer.css" />
+  <link rel="stylesheet" href="/assets/css/post.css" />
+  <script defer src="/assets/js/backHome.js"></script>
+  <script defer src="/assets/js/toc.js"></script>
+  <script defer src="/assets/js/copyright.js"></script>
+
+
+    <title>C# HtmlAgilityPack+Selenium爬取需要拉动滚动条的页面内容</title>
+  </head>
+  <body>
+    <div class="container">
+      <aside>
+        
+  <div class="sidebar">
+  <header>Tuzilow的小站</header>
+  <div class="info">
+    <div class="avatar">
+      <img src="https://cdn.jsdelivr.net/gh/Tuzilow/Tuzilow.github.io/images/avatar.png" alt="头像">
+    </div>
+    <div class="author">Tuzilow</div>
+    <div class="description">想要成为大佬</div>
+    <div class="about">
+      <a href="/about">about me.</a>
+    </div>
+  </div>
+  <div class="links">
+    <ul>
+    
+      <li class="links-item">
+        <a href="https://github.com/Tuzilow" target="_blank">
+          <i class="fa fa-github-alt" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="links-item">
+        <a href="tencent://message/?uin=1176281967" target="_blank">
+          <i class="fa fa-qq" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+    </ul>
+  </div>
+  <nav>
+    <ul>
+    
+      <li class="nav-item">
+        <a href="/archives">
+          <span class="nav-item__count">27</span>
+          <span class="nav-item__label">归档</span>
+        </a>
+      </li>
+    
+      <li class="nav-item">
+        <a href="/categories">
+          <span class="nav-item__count">2</span>
+          <span class="nav-item__label">分类</span>
+        </a>
+      </li>
+    
+      <li class="nav-item">
+        <a href="/tags">
+          <span class="nav-item__count">35</span>
+          <span class="nav-item__label">标签</span>
+        </a>
+      </li>
+    
+    </ul>
+  </nav>
+  <div class="catalogue" id="catalogue"></div>
+</div>
+
+      </aside>
+      <main>
+        
+  <div class="post">
+    <div class="post-front">
+      <h1 class="post-front__title">C# HtmlAgilityPack+Selenium爬取需要拉动滚动条的页面内容</h1>
+      <div class="post-front__desc">
+        
+        <p class="post-front__desc-date">
+          <i class="fa fa-calendar" aria-hidden="true"></i>
+          2019/09/05 12:02:37
+        </p>
+        
+        
+        <p class="post-front__desc-category">
+          <i class="fa fa-folder-o" aria-hidden="true"></i>
+          <a href="/categories/技术">
+            技术
+          </a>
+        </p>
+        
+          <div class="post-front__desc-tags">
+          
+          <a href="/tags/CSharp">
+            <i class="fa fa-tag" aria-hidden="true"></i>
+            CSharp
+          </a>
+          
+          <a href="/tags/Web Crawler">
+            <i class="fa fa-tag" aria-hidden="true"></i>
+            Web Crawler
+          </a>
+          
+        </div>
+      </div>
+    </div>
+    <div class="post-content">
+      <nav id="toc" class="toc"><ol><li><a href="#前情提要">前情提要</a></li><li><a href="#selenium简介">Selenium简介</a></li><li><a href="#c安装selenium">C#安装Selenium</a></li><li><a href="#实例获取某网站主页所有图片">实例(获取某网站主页所有图片)</a><ol><li><a href="#普通获取网页html">普通获取网页Html</a></li><li><a href="#不启动chrome窗口及关闭chrome控制台获取网页">不启动Chrome窗口及关闭Chrome控制台获取网页</a></li><li><a href="#将页面滚动到底部">将页面滚动到底部</a></li><li><a href="#使用htmlagilitypack解析读取到的html">使用HtmlAgilityPack解析读取到的Html</a></li><li><a href="#完整代码">完整代码</a></li></ol></li><li><a href="#参考文章">参考文章</a></li></ol></nav><p>现在大多数网站都是随着滚动条的滑动加载页面内容的，因此单纯获得静态页面的Html是无法获得全部的页面内容的。使用Selenium就可以模拟浏览器拉动滑动条来加载所有页面内容。</p>
+<h2 id="前情提要">前情提要</h2>
+<ul>
+<li><a href="https://tuzilow.github.io/2019/09/04/CSharpHtmlAgilityPack/">C#HtmlAgilityPack爬取静态页面</a></li>
+</ul>
+<h2 id="selenium简介">Selenium简介</h2>
+<p>Selenium是一个WEB自动化测试工具。Selenium测试直接运行在浏览器中，就像真正的用户在操作一样。支持的浏览器包括IE（7, 8, 9, 10, 11），Mozilla Firefox，Safari，Google Chrome，Opera等。主要功能包括：测试与浏览器的兼容性——测试你的应用程序看是否能够很好得工作在不同浏览器和操作系统之上。测试系统功能——创建回归测试检验软件功能和用户需求。支持自动录制动作和自动生成 .Net、Java、Perl等不同语言的测试脚本。Selenium也是一款同样使用Apache License 2.0协议发布的开源框架。</p>
+<h2 id="c安装selenium">C#安装Selenium</h2>
+<p>本文仅仅是使用Selenium实现拉动滚动条的功能，所以不对Selenium进行过多的介绍。
+通过Nuget包管理器搜索&quot;Selenium&quot;，分别安装:</p>
+<ul>
+<li>Selenium.WebDriver</li>
+<li>Selenium.Chrome.WebDriver</li>
+</ul>
+<h2 id="实例获取某网站主页所有图片">实例(获取某网站主页所有图片)</h2>
+<h3 id="普通获取网页html">普通获取网页Html</h3>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612696281477">复制</button>ChromeDriver driver = <span class="hljs-keyword">new</span> ChromeDriver();
+driver.Navigate().GoToUrl(url);
+<span class="hljs-built_in">string</span> title = driver.Title;<span class="hljs-comment">//页面title</span>
+<span class="hljs-built_in">string</span> html = driver.PageSource;<span class="hljs-comment">//页面Html</span>
+<b class="name">cs</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612696281477">ChromeDriver driver = new ChromeDriver();
+driver.Navigate().GoToUrl(url);
+string title = driver.Title;//页面title
+string html = driver.PageSource;//页面Html
+</textarea>
+<h3 id="不启动chrome窗口及关闭chrome控制台获取网页">不启动Chrome窗口及关闭Chrome控制台获取网页</h3>
+<p>程序执行时会自动打开Chrome窗口和输出控制台中一些信息，我们不需要这些东西。</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612695235638">复制</button><span class="hljs-comment">//不启动chrome窗口</span>
+ChromeOptions options = <span class="hljs-keyword">new</span> ChromeOptions();
+options.AddArgument(<span class="hljs-string">&quot;headless&quot;</span>);
+
+<span class="hljs-comment">//关闭ChromeDriver控制台</span>
+ChromeDriverService driverService = ChromeDriverService.CreateDefaultService();
+driverService.HideCommandPromptWindow = <span class="hljs-literal">true</span>;
+
+ChromeDriver driver = <span class="hljs-keyword">new</span> ChromeDriver(driverService, options);
+driver.Navigate().GoToUrl(url);
+<b class="name">cs</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612695235638">//不启动chrome窗口
+ChromeOptions options = new ChromeOptions();
+options.AddArgument("headless");
+
+//关闭ChromeDriver控制台
+ChromeDriverService driverService = ChromeDriverService.CreateDefaultService();
+driverService.HideCommandPromptWindow = true;
+
+ChromeDriver driver = new ChromeDriver(driverService, options);
+driver.Navigate().GoToUrl(url);
+</textarea>
+<h3 id="将页面滚动到底部">将页面滚动到底部</h3>
+<p>如果使用<code>scrollTo(0, document.body.scrollHeight)</code>，直接让将页面滚动到底部会导致页面中间部分读取失败，所以需要分几次滑动并且给页面足够的时间加载</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612694967076">复制</button><span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">10</span>; i++)
+{
+    <span class="hljs-built_in">string</span> jsCode = <span class="hljs-string">&quot;window.scrollTo({top: document.body.scrollHeight / 10 * &quot;</span> + i + <span class="hljs-string">&quot;, behavior: \&quot;smooth\&quot;});&quot;</span>;
+    <span class="hljs-comment">//使用IJavaScriptExecutor接口运行js代码</span>
+    IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+    js.ExecuteScript(jsCode);
+    <span class="hljs-comment">//暂停滚动</span>
+    Thread.Sleep(<span class="hljs-number">1000</span>);
+}
+<b class="name">cs</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612694967076">for (int i = 1; i <= 10; i++)
+{
+    string jsCode = "window.scrollTo({top: document.body.scrollHeight / 10 * " + i + ", behavior: \"smooth\"});";
+    //使用IJavaScriptExecutor接口运行js代码
+    IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+    js.ExecuteScript(jsCode);
+    //暂停滚动
+    Thread.Sleep(1000);
+}
+</textarea>
+<h3 id="使用htmlagilitypack解析读取到的html">使用HtmlAgilityPack解析读取到的Html</h3>
+<p>以下内容与<a href="https://tuzilow.github.io/2019/09/04/CSharpHtmlAgilityPack/">上一篇文章</a>基本相同</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612695693956">复制</button><span class="hljs-built_in">string</span> title = driver.Title;<span class="hljs-comment">//页面title</span>
+<span class="hljs-built_in">string</span> html = driver.PageSource;<span class="hljs-comment">//页面Html</span>
+
+HtmlDocument doc = <span class="hljs-keyword">new</span> HtmlDocument();
+doc.LoadHtml(html);<span class="hljs-comment">//解析Html字符串</span>
+<span class="hljs-built_in">string</span> imgPath = <span class="hljs-string">&quot;//img&quot;</span>;<span class="hljs-comment">//选择img</span>
+<span class="hljs-comment">//获取img标签中的图片</span>
+<span class="hljs-keyword">foreach</span> (HtmlNode node <span class="hljs-keyword">in</span> doc.DocumentNode.SelectNodes(imgPath))
+{
+    ······
+}
+<b class="name">cs</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612695693956">string title = driver.Title;//页面title
+string html = driver.PageSource;//页面Html
+
+HtmlDocument doc = new HtmlDocument();
+doc.LoadHtml(html);//解析Html字符串
+string imgPath = "//img";//选择img
+//获取img标签中的图片
+foreach (HtmlNode node in doc.DocumentNode.SelectNodes(imgPath))
+{
+    ······
+}
+</textarea>
+<h3 id="完整代码">完整代码</h3>
+<p>&lt;details&gt;</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612695344685">复制</button><span class="hljs-keyword">using</span> System;
+<span class="hljs-keyword">using</span> System.Collections.Generic;
+<span class="hljs-keyword">using</span> System.Linq;
+<span class="hljs-keyword">using</span> System.Text;
+<span class="hljs-keyword">using</span> System.Threading.Tasks;
+<span class="hljs-keyword">using</span> System.Net;
+<span class="hljs-keyword">using</span> System.IO;
+<span class="hljs-keyword">using</span> HtmlAgilityPack;
+<span class="hljs-keyword">using</span> System.Text.RegularExpressions;
+<span class="hljs-keyword">using</span> OpenQA.Selenium;
+<span class="hljs-keyword">using</span> OpenQA.Selenium.Chrome;
+<span class="hljs-keyword">using</span> System.Threading;
+
+<span class="hljs-keyword">namespace</span> <span class="hljs-title">WebCrawlerDemo</span>
+{
+    <span class="hljs-keyword">class</span> <span class="hljs-title">Program</span>
+    {
+        <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>(<span class="hljs-params"><span class="hljs-built_in">string</span>[] args</span>)</span>
+        {
+            WebClient wc = <span class="hljs-keyword">new</span> WebClient();
+
+            <span class="hljs-built_in">int</span> imgNum = <span class="hljs-number">0</span>;<span class="hljs-comment">//图片编号</span>
+            <span class="hljs-built_in">string</span> url = <span class="hljs-string">&quot;https://www.bilibili.com&quot;</span>;
+
+
+            <span class="hljs-built_in">string</span> html = FinalHtml.GetFinalHtml(url, <span class="hljs-number">10</span>);
+
+            HtmlDocument doc = <span class="hljs-keyword">new</span> HtmlDocument();
+            doc.LoadHtml(html);
+
+            <span class="hljs-built_in">string</span> imgPath = <span class="hljs-string">&quot;//img&quot;</span>;<span class="hljs-comment">//选择img</span>
+
+            <span class="hljs-comment">//HtmlNode nodes = hd.DocumentNode.SelectSingleNode(path);</span>
+
+            <span class="hljs-comment">//获取img标签中的图片</span>
+            <span class="hljs-keyword">foreach</span> (HtmlNode node <span class="hljs-keyword">in</span> doc.DocumentNode.SelectNodes(imgPath))
+            {
+                <span class="hljs-keyword">if</span> (node.Attributes[<span class="hljs-string">&quot;src&quot;</span>] != <span class="hljs-literal">null</span>)
+                {
+                    <span class="hljs-built_in">string</span> imgUrl = node.Attributes[<span class="hljs-string">&quot;src&quot;</span>].Value.ToString();
+                    <span class="hljs-keyword">if</span> (imgUrl != <span class="hljs-string">&quot;&quot;</span> &amp;&amp; imgUrl != <span class="hljs-string">&quot; &quot;</span>)
+                    {
+                        imgNum++;
+
+                        <span class="hljs-comment">//生成文件名，自动获取后缀</span>
+                        <span class="hljs-built_in">string</span> fileName = GetImgName(imgUrl, imgNum);
+
+                        <span class="hljs-comment">//Console.WriteLine(fileName);</span>
+                        <span class="hljs-comment">//Console.WriteLine(imgUrl);</span>
+                        ImgDownloader.DownloadImg(wc, imgUrl, <span class="hljs-string">&quot;images/&quot;</span>, fileName);
+                    }
+                }
+            }
+            <span class="hljs-comment">//获取背景图</span>
+            <span class="hljs-built_in">string</span> bgImgPath = <span class="hljs-string">&quot;//*[@style]&quot;</span>;<span class="hljs-comment">//选择具有style属性的节点</span>
+            <span class="hljs-keyword">foreach</span> (HtmlNode node <span class="hljs-keyword">in</span> doc.DocumentNode.SelectNodes(bgImgPath))
+            {
+                <span class="hljs-keyword">if</span> (node.Attributes[<span class="hljs-string">&quot;style&quot;</span>].Value.Contains(<span class="hljs-string">&quot;background-image:url&quot;</span>))
+                {
+                    imgNum++;
+                    <span class="hljs-built_in">string</span> bgImgUrl = node.Attributes[<span class="hljs-string">&quot;style&quot;</span>].Value;
+                    bgImgUrl = Regex.Match(bgImgUrl, <span class="hljs-string">@&quot;(?&lt;=\().+?(?=\))&quot;</span>).Value;<span class="hljs-comment">//读取url()的内容</span>
+                    <span class="hljs-comment">//Console.WriteLine(bgImgUrl);</span>
+                    <span class="hljs-comment">//生成文件名，自动获取后缀</span>
+                    <span class="hljs-built_in">string</span> fileName = GetImgName(bgImgUrl, imgNum);
+
+                    ImgDownloader.DownloadImg(wc, bgImgUrl, <span class="hljs-string">&quot;images/bgcImg/&quot;</span>, fileName);
+                }
+            }
+            Console.WriteLine(<span class="hljs-string">&quot;----------END----------&quot;</span>);
+            Console.WriteLine(<span class="hljs-string">$&quot;一共获得: <span class="hljs-subst">{imgNum}</span>张图&quot;</span>);
+            Console.ReadKey();
+        }
+    }
+    <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;summary&gt;</span></span>
+    <span class="hljs-comment"><span class="hljs-doctag">///</span> 图片下载器</span>
+    <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;/summary&gt;</span></span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ImgDownloader</span>
+    {
+        <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;summary&gt;</span></span>
+        <span class="hljs-comment"><span class="hljs-doctag">///</span> 下载图片</span>
+        <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;/summary&gt;</span></span>
+        <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;param name=&quot;webClient&quot;&gt;</span><span class="hljs-doctag">&lt;/param&gt;</span></span>
+        <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;param name=&quot;url&quot;&gt;</span>图片url<span class="hljs-doctag">&lt;/param&gt;</span></span>
+        <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;param name=&quot;folderPath&quot;&gt;</span>文件夹路径<span class="hljs-doctag">&lt;/param&gt;</span></span>
+        <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;param name=&quot;fileName&quot;&gt;</span>图片名<span class="hljs-doctag">&lt;/param&gt;</span></span>
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">DownloadImg</span>(<span class="hljs-params">WebClient webClient, <span class="hljs-built_in">string</span> url, <span class="hljs-built_in">string</span> folderPath, <span class="hljs-built_in">string</span> fileName</span>)</span>
+        {
+            <span class="hljs-comment">//如果文件夹不存在，则创建一个</span>
+            <span class="hljs-keyword">if</span> (!Directory.Exists(folderPath))
+            {
+                Directory.CreateDirectory(folderPath);
+            }
+            <span class="hljs-comment">//判断路径是否完整，补全不完整的路径</span>
+            <span class="hljs-keyword">if</span> (url.IndexOf(<span class="hljs-string">&quot;https:&quot;</span>) == <span class="hljs-number">-1</span> &amp;&amp; url.IndexOf(<span class="hljs-string">&quot;http:&quot;</span>) == <span class="hljs-number">-1</span>)
+            {
+                url = <span class="hljs-string">&quot;https:&quot;</span> + url;
+            }
+            <span class="hljs-comment">//下载图片</span>
+            <span class="hljs-keyword">try</span>
+            {
+                webClient.DownloadFile(url, folderPath + fileName);
+                Console.WriteLine(fileName + <span class="hljs-string">&quot;下载成功&quot;</span>);
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.Message);
+                Console.WriteLine(url);
+            }
+        }
+        <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;summary&gt;</span></span>
+        <span class="hljs-comment"><span class="hljs-doctag">///</span> 生成图片名称</span>
+        <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;/summary&gt;</span></span>
+        <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;param name=&quot;imageUrl&quot;&gt;</span>图片地址<span class="hljs-doctag">&lt;/param&gt;</span></span>
+        <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;param name=&quot;imageNum&quot;&gt;</span>图片编号<span class="hljs-doctag">&lt;/param&gt;</span></span>
+        <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;returns&gt;</span><span class="hljs-doctag">&lt;/returns&gt;</span></span>
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-built_in">string</span> <span class="hljs-title">GetImgName</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> imageUrl, <span class="hljs-built_in">int</span> imageNum</span>)</span>
+        {
+            <span class="hljs-built_in">string</span> imgExtension;
+            <span class="hljs-keyword">if</span> (imageUrl.LastIndexOf(<span class="hljs-string">&quot;.&quot;</span>) != <span class="hljs-number">-1</span>)
+            {
+                imgExtension = imageUrl.Substring(imageUrl.LastIndexOf(<span class="hljs-string">&quot;.&quot;</span>));
+            }
+            <span class="hljs-keyword">else</span>
+            {
+                imgExtension = <span class="hljs-string">&quot;.jpg&quot;</span>;
+            }
+            <span class="hljs-keyword">return</span> imageNum + imgExtension;
+        }
+    }
+    <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;summary&gt;</span></span>
+    <span class="hljs-comment"><span class="hljs-doctag">///</span> 获得执行过js的网址</span>
+    <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;/summary&gt;</span></span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">FinalHtml</span>
+    {
+        <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;summary&gt;</span></span>
+        <span class="hljs-comment"><span class="hljs-doctag">///</span> 获得拉动滚动条后的页面</span>
+        <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;/summary&gt;</span></span>
+        <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;param name=&quot;url&quot;&gt;</span>网址<span class="hljs-doctag">&lt;/param&gt;</span></span>
+        <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;param name=&quot;sectionNum&quot;&gt;</span>滚动几次<span class="hljs-doctag">&lt;/param&gt;</span></span>
+        <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;returns&gt;</span>html字符串<span class="hljs-doctag">&lt;/returns&gt;</span></span>
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-built_in">string</span> <span class="hljs-title">GetFinalHtml</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> url, <span class="hljs-built_in">int</span> sectionNum</span>)</span>
+        {
+            <span class="hljs-comment">//不启动chrome窗口</span>
+            ChromeOptions options = <span class="hljs-keyword">new</span> ChromeOptions();
+            options.AddArgument(<span class="hljs-string">&quot;headless&quot;</span>);
+
+            <span class="hljs-comment">//关闭ChromeDriver控制台</span>
+            ChromeDriverService driverService = ChromeDriverService.CreateDefaultService();
+            driverService.HideCommandPromptWindow = <span class="hljs-literal">true</span>;
+
+
+            ChromeDriver driver = <span class="hljs-keyword">new</span> ChromeDriver(driverService, options);
+
+            driver.Navigate().GoToUrl(url);
+
+            <span class="hljs-built_in">string</span> title = driver.Title;
+            Console.WriteLine(<span class="hljs-string">$&quot;Title: <span class="hljs-subst">{title}</span>&quot;</span>);
+            <span class="hljs-comment">//将页面滚动到底部</span>
+            Console.Write(<span class="hljs-string">&quot;页面滚动中，请稍后&quot;</span>);
+
+            <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">1</span>; i &lt;= sectionNum; i++)
+            {
+                <span class="hljs-built_in">string</span> jsCode = <span class="hljs-string">&quot;window.scrollTo({top: document.body.scrollHeight / &quot;</span> + sectionNum + <span class="hljs-string">&quot; * &quot;</span> + i + <span class="hljs-string">&quot;, behavior: \&quot;smooth\&quot;});&quot;</span>;
+                IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+                js.ExecuteScript(jsCode);
+                Console.Write(<span class="hljs-string">&quot;.&quot;</span>);
+                Thread.Sleep(<span class="hljs-number">1000</span>);
+            }
+            Console.WriteLine();
+
+            <span class="hljs-built_in">string</span> html = driver.PageSource;
+            driver.Quit();
+
+            <span class="hljs-keyword">return</span> html;
+        }
+    }
+}
+<b class="name">cs</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612695344685">using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Net;
+using System.IO;
+using HtmlAgilityPack;
+using System.Text.RegularExpressions;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+using System.Threading;
+
+namespace WebCrawlerDemo
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            WebClient wc = new WebClient();
+
+            int imgNum = 0;//图片编号
+            string url = "https://www.bilibili.com";
+
+
+            string html = FinalHtml.GetFinalHtml(url, 10);
+
+            HtmlDocument doc = new HtmlDocument();
+            doc.LoadHtml(html);
+
+            string imgPath = "//img";//选择img
+
+            //HtmlNode nodes = hd.DocumentNode.SelectSingleNode(path);
+
+            //获取img标签中的图片
+            foreach (HtmlNode node in doc.DocumentNode.SelectNodes(imgPath))
+            {
+                if (node.Attributes["src"] != null)
+                {
+                    string imgUrl = node.Attributes["src"].Value.ToString();
+                    if (imgUrl != "" && imgUrl != " ")
+                    {
+                        imgNum++;
+
+                        //生成文件名，自动获取后缀
+                        string fileName = GetImgName(imgUrl, imgNum);
+
+                        //Console.WriteLine(fileName);
+                        //Console.WriteLine(imgUrl);
+                        ImgDownloader.DownloadImg(wc, imgUrl, "images/", fileName);
+                    }
+                }
+            }
+            //获取背景图
+            string bgImgPath = "//*[@style]";//选择具有style属性的节点
+            foreach (HtmlNode node in doc.DocumentNode.SelectNodes(bgImgPath))
+            {
+                if (node.Attributes["style"].Value.Contains("background-image:url"))
+                {
+                    imgNum++;
+                    string bgImgUrl = node.Attributes["style"].Value;
+                    bgImgUrl = Regex.Match(bgImgUrl, @"(?<=\().+?(?=\))").Value;//读取url()的内容
+                    //Console.WriteLine(bgImgUrl);
+                    //生成文件名，自动获取后缀
+                    string fileName = GetImgName(bgImgUrl, imgNum);
+
+                    ImgDownloader.DownloadImg(wc, bgImgUrl, "images/bgcImg/", fileName);
+                }
+            }
+            Console.WriteLine("----------END----------");
+            Console.WriteLine($"一共获得: {imgNum}张图");
+            Console.ReadKey();
+        }
+    }
+    /// <summary>
+    /// 图片下载器
+    /// </summary>
+    public class ImgDownloader
+    {
+        /// <summary>
+        /// 下载图片
+        /// </summary>
+        /// <param name="webClient"></param>
+        /// <param name="url">图片url</param>
+        /// <param name="folderPath">文件夹路径</param>
+        /// <param name="fileName">图片名</param>
+        public static void DownloadImg(WebClient webClient, string url, string folderPath, string fileName)
+        {
+            //如果文件夹不存在，则创建一个
+            if (!Directory.Exists(folderPath))
+            {
+                Directory.CreateDirectory(folderPath);
+            }
+            //判断路径是否完整，补全不完整的路径
+            if (url.IndexOf("https:") == -1 && url.IndexOf("http:") == -1)
+            {
+                url = "https:" + url;
+            }
+            //下载图片
+            try
+            {
+                webClient.DownloadFile(url, folderPath + fileName);
+                Console.WriteLine(fileName + "下载成功");
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.Message);
+                Console.WriteLine(url);
+            }
+        }
+        /// <summary>
+        /// 生成图片名称
+        /// </summary>
+        /// <param name="imageUrl">图片地址</param>
+        /// <param name="imageNum">图片编号</param>
+        /// <returns></returns>
+        public static string GetImgName(string imageUrl, int imageNum)
+        {
+            string imgExtension;
+            if (imageUrl.LastIndexOf(".") != -1)
+            {
+                imgExtension = imageUrl.Substring(imageUrl.LastIndexOf("."));
+            }
+            else
+            {
+                imgExtension = ".jpg";
+            }
+            return imageNum + imgExtension;
+        }
+    }
+    /// <summary>
+    /// 获得执行过js的网址
+    /// </summary>
+    public class FinalHtml
+    {
+        /// <summary>
+        /// 获得拉动滚动条后的页面
+        /// </summary>
+        /// <param name="url">网址</param>
+        /// <param name="sectionNum">滚动几次</param>
+        /// <returns>html字符串</returns>
+        public static string GetFinalHtml(string url, int sectionNum)
+        {
+            //不启动chrome窗口
+            ChromeOptions options = new ChromeOptions();
+            options.AddArgument("headless");
+
+            //关闭ChromeDriver控制台
+            ChromeDriverService driverService = ChromeDriverService.CreateDefaultService();
+            driverService.HideCommandPromptWindow = true;
+
+
+            ChromeDriver driver = new ChromeDriver(driverService, options);
+
+            driver.Navigate().GoToUrl(url);
+
+            string title = driver.Title;
+            Console.WriteLine($"Title: {title}");
+            //将页面滚动到底部
+            Console.Write("页面滚动中，请稍后");
+
+            for (int i = 1; i <= sectionNum; i++)
+            {
+                string jsCode = "window.scrollTo({top: document.body.scrollHeight / " + sectionNum + " * " + i + ", behavior: \"smooth\"});";
+                IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+                js.ExecuteScript(jsCode);
+                Console.Write(".");
+                Thread.Sleep(1000);
+            }
+            Console.WriteLine();
+
+            string html = driver.PageSource;
+            driver.Quit();
+
+            return html;
+        }
+    }
+}
+</textarea>
+<p>&lt;/details&gt;</p>
+<h2 id="参考文章">参考文章</h2>
+<ul>
+<li><a href="http://finisky.azurewebsites.net/2019/07/20/selenium/">Selenium爬取网页实战</a></li>
+</ul>
+
+    </div>
+    
+  </div>
+
+        <footer>
+        
+  <div class="footer">
+  
+  <div class="theme">
+    博客主题为 <a href="https://github.com/Tuzilow/CoinRailgun">CoinRailgun</a> 默认主题
+  </div>
+  <div class="copyright">
+    <span>© 2019-2021 Tuzilow.</span>
+    <span>Powered by <a href="https://github.com/Tuzilow/CoinRailgun">CoinRailgun</a></span>
+  </div>
+</div>
+
+        </footer>
+      </main>
+    </div>
+  </body>
+</html>

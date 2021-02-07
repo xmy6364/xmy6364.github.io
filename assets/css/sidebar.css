@@ -1,0 +1,136 @@
+.sidebar {
+  position: fixed;
+  z-index: 5000;
+  width: 20rem;
+  height: 100%;
+  overflow-y: auto;
+  box-shadow: var(--shadow-spread-light);
+  transition: all 0.25s;
+  background: var(--white) url('/assets/logo.png') no-repeat bottom center;
+  background-size: 100px 100px;
+  margin-bottom: 1rem;
+}
+.sidebar:hover {
+  box-shadow: var(--shadow-spread-dark);
+  transition: all 0.25s;
+}
+
+.sidebar > * {
+  width: 100%;
+  padding: 0 1.2rem;
+  text-align: center;
+
+  opacity: 0;
+  animation: 0.3s fade-in ease-in-out forwards;
+}
+
+.sidebar header {
+  padding: 0.5rem 1.2rem;
+  color: var(--white);
+  background-color: var(--primary-dark-1);
+  margin-bottom: 1.5rem;
+  opacity: 1;
+}
+
+.sidebar .info > * {
+  margin-bottom: 1rem;
+}
+.sidebar .info .avatar img {
+  width: 104px;
+  height: 104px;
+  border-radius: 50%;
+  padding: 4px;
+  box-shadow: var(--shadow-spread);
+  background-color: #fff;
+}
+.sidebar .info .description {
+  color: var(--secondary);
+  font-size: var(--text-sm);
+}
+.sidebar .info .about a {
+  text-decoration: underline;
+  color: var(--primary);
+}
+.sidebar .info .about a:hover {
+  color: var(--primary-light-2);
+}
+
+.sidebar .links ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.sidebar .links ul .links-item a {
+  width: 2rem;
+  height: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s;
+}
+.sidebar .links ul .links-item a:hover {
+  background-color: var(--primary-light-2);
+  transition: all 0.25s;
+}
+
+.sidebar nav {
+  background-color: var(--white);
+  margin-top: 1rem;
+}
+.sidebar nav ul,
+.sidebar nav ul li a {
+  display: flex;
+}
+.sidebar nav ul {
+  justify-content: center;
+  align-items: center;
+
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-top: 1px solid var(--primary-light-3);
+  border-bottom: 1px solid var(--primary-light-3);
+  transition: all 0.25s;
+}
+.sidebar nav ul:hover {
+  box-shadow: var(--shadow-inner);
+  transition: all 0.25s;
+}
+.sidebar nav ul li {
+  margin-right: 1.5rem;
+}
+.sidebar nav ul li:last-child {
+  margin-right: 0;
+}
+.sidebar nav ul li a {
+  flex-direction: column;
+  transition: color 0.25s;
+}
+.sidebar nav ul li a .nav-item__count {
+  font-size: var(--text-lg);
+}
+.sidebar nav ul li a:hover {
+  color: var(--primary);
+  transition: color 0.25s;
+}
+.sidebar .catalogue {
+  margin-bottom: 1rem;
+}
+.sidebar .catalogue .toc {
+  font-size: var(--text-sm);
+  border: 1px dashed var(--primary);
+  border-radius: 5px;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  text-align: left;
+}
+.sidebar .catalogue .toc ol {
+  padding-left: 1rem;
+}
+.sidebar .catalogue .toc ol a {
+  line-height: 2em;
+  color: var(--primary-dark-2);
+}
+.sidebar .catalogue .toc ol a:hover {
+  color: var(--primary-light-2);
+}

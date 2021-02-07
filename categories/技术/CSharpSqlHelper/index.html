@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="author" content="Tuzilow">
+    <meta name="description" content="想要成为大佬">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.5.0/styles/default.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.5.0/styles/github-gist.min.css">
+    <link rel="stylesheet" href="/assets/lib/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/css/layout.css" />
+    <script defer src="https://cdn.bootcdn.net/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"></script>
+    <script defer src="/assets/js/copyCode.js"></script>
+    <script defer src="/assets/js/backTop.js"></script>
+
+    
+  <link rel="stylesheet" href="/assets/css/page.css" />
+  <link rel="stylesheet" href="/assets/css/sidebar.css" />
+  <link rel="stylesheet" href="/assets/css/footer.css" />
+  <link rel="stylesheet" href="/assets/css/post.css" />
+  <script defer src="/assets/js/backHome.js"></script>
+  <script defer src="/assets/js/toc.js"></script>
+  <script defer src="/assets/js/copyright.js"></script>
+
+
+    <title>C# 封装SqlHelper</title>
+  </head>
+  <body>
+    <div class="container">
+      <aside>
+        
+  <div class="sidebar">
+  <header>Tuzilow的小站</header>
+  <div class="info">
+    <div class="avatar">
+      <img src="https://cdn.jsdelivr.net/gh/Tuzilow/Tuzilow.github.io/images/avatar.png" alt="头像">
+    </div>
+    <div class="author">Tuzilow</div>
+    <div class="description">想要成为大佬</div>
+    <div class="about">
+      <a href="/about">about me.</a>
+    </div>
+  </div>
+  <div class="links">
+    <ul>
+    
+      <li class="links-item">
+        <a href="https://github.com/Tuzilow" target="_blank">
+          <i class="fa fa-github-alt" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="links-item">
+        <a href="tencent://message/?uin=1176281967" target="_blank">
+          <i class="fa fa-qq" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+    </ul>
+  </div>
+  <nav>
+    <ul>
+    
+      <li class="nav-item">
+        <a href="/archives">
+          <span class="nav-item__count">27</span>
+          <span class="nav-item__label">归档</span>
+        </a>
+      </li>
+    
+      <li class="nav-item">
+        <a href="/categories">
+          <span class="nav-item__count">2</span>
+          <span class="nav-item__label">分类</span>
+        </a>
+      </li>
+    
+      <li class="nav-item">
+        <a href="/tags">
+          <span class="nav-item__count">35</span>
+          <span class="nav-item__label">标签</span>
+        </a>
+      </li>
+    
+    </ul>
+  </nav>
+  <div class="catalogue" id="catalogue"></div>
+</div>
+
+      </aside>
+      <main>
+        
+  <div class="post">
+    <div class="post-front">
+      <h1 class="post-front__title">C# 封装SqlHelper</h1>
+      <div class="post-front__desc">
+        
+        <p class="post-front__desc-date">
+          <i class="fa fa-calendar" aria-hidden="true"></i>
+          2019/08/23 21:48:47
+        </p>
+        
+        
+        <p class="post-front__desc-category">
+          <i class="fa fa-folder-o" aria-hidden="true"></i>
+          <a href="/categories/技术">
+            技术
+          </a>
+        </p>
+        
+          <div class="post-front__desc-tags">
+          
+          <a href="/tags/CSharp">
+            <i class="fa fa-tag" aria-hidden="true"></i>
+            CSharp
+          </a>
+          
+          <a href="/tags/SQL Server">
+            <i class="fa fa-tag" aria-hidden="true"></i>
+            SQL Server
+          </a>
+          
+        </div>
+      </div>
+    </div>
+    <div class="post-content">
+      <nav id="toc" class="toc"></nav><p>老师在讲C#实战项目时所使用的SqlHelper，使用的数据库是SQL Server</p>
+<p><strong>注意，连接数据库的连接字符串需要在配置文件中设置好</strong></p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612692255423">复制</button><span class="hljs-tag">&lt;<span class="hljs-name">appSettings</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">add</span> <span class="hljs-attr">key</span> = <span class="hljs-string">&quot;connString&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;data source = .; database = CourseSelectionInfo; integrated security = true&quot;</span>/&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">appSettings</span>&gt;</span>
+<b class="name">XML</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612692255423"><appSettings>
+    <add key = "connString" value="data source = .; database = CourseSelectionInfo; integrated security = true"/>
+</appSettings>
+</textarea>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612693605687">复制</button><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">SqlHelper</span>
+{
+    <span class="hljs-meta">#<span class="hljs-meta-keyword">region</span> 连接字符串connString</span>
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-built_in">string</span> connString;
+    <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-title">SqlHelper</span>(<span class="hljs-params"></span>)</span>
+    {
+        connString = ConfigurationManager.AppSettings[<span class="hljs-string">&quot;connString&quot;</span>];
+    }
+    <span class="hljs-meta">#<span class="hljs-meta-keyword">endregion</span></span>
+
+    <span class="hljs-meta">#<span class="hljs-meta-keyword">region</span> 增删改int ExcuteNonQuery(string cmdText, CommandType cmdType, params SqlParameter[] parameters)</span>
+    <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;summary&gt;</span></span>
+    <span class="hljs-comment"><span class="hljs-doctag">///</span> 增删改</span>
+    <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;/summary&gt;</span></span>
+    <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;param name=&quot;cmdText&quot;&gt;</span>sql<span class="hljs-doctag">&lt;/param&gt;</span></span>
+    <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;param name=&quot;cmdType&quot;&gt;</span><span class="hljs-doctag">&lt;/param&gt;</span></span>
+    <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;param name=&quot;parameters&quot;&gt;</span>参数<span class="hljs-doctag">&lt;/param&gt;</span></span>
+    <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;returns&gt;</span>修改了几行<span class="hljs-doctag">&lt;/returns&gt;</span></span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-built_in">int</span> <span class="hljs-title">ExcuteNonQuery</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> cmdText, CommandType cmdType, <span class="hljs-keyword">params</span> SqlParameter[] parameters</span>)</span>
+    {
+        <span class="hljs-keyword">using</span> (SqlConnection connection = <span class="hljs-keyword">new</span> SqlConnection(connString))
+        {
+            <span class="hljs-keyword">using</span> (SqlCommand cmd = <span class="hljs-keyword">new</span> SqlCommand(cmdText, connection))
+            {
+                cmd.CommandType = cmdType;
+                connection.Open();
+                <span class="hljs-keyword">if</span> (parameters.Length &gt; <span class="hljs-number">0</span>)
+                {
+                    cmd.Parameters.AddRange(parameters);
+                }
+                <span class="hljs-keyword">return</span> cmd.ExecuteNonQuery();
+            }
+        }
+    }
+    <span class="hljs-meta">#<span class="hljs-meta-keyword">endregion</span></span>
+
+    <span class="hljs-meta">#<span class="hljs-meta-keyword">region</span> 获取一个数据 T ExcuteScalar&lt;T&gt;(string cmdText,  CommandType cmdType, params SqlParameter[] parameters)</span>
+    <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;summary&gt;</span></span>
+    <span class="hljs-comment"><span class="hljs-doctag">///</span> 获取一个数据<span class="hljs-doctag">&lt;T&gt;</span></span>
+    <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;/summary&gt;</span></span>
+    <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;typeparam name=&quot;T&quot;&gt;</span>数据类型<span class="hljs-doctag">&lt;/typeparam&gt;</span></span>
+    <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;param name=&quot;cmdText&quot;&gt;</span>sql<span class="hljs-doctag">&lt;/param&gt;</span></span>
+    <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;param name=&quot;cmdType&quot;&gt;</span><span class="hljs-doctag">&lt;/param&gt;</span></span>
+    <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;param name=&quot;parameters&quot;&gt;</span>参数<span class="hljs-doctag">&lt;/param&gt;</span></span>
+    <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;returns&gt;</span>任意类型的数据<span class="hljs-doctag">&lt;/returns&gt;</span></span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> T <span class="hljs-title">ExcuteScalar</span>&lt;<span class="hljs-title">T</span>&gt;(<span class="hljs-params"><span class="hljs-built_in">string</span> cmdText, CommandType cmdType, <span class="hljs-keyword">params</span> SqlParameter[] parameters</span>)</span>
+    {
+        <span class="hljs-keyword">using</span> (SqlConnection connection = <span class="hljs-keyword">new</span> SqlConnection(connString))
+        {
+            <span class="hljs-keyword">using</span> (SqlCommand cmd = <span class="hljs-keyword">new</span> SqlCommand(cmdText, connection))
+            {
+                cmd.CommandType = cmdType;
+                connection.Open();
+                <span class="hljs-keyword">if</span> (parameters.Length &gt; <span class="hljs-number">0</span>)
+                {
+                    cmd.Parameters.AddRange(parameters);
+                }
+                <span class="hljs-keyword">return</span> (T)cmd.ExecuteScalar();
+            }
+        }
+    }
+    <span class="hljs-meta">#<span class="hljs-meta-keyword">endregion</span></span>
+
+    <span class="hljs-meta">#<span class="hljs-meta-keyword">region</span> 读取数据表SqlDataReader ExcuteReader(string cmdText, CommandType cmdType, params SqlParameter[] parameters)</span>
+    <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;summary&gt;</span></span>
+    <span class="hljs-comment"><span class="hljs-doctag">///</span> 读取数据表</span>
+    <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;/summary&gt;</span></span>
+    <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;param name=&quot;cmdText&quot;&gt;</span>sql<span class="hljs-doctag">&lt;/param&gt;</span></span>
+    <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;param name=&quot;cmdType&quot;&gt;</span><span class="hljs-doctag">&lt;/param&gt;</span></span>
+    <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;param name=&quot;parameters&quot;&gt;</span>参数<span class="hljs-doctag">&lt;/param&gt;</span></span>
+    <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;returns&gt;</span>SqlDataReader<span class="hljs-doctag">&lt;/returns&gt;</span></span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> SqlDataReader <span class="hljs-title">ExcuteReader</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> cmdText, CommandType cmdType, <span class="hljs-keyword">params</span> SqlParameter[] parameters</span>)</span>
+    {
+        SqlConnection connection = <span class="hljs-keyword">new</span> SqlConnection(connString);
+            <span class="hljs-keyword">using</span> (SqlCommand cmd = <span class="hljs-keyword">new</span> SqlCommand(cmdText, connection))
+            {
+                cmd.CommandType = cmdType;
+                connection.Open();
+                <span class="hljs-keyword">if</span> (parameters.Length &gt; <span class="hljs-number">0</span>)
+                {
+                    cmd.Parameters.AddRange(parameters);
+                }
+                <span class="hljs-keyword">return</span> cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            }
+    }
+    <span class="hljs-meta">#<span class="hljs-meta-keyword">endregion</span></span>
+
+    <span class="hljs-meta">#<span class="hljs-meta-keyword">region</span> 临时数据库DataSet GetDataSet(string cmdText, CommandType cmdType, params SqlParameter[] parameters)</span>
+    <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;summary&gt;</span></span>
+    <span class="hljs-comment"><span class="hljs-doctag">///</span> 获取临时数据库</span>
+    <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;/summary&gt;</span></span>
+    <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;param name=&quot;cmdText&quot;&gt;</span><span class="hljs-doctag">&lt;/param&gt;</span></span>
+    <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;param name=&quot;cmdType&quot;&gt;</span><span class="hljs-doctag">&lt;/param&gt;</span></span>
+    <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;param name=&quot;parameters&quot;&gt;</span><span class="hljs-doctag">&lt;/param&gt;</span></span>
+    <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;returns&gt;</span><span class="hljs-doctag">&lt;/returns&gt;</span></span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> DataSet <span class="hljs-title">GetDataSet</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> cmdText, CommandType cmdType, <span class="hljs-keyword">params</span> SqlParameter[] parameters</span>)</span>
+    {
+        DataSet ds = <span class="hljs-keyword">new</span> DataSet();
+        <span class="hljs-keyword">using</span> (SqlConnection connection = <span class="hljs-keyword">new</span> SqlConnection(connString))
+        {
+            <span class="hljs-keyword">using</span> (SqlCommand cmd = <span class="hljs-keyword">new</span> SqlCommand(cmdText, connection))
+            {
+                cmd.CommandType = cmdType;
+                <span class="hljs-keyword">using</span> (SqlDataAdapter adapter = <span class="hljs-keyword">new</span> SqlDataAdapter(cmd))
+                {
+                    <span class="hljs-keyword">if</span> (parameters.Length &gt; <span class="hljs-number">0</span>)
+                    {
+                        adapter.SelectCommand.Parameters.AddRange(parameters);
+                    }
+                    adapter.Fill(ds);
+                }
+            }
+        }
+        <span class="hljs-keyword">return</span> ds;
+    }
+    <span class="hljs-meta">#<span class="hljs-meta-keyword">endregion</span></span>
+
+    <span class="hljs-meta">#<span class="hljs-meta-keyword">region</span> 临时数据表DataTable GetDataTable(string cmdText, CommandType cmdType, params SqlParameter[] parameters)</span>
+    <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;summary&gt;</span></span>
+    <span class="hljs-comment"><span class="hljs-doctag">///</span> 获取临时数据表</span>
+    <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;/summary&gt;</span></span>
+    <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;param name=&quot;cmdText&quot;&gt;</span>sql<span class="hljs-doctag">&lt;/param&gt;</span></span>
+    <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;param name=&quot;cmdType&quot;&gt;</span><span class="hljs-doctag">&lt;/param&gt;</span></span>
+    <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;param name=&quot;parameters&quot;&gt;</span>参数<span class="hljs-doctag">&lt;/param&gt;</span></span>
+    <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;returns&gt;</span><span class="hljs-doctag">&lt;/returns&gt;</span></span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> DataTable <span class="hljs-title">GetDataTable</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> cmdText, CommandType cmdType, <span class="hljs-keyword">params</span> SqlParameter[] parameters</span>)</span>
+    {
+        <span class="hljs-keyword">return</span> GetDataSet(cmdText, cmdType, parameters).Tables[<span class="hljs-number">0</span>];
+    }
+    <span class="hljs-meta">#<span class="hljs-meta-keyword">endregion</span></span>
+}
+<b class="name">cs</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612693605687">public class SqlHelper
+{
+    #region 连接字符串connString
+    private static string connString;
+    static SqlHelper()
+    {
+        connString = ConfigurationManager.AppSettings["connString"];
+    }
+    #endregion
+
+    #region 增删改int ExcuteNonQuery(string cmdText, CommandType cmdType, params SqlParameter[] parameters)
+    /// <summary>
+    /// 增删改
+    /// </summary>
+    /// <param name="cmdText">sql</param>
+    /// <param name="cmdType"></param>
+    /// <param name="parameters">参数</param>
+    /// <returns>修改了几行</returns>
+    public static int ExcuteNonQuery(string cmdText, CommandType cmdType, params SqlParameter[] parameters)
+    {
+        using (SqlConnection connection = new SqlConnection(connString))
+        {
+            using (SqlCommand cmd = new SqlCommand(cmdText, connection))
+            {
+                cmd.CommandType = cmdType;
+                connection.Open();
+                if (parameters.Length > 0)
+                {
+                    cmd.Parameters.AddRange(parameters);
+                }
+                return cmd.ExecuteNonQuery();
+            }
+        }
+    }
+    #endregion
+
+    #region 获取一个数据 T ExcuteScalar<T>(string cmdText,  CommandType cmdType, params SqlParameter[] parameters)
+    /// <summary>
+    /// 获取一个数据<T>
+    /// </summary>
+    /// <typeparam name="T">数据类型</typeparam>
+    /// <param name="cmdText">sql</param>
+    /// <param name="cmdType"></param>
+    /// <param name="parameters">参数</param>
+    /// <returns>任意类型的数据</returns>
+    public static T ExcuteScalar<T>(string cmdText, CommandType cmdType, params SqlParameter[] parameters)
+    {
+        using (SqlConnection connection = new SqlConnection(connString))
+        {
+            using (SqlCommand cmd = new SqlCommand(cmdText, connection))
+            {
+                cmd.CommandType = cmdType;
+                connection.Open();
+                if (parameters.Length > 0)
+                {
+                    cmd.Parameters.AddRange(parameters);
+                }
+                return (T)cmd.ExecuteScalar();
+            }
+        }
+    }
+    #endregion
+
+    #region 读取数据表SqlDataReader ExcuteReader(string cmdText, CommandType cmdType, params SqlParameter[] parameters)
+    /// <summary>
+    /// 读取数据表
+    /// </summary>
+    /// <param name="cmdText">sql</param>
+    /// <param name="cmdType"></param>
+    /// <param name="parameters">参数</param>
+    /// <returns>SqlDataReader</returns>
+    public static SqlDataReader ExcuteReader(string cmdText, CommandType cmdType, params SqlParameter[] parameters)
+    {
+        SqlConnection connection = new SqlConnection(connString);
+            using (SqlCommand cmd = new SqlCommand(cmdText, connection))
+            {
+                cmd.CommandType = cmdType;
+                connection.Open();
+                if (parameters.Length > 0)
+                {
+                    cmd.Parameters.AddRange(parameters);
+                }
+                return cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            }
+    }
+    #endregion
+
+    #region 临时数据库DataSet GetDataSet(string cmdText, CommandType cmdType, params SqlParameter[] parameters)
+    /// <summary>
+    /// 获取临时数据库
+    /// </summary>
+    /// <param name="cmdText"></param>
+    /// <param name="cmdType"></param>
+    /// <param name="parameters"></param>
+    /// <returns></returns>
+    public static DataSet GetDataSet(string cmdText, CommandType cmdType, params SqlParameter[] parameters)
+    {
+        DataSet ds = new DataSet();
+        using (SqlConnection connection = new SqlConnection(connString))
+        {
+            using (SqlCommand cmd = new SqlCommand(cmdText, connection))
+            {
+                cmd.CommandType = cmdType;
+                using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
+                {
+                    if (parameters.Length > 0)
+                    {
+                        adapter.SelectCommand.Parameters.AddRange(parameters);
+                    }
+                    adapter.Fill(ds);
+                }
+            }
+        }
+        return ds;
+    }
+    #endregion
+
+    #region 临时数据表DataTable GetDataTable(string cmdText, CommandType cmdType, params SqlParameter[] parameters)
+    /// <summary>
+    /// 获取临时数据表
+    /// </summary>
+    /// <param name="cmdText">sql</param>
+    /// <param name="cmdType"></param>
+    /// <param name="parameters">参数</param>
+    /// <returns></returns>
+    public static DataTable GetDataTable(string cmdText, CommandType cmdType, params SqlParameter[] parameters)
+    {
+        return GetDataSet(cmdText, cmdType, parameters).Tables[0];
+    }
+    #endregion
+}
+</textarea>
+
+    </div>
+    
+  </div>
+
+        <footer>
+        
+  <div class="footer">
+  
+  <div class="theme">
+    博客主题为 <a href="https://github.com/Tuzilow/CoinRailgun">CoinRailgun</a> 默认主题
+  </div>
+  <div class="copyright">
+    <span>© 2019-2021 Tuzilow.</span>
+    <span>Powered by <a href="https://github.com/Tuzilow/CoinRailgun">CoinRailgun</a></span>
+  </div>
+</div>
+
+        </footer>
+      </main>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="author" content="Tuzilow">
+    <meta name="description" content="想要成为大佬">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.5.0/styles/default.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.5.0/styles/github-gist.min.css">
+    <link rel="stylesheet" href="/assets/lib/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/css/layout.css" />
+    <script defer src="https://cdn.bootcdn.net/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"></script>
+    <script defer src="/assets/js/copyCode.js"></script>
+    <script defer src="/assets/js/backTop.js"></script>
+
+    
+  <link rel="stylesheet" href="/assets/css/page.css" />
+  <link rel="stylesheet" href="/assets/css/sidebar.css" />
+  <link rel="stylesheet" href="/assets/css/footer.css" />
+  <link rel="stylesheet" href="/assets/css/post.css" />
+  <script defer src="/assets/js/backHome.js"></script>
+  <script defer src="/assets/js/toc.js"></script>
+  <script defer src="/assets/js/copyright.js"></script>
+
+
+    <title>TypeScript实现设计模式——策略模式</title>
+  </head>
+  <body>
+    <div class="container">
+      <aside>
+        
+  <div class="sidebar">
+  <header>Tuzilow的小站</header>
+  <div class="info">
+    <div class="avatar">
+      <img src="https://cdn.jsdelivr.net/gh/Tuzilow/Tuzilow.github.io/images/avatar.png" alt="头像">
+    </div>
+    <div class="author">Tuzilow</div>
+    <div class="description">想要成为大佬</div>
+    <div class="about">
+      <a href="/about">about me.</a>
+    </div>
+  </div>
+  <div class="links">
+    <ul>
+    
+      <li class="links-item">
+        <a href="https://github.com/Tuzilow" target="_blank">
+          <i class="fa fa-github-alt" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="links-item">
+        <a href="tencent://message/?uin=1176281967" target="_blank">
+          <i class="fa fa-qq" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+    </ul>
+  </div>
+  <nav>
+    <ul>
+    
+      <li class="nav-item">
+        <a href="/archives">
+          <span class="nav-item__count">27</span>
+          <span class="nav-item__label">归档</span>
+        </a>
+      </li>
+    
+      <li class="nav-item">
+        <a href="/categories">
+          <span class="nav-item__count">2</span>
+          <span class="nav-item__label">分类</span>
+        </a>
+      </li>
+    
+      <li class="nav-item">
+        <a href="/tags">
+          <span class="nav-item__count">35</span>
+          <span class="nav-item__label">标签</span>
+        </a>
+      </li>
+    
+    </ul>
+  </nav>
+  <div class="catalogue" id="catalogue"></div>
+</div>
+
+      </aside>
+      <main>
+        
+  <div class="post">
+    <div class="post-front">
+      <h1 class="post-front__title">TypeScript实现设计模式——策略模式</h1>
+      <div class="post-front__desc">
+        
+        <p class="post-front__desc-date">
+          <i class="fa fa-calendar" aria-hidden="true"></i>
+          2020/03/21 17:29:07
+        </p>
+        
+        
+        <p class="post-front__desc-category">
+          <i class="fa fa-folder-o" aria-hidden="true"></i>
+          <a href="/categories/技术">
+            技术
+          </a>
+        </p>
+        
+          <div class="post-front__desc-tags">
+          
+          <a href="/tags/TypeScript">
+            <i class="fa fa-tag" aria-hidden="true"></i>
+            TypeScript
+          </a>
+          
+          <a href="/tags/设计模式">
+            <i class="fa fa-tag" aria-hidden="true"></i>
+            设计模式
+          </a>
+          
+        </div>
+      </div>
+    </div>
+    <div class="post-content">
+      <nav id="toc" class="toc"></nav><blockquote>
+<p>策略模式（Strategy）：它定义了算法家族，分别封装起来，让它们之间可以互相替换，此模式让算法的变化不会影响到使用算法的客户。</p>
+<p>——《大话设计模式》</p>
+</blockquote>
+<p>策略模式主要用来解决当有多种相似算法的时，使用if...else产生的难以维护的问题。它主要由三部分组成：Strategy接口、具体的Strategy类以及用来改变和执行策略的Context类。</p>
+<p>接下来将以一个超市选择优惠活动的例子实现策略模式。</p>
+<p><strong>Strategy接口</strong></p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612690919537">复制</button><span class="hljs-keyword">interface</span> Strategy {
+  <span class="hljs-comment">/**
+   * 优惠活动
+   * <span class="hljs-doctag">@param </span>money 原价
+   * <span class="hljs-doctag">@returns </span>现价
+   */</span>
+  discount(money: <span class="hljs-built_in">number</span>): <span class="hljs-built_in">number</span>;
+}
+<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612690919537">interface Strategy {
+  /**
+   * 优惠活动
+   * @param money 原价
+   * @returns 现价
+   */
+  discount(money: number): number;
+}
+</textarea>
+<p><strong>具体的优惠策略</strong></p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612686995834">复制</button><span class="hljs-comment">// 满减优惠</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FullAndReduceStrategy</span> <span class="hljs-title">implements</span> <span class="hljs-title">Strategy</span> </span>{
+  <span class="hljs-comment">// 满足条件的金额</span>
+  <span class="hljs-keyword">private</span> conditionMoney: <span class="hljs-built_in">number</span>;
+  <span class="hljs-comment">// 减少的金额</span>
+  <span class="hljs-keyword">private</span> reduceMoney: <span class="hljs-built_in">number</span>;
+
+  <span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params">money: <span class="hljs-built_in">number</span>, returnMoney: <span class="hljs-built_in">number</span></span>)</span> {
+    <span class="hljs-built_in">this</span>.conditionMoney = money;
+    <span class="hljs-built_in">this</span>.reduceMoney = returnMoney;
+  }
+
+  <span class="hljs-keyword">public</span> discount(money: <span class="hljs-built_in">number</span>): <span class="hljs-built_in">number</span> {
+    <span class="hljs-keyword">let</span> result: <span class="hljs-built_in">number</span>;
+
+    <span class="hljs-keyword">if</span> (money &gt;= <span class="hljs-built_in">this</span>.conditionMoney) {
+      result =
+        money - <span class="hljs-built_in">Math</span>.floor(money / <span class="hljs-built_in">this</span>.conditionMoney) * <span class="hljs-built_in">this</span>.reduceMoney;
+    }
+
+    <span class="hljs-keyword">return</span> result;
+  }
+}
+
+<span class="hljs-comment">// 现金折扣</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CashRebateStrategy</span> <span class="hljs-title">implements</span> <span class="hljs-title">Strategy</span> </span>{
+  <span class="hljs-comment">// 折扣值</span>
+  <span class="hljs-keyword">private</span> moneyRabte: <span class="hljs-built_in">number</span>;
+
+  <span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params">moneyRabte: <span class="hljs-built_in">number</span></span>)</span> {
+    <span class="hljs-built_in">this</span>.moneyRabte = moneyRabte;
+  }
+
+  discount(money: <span class="hljs-built_in">number</span>): <span class="hljs-built_in">number</span> {
+    <span class="hljs-keyword">return</span> money * <span class="hljs-built_in">this</span>.moneyRabte;
+  }
+}
+<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612686995834">// 满减优惠
+class FullAndReduceStrategy implements Strategy {
+  // 满足条件的金额
+  private conditionMoney: number;
+  // 减少的金额
+  private reduceMoney: number;
+
+  constructor(money: number, returnMoney: number) {
+    this.conditionMoney = money;
+    this.reduceMoney = returnMoney;
+  }
+
+  public discount(money: number): number {
+    let result: number;
+
+    if (money >= this.conditionMoney) {
+      result =
+        money - Math.floor(money / this.conditionMoney) * this.reduceMoney;
+    }
+
+    return result;
+  }
+}
+
+// 现金折扣
+class CashRebateStrategy implements Strategy {
+  // 折扣值
+  private moneyRabte: number;
+
+  constructor(moneyRabte: number) {
+    this.moneyRabte = moneyRabte;
+  }
+
+  discount(money: number): number {
+    return money * this.moneyRabte;
+  }
+}
+</textarea>
+<p><strong>Context类</strong></p>
+<p><code>setStrategy</code>方法用来控制要使用的策略，<code>execute</code>方法用来执行策略。</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612696156450">复制</button><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Context</span> </span>{
+  <span class="hljs-keyword">private</span> strategy: Strategy;
+  <span class="hljs-keyword">private</span> money: <span class="hljs-built_in">number</span>;
+
+  <span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params">money: <span class="hljs-built_in">number</span></span>)</span> {
+    <span class="hljs-built_in">this</span>.money = money;
+  }
+
+  <span class="hljs-comment">// 设置优惠策略</span>
+  <span class="hljs-keyword">public</span> setStrategy(strategy: Strategy): <span class="hljs-built_in">void</span> {
+    <span class="hljs-built_in">this</span>.strategy = strategy;
+  }
+
+  <span class="hljs-comment">// 执行策略</span>
+  <span class="hljs-keyword">public</span> execute(): <span class="hljs-built_in">number</span> {
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.strategy.discount(<span class="hljs-built_in">this</span>.money);
+  }
+}
+<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612696156450">class Context {
+  private strategy: Strategy;
+  private money: number;
+
+  constructor(money: number) {
+    this.money = money;
+  }
+
+  // 设置优惠策略
+  public setStrategy(strategy: Strategy): void {
+    this.strategy = strategy;
+  }
+
+  // 执行策略
+  public execute(): number {
+    return this.strategy.discount(this.money);
+  }
+}
+</textarea>
+<p><strong>测试</strong></p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612696357724">复制</button><span class="hljs-keyword">const</span> context: Context = <span class="hljs-keyword">new</span> Context(<span class="hljs-number">100</span>);
+
+context.setStrategy(<span class="hljs-keyword">new</span> FullAndReduceStrategy(<span class="hljs-number">50</span>, <span class="hljs-number">2</span>));
+<span class="hljs-built_in">console</span>.log(context.execute()); <span class="hljs-comment">// 96</span>
+
+context.setStrategy(<span class="hljs-keyword">new</span> CashRebateStrategy(<span class="hljs-number">0.5</span>));
+<span class="hljs-built_in">console</span>.log(context.execute()); <span class="hljs-comment">// 50</span>
+<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612696357724">const context: Context = new Context(100);
+
+context.setStrategy(new FullAndReduceStrategy(50, 2));
+console.log(context.execute()); // 96
+
+context.setStrategy(new CashRebateStrategy(0.5));
+console.log(context.execute()); // 50
+</textarea>
+
+    </div>
+    
+  </div>
+
+        <footer>
+        
+  <div class="footer">
+  
+  <div class="theme">
+    博客主题为 <a href="https://github.com/Tuzilow/CoinRailgun">CoinRailgun</a> 默认主题
+  </div>
+  <div class="copyright">
+    <span>© 2019-2021 Tuzilow.</span>
+    <span>Powered by <a href="https://github.com/Tuzilow/CoinRailgun">CoinRailgun</a></span>
+  </div>
+</div>
+
+        </footer>
+      </main>
+    </div>
+  </body>
+</html>

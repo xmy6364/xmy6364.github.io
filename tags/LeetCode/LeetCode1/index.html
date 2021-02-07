@@ -1,0 +1,1445 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="author" content="Tuzilow">
+    <meta name="description" content="想要成为大佬">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.5.0/styles/default.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.5.0/styles/github-gist.min.css">
+    <link rel="stylesheet" href="/assets/lib/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/css/layout.css" />
+    <script defer src="https://cdn.bootcdn.net/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"></script>
+    <script defer src="/assets/js/copyCode.js"></script>
+    <script defer src="/assets/js/backTop.js"></script>
+
+    
+  <link rel="stylesheet" href="/assets/css/page.css" />
+  <link rel="stylesheet" href="/assets/css/sidebar.css" />
+  <link rel="stylesheet" href="/assets/css/footer.css" />
+  <link rel="stylesheet" href="/assets/css/post.css" />
+  <script defer src="/assets/js/backHome.js"></script>
+  <script defer src="/assets/js/toc.js"></script>
+  <script defer src="/assets/js/copyright.js"></script>
+
+
+    <title>LeetCode刷题记录（1）</title>
+  </head>
+  <body>
+    <div class="container">
+      <aside>
+        
+  <div class="sidebar">
+  <header>Tuzilow的小站</header>
+  <div class="info">
+    <div class="avatar">
+      <img src="https://cdn.jsdelivr.net/gh/Tuzilow/Tuzilow.github.io/images/avatar.png" alt="头像">
+    </div>
+    <div class="author">Tuzilow</div>
+    <div class="description">想要成为大佬</div>
+    <div class="about">
+      <a href="/about">about me.</a>
+    </div>
+  </div>
+  <div class="links">
+    <ul>
+    
+      <li class="links-item">
+        <a href="https://github.com/Tuzilow" target="_blank">
+          <i class="fa fa-github-alt" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="links-item">
+        <a href="tencent://message/?uin=1176281967" target="_blank">
+          <i class="fa fa-qq" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+    </ul>
+  </div>
+  <nav>
+    <ul>
+    
+      <li class="nav-item">
+        <a href="/archives">
+          <span class="nav-item__count">27</span>
+          <span class="nav-item__label">归档</span>
+        </a>
+      </li>
+    
+      <li class="nav-item">
+        <a href="/categories">
+          <span class="nav-item__count">2</span>
+          <span class="nav-item__label">分类</span>
+        </a>
+      </li>
+    
+      <li class="nav-item">
+        <a href="/tags">
+          <span class="nav-item__count">35</span>
+          <span class="nav-item__label">标签</span>
+        </a>
+      </li>
+    
+    </ul>
+  </nav>
+  <div class="catalogue" id="catalogue"></div>
+</div>
+
+      </aside>
+      <main>
+        
+  <div class="post">
+    <div class="post-front">
+      <h1 class="post-front__title">LeetCode刷题记录（1）</h1>
+      <div class="post-front__desc">
+        
+        <p class="post-front__desc-date">
+          <i class="fa fa-calendar" aria-hidden="true"></i>
+          2020/04/19 20:29:24
+        </p>
+        
+        
+        <p class="post-front__desc-category">
+          <i class="fa fa-folder-o" aria-hidden="true"></i>
+          <a href="/categories/技术">
+            技术
+          </a>
+        </p>
+        
+          <div class="post-front__desc-tags">
+          
+          <a href="/tags/LeetCode">
+            <i class="fa fa-tag" aria-hidden="true"></i>
+            LeetCode
+          </a>
+          
+          <a href="/tags/算法">
+            <i class="fa fa-tag" aria-hidden="true"></i>
+            算法
+          </a>
+          
+          <a href="/tags/JavaScript">
+            <i class="fa fa-tag" aria-hidden="true"></i>
+            JavaScript
+          </a>
+          
+        </div>
+      </div>
+    </div>
+    <div class="post-content">
+      <nav id="toc" class="toc"><ol><li><a href="#两数之和">两数之和</a></li><li><a href="#整数反转">整数反转</a></li><li><a href="#回文数">回文数</a></li><li><a href="#罗马数字转整数">罗马数字转整数</a></li><li><a href="#最长公共前缀">最长公共前缀</a></li><li><a href="#有效的括号">有效的括号</a></li><li><a href="#合并两个有序链表">合并两个有序链表</a></li><li><a href="#删除排序数组中的重复项">删除排序数组中的重复项</a></li><li><a href="#移除元素">移除元素</a></li><li><a href="#搜索插入位置二分法">搜索插入位置(二分法)</a></li><li><a href="#最大子序和">最大子序和</a></li><li><a href="#最后一个单词的长度">最后一个单词的长度</a></li><li><a href="#加一">加一</a></li><li><a href="#二进制求和">二进制求和</a></li><li><a href="#x-的平方根二分法">x 的平方根(二分法)</a></li></ol></nav><p>使用语言: JavaScript。</p>
+<p>从简单题开始写的，只放上了代码，没有写思路。</p>
+<h2 id="两数之和"><a href="https://leetcode-cn.com/problems/two-sum/">两数之和</a></h2>
+<blockquote>
+<p>给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。</p>
+<p>你可以假设每种输入只会对应一个答案。但是，数组中同一个元素不能使用两遍。</p>
+<p>示例:</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612692474031">复制</button>给定 nums = [2, 7, 11, 15], target = 9
+因为 nums[0] + nums[1] = 2 + 7 = 9
+所以返回 [0, 1]
+</code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612692474031">给定 nums = [2, 7, 11, 15], target = 9
+因为 nums[0] + nums[1] = 2 + 7 = 9
+所以返回 [0, 1]
+</textarea>
+</blockquote>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612690518634">复制</button><span class="hljs-comment">/**
+ * <span class="hljs-doctag">@param <span class="hljs-type">{number[]}</span> <span class="hljs-variable">nums</span></span>
+ * <span class="hljs-doctag">@param <span class="hljs-type">{number}</span> <span class="hljs-variable">target</span></span>
+ * <span class="hljs-doctag">@return <span class="hljs-type">{number[]}</span></span>
+ */</span>
+<span class="hljs-keyword">var</span> twoSum = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">nums, target</span>) </span>{
+  <span class="hljs-keyword">let</span> temp = [];
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; nums.length; i++){
+    <span class="hljs-keyword">let</span> diff = target - nums[i];
+    
+    <span class="hljs-keyword">if</span> (temp[diff] !== <span class="hljs-literal">undefined</span>) {
+      <span class="hljs-keyword">return</span> [temp[diff], i];
+    }
+
+    temp[nums[i]] = i;
+  }
+};
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612690518634">/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number[]}
+ */
+var twoSum = function(nums, target) {
+  let temp = [];
+  for (let i = 0; i < nums.length; i++){
+    let diff = target - nums[i];
+    
+    if (temp[diff] !== undefined) {
+      return [temp[diff], i];
+    }
+
+    temp[nums[i]] = i;
+  }
+};
+</textarea>
+<p>使用map</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612692732198">复制</button><span class="hljs-keyword">var</span> twoSum = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">nums, target</span>) </span>{
+  <span class="hljs-keyword">let</span> map = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Map</span>();
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; nums.length; i++) {
+    <span class="hljs-keyword">let</span> dif = target-nums[i]
+    <span class="hljs-keyword">if</span> (map.has(dif)) {
+      <span class="hljs-keyword">return</span> [map.get(dif), i]
+    }
+    map.set(nums[i], i);
+  }
+};
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612692732198">var twoSum = function(nums, target) {
+  let map = new Map();
+  for (let i = 0; i < nums.length; i++) {
+    let dif = target-nums[i]
+    if (map.has(dif)) {
+      return [map.get(dif), i]
+    }
+    map.set(nums[i], i);
+  }
+};
+</textarea>
+<h2 id="整数反转"><a href="https://leetcode-cn.com/problems/reverse-integer/">整数反转</a></h2>
+<blockquote>
+<p>给出一个 32 位的有符号整数，你需要将这个整数中每位上的数字进行反转。</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612689286954">复制</button>示例 1:
+输入: 123
+输出: 321
+</code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612689286954">示例 1:
+输入: 123
+输出: 321
+</textarea>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612690543800">复制</button>示例 2:
+输入: -123
+输出: -321
+</code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612690543800">示例 2:
+输入: -123
+输出: -321
+</textarea>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612693793508">复制</button>示例 3:
+输入: 120
+输出: 21
+</code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612693793508">示例 3:
+输入: 120
+输出: 21
+</textarea>
+<p>注意:</p>
+<p>假设我们的环境只能存储得下 32 位的有符号整数，则其数值范围为 [−231,  231 − 1]。请根据这个假设，如果反转后整数溢出那么就返回 0。</p>
+</blockquote>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612695320683">复制</button><span class="hljs-comment">/**
+ * <span class="hljs-doctag">@param <span class="hljs-type">{number}</span> <span class="hljs-variable">x</span></span>
+ * <span class="hljs-doctag">@return <span class="hljs-type">{number}</span></span>
+ */</span>
+<span class="hljs-keyword">var</span> reverse = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">x</span>) </span>{
+  <span class="hljs-keyword">const</span> res = <span class="hljs-built_in">parseInt</span>(x.toString().split(<span class="hljs-string">&#x27;&#x27;</span>).reverse().join(<span class="hljs-string">&#x27;&#x27;</span>));
+
+  <span class="hljs-keyword">if</span> (res &lt; -<span class="hljs-number">2147483648</span> || res &gt; <span class="hljs-number">2147483647</span>) {
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>
+  }
+
+  <span class="hljs-keyword">return</span> x &gt; <span class="hljs-number">0</span> ? res : -res;
+};
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612695320683">/**
+ * @param {number} x
+ * @return {number}
+ */
+var reverse = function(x) {
+  const res = parseInt(x.toString().split('').reverse().join(''));
+
+  if (res < -2147483648 || res > 2147483647) {
+    return 0
+  }
+
+  return x > 0 ? res : -res;
+};
+</textarea>
+<h2 id="回文数"><a href="https://leetcode-cn.com/problems/palindrome-number/">回文数</a></h2>
+<blockquote>
+<p>判断一个整数是否是回文数。回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612689843000">复制</button>示例 1:
+输入: 121
+输出: true
+</code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612689843000">示例 1:
+输入: 121
+输出: true
+</textarea>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612695590731">复制</button>示例 2:
+输入: -121
+输出: false
+解释: 从左向右读, 为 -121 。 从右向左读, 为 121- 。因此它不是一个回文数。
+</code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612695590731">示例 2:
+输入: -121
+输出: false
+解释: 从左向右读, 为 -121 。 从右向左读, 为 121- 。因此它不是一个回文数。
+</textarea>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612691686854">复制</button>示例 3:
+输入: 10
+输出: false
+解释: 从右向左读, 为 01 。因此它不是一个回文数。
+</code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612691686854">示例 3:
+输入: 10
+输出: false
+解释: 从右向左读, 为 01 。因此它不是一个回文数。
+</textarea>
+<p>进阶:</p>
+<p>你能不将整数转为字符串来解决这个问题吗？</p>
+</blockquote>
+<p>字符串反转</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612694986660">复制</button><span class="hljs-comment">/**
+ * <span class="hljs-doctag">@param <span class="hljs-type">{number}</span> <span class="hljs-variable">x</span></span>
+ * <span class="hljs-doctag">@return <span class="hljs-type">{boolean}</span></span>
+ */</span>
+<span class="hljs-keyword">var</span> isPalindrome = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">x</span>) </span>{
+  <span class="hljs-keyword">const</span> reX = x.toString().split(<span class="hljs-string">&#x27;&#x27;</span>).reverse().join(<span class="hljs-string">&#x27;&#x27;</span>);
+
+  <span class="hljs-keyword">if</span> (x.toString() !== reX) {
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+  }
+  <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+};
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612694986660">/**
+ * @param {number} x
+ * @return {boolean}
+ */
+var isPalindrome = function(x) {
+  const reX = x.toString().split('').reverse().join('');
+
+  if (x.toString() !== reX) {
+    return false;
+  }
+  return true;
+};
+</textarea>
+<p>不用字符串</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612687729996">复制</button><span class="hljs-keyword">var</span> isPalindrome = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">x</span>) </span>{
+  <span class="hljs-keyword">if</span> (x &lt; <span class="hljs-number">0</span> || (x % <span class="hljs-number">10</span> === <span class="hljs-number">0</span> &amp;&amp; x !== <span class="hljs-number">0</span>)) {
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+  }
+
+  <span class="hljs-keyword">let</span> reNum = <span class="hljs-number">0</span>;
+  <span class="hljs-keyword">while</span>(x &gt; reNum) {
+    reNum = reNum * <span class="hljs-number">10</span> + x % <span class="hljs-number">10</span>;
+    x = <span class="hljs-built_in">parseInt</span>(x / <span class="hljs-number">10</span>);
+  }
+
+  <span class="hljs-keyword">return</span> reNum === x || <span class="hljs-built_in">parseInt</span>(reNum / <span class="hljs-number">10</span>) === x;
+};
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612687729996">var isPalindrome = function(x) {
+  if (x < 0 || (x % 10 === 0 && x !== 0)) {
+    return false;
+  }
+
+  let reNum = 0;
+  while(x > reNum) {
+    reNum = reNum * 10 + x % 10;
+    x = parseInt(x / 10);
+  }
+
+  return reNum === x || parseInt(reNum / 10) === x;
+};
+</textarea>
+<h2 id="罗马数字转整数"><a href="https://leetcode-cn.com/problems/roman-to-integer/">罗马数字转整数</a></h2>
+<blockquote>
+<p>罗马数字包含以下七种字符: I， V， X， L，C，D 和 M。</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612691967658">复制</button>字符          数值
+I             1
+V             5
+X             10
+L             50
+C             100
+D             500
+M             1000
+</code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612691967658">字符          数值
+I             1
+V             5
+X             10
+L             50
+C             100
+D             500
+M             1000
+</textarea>
+<p>例如， 罗马数字 2 写做 II ，即为两个并列的 1。12 写做 XII ，即为 X + II 。 27 写做  XXVII, 即为 XX + V + II 。</p>
+<p>通常情况下，罗马数字中小的数字在大的数字的右边。但也存在特例，例如 4 不写做 IIII，而是 IV。数字 1 在数字 5 的左边，所表示的数等于大数 5 减小数 1 得到的数值 4 。同样地，数字 9 表示为 IX。这个特殊的规则只适用于以下六种情况：</p>
+<ul>
+<li>I 可以放在 V (5) 和 X (10) 的左边，来表示 4 和 9。</li>
+<li>X 可以放在 L (50) 和 C (100) 的左边，来表示 40 和 90。</li>
+<li>C 可以放在 D (500) 和 M (1000) 的左边，来表示 400 和 900。</li>
+</ul>
+<p>给定一个罗马数字，将其转换成整数。输入确保在 1 到 3999 的范围内。</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612690885740">复制</button>示例 1:
+输入: &quot;III&quot;
+输出: 3
+</code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612690885740">示例 1:
+输入: "III"
+输出: 3
+</textarea>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612691811458">复制</button>示例 2:
+输入: &quot;IV&quot;
+输出: 4
+</code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612691811458">示例 2:
+输入: "IV"
+输出: 4
+</textarea>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612690356855">复制</button>示例 3:
+输入: &quot;IX&quot;
+输出: 9
+</code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612690356855">示例 3:
+输入: "IX"
+输出: 9
+</textarea>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612687280237">复制</button>示例 4:
+输入: &quot;LVIII&quot;
+输出: 58
+解释: L = 50, V= 5, III = 3.
+</code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612687280237">示例 4:
+输入: "LVIII"
+输出: 58
+解释: L = 50, V= 5, III = 3.
+</textarea>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612689016920">复制</button>示例 5:
+输入: &quot;MCMXCIV&quot;
+输出: 1994
+解释: M = 1000, CM = 900, XC = 90, IV = 4.
+</code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612689016920">示例 5:
+输入: "MCMXCIV"
+输出: 1994
+解释: M = 1000, CM = 900, XC = 90, IV = 4.
+</textarea>
+</blockquote>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612687992950">复制</button><span class="hljs-comment">/**
+ * <span class="hljs-doctag">@param <span class="hljs-type">{string}</span> <span class="hljs-variable">s</span></span>
+ * <span class="hljs-doctag">@return <span class="hljs-type">{number}</span></span>
+ */</span>
+<span class="hljs-keyword">var</span> romanToInt = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">s</span>) </span>{
+  <span class="hljs-comment">// IV 4 IX 9 XL 40 XC 90 CD 400 CM 900</span>
+  <span class="hljs-keyword">let</span> dir = {
+    <span class="hljs-attr">I</span>: <span class="hljs-number">1</span>,
+    <span class="hljs-attr">V</span>: <span class="hljs-number">5</span>,
+    <span class="hljs-attr">X</span>: <span class="hljs-number">10</span>,
+    <span class="hljs-attr">L</span>: <span class="hljs-number">50</span>,
+    <span class="hljs-attr">C</span>: <span class="hljs-number">100</span>,
+    <span class="hljs-attr">D</span>: <span class="hljs-number">500</span>,
+    <span class="hljs-attr">M</span>: <span class="hljs-number">1000</span>
+  };
+
+  <span class="hljs-keyword">let</span> res = <span class="hljs-number">0</span>;
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; s.length; i++) {
+    <span class="hljs-keyword">const</span> current = dir[s[i]];
+    <span class="hljs-keyword">const</span> next = dir[s[i+<span class="hljs-number">1</span>]];
+
+    <span class="hljs-keyword">if</span> (next / current === <span class="hljs-number">5</span> || next / current === <span class="hljs-number">10</span>) {
+      res += next - current;
+      i++;
+    } <span class="hljs-keyword">else</span> {
+      res += current;
+    }
+  }
+  <span class="hljs-keyword">return</span> res;
+};
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612687992950">/**
+ * @param {string} s
+ * @return {number}
+ */
+var romanToInt = function(s) {
+  // IV 4 IX 9 XL 40 XC 90 CD 400 CM 900
+  let dir = {
+    I: 1,
+    V: 5,
+    X: 10,
+    L: 50,
+    C: 100,
+    D: 500,
+    M: 1000
+  };
+
+  let res = 0;
+  for (let i = 0; i < s.length; i++) {
+    const current = dir[s[i]];
+    const next = dir[s[i+1]];
+
+    if (next / current === 5 || next / current === 10) {
+      res += next - current;
+      i++;
+    } else {
+      res += current;
+    }
+  }
+  return res;
+};
+</textarea>
+<h2 id="最长公共前缀"><a href="https://leetcode-cn.com/problems/longest-common-prefix/">最长公共前缀</a></h2>
+<blockquote>
+<p>编写一个函数来查找字符串数组中的最长公共前缀。</p>
+<p>如果不存在公共前缀，返回空字符串 &quot;&quot;。</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612692829272">复制</button>示例 1:
+输入: [&quot;flower&quot;,&quot;flow&quot;,&quot;flight&quot;]
+输出: &quot;fl&quot;
+</code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612692829272">示例 1:
+输入: ["flower","flow","flight"]
+输出: "fl"
+</textarea>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612690980362">复制</button>示例 2:
+输入: [&quot;dog&quot;,&quot;racecar&quot;,&quot;car&quot;]
+输出: &quot;&quot;
+解释: 输入不存在公共前缀。
+</code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612690980362">示例 2:
+输入: ["dog","racecar","car"]
+输出: ""
+解释: 输入不存在公共前缀。
+</textarea>
+<p>说明:
+所有输入只包含小写字母 a-z 。</p>
+</blockquote>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612691250293">复制</button><span class="hljs-comment">/**
+ * <span class="hljs-doctag">@param <span class="hljs-type">{string[]}</span> <span class="hljs-variable">strs</span></span>
+ * <span class="hljs-doctag">@return <span class="hljs-type">{string}</span></span>
+ */</span>
+<span class="hljs-keyword">var</span> longestCommonPrefix = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">strs</span>) </span>{
+  <span class="hljs-keyword">if</span> (strs.length === <span class="hljs-number">1</span>) {
+    <span class="hljs-keyword">return</span> strs[<span class="hljs-number">0</span>];
+  }
+
+  strs.sort(<span class="hljs-function">(<span class="hljs-params">current, next</span>) =&gt;</span> current.length - next.length);
+
+  <span class="hljs-keyword">let</span> publicStr = <span class="hljs-string">&#x27;&#x27;</span>;
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; strs.length - <span class="hljs-number">1</span>; i++) {
+    <span class="hljs-keyword">let</span> current = publicStr ? publicStr : strs[i];
+    <span class="hljs-keyword">let</span> next = strs[i + <span class="hljs-number">1</span>];
+    <span class="hljs-keyword">let</span> currentLength = current.length;
+
+    <span class="hljs-keyword">if</span> (current === <span class="hljs-string">&#x27;&#x27;</span>) {
+      <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;&#x27;</span>;
+    }
+
+    <span class="hljs-keyword">while</span> (next.indexOf(current) !== <span class="hljs-number">0</span>) {
+      currentLength--;
+      current = current.substr(<span class="hljs-number">0</span>, currentLength);
+
+      <span class="hljs-keyword">if</span> (current === <span class="hljs-string">&#x27;&#x27;</span>) {
+        <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;&#x27;</span>;
+      }
+    }
+
+    publicStr = current;
+  }
+
+  <span class="hljs-keyword">return</span> publicStr;
+};
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612691250293">/**
+ * @param {string[]} strs
+ * @return {string}
+ */
+var longestCommonPrefix = function(strs) {
+  if (strs.length === 1) {
+    return strs[0];
+  }
+
+  strs.sort((current, next) => current.length - next.length);
+
+  let publicStr = '';
+  for (let i = 0; i < strs.length - 1; i++) {
+    let current = publicStr ? publicStr : strs[i];
+    let next = strs[i + 1];
+    let currentLength = current.length;
+
+    if (current === '') {
+      return '';
+    }
+
+    while (next.indexOf(current) !== 0) {
+      currentLength--;
+      current = current.substr(0, currentLength);
+
+      if (current === '') {
+        return '';
+      }
+    }
+
+    publicStr = current;
+  }
+
+  return publicStr;
+};
+</textarea>
+<h2 id="有效的括号"><a href="https://leetcode-cn.com/problems/valid-parentheses/">有效的括号</a></h2>
+<blockquote>
+<p>给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串，判断字符串是否有效。</p>
+<p>有效字符串需满足：</p>
+<p>左括号必须用相同类型的右括号闭合。
+左括号必须以正确的顺序闭合。
+注意空字符串可被认为是有效字符串。</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612687180050">复制</button>示例 1:
+输入: &quot;()&quot;
+输出: true
+</code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612687180050">示例 1:
+输入: "()"
+输出: true
+</textarea>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612686725921">复制</button>示例 2:
+输入: &quot;()[]{}&quot;
+输出: true
+</code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612686725921">示例 2:
+输入: "()[]{}"
+输出: true
+</textarea>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612694887355">复制</button>示例 3:
+输入: &quot;(]&quot;
+输出: false
+</code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612694887355">示例 3:
+输入: "(]"
+输出: false
+</textarea>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612696514614">复制</button>示例 4:
+输入: &quot;([)]&quot;
+输出: false
+</code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612696514614">示例 4:
+输入: "([)]"
+输出: false
+</textarea>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612690873837">复制</button>示例 5:
+输入: &quot;{[]}&quot;
+输出: true
+</code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612690873837">示例 5:
+输入: "{[]}"
+输出: true
+</textarea>
+</blockquote>
+<p>某大佬的做法</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612692946305">复制</button><span class="hljs-comment">/**
+ * <span class="hljs-doctag">@param <span class="hljs-type">{string}</span> <span class="hljs-variable">s</span></span>
+ * <span class="hljs-doctag">@return <span class="hljs-type">{boolean}</span></span>
+ */</span>
+<span class="hljs-keyword">var</span> isValid = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">s</span>) </span>{
+  <span class="hljs-keyword">while</span> (s.includes(<span class="hljs-string">&#x27;()&#x27;</span>) || s.includes(<span class="hljs-string">&#x27;[]&#x27;</span>) || s.includes(<span class="hljs-string">&#x27;{}&#x27;</span>)) {
+    s = s.replace(<span class="hljs-string">&#x27;{}&#x27;</span>, <span class="hljs-string">&#x27;&#x27;</span>);
+    s = s.replace(<span class="hljs-string">&#x27;[]&#x27;</span>, <span class="hljs-string">&#x27;&#x27;</span>);
+    s = s.replace(<span class="hljs-string">&#x27;()&#x27;</span>, <span class="hljs-string">&#x27;&#x27;</span>);
+  }
+  <span class="hljs-keyword">return</span> s === <span class="hljs-string">&#x27;&#x27;</span>;
+};
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612692946305">/**
+ * @param {string} s
+ * @return {boolean}
+ */
+var isValid = function(s) {
+  while (s.includes('()') || s.includes('[]') || s.includes('{}')) {
+    s = s.replace('{}', '');
+    s = s.replace('[]', '');
+    s = s.replace('()', '');
+  }
+  return s === '';
+};
+</textarea>
+<p>大佬做法2</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612695276712">复制</button><span class="hljs-keyword">var</span> isValid = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">s</span>) </span>{
+  <span class="hljs-keyword">const</span> map = {
+    <span class="hljs-string">&#x27;(&#x27;</span>:<span class="hljs-string">&#x27;)&#x27;</span>,
+    <span class="hljs-string">&#x27;[&#x27;</span>:<span class="hljs-string">&#x27;]&#x27;</span>,
+    <span class="hljs-string">&#x27;{&#x27;</span>:<span class="hljs-string">&#x27;}&#x27;</span>
+  };
+
+  <span class="hljs-keyword">let</span> leftArr = [];
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> ch <span class="hljs-keyword">of</span> s) {
+    <span class="hljs-keyword">if</span> (ch <span class="hljs-keyword">in</span> map) {
+      leftArr.push(ch);
+    } <span class="hljs-keyword">else</span> {
+      <span class="hljs-keyword">if</span> (ch !== map[leftArr.pop()]) {
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+      }
+    }
+  }
+
+  <span class="hljs-keyword">return</span> !leftArr.length;
+};
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612695276712">var isValid = function(s) {
+  const map = {
+    '(':')',
+    '[':']',
+    '{':'}'
+  };
+
+  let leftArr = [];
+  for (let ch of s) {
+    if (ch in map) {
+      leftArr.push(ch);
+    } else {
+      if (ch !== map[leftArr.pop()]) {
+        return false;
+      }
+    }
+  }
+
+  return !leftArr.length;
+};
+</textarea>
+<h2 id="合并两个有序链表"><a href="https://leetcode-cn.com/problems/merge-two-sorted-lists/">合并两个有序链表</a></h2>
+<blockquote>
+<p>将两个升序链表合并为一个新的升序链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612695982819">复制</button>示例：
+输入：1-&gt;2-&gt;4, 1-&gt;3-&gt;4
+输出：1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4
+</code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612695982819">示例：
+输入：1->2->4, 1->3->4
+输出：1->1->2->3->4->4
+</textarea>
+</blockquote>
+<p>大佬做法-递归</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612694603434">复制</button><span class="hljs-comment">/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */</span>
+<span class="hljs-comment">/**
+ * <span class="hljs-doctag">@param <span class="hljs-type">{ListNode}</span> <span class="hljs-variable">l1</span></span>
+ * <span class="hljs-doctag">@param <span class="hljs-type">{ListNode}</span> <span class="hljs-variable">l2</span></span>
+ * <span class="hljs-doctag">@return <span class="hljs-type">{ListNode}</span></span>
+ */</span>
+<span class="hljs-keyword">var</span> mergeTwoLists = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">l1, l2</span>) </span>{
+  <span class="hljs-keyword">if</span> (l1 === <span class="hljs-literal">null</span>) {
+    <span class="hljs-keyword">return</span> l2;
+  }
+  <span class="hljs-keyword">if</span> (l2 === <span class="hljs-literal">null</span>) {
+    <span class="hljs-keyword">return</span> l1;
+  }
+
+  <span class="hljs-keyword">if</span> (l1.val &lt; l2.val) {
+    l1.next = mergeTwoLists(l1.next, l2);
+    <span class="hljs-keyword">return</span> l1;
+  } <span class="hljs-keyword">else</span> {
+    l2.next = mergeTwoLists(l1, l2.next);
+    <span class="hljs-keyword">return</span> l2;
+  }
+};
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612694603434">/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * @param {ListNode} l1
+ * @param {ListNode} l2
+ * @return {ListNode}
+ */
+var mergeTwoLists = function(l1, l2) {
+  if (l1 === null) {
+    return l2;
+  }
+  if (l2 === null) {
+    return l1;
+  }
+
+  if (l1.val < l2.val) {
+    l1.next = mergeTwoLists(l1.next, l2);
+    return l1;
+  } else {
+    l2.next = mergeTwoLists(l1, l2.next);
+    return l2;
+  }
+};
+</textarea>
+<h2 id="删除排序数组中的重复项"><a href="https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/">删除排序数组中的重复项</a></h2>
+<blockquote>
+<p>给定一个排序数组，你需要在 原地 删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。</p>
+<p>不要使用额外的数组空间，你必须在 原地 修改输入数组 并在使用 O(1) 额外空间的条件下完成。</p>
+<p>示例 1:</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612692954246">复制</button>给定数组 nums = [1,1,2], 
+
+函数应该返回新的长度 2, 并且原数组 nums 的前两个元素被修改为 1, 2。 
+
+你不需要考虑数组中超出新长度后面的元素。
+</code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612692954246">给定数组 nums = [1,1,2], 
+
+函数应该返回新的长度 2, 并且原数组 nums 的前两个元素被修改为 1, 2。 
+
+你不需要考虑数组中超出新长度后面的元素。
+</textarea>
+<p>示例 2:</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612689783755">复制</button>给定 nums = [0,0,1,1,1,2,2,3,3,4],
+
+函数应该返回新的长度 5, 并且原数组 nums 的前五个元素被修改为 0, 1, 2, 3, 4。
+
+你不需要考虑数组中超出新长度后面的元素。
+</code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612689783755">给定 nums = [0,0,1,1,1,2,2,3,3,4],
+
+函数应该返回新的长度 5, 并且原数组 nums 的前五个元素被修改为 0, 1, 2, 3, 4。
+
+你不需要考虑数组中超出新长度后面的元素。
+</textarea>
+<p>说明:</p>
+<p>为什么返回数值是整数，但输出的答案是数组呢?</p>
+<p>请注意，输入数组是以「引用」方式传递的，这意味着在函数里修改输入数组对于调用者是可见的。</p>
+<p>你可以想象内部操作如下:</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612695746084">复制</button><span class="hljs-comment">// nums 是以“引用”方式传递的。也就是说，不对实参做任何拷贝</span>
+<span class="hljs-keyword">int</span> len = removeDuplicates(nums);
+
+<span class="hljs-comment">// 在函数里修改输入数组对于调用者是可见的。</span>
+<span class="hljs-comment">// 根据你的函数返回的长度, 它会打印出数组中该长度范围内的所有元素。</span>
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; len; i++) {
+ print(nums[i]);
+}
+<b class="name">c</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612695746084">// nums 是以“引用”方式传递的。也就是说，不对实参做任何拷贝
+int len = removeDuplicates(nums);
+
+// 在函数里修改输入数组对于调用者是可见的。
+// 根据你的函数返回的长度, 它会打印出数组中该长度范围内的所有元素。
+for (int i = 0; i < len; i++) {
+ print(nums[i]);
+}
+</textarea>
+</blockquote>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612691937135">复制</button><span class="hljs-comment">/**
+ * <span class="hljs-doctag">@param <span class="hljs-type">{number[]}</span> <span class="hljs-variable">nums</span></span>
+ * <span class="hljs-doctag">@return <span class="hljs-type">{number}</span></span>
+ */</span>
+<span class="hljs-keyword">var</span> removeDuplicates = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">nums</span>) </span>{
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; nums.length; i++) {
+    <span class="hljs-keyword">if</span> (nums[i] === nums[i + <span class="hljs-number">1</span>]) {
+      nums.splice(i, <span class="hljs-number">1</span>);
+      i--;
+    }
+  }
+  <span class="hljs-keyword">return</span> nums.length;
+};
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612691937135">/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var removeDuplicates = function (nums) {
+  for (let i = 0; i < nums.length; i++) {
+    if (nums[i] === nums[i + 1]) {
+      nums.splice(i, 1);
+      i--;
+    }
+  }
+  return nums.length;
+};
+</textarea>
+<p>删(xiu)除(gai)</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612687101572">复制</button><span class="hljs-keyword">var</span> removeDuplicates = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">nums</span>) </span>{
+  <span class="hljs-keyword">var</span> len = <span class="hljs-number">1</span>;
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">1</span>; i &lt; nums.length; i++) {
+    <span class="hljs-keyword">if</span> (nums[i] !== nums[i - <span class="hljs-number">1</span>]) {
+      nums[len++] = nums[i];
+    }
+    <span class="hljs-built_in">console</span>.log(nums)
+  }
+  <span class="hljs-keyword">return</span> len;
+};
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612687101572">var removeDuplicates = function (nums) {
+  var len = 1;
+  for (var i = 1; i < nums.length; i++) {
+    if (nums[i] !== nums[i - 1]) {
+      nums[len++] = nums[i];
+    }
+    console.log(nums)
+  }
+  return len;
+};
+</textarea>
+<h2 id="移除元素"><a href="https://leetcode-cn.com/problems/remove-element/">移除元素</a></h2>
+<blockquote>
+<p>给你一个数组 nums 和一个值 val，你需要 原地 移除所有数值等于 val 的元素，并返回移除后数组的新长度。</p>
+<p>不要使用额外的数组空间，你必须仅使用 O(1) 额外空间并 原地 修改输入数组。</p>
+<p>元素的顺序可以改变。你不需要考虑数组中超出新长度后面的元素。</p>
+<p>示例 1:</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612692071410">复制</button>给定 nums = [3,2,2,3], val = 3,
+
+函数应该返回新的长度 2, 并且 nums 中的前两个元素均为 2。
+
+你不需要考虑数组中超出新长度后面的元素。
+</code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612692071410">给定 nums = [3,2,2,3], val = 3,
+
+函数应该返回新的长度 2, 并且 nums 中的前两个元素均为 2。
+
+你不需要考虑数组中超出新长度后面的元素。
+</textarea>
+<p>示例 2:</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612688661878">复制</button>给定 nums = [0,1,2,2,3,0,4,2], val = 2,
+
+函数应该返回新的长度 5, 并且 nums 中的前五个元素为 0, 1, 3, 0, 4。
+
+注意这五个元素可为任意顺序。
+
+你不需要考虑数组中超出新长度后面的元素。
+</code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612688661878">给定 nums = [0,1,2,2,3,0,4,2], val = 2,
+
+函数应该返回新的长度 5, 并且 nums 中的前五个元素为 0, 1, 3, 0, 4。
+
+注意这五个元素可为任意顺序。
+
+你不需要考虑数组中超出新长度后面的元素。
+</textarea>
+<p>说明:</p>
+<p>为什么返回数值是整数，但输出的答案是数组呢?</p>
+<p>请注意，输入数组是以「引用」方式传递的，这意味着在函数里修改输入数组对于调用者是可见的。</p>
+<p>你可以想象内部操作如下:</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612689014507">复制</button><span class="hljs-comment">// nums 是以“引用”方式传递的。也就是说，不对实参作任何拷贝</span>
+<span class="hljs-keyword">int</span> len = removeElement(nums, val);
+
+<span class="hljs-comment">// 在函数里修改输入数组对于调用者是可见的。</span>
+<span class="hljs-comment">// 根据你的函数返回的长度, 它会打印出数组中 该长度范围内 的所有元素。</span>
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; len; i++) {
+ print(nums[i]);
+}
+<b class="name">c</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612689014507">// nums 是以“引用”方式传递的。也就是说，不对实参作任何拷贝
+int len = removeElement(nums, val);
+
+// 在函数里修改输入数组对于调用者是可见的。
+// 根据你的函数返回的长度, 它会打印出数组中 该长度范围内 的所有元素。
+for (int i = 0; i < len; i++) {
+ print(nums[i]);
+}
+</textarea>
+</blockquote>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612688333570">复制</button><span class="hljs-comment">/**
+ * <span class="hljs-doctag">@param <span class="hljs-type">{number[]}</span> <span class="hljs-variable">nums</span></span>
+ * <span class="hljs-doctag">@param <span class="hljs-type">{number}</span> <span class="hljs-variable">val</span></span>
+ * <span class="hljs-doctag">@return <span class="hljs-type">{number}</span></span>
+ */</span>
+<span class="hljs-keyword">var</span> removeElement = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">nums, val</span>) </span>{
+  <span class="hljs-keyword">let</span> len = <span class="hljs-number">0</span>;
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; nums.length; i++) {
+    <span class="hljs-keyword">if</span> (nums[i] !== val) {
+      nums[len++] = nums[i];
+    }
+  }
+  <span class="hljs-keyword">return</span> len;
+};
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612688333570">/**
+ * @param {number[]} nums
+ * @param {number} val
+ * @return {number}
+ */
+var removeElement = function(nums, val) {
+  let len = 0;
+  for (let i = 0; i < nums.length; i++) {
+    if (nums[i] !== val) {
+      nums[len++] = nums[i];
+    }
+  }
+  return len;
+};
+</textarea>
+<h2 id="搜索插入位置二分法"><a href="https://leetcode-cn.com/problems/search-insert-position/">搜索插入位置(二分法)</a></h2>
+<blockquote>
+<p>给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。如果目标值不存在于数组中，返回它将会被按顺序插入的位置。</p>
+<p>你可以假设数组中无重复元素。</p>
+<p>示例 1:</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612696100650">复制</button>输入: [1,3,5,6], 5
+输出: 2
+</code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612696100650">输入: [1,3,5,6], 5
+输出: 2
+</textarea>
+<p>示例 2:</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612687424365">复制</button>输入: [1,3,5,6], 2
+输出: 1
+</code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612687424365">输入: [1,3,5,6], 2
+输出: 1
+</textarea>
+<p>示例 3:</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612687290919">复制</button>输入: [1,3,5,6], 7
+输出: 4
+</code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612687290919">输入: [1,3,5,6], 7
+输出: 4
+</textarea>
+<p>示例 4:</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612696055776">复制</button>输入: [1,3,5,6], 0
+输出: 0
+</code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612696055776">输入: [1,3,5,6], 0
+输出: 0
+</textarea>
+</blockquote>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612689520606">复制</button><span class="hljs-comment">/**
+ * <span class="hljs-doctag">@param <span class="hljs-type">{number[]}</span> <span class="hljs-variable">nums</span></span>
+ * <span class="hljs-doctag">@param <span class="hljs-type">{number}</span> <span class="hljs-variable">target</span></span>
+ * <span class="hljs-doctag">@return <span class="hljs-type">{number}</span></span>
+ */</span>
+<span class="hljs-keyword">var</span> searchInsert = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">nums, target</span>) </span>{
+  nums.push(target);
+  <span class="hljs-keyword">return</span> nums.sort(<span class="hljs-function">(<span class="hljs-params">a, b</span>) =&gt;</span> a - b).indexOf(target);
+};
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612689520606">/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number}
+ */
+var searchInsert = function (nums, target) {
+  nums.push(target);
+  return nums.sort((a, b) => a - b).indexOf(target);
+};
+</textarea>
+<p>二分法</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612695567697">复制</button><span class="hljs-keyword">var</span> searchInsert = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">nums, target</span>) </span>{
+  <span class="hljs-keyword">var</span> left = <span class="hljs-number">0</span>;
+  <span class="hljs-keyword">var</span> right = nums.length - <span class="hljs-number">1</span>;
+
+  <span class="hljs-keyword">if</span> (target &gt; nums[right]) {
+    <span class="hljs-keyword">return</span> right + <span class="hljs-number">1</span>;
+  }
+
+  <span class="hljs-keyword">while</span> (left &lt; right) {
+    <span class="hljs-keyword">var</span> index = <span class="hljs-built_in">parseInt</span>((left + right) &gt;&gt;&gt; <span class="hljs-number">1</span>); <span class="hljs-comment">//取左中位数</span>
+
+    <span class="hljs-keyword">if</span> (nums[index] &lt; target) {
+      left = index + <span class="hljs-number">1</span>;
+      <span class="hljs-comment">//中位数小于目标值，削去区间左侧</span>
+    } <span class="hljs-keyword">else</span> {
+      right = index;
+      <span class="hljs-comment">//中位数大于等于目标值，削去区间右侧</span>
+    }
+  }
+  <span class="hljs-keyword">return</span> left;
+};
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612695567697">var searchInsert = function (nums, target) {
+  var left = 0;
+  var right = nums.length - 1;
+
+  if (target > nums[right]) {
+    return right + 1;
+  }
+
+  while (left < right) {
+    var index = parseInt((left + right) >>> 1); //取左中位数
+
+    if (nums[index] < target) {
+      left = index + 1;
+      //中位数小于目标值，削去区间左侧
+    } else {
+      right = index;
+      //中位数大于等于目标值，削去区间右侧
+    }
+  }
+  return left;
+};
+</textarea>
+<h2 id="最大子序和"><a href="https://leetcode-cn.com/problems/maximum-subarray/">最大子序和</a></h2>
+<blockquote>
+<p>给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。</p>
+<p>示例:</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612687446004">复制</button>输入: [-2,1,-3,4,-1,2,1,-5,4],
+输出: 6
+解释: 连续子数组 [4,-1,2,1] 的和最大，为 6。
+</code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612687446004">输入: [-2,1,-3,4,-1,2,1,-5,4],
+输出: 6
+解释: 连续子数组 [4,-1,2,1] 的和最大，为 6。
+</textarea>
+<p>进阶:</p>
+<p>如果你已经实现复杂度为 O(n) 的解法，尝试使用更为精妙的分治法求解。</p>
+</blockquote>
+<p>动态规划</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612693972954">复制</button><span class="hljs-comment">/**
+ * <span class="hljs-doctag">@param <span class="hljs-type">{number[]}</span> <span class="hljs-variable">nums</span></span>
+ * <span class="hljs-doctag">@return <span class="hljs-type">{number}</span></span>
+ */</span>
+<span class="hljs-keyword">var</span> maxSubArray = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">nums</span>) </span>{
+  <span class="hljs-keyword">let</span> ans = nums[<span class="hljs-number">0</span>];
+  <span class="hljs-keyword">let</span> sum = <span class="hljs-number">0</span>;
+
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> num <span class="hljs-keyword">of</span> nums) {
+    <span class="hljs-keyword">if</span> (sum &gt; <span class="hljs-number">0</span>) {
+      sum += num;
+    } <span class="hljs-keyword">else</span> {
+      sum = num;
+    }
+    ans = <span class="hljs-built_in">Math</span>.max(ans, sum);
+  }
+
+  <span class="hljs-keyword">return</span> ans;
+};
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612693972954">/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var maxSubArray = function(nums) {
+  let ans = nums[0];
+  let sum = 0;
+
+  for (const num of nums) {
+    if (sum > 0) {
+      sum += num;
+    } else {
+      sum = num;
+    }
+    ans = Math.max(ans, sum);
+  }
+
+  return ans;
+};
+</textarea>
+<h2 id="最后一个单词的长度"><a href="https://leetcode-cn.com/problems/length-of-last-word/">最后一个单词的长度</a></h2>
+<blockquote>
+<p>给定一个仅包含大小写字母和空格 ' ' 的字符串 s，返回其最后一个单词的长度。如果字符串从左向右滚动显示，那么最后一个单词就是最后出现的单词。</p>
+<p>如果不存在最后一个单词，请返回 0 。</p>
+<p>说明：一个单词是指仅由字母组成、不包含任何空格字符的 最大子字符串。</p>
+<p>示例:</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612691963592">复制</button>输入: &quot;Hello World&quot;
+输出: 5
+</code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612691963592">输入: "Hello World"
+输出: 5
+</textarea>
+</blockquote>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612691261448">复制</button><span class="hljs-comment">/**
+ * <span class="hljs-doctag">@param <span class="hljs-type">{string}</span> <span class="hljs-variable">s</span></span>
+ * <span class="hljs-doctag">@return <span class="hljs-type">{number}</span></span>
+ */</span>
+<span class="hljs-keyword">var</span> lengthOfLastWord = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">s</span>) </span>{
+  <span class="hljs-keyword">const</span> arr = s.trim().split(<span class="hljs-string">&#x27; &#x27;</span>);
+
+  <span class="hljs-keyword">return</span> arr[arr.length - <span class="hljs-number">1</span>].length;
+};
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612691261448">/**
+ * @param {string} s
+ * @return {number}
+ */
+var lengthOfLastWord = function(s) {
+  const arr = s.trim().split(' ');
+
+  return arr[arr.length - 1].length;
+};
+</textarea>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612686900041">复制</button><span class="hljs-keyword">var</span> lengthOfLastWord = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">s</span>) </span>{
+  <span class="hljs-keyword">let</span> end = s.length - <span class="hljs-number">1</span>;
+  <span class="hljs-keyword">while</span> (end &gt;= <span class="hljs-number">0</span> &amp;&amp; s[end] == <span class="hljs-string">&#x27; &#x27;</span>) {
+    end--;
+  }
+  <span class="hljs-keyword">if</span> (end &lt; <span class="hljs-number">0</span>) {
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+  }
+  <span class="hljs-keyword">let</span> start = end;
+  <span class="hljs-keyword">while</span> (start &gt;= <span class="hljs-number">0</span> &amp;&amp; s[start] != <span class="hljs-string">&#x27; &#x27;</span>) {
+    start--;
+  }
+  <span class="hljs-keyword">return</span> end - start;
+};
+
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612686900041">var lengthOfLastWord = function (s) {
+  let end = s.length - 1;
+  while (end >= 0 && s[end] == ' ') {
+    end--;
+  }
+  if (end < 0) {
+    return 0;
+  }
+  let start = end;
+  while (start >= 0 && s[start] != ' ') {
+    start--;
+  }
+  return end - start;
+};
+
+</textarea>
+<h2 id="加一"><a href="https://leetcode-cn.com/problems/plus-one/">加一</a></h2>
+<blockquote>
+<p>给定一个由整数组成的非空数组所表示的非负整数，在该数的基础上加一。</p>
+<p>最高位数字存放在数组的首位， 数组中每个元素只存储单个数字。</p>
+<p>你可以假设除了整数 0 之外，这个整数不会以零开头。</p>
+<p>示例 1:</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612689879941">复制</button>输入: [1,2,3]
+输出: [1,2,4]
+解释: 输入数组表示数字 123。
+</code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612689879941">输入: [1,2,3]
+输出: [1,2,4]
+解释: 输入数组表示数字 123。
+</textarea>
+<p>示例 2:</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612687586104">复制</button>输入: [4,3,2,1]
+输出: [4,3,2,2]
+解释: 输入数组表示数字 4321。
+</code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612687586104">输入: [4,3,2,1]
+输出: [4,3,2,2]
+解释: 输入数组表示数字 4321。
+</textarea>
+</blockquote>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612692222364">复制</button><span class="hljs-comment">/**
+ * <span class="hljs-doctag">@param <span class="hljs-type">{number[]}</span> <span class="hljs-variable">digits</span></span>
+ * <span class="hljs-doctag">@return <span class="hljs-type">{number[]}</span></span>
+ */</span>
+<span class="hljs-keyword">var</span> plusOne = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">digits</span>) </span>{
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = digits.length - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--) {
+    digits[i]++;   
+    <span class="hljs-keyword">if</span> (digits[i] === <span class="hljs-number">10</span>) {
+      digits[i] = <span class="hljs-number">0</span>;
+      <span class="hljs-keyword">if</span> (i === <span class="hljs-number">0</span>) {
+        <span class="hljs-keyword">return</span> [<span class="hljs-number">1</span>, ...digits];
+      }
+    } <span class="hljs-keyword">else</span> {
+      <span class="hljs-keyword">break</span>;
+    }
+  }
+  <span class="hljs-keyword">return</span> digits;
+};
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612692222364">/**
+ * @param {number[]} digits
+ * @return {number[]}
+ */
+var plusOne = function(digits) {
+  for (let i = digits.length - 1; i >= 0; i--) {
+    digits[i]++;   
+    if (digits[i] === 10) {
+      digits[i] = 0;
+      if (i === 0) {
+        return [1, ...digits];
+      }
+    } else {
+      break;
+    }
+  }
+  return digits;
+};
+</textarea>
+<p>大佬思路</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612688618502">复制</button><span class="hljs-keyword">var</span> plusOne = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">digits</span>) </span>{
+    <span class="hljs-keyword">const</span> len = digits.length;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> i = len - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--) {
+        digits[i]++;
+        digits[i] %= <span class="hljs-number">10</span>;
+        <span class="hljs-keyword">if</span>(digits[i]!=<span class="hljs-number">0</span>)
+            <span class="hljs-keyword">return</span> digits;
+    }
+    
+    <span class="hljs-keyword">return</span> [<span class="hljs-number">1</span>, ...digits];
+};
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612688618502">var plusOne = function(digits) {
+    const len = digits.length;
+    for(let i = len - 1; i >= 0; i--) {
+        digits[i]++;
+        digits[i] %= 10;
+        if(digits[i]!=0)
+            return digits;
+    }
+    
+    return [1, ...digits];
+};
+</textarea>
+<h2 id="二进制求和"><a href="https://leetcode-cn.com/problems/add-binary/">二进制求和</a></h2>
+<blockquote>
+<p>给你两个二进制字符串，返回它们的和（用二进制表示）。</p>
+<p>输入为 非空 字符串且只包含数字 1 和 0。</p>
+<p>示例 1:</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612694610476">复制</button>输入: a = &quot;11&quot;, b = &quot;1&quot;
+输出: &quot;100&quot;
+</code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612694610476">输入: a = "11", b = "1"
+输出: "100"
+</textarea>
+<p>示例 2:</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612688495080">复制</button>输入: a = &quot;1010&quot;, b = &quot;1011&quot;
+输出: &quot;10101&quot;
+</code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612688495080">输入: a = "1010", b = "1011"
+输出: "10101"
+</textarea>
+<p>提示：</p>
+<ul>
+<li>每个字符串仅由字符 '0' 或 '1' 组成。</li>
+<li>1 &lt;= a.length, b.length &lt;= 10^4</li>
+<li>字符串如果不是 &quot;0&quot; ，就都不含前导零。</li>
+</ul>
+</blockquote>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612689207496">复制</button><span class="hljs-comment">/**
+ * <span class="hljs-doctag">@param <span class="hljs-type">{string}</span> <span class="hljs-variable">a</span></span>
+ * <span class="hljs-doctag">@param <span class="hljs-type">{string}</span> <span class="hljs-variable">b</span></span>
+ * <span class="hljs-doctag">@return <span class="hljs-type">{string}</span></span>
+ */</span>
+<span class="hljs-keyword">var</span> addBinary = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">a, b</span>) </span>{
+  <span class="hljs-keyword">const</span> diff = a.length - b.length;
+
+  <span class="hljs-keyword">if</span> (diff &lt; <span class="hljs-number">0</span>) {
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; -diff; i++) {
+      a = <span class="hljs-string">&#x27;0&#x27;</span> + a;
+    }
+  }
+  <span class="hljs-keyword">if</span> (diff &gt; <span class="hljs-number">0</span>) {
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; diff; i++) {
+      b = <span class="hljs-string">&#x27;0&#x27;</span> + b;
+    }
+  }
+
+  <span class="hljs-keyword">let</span> arrA = a.split(<span class="hljs-string">&#x27;&#x27;</span>);
+  <span class="hljs-keyword">let</span> arrB = b.split(<span class="hljs-string">&#x27;&#x27;</span>);
+
+  <span class="hljs-keyword">const</span> len = a.length;
+  <span class="hljs-keyword">let</span> carry = <span class="hljs-number">0</span>;
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = len - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--) {
+    <span class="hljs-keyword">const</span> num = <span class="hljs-built_in">parseInt</span>(arrA[i]) + <span class="hljs-built_in">parseInt</span>(arrB[i]) + carry;
+
+    carry = num === <span class="hljs-number">1</span> || num === <span class="hljs-number">0</span> ? <span class="hljs-number">0</span> : <span class="hljs-number">1</span>;
+
+    <span class="hljs-keyword">if</span> (num !== <span class="hljs-number">0</span>) {
+      arrA[i] = num % <span class="hljs-number">2</span> === <span class="hljs-number">0</span> ? <span class="hljs-string">&#x27;0&#x27;</span> : <span class="hljs-string">&#x27;1&#x27;</span>;
+    }
+  }
+
+  <span class="hljs-keyword">if</span> (carry === <span class="hljs-number">1</span>) {
+    <span class="hljs-keyword">return</span> [<span class="hljs-string">&#x27;1&#x27;</span>, ...arrA].join(<span class="hljs-string">&#x27;&#x27;</span>);
+  }
+  <span class="hljs-keyword">return</span> arrA.join(<span class="hljs-string">&#x27;&#x27;</span>);
+};
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612689207496">/**
+ * @param {string} a
+ * @param {string} b
+ * @return {string}
+ */
+var addBinary = function (a, b) {
+  const diff = a.length - b.length;
+
+  if (diff < 0) {
+    for (let i = 0; i < -diff; i++) {
+      a = '0' + a;
+    }
+  }
+  if (diff > 0) {
+    for (let i = 0; i < diff; i++) {
+      b = '0' + b;
+    }
+  }
+
+  let arrA = a.split('');
+  let arrB = b.split('');
+
+  const len = a.length;
+  let carry = 0;
+  for (let i = len - 1; i >= 0; i--) {
+    const num = parseInt(arrA[i]) + parseInt(arrB[i]) + carry;
+
+    carry = num === 1 || num === 0 ? 0 : 1;
+
+    if (num !== 0) {
+      arrA[i] = num % 2 === 0 ? '0' : '1';
+    }
+  }
+
+  if (carry === 1) {
+    return ['1', ...arrA].join('');
+  }
+  return arrA.join('');
+};
+</textarea>
+<p>大佬做法</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612690846611">复制</button><span class="hljs-keyword">var</span> addBinary = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">a, b</span>) </span>{
+    <span class="hljs-keyword">let</span> ans = <span class="hljs-string">&quot;&quot;</span>;
+    <span class="hljs-keyword">let</span> ca = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> i = a.length - <span class="hljs-number">1</span>, j = b.length - <span class="hljs-number">1</span>;i &gt;= <span class="hljs-number">0</span> || j &gt;= <span class="hljs-number">0</span>; i--, j--) {
+        <span class="hljs-keyword">let</span> sum = ca;
+        sum += i &gt;= <span class="hljs-number">0</span> ? <span class="hljs-built_in">parseInt</span>(a[i]) : <span class="hljs-number">0</span>;
+        sum += j &gt;= <span class="hljs-number">0</span> ? <span class="hljs-built_in">parseInt</span>(b[j]) : <span class="hljs-number">0</span>;
+        ans += sum % <span class="hljs-number">2</span>;
+        ca = <span class="hljs-built_in">Math</span>.floor(sum / <span class="hljs-number">2</span>);
+    }
+    ans += ca == <span class="hljs-number">1</span> ? ca : <span class="hljs-string">&quot;&quot;</span>;
+    <span class="hljs-keyword">return</span> ans.split(<span class="hljs-string">&#x27;&#x27;</span>).reverse().join(<span class="hljs-string">&#x27;&#x27;</span>);
+};
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612690846611">var addBinary = function(a, b) {
+    let ans = "";
+    let ca = 0;
+    for(let i = a.length - 1, j = b.length - 1;i >= 0 || j >= 0; i--, j--) {
+        let sum = ca;
+        sum += i >= 0 ? parseInt(a[i]) : 0;
+        sum += j >= 0 ? parseInt(b[j]) : 0;
+        ans += sum % 2;
+        ca = Math.floor(sum / 2);
+    }
+    ans += ca == 1 ? ca : "";
+    return ans.split('').reverse().join('');
+};
+</textarea>
+<h2 id="x-的平方根二分法"><a href="https://leetcode-cn.com/problems/sqrtx/">x 的平方根(二分法)</a></h2>
+<blockquote>
+<p>实现 int sqrt(int x) 函数。</p>
+<p>计算并返回 x 的平方根，其中 x 是非负整数。</p>
+<p>由于返回类型是整数，结果只保留整数的部分，小数部分将被舍去。</p>
+<p>示例 1:</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612688739823">复制</button>输入: 4
+输出: 2
+</code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612688739823">输入: 4
+输出: 2
+</textarea>
+<p>示例 2:</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612694117450">复制</button>输入: 8
+输出: 2
+</code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612694117450">输入: 8
+输出: 2
+</textarea>
+<p>说明: 8 的平方根是 2.82842...,
+由于返回类型是整数，小数部分将被舍去。</p>
+</blockquote>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612690416116">复制</button><span class="hljs-comment">/**
+ * <span class="hljs-doctag">@param <span class="hljs-type">{number}</span> <span class="hljs-variable">x</span></span>
+ * <span class="hljs-doctag">@return <span class="hljs-type">{number}</span></span>
+ */</span>
+<span class="hljs-keyword">var</span> mySqrt = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">x</span>) </span>{
+  <span class="hljs-keyword">if</span> (x == <span class="hljs-number">0</span> || x == <span class="hljs-number">1</span>) {
+    <span class="hljs-keyword">return</span> x;
+  }
+
+  <span class="hljs-keyword">var</span> left = <span class="hljs-number">1</span>;
+  <span class="hljs-keyword">var</span> right = x;
+  <span class="hljs-keyword">while</span> (left &lt;= right) {
+    <span class="hljs-keyword">var</span> middle = left + ((right - left) &gt;&gt;&gt; <span class="hljs-number">1</span>);
+    
+    <span class="hljs-keyword">if</span> (middle * middle === x) {
+      <span class="hljs-keyword">return</span> middle;
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (middle * middle &gt; x) {
+      right = middle - <span class="hljs-number">1</span>;
+    } <span class="hljs-keyword">else</span> {
+      left = middle + <span class="hljs-number">1</span>;
+    }
+  }
+  <span class="hljs-keyword">return</span> right;
+};
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612690416116">/**
+ * @param {number} x
+ * @return {number}
+ */
+var mySqrt = function (x) {
+  if (x == 0 || x == 1) {
+    return x;
+  }
+
+  var left = 1;
+  var right = x;
+  while (left <= right) {
+    var middle = left + ((right - left) >>> 1);
+    
+    if (middle * middle === x) {
+      return middle;
+    } else if (middle * middle > x) {
+      right = middle - 1;
+    } else {
+      left = middle + 1;
+    }
+  }
+  return right;
+};
+</textarea>
+
+    </div>
+    
+  </div>
+
+        <footer>
+        
+  <div class="footer">
+  
+  <div class="theme">
+    博客主题为 <a href="https://github.com/Tuzilow/CoinRailgun">CoinRailgun</a> 默认主题
+  </div>
+  <div class="copyright">
+    <span>© 2019-2021 Tuzilow.</span>
+    <span>Powered by <a href="https://github.com/Tuzilow/CoinRailgun">CoinRailgun</a></span>
+  </div>
+</div>
+
+        </footer>
+      </main>
+    </div>
+  </body>
+</html>

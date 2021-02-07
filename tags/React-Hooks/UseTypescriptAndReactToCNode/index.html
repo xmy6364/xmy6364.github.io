@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="author" content="Tuzilow">
+    <meta name="description" content="想要成为大佬">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.5.0/styles/default.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.5.0/styles/github-gist.min.css">
+    <link rel="stylesheet" href="/assets/lib/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/css/layout.css" />
+    <script defer src="https://cdn.bootcdn.net/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"></script>
+    <script defer src="/assets/js/copyCode.js"></script>
+    <script defer src="/assets/js/backTop.js"></script>
+
+    
+  <link rel="stylesheet" href="/assets/css/page.css" />
+  <link rel="stylesheet" href="/assets/css/sidebar.css" />
+  <link rel="stylesheet" href="/assets/css/footer.css" />
+  <link rel="stylesheet" href="/assets/css/post.css" />
+  <script defer src="/assets/js/backHome.js"></script>
+  <script defer src="/assets/js/toc.js"></script>
+  <script defer src="/assets/js/copyright.js"></script>
+
+
+    <title>使用Typescript和React重构CNode社区</title>
+  </head>
+  <body>
+    <div class="container">
+      <aside>
+        
+  <div class="sidebar">
+  <header>Tuzilow的小站</header>
+  <div class="info">
+    <div class="avatar">
+      <img src="https://cdn.jsdelivr.net/gh/Tuzilow/Tuzilow.github.io/images/avatar.png" alt="头像">
+    </div>
+    <div class="author">Tuzilow</div>
+    <div class="description">想要成为大佬</div>
+    <div class="about">
+      <a href="/about">about me.</a>
+    </div>
+  </div>
+  <div class="links">
+    <ul>
+    
+      <li class="links-item">
+        <a href="https://github.com/Tuzilow" target="_blank">
+          <i class="fa fa-github-alt" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="links-item">
+        <a href="tencent://message/?uin=1176281967" target="_blank">
+          <i class="fa fa-qq" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+    </ul>
+  </div>
+  <nav>
+    <ul>
+    
+      <li class="nav-item">
+        <a href="/archives">
+          <span class="nav-item__count">27</span>
+          <span class="nav-item__label">归档</span>
+        </a>
+      </li>
+    
+      <li class="nav-item">
+        <a href="/categories">
+          <span class="nav-item__count">2</span>
+          <span class="nav-item__label">分类</span>
+        </a>
+      </li>
+    
+      <li class="nav-item">
+        <a href="/tags">
+          <span class="nav-item__count">35</span>
+          <span class="nav-item__label">标签</span>
+        </a>
+      </li>
+    
+    </ul>
+  </nav>
+  <div class="catalogue" id="catalogue"></div>
+</div>
+
+      </aside>
+      <main>
+        
+  <div class="post">
+    <div class="post-front">
+      <h1 class="post-front__title">使用Typescript和React重构CNode社区</h1>
+      <div class="post-front__desc">
+        
+        <p class="post-front__desc-date">
+          <i class="fa fa-calendar" aria-hidden="true"></i>
+          2020/07/05 01:12:53
+        </p>
+        
+        
+        <p class="post-front__desc-category">
+          <i class="fa fa-folder-o" aria-hidden="true"></i>
+          <a href="/categories/技术">
+            技术
+          </a>
+        </p>
+        
+          <div class="post-front__desc-tags">
+          
+          <a href="/tags/TypeScript">
+            <i class="fa fa-tag" aria-hidden="true"></i>
+            TypeScript
+          </a>
+          
+          <a href="/tags/React">
+            <i class="fa fa-tag" aria-hidden="true"></i>
+            React
+          </a>
+          
+          <a href="/tags/React-Router">
+            <i class="fa fa-tag" aria-hidden="true"></i>
+            React-Router
+          </a>
+          
+          <a href="/tags/React-Hooks">
+            <i class="fa fa-tag" aria-hidden="true"></i>
+            React-Hooks
+          </a>
+          
+          <a href="/tags/CNode">
+            <i class="fa fa-tag" aria-hidden="true"></i>
+            CNode
+          </a>
+          
+        </div>
+      </div>
+    </div>
+    <div class="post-content">
+      <nav id="toc" class="toc"><ol><li><a href="#部分源码解析">部分源码解析</a></li><li><a href="#本地运行">本地运行</a></li><li><a href="#技术栈">技术栈</a></li></ol></nav><p>一个React和Typescript的练手项目，后台调用CNode社区提供的API，功能基本完成，演示网站部署在<a href="https://www.netlify.com/">netlify</a>。</p>
+<p>等以后水平提高了会考虑重构本项目，并且增加移动端适配。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Tuzilow/blog-image/img/cnode-demo.png" alt="预览图"></p>
+<ul>
+<li><a href="https://cnodets.netlify.app/#/">演示地址</a></li>
+<li><a href="https://github.com/Tuzilow/cnode-react-ts">项目源码</a></li>
+</ul>
+<p>项目主要目录结构</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612694913133">复制</button>src
+├─assets
+│  └─images
+├─components
+│  ├─Header       Header组件
+│  ├─Login        登陆组件
+│  ├─Pagination   分页器组件
+│  ├─RecentList   侧边栏列表组件
+│  ├─TopicItem    文章列表项组件
+│  └─TopicList    文章列表组件
+├─d.ts            全局声明
+└─pages
+    ├─Collect     收藏页
+    ├─Detail      文章详情页
+    ├─Home        首页
+    └─User        用户详情页
+<b class="name">bash</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612694913133">src
+├─assets
+│  └─images
+├─components
+│  ├─Header       Header组件
+│  ├─Login        登陆组件
+│  ├─Pagination   分页器组件
+│  ├─RecentList   侧边栏列表组件
+│  ├─TopicItem    文章列表项组件
+│  └─TopicList    文章列表组件
+├─d.ts            全局声明
+└─pages
+    ├─Collect     收藏页
+    ├─Detail      文章详情页
+    ├─Home        首页
+    └─User        用户详情页
+</textarea>
+<h2 id="部分源码解析">部分源码解析</h2>
+<p>（未完成）</p>
+<h2 id="本地运行">本地运行</h2>
+<p><strong>使用<code>yarn</code></strong></p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612689795073">复制</button>$ git <span class="hljs-built_in">clone</span> https://github.com/Tuzilow/cnode-react-ts.git
+
+$ yarn install
+
+$ yarn start
+<b class="name">bash</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612689795073">$ git clone https://github.com/Tuzilow/cnode-react-ts.git
+
+$ yarn install
+
+$ yarn start
+</textarea>
+<p><strong>使用<code>npm</code></strong></p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612691544915">复制</button>$ git <span class="hljs-built_in">clone</span> https://github.com/Tuzilow/cnode-react-ts.git
+
+$ npm install
+
+$ npm start
+<b class="name">bash</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612691544915">$ git clone https://github.com/Tuzilow/cnode-react-ts.git
+
+$ npm install
+
+$ npm start
+</textarea>
+<h2 id="技术栈">技术栈</h2>
+<ul>
+<li>React</li>
+<li>React-Router</li>
+<li>React Hooks</li>
+<li>Typescript</li>
+<li>ant-design</li>
+<li>fetch API</li>
+</ul>
+
+    </div>
+    
+  </div>
+
+        <footer>
+        
+  <div class="footer">
+  
+  <div class="theme">
+    博客主题为 <a href="https://github.com/Tuzilow/CoinRailgun">CoinRailgun</a> 默认主题
+  </div>
+  <div class="copyright">
+    <span>© 2019-2021 Tuzilow.</span>
+    <span>Powered by <a href="https://github.com/Tuzilow/CoinRailgun">CoinRailgun</a></span>
+  </div>
+</div>
+
+        </footer>
+      </main>
+    </div>
+  </body>
+</html>

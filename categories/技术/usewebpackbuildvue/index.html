@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="author" content="Tuzilow">
+    <meta name="description" content="想要成为大佬">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.5.0/styles/default.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.5.0/styles/github-gist.min.css">
+    <link rel="stylesheet" href="/assets/lib/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/css/layout.css" />
+    <script defer src="https://cdn.bootcdn.net/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"></script>
+    <script defer src="/assets/js/copyCode.js"></script>
+    <script defer src="/assets/js/backTop.js"></script>
+
+    
+  <link rel="stylesheet" href="/assets/css/page.css" />
+  <link rel="stylesheet" href="/assets/css/sidebar.css" />
+  <link rel="stylesheet" href="/assets/css/footer.css" />
+  <link rel="stylesheet" href="/assets/css/post.css" />
+  <script defer src="/assets/js/backHome.js"></script>
+  <script defer src="/assets/js/toc.js"></script>
+  <script defer src="/assets/js/copyright.js"></script>
+
+
+    <title>使用 webpack 手动搭建 vue 项目</title>
+  </head>
+  <body>
+    <div class="container">
+      <aside>
+        
+  <div class="sidebar">
+  <header>Tuzilow的小站</header>
+  <div class="info">
+    <div class="avatar">
+      <img src="https://cdn.jsdelivr.net/gh/Tuzilow/Tuzilow.github.io/images/avatar.png" alt="头像">
+    </div>
+    <div class="author">Tuzilow</div>
+    <div class="description">想要成为大佬</div>
+    <div class="about">
+      <a href="/about">about me.</a>
+    </div>
+  </div>
+  <div class="links">
+    <ul>
+    
+      <li class="links-item">
+        <a href="https://github.com/Tuzilow" target="_blank">
+          <i class="fa fa-github-alt" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="links-item">
+        <a href="tencent://message/?uin=1176281967" target="_blank">
+          <i class="fa fa-qq" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+    </ul>
+  </div>
+  <nav>
+    <ul>
+    
+      <li class="nav-item">
+        <a href="/archives">
+          <span class="nav-item__count">27</span>
+          <span class="nav-item__label">归档</span>
+        </a>
+      </li>
+    
+      <li class="nav-item">
+        <a href="/categories">
+          <span class="nav-item__count">2</span>
+          <span class="nav-item__label">分类</span>
+        </a>
+      </li>
+    
+      <li class="nav-item">
+        <a href="/tags">
+          <span class="nav-item__count">35</span>
+          <span class="nav-item__label">标签</span>
+        </a>
+      </li>
+    
+    </ul>
+  </nav>
+  <div class="catalogue" id="catalogue"></div>
+</div>
+
+      </aside>
+      <main>
+        
+  <div class="post">
+    <div class="post-front">
+      <h1 class="post-front__title">使用 webpack 手动搭建 vue 项目</h1>
+      <div class="post-front__desc">
+        
+        <p class="post-front__desc-date">
+          <i class="fa fa-calendar" aria-hidden="true"></i>
+          2020/12/07 20:30:13
+        </p>
+        
+        
+        <p class="post-front__desc-category">
+          <i class="fa fa-folder-o" aria-hidden="true"></i>
+          <a href="/categories/技术">
+            技术
+          </a>
+        </p>
+        
+          <div class="post-front__desc-tags">
+          
+          <a href="/tags/JavaScript">
+            <i class="fa fa-tag" aria-hidden="true"></i>
+            JavaScript
+          </a>
+          
+          <a href="/tags/Vue">
+            <i class="fa fa-tag" aria-hidden="true"></i>
+            Vue
+          </a>
+          
+          <a href="/tags/Webpack">
+            <i class="fa fa-tag" aria-hidden="true"></i>
+            Webpack
+          </a>
+          
+        </div>
+      </div>
+    </div>
+    <div class="post-content">
+      <nav id="toc" class="toc"><ol><li><a href="#构建项目基本目录">构建项目基本目录</a></li><li><a href="#安装必要依赖">安装必要依赖</a><ol><li><a href="#webpack-及相关插件">webpack 及相关插件</a></li><li><a href="#安装-vue">安装 vue</a></li></ol></li><li><a href="#搭建项目">搭建项目</a><ol><li><a href="#简单实现-webpack-打包">简单实现 webpack 打包</a></li><li><a href="#开启热加载">开启热加载</a></li><li><a href="#配置-vue">配置 Vue</a></li><li><a href="#配置图片资源的加载">配置图片资源的加载</a></li></ol></li><li><a href="#配置-babel">配置 babel</a><ol><li><a href="#设置-src-别名以及省略后缀">设置 src 别名以及省略后缀</a></li></ol></li><li><a href="#参考文章">参考文章</a></li></ol></nav><p>webpack 是一个前端工程化打包工具，对于前端工程师来说 webpack 是一项十分重要的技能。下面我们就通过搭建一个 vue 项目来学习使用 webpack</p>
+<p><strong>主要环境：</strong></p>
+<ul>
+<li>node v14.15.0</li>
+<li>npm v6.14.9</li>
+<li>webpack v5.10.0</li>
+<li>webpack-cli v4.2.0</li>
+<li>vue v2.6.12</li>
+</ul>
+<p><strong>本项目实现以下功能：</strong></p>
+<ul>
+<li>与<code>vue/cli</code>类似的基本目录</li>
+<li>支持<code>*.vue</code>,<code>*.css</code>等文件</li>
+<li>支持<code>es6</code>及以上语法</li>
+<li>支持加载图片</li>
+<li>热加载</li>
+</ul>
+<h2 id="构建项目基本目录">构建项目基本目录</h2>
+<p>执行<code>npm init</code>并创建以下目录</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612687460497">复制</button>demo
+├─ dist
+├─ public
+└─ src
+</code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612687460497">demo
+├─ dist
+├─ public
+└─ src
+</textarea>
+<h2 id="安装必要依赖">安装必要依赖</h2>
+<h3 id="webpack-及相关插件">webpack 及相关插件</h3>
+<ul>
+<li>webpack <code>npm install -D webpack webpack-cli</code></li>
+<li>webpack 本地服务器插件 <code>npm install -D webpack-dev-server</code></li>
+<li>html 生成插件，它会将生成的 js 和 css 文件插入到 html 中 <code>npm install -D html-webpack-plugin</code></li>
+<li>vue 插件 <code>npm install -D vue-loader vue-template-compiler</code></li>
+<li>css 插件 <code>npm install -D css-loader style-loader vue-style-loader</code></li>
+<li>图片插件 <code>npm install -D file-loader url-loader</code></li>
+<li>babel 插件 <code>npm install -D @babel/core @babel/cli @babel/preset-env babel-loader</code>, <code>npm install @babel/polyfill</code></li>
+</ul>
+<h3 id="安装-vue">安装 vue</h3>
+<ul>
+<li><code>npm install vue vue-router</code></li>
+</ul>
+<h2 id="搭建项目">搭建项目</h2>
+<h3 id="简单实现-webpack-打包">简单实现 webpack 打包</h3>
+<p>新建<code>src/main.js</code>，并写入：</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612689112429">复制</button><span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;Hello Webpack&#x27;</span>);
+<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612689112429">console.log('Hello Webpack');
+</textarea>
+<p>根目录下新建<code>webpack.config.js</code>，并写入：</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612688200866">复制</button><span class="hljs-keyword">const</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;path&#x27;</span>);
+
+<span class="hljs-keyword">const</span> config = {
+  <span class="hljs-attr">entry</span>: <span class="hljs-string">&#x27;./src/main.js&#x27;</span>, <span class="hljs-comment">// 定义入口文件</span>
+  <span class="hljs-attr">output</span>: {
+    <span class="hljs-attr">path</span>: path.resolve(__dirname + <span class="hljs-string">&#x27;/dist&#x27;</span>), <span class="hljs-comment">// 打包生成文件地址，必须是绝对路径</span>
+    <span class="hljs-attr">filename</span>: <span class="hljs-string">&#x27;[name].build.js&#x27;</span>, <span class="hljs-comment">// 生成的文件名</span>
+  },
+};
+<span class="hljs-built_in">module</span>.exports = config;
+<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612688200866">const path = require('path');
+
+const config = {
+  entry: './src/main.js', // 定义入口文件
+  output: {
+    path: path.resolve(__dirname + '/dist'), // 打包生成文件地址，必须是绝对路径
+    filename: '[name].build.js', // 生成的文件名
+  },
+};
+module.exports = config;
+</textarea>
+<p>在<code>package.json</code>中的<code>scripts</code>中添加一个脚本：</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612693479235">复制</button>{
+  ...
+  <span class="hljs-attr">&quot;scripts&quot;</span>: {
+    <span class="hljs-attr">&quot;build&quot;</span>: <span class="hljs-string">&quot;webpack --mode=production&quot;</span>
+  }
+  ...
+}
+<b class="name">json</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612693479235">{
+  ...
+  "scripts": {
+    "build": "webpack --mode=production"
+  }
+  ...
+}
+</textarea>
+<p>在命令行中执行<code>npm run build</code>，此时项目目录中出现了<code>dist/main.build.js</code>，证明执行成功</p>
+<p>js 文件打包成功后，需要一个 html 文件来引入这个 js 文件，这就需要用到我们一开始下载的<code>html-webpack-plugin</code></p>
+<p>首先新建<code>public/index.html</code>创建一个基础页面：</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612694062295">复制</button><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-meta-keyword">html</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">&quot;UTF-8&quot;</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;viewport&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;width=device-width, initial-scale=1.0&quot;</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>webpack搭建vue<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-comment">&lt;!-- 如果浏览器禁止加载js脚本 --&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">noscript</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">strong</span>&gt;</span>
+        We&#x27;re sorry but this site doesn&#x27;t work properly without JavaScript
+        enabled. Please enable it to continue.
+      <span class="hljs-tag">&lt;/<span class="hljs-name">strong</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">noscript</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;app&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-comment">&lt;!-- build后的文件会在这之后自动引入 --&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+<b class="name">html</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612694062295"><!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>webpack搭建vue</title>
+  </head>
+  <body>
+    <!-- 如果浏览器禁止加载js脚本 -->
+    <noscript>
+      <strong>
+        We're sorry but this site doesn't work properly without JavaScript
+        enabled. Please enable it to continue.
+      </strong>
+    </noscript>
+
+    <div id="app"></div>
+    <!-- build后的文件会在这之后自动引入 -->
+  </body>
+</html>
+</textarea>
+<p>在<code>public</code>下随便放入一个图标<code>favicon.ico</code>，然后在<code>webpack.config.js</code>中配置插件：</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612690737387">复制</button><span class="hljs-keyword">const</span> HtmlWebpackPlugin = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;html-webpack-plugin&#x27;</span>);
+
+<span class="hljs-keyword">const</span> config = {
+  ...
+  <span class="hljs-attr">plugins</span>:[
+     <span class="hljs-keyword">new</span> HtmlWebpackPlugin({
+      <span class="hljs-attr">filename</span>: <span class="hljs-string">&#x27;index.html&#x27;</span>, <span class="hljs-comment">// 生成的文件夹名</span>
+      <span class="hljs-attr">template</span>: <span class="hljs-string">&#x27;public/index.html&#x27;</span>, <span class="hljs-comment">// 模板html</span>
+      <span class="hljs-attr">favicon</span>: <span class="hljs-string">&#x27;public/favicon.ico&#x27;</span>, <span class="hljs-comment">// 图标</span>
+    }),
+  ]
+}
+...
+<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612690737387">const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+const config = {
+  ...
+  plugins:[
+     new HtmlWebpackPlugin({
+      filename: 'index.html', // 生成的文件夹名
+      template: 'public/index.html', // 模板html
+      favicon: 'public/favicon.ico', // 图标
+    }),
+  ]
+}
+...
+</textarea>
+<p>之后再次执行<code>npm run build</code>，<code>dist</code>下会生成<code>index.html</code>，<code>favicon.ico</code>，<code>main.build.js</code>三个文件，通过浏览器打开<code>index.html</code>，就可以发现控制台输出了<code>Hello Webpack</code>，页面图标也变成了自己设定的图标，通过编辑器打开<code>index.html</code>，我们会发现 webpack 帮助我们自动引入了<code>favicon.ico</code>和<code>main.build.js</code>：</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612692553413">复制</button><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-meta-keyword">html</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    ...
+    <span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">&quot;icon&quot;</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;favicon.ico&quot;</span> /&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+    ...
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;main.build.js&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+
+<b class="name">html</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612692553413"><!DOCTYPE html>
+<html>
+  <head>
+    ...
+    <link rel="icon" href="favicon.ico" />
+  </head>
+  <body>
+    ...
+    <script src="main.build.js"></script>
+  </body>
+</html>
+
+</textarea>
+<h3 id="开启热加载">开启热加载</h3>
+<p>webpack 热加载需要用到<code>webpack-dev-server</code>，在开始我们已经安装过了，在<code>webpack.config.js</code>中配置：</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612688694491">复制</button><span class="hljs-keyword">const</span> config = {
+  ...
+  <span class="hljs-attr">devServer</span>: {
+    <span class="hljs-attr">contentBase</span>: path.join(__dirname, <span class="hljs-string">&#x27;dist&#x27;</span>), <span class="hljs-comment">// html所在路径</span>
+    <span class="hljs-attr">compress</span>: <span class="hljs-literal">true</span>, <span class="hljs-comment">// 是否压缩</span>
+    <span class="hljs-attr">port</span>: <span class="hljs-number">3000</span>, <span class="hljs-comment">// 端口</span>
+    <span class="hljs-attr">hot</span>: <span class="hljs-literal">true</span>, <span class="hljs-comment">// 热部署</span>
+    <span class="hljs-attr">open</span>: <span class="hljs-literal">true</span>, <span class="hljs-comment">// 打包完成后自动打开网页</span>
+  }
+}
+<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612688694491">const config = {
+  ...
+  devServer: {
+    contentBase: path.join(__dirname, 'dist'), // html所在路径
+    compress: true, // 是否压缩
+    port: 3000, // 端口
+    hot: true, // 热部署
+    open: true, // 打包完成后自动打开网页
+  }
+}
+</textarea>
+<p>增加<code>package.json</code>脚本：</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612692144750">复制</button>{
+  ...
+  <span class="hljs-attr">&quot;scripts&quot;</span>: {
+    <span class="hljs-attr">&quot;build&quot;</span>: <span class="hljs-string">&quot;webpack --mode=production&quot;</span>,
+    <span class="hljs-attr">&quot;serve&quot;</span>: <span class="hljs-string">&quot;webpack serve&quot;</span>
+  }
+  ...
+}
+<b class="name">json</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612692144750">{
+  ...
+  "scripts": {
+    "build": "webpack --mode=production",
+    "serve": "webpack serve"
+  }
+  ...
+}
+</textarea>
+<p>执行<code>npm run serve</code>，打包成功后会自动打开网页，并且当你修改<code>src/main.js</code>或<code>src/index.html</code>的内容的时候，浏览器会自动重新打包并刷新</p>
+<h3 id="配置-vue">配置 Vue</h3>
+<p>让 webpack 打包<code>*.vue</code>文件需要<code>vue-loader</code>和<code>vue-template-compiler</code>，同时为了 webpack 能够解析 vue 中的 css 还需要用到<code>css-loader</code>和<code>vue-style-loader</code>，在<code>webpack.config.js</code>配置以上插件：</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612687958882">复制</button>...
+<span class="hljs-keyword">const</span> { VueLoaderPlugin } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;vue-loader&#x27;</span>);
+
+<span class="hljs-keyword">const</span> config = {
+  ...
+  <span class="hljs-comment">// loaders</span>
+  <span class="hljs-attr">module</span>: {
+    <span class="hljs-attr">rules</span>: [
+      {
+        <span class="hljs-comment">// *.vue</span>
+        <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.vue$/</span>,
+        loader: <span class="hljs-string">&#x27;vue-loader&#x27;</span>,
+      },
+      {
+        <span class="hljs-comment">// `*.vue` 文件中的 `&lt;style&gt;` 块以及普通的`*.css`</span>
+        <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.css$/</span>,
+        use: [<span class="hljs-string">&#x27;vue-style-loader&#x27;</span>, <span class="hljs-string">&#x27;css-loader&#x27;</span>],
+      },
+    ],
+  },
+  <span class="hljs-attr">plugins</span>: [
+    ...
+    <span class="hljs-keyword">new</span> VueLoaderPlugin(),
+  ],
+  ...
+};
+...
+<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612687958882">...
+const { VueLoaderPlugin } = require('vue-loader');
+
+const config = {
+  ...
+  // loaders
+  module: {
+    rules: [
+      {
+        // *.vue
+        test: /\.vue$/,
+        loader: 'vue-loader',
+      },
+      {
+        // `*.vue` 文件中的 `<style>` 块以及普通的`*.css`
+        test: /\.css$/,
+        use: ['vue-style-loader', 'css-loader'],
+      },
+    ],
+  },
+  plugins: [
+    ...
+    new VueLoaderPlugin(),
+  ],
+  ...
+};
+...
+</textarea>
+<p>配置完后新建<code>src/App.vue</code>:</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612691981279">复制</button><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;example&quot;</span>&gt;</span>
+    {{ msg }}
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {
+  <span class="hljs-function"><span class="hljs-title">data</span>(<span class="hljs-params"></span>)</span> {
+    <span class="hljs-keyword">return</span> {
+      <span class="hljs-attr">msg</span>: <span class="hljs-string">&#x27;Hello Webpack&#x27;</span>,
+    };
+  },
+};
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="css">
+<span class="hljs-selector-class">.example</span> {
+  <span class="hljs-attribute">color</span>: red;
+}
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
+<b class="name">html</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612691981279"><template>
+  <div class="example">
+    {{ msg }}
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      msg: 'Hello Webpack',
+    };
+  },
+};
+</script>
+
+<style>
+.example {
+  color: red;
+}
+</style>
+</textarea>
+<p>修改<code>src/main.js</code>:</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612694572382">复制</button><span class="hljs-keyword">import</span> Vue <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vue&#x27;</span>;
+<span class="hljs-keyword">import</span> App <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./App.vue&#x27;</span>;
+
+<span class="hljs-keyword">new</span> Vue({
+  <span class="hljs-attr">el</span>: <span class="hljs-string">&#x27;#app&#x27;</span>,
+  <span class="hljs-attr">render</span>: <span class="hljs-function">(<span class="hljs-params">h</span>) =&gt;</span> h(App),
+});
+<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612694572382">import Vue from 'vue';
+import App from './App.vue';
+
+new Vue({
+  el: '#app',
+  render: (h) => h(App),
+});
+</textarea>
+<p>然后运行<code>npm run serve</code>，即可看到页面上显示的<code>Hello Webpack</code></p>
+<h3 id="配置图片资源的加载">配置图片资源的加载</h3>
+<p>使用<code>file-loader</code>或<code>url-loader</code>加载，它们都是用于打包文件和图片资源的，区别在于<code>url-loader</code>封装了<code>file-loader</code></p>
+<p>在访问网站时如果图片较多，会发很多 http 请求，会降低页面性能。这个问题可以通过 <code>url-loader</code> 解决。<code>url-loader</code> 会将引入的图片编码，生成 dataURl。相当于把图片数据翻译成一串字符,再把这串字符打包到文件中，最终只需要引入这个文件就能访问图片了。
+当然，如果图片较大，编码会消耗性能。因此 <code>url-loader</code> 提供了一个 limit 参数，小于 limit 字节的文件会被转为 DataURl，大于 limit 的还会使用 file-loader 进行 copy。
+此处我们使用 <code>url-loader</code>,由于它是基于 <code>file-loader</code> 的封装，所以也需要引入 <code>file-loader</code>。</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612687183248">复制</button>...
+<span class="hljs-keyword">const</span> config = {
+  ...
+  <span class="hljs-attr">module</span>: {
+    <span class="hljs-attr">rules</span>: [
+      ...
+      {
+        <span class="hljs-comment">// 图片</span>
+        <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.(png|jpe?g|gif|svg)(\?.*)?$/</span>,
+        use: {
+          <span class="hljs-attr">loader</span>: <span class="hljs-string">&#x27;url-loader&#x27;</span>,
+          <span class="hljs-attr">options</span>: {
+            <span class="hljs-attr">limit</span>: <span class="hljs-number">25000</span>,
+          },
+        },
+      },
+    ],
+  },
+};
+...
+<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612687183248">...
+const config = {
+  ...
+  module: {
+    rules: [
+      ...
+      {
+        // 图片
+        test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+        use: {
+          loader: 'url-loader',
+          options: {
+            limit: 25000,
+          },
+        },
+      },
+    ],
+  },
+};
+...
+</textarea>
+<p>然后添加一个图片<code>src/assets/logo.png</code>，在<code>App.vue</code>中引入：</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612687007175">复制</button><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;example&quot;</span>&gt;</span>
+    {{ msg }}
+    <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">:src</span>=<span class="hljs-string">&quot;url&quot;</span> /&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+<span class="hljs-keyword">import</span> logo <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./assets/logo.png&#x27;</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {
+  <span class="hljs-function"><span class="hljs-title">data</span>(<span class="hljs-params"></span>)</span> {
+    <span class="hljs-keyword">return</span> {
+      <span class="hljs-attr">msg</span>: <span class="hljs-string">&#x27;Hello Vue1&#x27;</span>,
+      <span class="hljs-attr">url</span>: logo,
+    };
+  },
+};
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="css">
+<span class="hljs-selector-class">.example</span> {
+  <span class="hljs-attribute">color</span>: red;
+}
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
+<b class="name">html</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612687007175"><template>
+  <div class="example">
+    {{ msg }}
+    <img :src="url" />
+  </div>
+</template>
+
+<script>
+import logo from './assets/logo.png';
+
+export default {
+  data() {
+    return {
+      msg: 'Hello Vue1',
+      url: logo,
+    };
+  },
+};
+</script>
+
+<style>
+.example {
+  color: red;
+}
+</style>
+</textarea>
+<p>再次<code>npm run serve</code>即可看到图片</p>
+<h2 id="配置-babel">配置 babel</h2>
+<p>babel 可以将 js 的高版本(es6)语法转换为低版本，使得项目兼容低版本浏览器</p>
+<p>需要我们注意的是，babel7 与 babel6 不兼容，因此需要使用最新版本的 babel 和 babel 插件，在前面文章开始我们已经安装了 babel7 版本的 babel 插件，下面我们在<code>webpack.config.js</code>中配置它：</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612687700124">复制</button>...
+<span class="hljs-keyword">const</span> config = {
+  ...
+  <span class="hljs-attr">module</span>: {
+    <span class="hljs-attr">rules</span>: [
+      ...
+      {
+        <span class="hljs-comment">// *.js</span>
+        <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.js$/</span>,
+        exclude: <span class="hljs-regexp">/node_modules/</span>, <span class="hljs-comment">// 不编译node_modules下的文件</span>
+        loader: <span class="hljs-string">&#x27;babel-loader&#x27;</span>,
+      },
+    ],
+  },
+};
+...
+<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612687700124">...
+const config = {
+  ...
+  module: {
+    rules: [
+      ...
+      {
+        // *.js
+        test: /\.js$/,
+        exclude: /node_modules/, // 不编译node_modules下的文件
+        loader: 'babel-loader',
+      },
+    ],
+  },
+};
+...
+</textarea>
+<p>配置完后在项目根目录下创建一个 babel 的配置文件<code>.babelrc</code>，写入如下内容：</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612693529575">复制</button>{
+  <span class="hljs-attr">&quot;presets&quot;</span>: [
+    [
+      <span class="hljs-string">&quot;@babel/preset-env&quot;</span>,
+      {
+        <span class="hljs-attr">&quot;useBuiltIns&quot;</span>: <span class="hljs-string">&quot;entry&quot;</span>
+      }
+    ]
+  ]
+}
+<b class="name">json</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612693529575">{
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "useBuiltIns": "entry"
+      }
+    ]
+  ]
+}
+</textarea>
+<blockquote>
+<p>更多 babel 配置请查看<a href="https://www.babeljs.cn/">babel 中文官网</a></p>
+</blockquote>
+<p>配置完成后新建一个<code>src/utils/getData.js</code>测试一下：</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612688225688">复制</button><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getData</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve, reject</span>) =&gt;</span> {
+    resolve(<span class="hljs-string">&#x27;ok&#x27;</span>);
+  });
+}
+<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612688225688">export default function getData() {
+  return new Promise((resolve, reject) => {
+    resolve('ok');
+  });
+}
+</textarea>
+<p>在<code>src/App.vue</code>中引入：</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612689368799">复制</button><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;example&quot;</span>&gt;</span>
+    {{ msg }}
+    <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">:src</span>=<span class="hljs-string">&quot;url&quot;</span> /&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+<span class="hljs-keyword">import</span> logo <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./assets/logo.png&#x27;</span>;
+<span class="hljs-keyword">import</span> getData <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./utils/getData&#x27;</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {
+  <span class="hljs-function"><span class="hljs-title">data</span>(<span class="hljs-params"></span>)</span> {
+    <span class="hljs-keyword">return</span> {
+      <span class="hljs-attr">msg</span>: <span class="hljs-string">&#x27;Hello Vue1&#x27;</span>,
+      <span class="hljs-attr">url</span>: logo,
+    };
+  },
+  <span class="hljs-attr">methods</span>: {
+    <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-title">fetchData</span>(<span class="hljs-params"></span>)</span> {
+      <span class="hljs-keyword">const</span> data = <span class="hljs-keyword">await</span> getData();
+      <span class="hljs-built_in">this</span>.msg = data;
+    },
+  },
+  <span class="hljs-function"><span class="hljs-title">created</span>(<span class="hljs-params"></span>)</span> {
+    <span class="hljs-built_in">this</span>.fetchData();
+  },
+};
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="css">
+<span class="hljs-selector-class">.example</span> {
+  <span class="hljs-attribute">color</span>: red;
+}
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
+<b class="name">html</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612689368799"><template>
+  <div class="example">
+    {{ msg }}
+    <img :src="url" />
+  </div>
+</template>
+
+<script>
+import logo from './assets/logo.png';
+import getData from './utils/getData';
+
+export default {
+  data() {
+    return {
+      msg: 'Hello Vue1',
+      url: logo,
+    };
+  },
+  methods: {
+    async fetchData() {
+      const data = await getData();
+      this.msg = data;
+    },
+  },
+  created() {
+    this.fetchData();
+  },
+};
+</script>
+
+<style>
+.example {
+  color: red;
+}
+</style>
+</textarea>
+<p>重新执行<code>npm run serve</code>后，页面显示<code>ok</code>，babel 引入成功</p>
+<h3 id="设置-src-别名以及省略后缀">设置 src 别名以及省略后缀</h3>
+<p>为了方便开发，我们可以给 src 目录设置别名，以及将常用文件类型的后缀省略</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612692227019">复制</button>...
+<span class="hljs-keyword">const</span> config = {
+  ...
+  <span class="hljs-comment">// 解析路径</span>
+  <span class="hljs-attr">resolve</span>: {
+    <span class="hljs-comment">// 设置src别名</span>
+    <span class="hljs-attr">alias</span>: {
+      <span class="hljs-string">&#x27;@&#x27;</span>: path.resolve(__dirname, <span class="hljs-string">&#x27;src&#x27;</span>),
+    },
+    <span class="hljs-comment">//后缀名 可以根据需要自由增减</span>
+    <span class="hljs-attr">extensions</span>: [<span class="hljs-string">&#x27;.js&#x27;</span>, <span class="hljs-string">&#x27;.vue&#x27;</span>],
+  },
+  ...
+};
+...
+<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612692227019">...
+const config = {
+  ...
+  // 解析路径
+  resolve: {
+    // 设置src别名
+    alias: {
+      '@': path.resolve(__dirname, 'src'),
+    },
+    //后缀名 可以根据需要自由增减
+    extensions: ['.js', '.vue'],
+  },
+  ...
+};
+...
+</textarea>
+<p>这样我们就可以以如下方式导入 vue 和 js 文件：</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612689173086">复制</button><span class="hljs-comment">// 导入App.vue</span>
+<span class="hljs-keyword">import</span> App <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@/App&#x27;</span>;
+<span class="hljs-comment">// 导入getData</span>
+<span class="hljs-keyword">import</span> getData <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@/utils/getData&#x27;</span>;
+<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612689173086">// 导入App.vue
+import App from '@/App';
+// 导入getData
+import getData from '@/utils/getData';
+</textarea>
+<p>至此，我们已经简单的搭建出了 vue 项目，在项目中我们可能还会需要用到<code>less</code>,<code>sass</code>,字体图标等工具，针对这类工具 webpack 都有与其对应的<code>loader</code>或<code>plugin</code>，需要时搜索他们的文档即可。</p>
+<ul>
+<li>本项目仓库 <a href="https://github.com/Tuzilow/webpack-vue">Tuzilow/webpack-vue</a></li>
+</ul>
+<h2 id="参考文章">参考文章</h2>
+<ul>
+<li><a href="https://webpack.docschina.org/concepts/">webpack 中文文档</a></li>
+<li><a href="https://juejin.cn/post/6844903941180768269">webpack4 练手项目-搭建 Vue 项目</a></li>
+<li><a href="https://segmentfault.com/a/1190000018461758">使用 Webpack 与 Babel 配置 ES6 开发环境</a></li>
+</ul>
+
+    </div>
+    
+  </div>
+
+        <footer>
+        
+  <div class="footer">
+  
+  <div class="theme">
+    博客主题为 <a href="https://github.com/Tuzilow/CoinRailgun">CoinRailgun</a> 默认主题
+  </div>
+  <div class="copyright">
+    <span>© 2019-2021 Tuzilow.</span>
+    <span>Powered by <a href="https://github.com/Tuzilow/CoinRailgun">CoinRailgun</a></span>
+  </div>
+</div>
+
+        </footer>
+      </main>
+    </div>
+  </body>
+</html>

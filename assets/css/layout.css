@@ -1,0 +1,254 @@
+:root {
+  --white: rgb(245, 237, 229);
+  --primary-light-4: #e8e0da;
+  --primary-light-3: #dbd3ce;
+  --primary-light-2: #cfc0b8;
+  --primary-light-1: #c29e8d;
+  --primary: #b47d67;
+  --primary-dark-1: #8f5b4a;
+  --primary-dark-2: #693d31;
+  --primary-dark-3: #42231c;
+  --black: rgb(29, 14, 12);
+  --secondary: rgba(29, 14, 12, 0.5);
+  --text: rgba(29, 14, 12, 0.8);
+  --white-light-1: rgba(245, 237, 229, 0.3);
+  --white-light-2: rgb(252, 253, 253);
+  --warm: #fdf6e3;
+}
+:root {
+  --shadow-spread-light-2: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+  --shadow-spread-light: 0 0 7px rgb(0 0 0 / 20%);
+  --shadow-spread: 0 0px 10px rgb(0 0 0 / 20%);
+  --shadow-spread-dark: 0 0px 16px rgb(0 0 0 / 20%);
+  --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.247);
+  --shadow-normal: 0 4px 6px -1px rgba(0, 0, 0, 0.219),
+    0 2px 4px -1px rgba(0, 0, 0, 0.164);
+  --shadow-md: 0 6px 12px -1px rgba(0, 0, 0, 0.219),
+    0 4px 8px -1px rgba(0, 0, 0, 0.164);
+}
+:root {
+  --text-xs: 12px;
+  --text-sm: 14px;
+  --text-normal: 16px;
+  --text-lg: 18px;
+  --text-xl: 20px;
+  --text-xxl: 24px;
+
+  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --font-mono: Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New',
+    monospace;
+  --font-song: 'Songti SC', 'Noto Serif SC', STZhongsong, STKaiti, KaiTi, Roboto,
+    serif;
+  --font-default: 'PingFang SC', 'Microsoft YaHei', Roboto, Arial, sans-serif;
+  --font-noto: 'Noto Serif SC', Consolas, serif, Menlo, Monaco,
+    'Liberation Mono', 'Courier New', monospace;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 2px;
+  background-color: var(--primary-light-1);
+}
+::-webkit-scrollbar-track {
+  border-radius: 2px;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100%;
+  color: var(--black);
+  font-family: var(--font-default);
+  font-size: var(--text-normal);
+  overflow-y: scroll;
+}
+
+ul,
+li {
+  list-style: none;
+}
+a {
+  color: var(--black);
+  text-decoration: none;
+  transition: color 0.25s;
+}
+a:hover {
+  transition: color 0.25s;
+}
+
+main {
+  width: 100%;
+  padding: 1.5rem 10rem 1.5rem 30rem;
+  background-color: var(--white-light-1);
+}
+
+code {
+  font-family: var(--font-mono);
+}
+
+blockquote {
+  position: relative;
+  background: var(--white);
+  margin-left: 0;
+  padding: 0.2rem 0.8rem;
+  margin-bottom: 0.5rem;
+  color: var(--primary-dark-3);
+}
+blockquote::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background-color: var(--primary);
+}
+
+code {
+  background-color: var(--warm);
+}
+
+p > code,
+li > code {
+  padding-left: 0.2rem;
+  padding-right: 0.2rem;
+}
+
+pre.hljs {
+  padding: 12px 2px 12px 40px !important;
+  border-radius: 5px !important;
+  position: relative;
+  font-size: 14px !important;
+  line-height: 22px !important;
+  overflow: hidden !important;
+  background-color: var(--warm);
+}
+pre.hljs code {
+  display: block !important;
+  margin: 0 10px !important;
+  overflow-x: auto !important;
+}
+pre.hljs code::-webkit-scrollbar {
+  z-index: 11;
+  width: 6px;
+}
+pre.hljs code::-webkit-scrollbar:horizontal {
+  height: 6px;
+}
+pre.hljs code::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  width: 6px;
+  background: var(--primary);
+}
+pre.hljs code::-webkit-scrollbar-corner,
+pre.hljs code::-webkit-scrollbar-track {
+  background: var(--white);
+}
+pre.hljs code::-webkit-scrollbar-track-piece {
+  background: var(--white);
+  width: 6px;
+}
+.line-numbers-rows {
+  position: absolute;
+  pointer-events: none;
+  top: 12px;
+  bottom: 12px;
+  left: 0;
+  font-size: 100%;
+  width: 40px;
+  text-align: center;
+  letter-spacing: -1px;
+  border-right: 1px solid var(--primary-light-4);
+  user-select: none;
+  counter-reset: linenumber;
+}
+.line-numbers-rows span {
+  pointer-events: none;
+  display: block;
+  counter-increment: linenumber;
+}
+.line-numbers-rows span:before {
+  font-family: var(--font-mono);
+  content: counter(linenumber);
+  color: #999;
+  display: block;
+  text-align: center;
+}
+b.name {
+  position: absolute;
+  top: 3px;
+  right: 50px;
+  z-index: 10;
+  color: var(--primary-dark-1);
+  padding: 2px 4px;
+  pointer-events: none;
+}
+.copy-btn {
+  position: absolute;
+  top: 4px;
+  right: 10px;
+  padding: 2px 4px;
+  z-index: 10;
+  color: #333;
+  cursor: pointer;
+  background-color: var(--warm);
+  border: 0;
+  border-radius: 2px;
+  transition: all 0.25s;
+}
+.copy-btn:hover {
+  background-color: var(--white);
+  transition: all 0.25s;
+}
+
+.back-top {
+  outline: none;
+  position: fixed;
+  bottom: 0;
+  right: 1rem;
+
+  padding: 4px 8px;
+  border: 0;
+
+  cursor: pointer;
+
+  background-color: var(--primary-light-2);
+  color: var(--primary-dark-2);
+}
+
+@keyframes swift-Y {
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes swift-X {
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes fade-in {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes zoom-in {
+  from {
+    opacity: 0;
+    transform: scale3d(0.3, 0.3, 0.3);
+  }
+  50% {
+    opacity: 1;
+  }
+}

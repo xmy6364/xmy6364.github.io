@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="author" content="Tuzilow">
+    <meta name="description" content="想要成为大佬">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.5.0/styles/default.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.5.0/styles/github-gist.min.css">
+    <link rel="stylesheet" href="/assets/lib/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/css/layout.css" />
+    <script defer src="https://cdn.bootcdn.net/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"></script>
+    <script defer src="/assets/js/copyCode.js"></script>
+    <script defer src="/assets/js/backTop.js"></script>
+
+    
+  <link rel="stylesheet" href="/assets/css/page.css" />
+  <link rel="stylesheet" href="/assets/css/sidebar.css" />
+  <link rel="stylesheet" href="/assets/css/footer.css" />
+  <link rel="stylesheet" href="/assets/css/post.css" />
+  <script defer src="/assets/js/backHome.js"></script>
+  <script defer src="/assets/js/toc.js"></script>
+  <script defer src="/assets/js/copyright.js"></script>
+
+
+    <title>在express中使用ES7装饰器构建路由</title>
+  </head>
+  <body>
+    <div class="container">
+      <aside>
+        
+  <div class="sidebar">
+  <header>Tuzilow的小站</header>
+  <div class="info">
+    <div class="avatar">
+      <img src="https://cdn.jsdelivr.net/gh/Tuzilow/Tuzilow.github.io/images/avatar.png" alt="头像">
+    </div>
+    <div class="author">Tuzilow</div>
+    <div class="description">想要成为大佬</div>
+    <div class="about">
+      <a href="/about">about me.</a>
+    </div>
+  </div>
+  <div class="links">
+    <ul>
+    
+      <li class="links-item">
+        <a href="https://github.com/Tuzilow" target="_blank">
+          <i class="fa fa-github-alt" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="links-item">
+        <a href="tencent://message/?uin=1176281967" target="_blank">
+          <i class="fa fa-qq" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+    </ul>
+  </div>
+  <nav>
+    <ul>
+    
+      <li class="nav-item">
+        <a href="/archives">
+          <span class="nav-item__count">27</span>
+          <span class="nav-item__label">归档</span>
+        </a>
+      </li>
+    
+      <li class="nav-item">
+        <a href="/categories">
+          <span class="nav-item__count">2</span>
+          <span class="nav-item__label">分类</span>
+        </a>
+      </li>
+    
+      <li class="nav-item">
+        <a href="/tags">
+          <span class="nav-item__count">35</span>
+          <span class="nav-item__label">标签</span>
+        </a>
+      </li>
+    
+    </ul>
+  </nav>
+  <div class="catalogue" id="catalogue"></div>
+</div>
+
+      </aside>
+      <main>
+        
+  <div class="post">
+    <div class="post-front">
+      <h1 class="post-front__title">在express中使用ES7装饰器构建路由</h1>
+      <div class="post-front__desc">
+        
+        <p class="post-front__desc-date">
+          <i class="fa fa-calendar" aria-hidden="true"></i>
+          2020/09/12 19:35:40
+        </p>
+        
+        
+        <p class="post-front__desc-category">
+          <i class="fa fa-folder-o" aria-hidden="true"></i>
+          <a href="/categories/技术">
+            技术
+          </a>
+        </p>
+        
+          <div class="post-front__desc-tags">
+          
+          <a href="/tags/JavaScript">
+            <i class="fa fa-tag" aria-hidden="true"></i>
+            JavaScript
+          </a>
+          
+          <a href="/tags/decorator">
+            <i class="fa fa-tag" aria-hidden="true"></i>
+            decorator
+          </a>
+          
+          <a href="/tags/express">
+            <i class="fa fa-tag" aria-hidden="true"></i>
+            express
+          </a>
+          
+        </div>
+      </div>
+    </div>
+    <div class="post-content">
+      <nav id="toc" class="toc"><ol><li><a href="#tuzilowexpress-decorator">@tuzilow/express-decorator</a></li><li><a href="#正式开始">正式开始</a><ol><li><a href="#创建packagejson">创建package.json</a></li><li><a href="#创建babelrc">创建.babelrc</a></li><li><a href="#创建indexjs并编写代码">创建index.js并编写代码</a></li></ol></li><li><a href="#项目源码">项目源码</a></li></ol></nav><p>在Java的Spring框架中，我们经常会看到类似于<code>@Controller</code>这样的注解，这类代码能够极大的提高我们代码的可读性和复用性。而在Javascript的ES7提案中，有一种新的语法叫做decorator，它能够在Javascript中实现与注解相同的功能。</p>
+<h2 id="tuzilowexpress-decorator">@tuzilow/express-decorator</h2>
+<p><code>@tuzilow/express-decorator</code>是由本人开发的一个简单的express装饰器包，具有<code>@Controller</code>、<code>@RootUrl</code>、<code>@Get</code>等API，能够方便快捷的构建express后台接口。</p>
+<h2 id="正式开始">正式开始</h2>
+<h3 id="创建packagejson">创建package.json</h3>
+<p>执行<code>npm init</code>，并使用<code>npm</code>或<code>yarn</code>添加以下依赖</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612693648426">复制</button>{
+  <span class="hljs-attr">&quot;name&quot;</span>: <span class="hljs-string">&quot;decorator-demo&quot;</span>,
+  <span class="hljs-attr">&quot;version&quot;</span>: <span class="hljs-string">&quot;1.0.0&quot;</span>,
+  <span class="hljs-attr">&quot;main&quot;</span>: <span class="hljs-string">&quot;index.js&quot;</span>,
+  <span class="hljs-attr">&quot;license&quot;</span>: <span class="hljs-string">&quot;MIT&quot;</span>,
+  <span class="hljs-attr">&quot;dependencies&quot;</span>: {
+    <span class="hljs-attr">&quot;@tuzilow/express-decorator&quot;</span>: <span class="hljs-string">&quot;^0.0.3&quot;</span>,
+    <span class="hljs-attr">&quot;express&quot;</span>: <span class="hljs-string">&quot;^4.17.1&quot;</span>
+  },
+  <span class="hljs-attr">&quot;devDependencies&quot;</span>: {
+    <span class="hljs-attr">&quot;@babel/cli&quot;</span>: <span class="hljs-string">&quot;^7.11.6&quot;</span>,
+    <span class="hljs-attr">&quot;@babel/core&quot;</span>: <span class="hljs-string">&quot;^7.0.0&quot;</span>,
+    <span class="hljs-attr">&quot;@babel/node&quot;</span>: <span class="hljs-string">&quot;^7.0.0&quot;</span>,
+    <span class="hljs-attr">&quot;@babel/plugin-proposal-class-properties&quot;</span>: <span class="hljs-string">&quot;^7.10.4&quot;</span>,
+    <span class="hljs-attr">&quot;@babel/plugin-proposal-decorators&quot;</span>: <span class="hljs-string">&quot;^7.10.5&quot;</span>,
+    <span class="hljs-attr">&quot;@babel/preset-env&quot;</span>: <span class="hljs-string">&quot;^7.0.0&quot;</span>,
+    <span class="hljs-attr">&quot;babel-eslint&quot;</span>: <span class="hljs-string">&quot;^9.0.0&quot;</span>
+  },
+  <span class="hljs-attr">&quot;scripts&quot;</span>: {
+    <span class="hljs-attr">&quot;start&quot;</span>: <span class="hljs-string">&quot;babel-node index&quot;</span>
+  }
+}
+<b class="name">json</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612693648426">{
+  "name": "decorator-demo",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@tuzilow/express-decorator": "^0.0.3",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.11.6",
+    "@babel/core": "^7.0.0",
+    "@babel/node": "^7.0.0",
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "@babel/plugin-proposal-decorators": "^7.10.5",
+    "@babel/preset-env": "^7.0.0",
+    "babel-eslint": "^9.0.0"
+  },
+  "scripts": {
+    "start": "babel-node index"
+  }
+}
+</textarea>
+<h3 id="创建babelrc">创建.babelrc</h3>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612693589837">复制</button>{
+  <span class="hljs-attr">&quot;plugins&quot;</span>: [
+    [<span class="hljs-string">&quot;@babel/plugin-proposal-decorators&quot;</span>, { <span class="hljs-attr">&quot;legacy&quot;</span>: <span class="hljs-literal">true</span> }],
+    [<span class="hljs-string">&quot;@babel/plugin-proposal-class-properties&quot;</span>, { <span class="hljs-attr">&quot;loose&quot;</span>: <span class="hljs-literal">true</span> }]
+  ],
+  <span class="hljs-attr">&quot;presets&quot;</span>: [<span class="hljs-string">&quot;@babel/preset-env&quot;</span>]
+}
+<b class="name">json</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612693589837">{
+  "plugins": [
+    ["@babel/plugin-proposal-decorators", { "legacy": true }],
+    ["@babel/plugin-proposal-class-properties", { "loose": true }]
+  ],
+  "presets": ["@babel/preset-env"]
+}
+</textarea>
+<h3 id="创建indexjs并编写代码">创建index.js并编写代码</h3>
+<p>首先，编写一个普通的express应用</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612694896786">复制</button><span class="hljs-keyword">import</span> express <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;express&#x27;</span>;
+
+<span class="hljs-keyword">const</span> Server = express();
+
+Server.get(<span class="hljs-string">&#x27;/&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> {
+  res.json({
+    <span class="hljs-attr">title</span>: <span class="hljs-string">&#x27;hello world&#x27;</span>,
+  });
+});
+
+Server.listen(<span class="hljs-number">3000</span>, <span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-built_in">console</span>.info(<span class="hljs-string">&#x27;running in http://localhost:3000&#x27;</span>);
+});
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612694896786">import express from 'express';
+
+const Server = express();
+
+Server.get('/', (req, res) => {
+  res.json({
+    title: 'hello world',
+  });
+});
+
+Server.listen(3000, () => {
+  console.info('running in http://localhost:3000');
+});
+</textarea>
+<p>执行无误后使用<code>@tuzilow/express-decorator</code>对其进行改造</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612691469396">复制</button><span class="hljs-keyword">import</span> express <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;express&#x27;</span>;
+<span class="hljs-keyword">import</span> { Controller, Get } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@tuzilow/express-decorator&#x27;</span>;
+
+<span class="hljs-keyword">const</span> Server = express();
+
+@Controller
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">User</span> </span>{
+  @Get(<span class="hljs-string">&#x27;/&#x27;</span>)
+  <span class="hljs-function"><span class="hljs-title">home</span>(<span class="hljs-params">req, res</span>)</span> {
+    res.json({
+      <span class="hljs-attr">title</span>: <span class="hljs-string">&#x27;hello world&#x27;</span>,
+    });
+  }
+}
+
+Server.use(<span class="hljs-keyword">new</span> User());
+
+Server.listen(<span class="hljs-number">3000</span>, <span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-built_in">console</span>.info(<span class="hljs-string">&#x27;running in http://localhost:3000&#x27;</span>);
+});
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612691469396">import express from 'express';
+import { Controller, Get } from '@tuzilow/express-decorator';
+
+const Server = express();
+
+@Controller
+class User {
+  @Get('/')
+  home(req, res) {
+    res.json({
+      title: 'hello world',
+    });
+  }
+}
+
+Server.use(new User());
+
+Server.listen(3000, () => {
+  console.info('running in http://localhost:3000');
+});
+</textarea>
+<p>运行结果与前面普通的express应用的运行结果相同，如果想要设定统一的父级路由，可以使用<code>@RootUrl</code></p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612691352481">复制</button><span class="hljs-keyword">import</span> express <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;express&#x27;</span>;
+<span class="hljs-keyword">import</span> { Controller, Get, RootUrl } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@tuzilow/express-decorator&#x27;</span>;
+
+<span class="hljs-keyword">const</span> Server = express();
+
+@Controller
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">User</span> </span>{
+  @RootUrl(<span class="hljs-string">&#x27;/user&#x27;</span>) <span class="hljs-function"><span class="hljs-title">url</span>(<span class="hljs-params"></span>)</span> {}
+  
+  @Get(<span class="hljs-string">&#x27;/&#x27;</span>)
+  <span class="hljs-function"><span class="hljs-title">home</span>(<span class="hljs-params">req, res</span>)</span> {
+    res.json({
+      <span class="hljs-attr">title</span>: <span class="hljs-string">&#x27;hello world&#x27;</span>,
+    });
+  }
+   
+  @Get(<span class="hljs-string">&#x27;/list&#x27;</span>)
+  <span class="hljs-function"><span class="hljs-title">list</span>(<span class="hljs-params">req, res</span>)</span> {
+    res.json({
+      <span class="hljs-attr">title</span>: <span class="hljs-string">&#x27;this is a list&#x27;</span>,
+    });
+  }
+}
+
+Server.use(<span class="hljs-keyword">new</span> User());
+
+Server.listen(<span class="hljs-number">3000</span>, <span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-built_in">console</span>.info(<span class="hljs-string">&#x27;running in http://localhost:3000&#x27;</span>);
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612691352481">import express from 'express';
+import { Controller, Get, RootUrl } from '@tuzilow/express-decorator';
+
+const Server = express();
+
+@Controller
+class User {
+  @RootUrl('/user') url() {}
+  
+  @Get('/')
+  home(req, res) {
+    res.json({
+      title: 'hello world',
+    });
+  }
+   
+  @Get('/list')
+  list(req, res) {
+    res.json({
+      title: 'this is a list',
+    });
+  }
+}
+
+Server.use(new User());
+
+Server.listen(3000, () => {
+  console.info('running in http://localhost:3000');
+</textarea>
+<p>这样请求路径就会变为<code>http://localhost:3000/user</code>和<code>http://localhost:3000/user/list</code>，因为该装饰器包只提供了简易的API，因此传递参数、设置header等操作需要使用express的方法</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612690376614">复制</button><span class="hljs-keyword">import</span> express <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;express&#x27;</span>;
+<span class="hljs-keyword">import</span> { Controller, Get, RootUrl, Post } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@tuzilow/express-decorator&#x27;</span>;
+
+<span class="hljs-keyword">const</span> Server = express();
+
+@Controller
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">User</span> </span>{
+  @RootUrl(<span class="hljs-string">&#x27;/user&#x27;</span>) <span class="hljs-function"><span class="hljs-title">url</span>(<span class="hljs-params"></span>)</span> {}
+
+  @Get(<span class="hljs-string">&#x27;/&#x27;</span>)
+  <span class="hljs-function"><span class="hljs-title">home</span>(<span class="hljs-params">req, res</span>)</span> {
+    res.json({
+      <span class="hljs-attr">title</span>: <span class="hljs-string">&#x27;hello world&#x27;</span>,
+    });
+  }
+
+  <span class="hljs-comment">// query传参</span>
+  @Get(<span class="hljs-string">&#x27;/getOne&#x27;</span>)
+  <span class="hljs-function"><span class="hljs-title">getOne</span>(<span class="hljs-params">req, res</span>)</span> {
+    <span class="hljs-keyword">const</span> { id } = req.query;
+    res.json({
+      <span class="hljs-attr">title</span>: <span class="hljs-string">&#x27;hello world&#x27;</span>,
+      id,
+    });
+  }
+
+  <span class="hljs-comment">// params传参</span>
+  @Get(<span class="hljs-string">&#x27;/list/:id&#x27;</span>)
+  <span class="hljs-function"><span class="hljs-title">getItem</span>(<span class="hljs-params">req, res</span>)</span> {
+    <span class="hljs-keyword">const</span> { id } = req.params;
+    res.json({
+      <span class="hljs-attr">title</span>: <span class="hljs-string">&#x27;hello world&#x27;</span>,
+      id,
+    });
+  }
+
+  <span class="hljs-comment">// body传参</span>
+  @Post(<span class="hljs-string">&#x27;/create&#x27;</span>)
+  <span class="hljs-function"><span class="hljs-title">create</span>(<span class="hljs-params">req, res</span>)</span> {
+    <span class="hljs-keyword">const</span> { id } = req.body;
+    res.json({
+      <span class="hljs-attr">code</span>: <span class="hljs-number">0</span>,
+      id,
+    });
+  }
+}
+
+Server.use(<span class="hljs-keyword">new</span> User());
+
+Server.listen(<span class="hljs-number">3000</span>, <span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-built_in">console</span>.info(<span class="hljs-string">&#x27;running in http://localhost:3000&#x27;</span>);
+});
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612690376614">import express from 'express';
+import { Controller, Get, RootUrl, Post } from '@tuzilow/express-decorator';
+
+const Server = express();
+
+@Controller
+class User {
+  @RootUrl('/user') url() {}
+
+  @Get('/')
+  home(req, res) {
+    res.json({
+      title: 'hello world',
+    });
+  }
+
+  // query传参
+  @Get('/getOne')
+  getOne(req, res) {
+    const { id } = req.query;
+    res.json({
+      title: 'hello world',
+      id,
+    });
+  }
+
+  // params传参
+  @Get('/list/:id')
+  getItem(req, res) {
+    const { id } = req.params;
+    res.json({
+      title: 'hello world',
+      id,
+    });
+  }
+
+  // body传参
+  @Post('/create')
+  create(req, res) {
+    const { id } = req.body;
+    res.json({
+      code: 0,
+      id,
+    });
+  }
+}
+
+Server.use(new User());
+
+Server.listen(3000, () => {
+  console.info('running in http://localhost:3000');
+});
+</textarea>
+<h2 id="项目源码">项目源码</h2>
+<ul>
+<li>GitHub仓库地址：<a href="https://github.com/Tuzilow">Tuzilow</a>/<a href="https://github.com/Tuzilow/express-decorator">express-decorator</a></li>
+<li>npm地址：<a href="https://www.npmjs.com/package/@tuzilow/express-decorator">@tuzilow/express-decorator</a></li>
+</ul>
+
+    </div>
+    
+  </div>
+
+        <footer>
+        
+  <div class="footer">
+  
+  <div class="theme">
+    博客主题为 <a href="https://github.com/Tuzilow/CoinRailgun">CoinRailgun</a> 默认主题
+  </div>
+  <div class="copyright">
+    <span>© 2019-2021 Tuzilow.</span>
+    <span>Powered by <a href="https://github.com/Tuzilow/CoinRailgun">CoinRailgun</a></span>
+  </div>
+</div>
+
+        </footer>
+      </main>
+    </div>
+  </body>
+</html>

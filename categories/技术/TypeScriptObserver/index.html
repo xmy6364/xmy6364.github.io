@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="author" content="Tuzilow">
+    <meta name="description" content="想要成为大佬">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.5.0/styles/default.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.5.0/styles/github-gist.min.css">
+    <link rel="stylesheet" href="/assets/lib/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/css/layout.css" />
+    <script defer src="https://cdn.bootcdn.net/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"></script>
+    <script defer src="/assets/js/copyCode.js"></script>
+    <script defer src="/assets/js/backTop.js"></script>
+
+    
+  <link rel="stylesheet" href="/assets/css/page.css" />
+  <link rel="stylesheet" href="/assets/css/sidebar.css" />
+  <link rel="stylesheet" href="/assets/css/footer.css" />
+  <link rel="stylesheet" href="/assets/css/post.css" />
+  <script defer src="/assets/js/backHome.js"></script>
+  <script defer src="/assets/js/toc.js"></script>
+  <script defer src="/assets/js/copyright.js"></script>
+
+
+    <title>TypeScript实现设计模式——观察者模式</title>
+  </head>
+  <body>
+    <div class="container">
+      <aside>
+        
+  <div class="sidebar">
+  <header>Tuzilow的小站</header>
+  <div class="info">
+    <div class="avatar">
+      <img src="https://cdn.jsdelivr.net/gh/Tuzilow/Tuzilow.github.io/images/avatar.png" alt="头像">
+    </div>
+    <div class="author">Tuzilow</div>
+    <div class="description">想要成为大佬</div>
+    <div class="about">
+      <a href="/about">about me.</a>
+    </div>
+  </div>
+  <div class="links">
+    <ul>
+    
+      <li class="links-item">
+        <a href="https://github.com/Tuzilow" target="_blank">
+          <i class="fa fa-github-alt" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="links-item">
+        <a href="tencent://message/?uin=1176281967" target="_blank">
+          <i class="fa fa-qq" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+    </ul>
+  </div>
+  <nav>
+    <ul>
+    
+      <li class="nav-item">
+        <a href="/archives">
+          <span class="nav-item__count">27</span>
+          <span class="nav-item__label">归档</span>
+        </a>
+      </li>
+    
+      <li class="nav-item">
+        <a href="/categories">
+          <span class="nav-item__count">2</span>
+          <span class="nav-item__label">分类</span>
+        </a>
+      </li>
+    
+      <li class="nav-item">
+        <a href="/tags">
+          <span class="nav-item__count">35</span>
+          <span class="nav-item__label">标签</span>
+        </a>
+      </li>
+    
+    </ul>
+  </nav>
+  <div class="catalogue" id="catalogue"></div>
+</div>
+
+      </aside>
+      <main>
+        
+  <div class="post">
+    <div class="post-front">
+      <h1 class="post-front__title">TypeScript实现设计模式——观察者模式</h1>
+      <div class="post-front__desc">
+        
+        <p class="post-front__desc-date">
+          <i class="fa fa-calendar" aria-hidden="true"></i>
+          2020/04/16 17:55:55
+        </p>
+        
+        
+        <p class="post-front__desc-category">
+          <i class="fa fa-folder-o" aria-hidden="true"></i>
+          <a href="/categories/技术">
+            技术
+          </a>
+        </p>
+        
+          <div class="post-front__desc-tags">
+          
+          <a href="/tags/TypeScript">
+            <i class="fa fa-tag" aria-hidden="true"></i>
+            TypeScript
+          </a>
+          
+          <a href="/tags/设计模式">
+            <i class="fa fa-tag" aria-hidden="true"></i>
+            设计模式
+          </a>
+          
+        </div>
+      </div>
+    </div>
+    <div class="post-content">
+      <nav id="toc" class="toc"><ol><li><a href="#subject部分">Subject部分</a></li><li><a href="#observer部分">Observer部分</a></li><li><a href="#测试代码">测试代码</a></li></ol></nav><p><strong>观察者模式</strong>是一种行为设计模式，允许一个对象将其状态的改变通知其他对象。</p>
+<p>观察者模式提供了一种作用于任何实现了订阅者接口的对象的机制， 可对其事件进行订阅和取消订阅。</p>
+<p><img src="https://refactoringguru.cn/images/patterns/content/observer/observer.png" alt=""></p>
+<p><em>图片来源：https://refactoringguru.cn/design-patterns/observer</em></p>
+<p>观察者模式是一种在前端领域应用十分广泛的设计模式，特别是在图形界面的组件中，如果你自定义了一个按钮组件，那么你很可能需要用到观察者模式。</p>
+<p>观察者模式的核心成员有两个，一个是作为事件发布者的Subject类，另一个是作为事件接收者的Observer类。</p>
+<h3 id="subject部分">Subject部分</h3>
+<p>Subject类所具有的公共部分是对订阅者的管理和向所有订阅者发布消息，而具体Subject所负责的业务逻辑需要放到各自的Subject类中。</p>
+<p><strong>Subject接口</strong></p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612691563906">复制</button><span class="hljs-keyword">interface</span> Subject {
+  <span class="hljs-comment">// 添加观察者</span>
+  attach(observer: Observer): <span class="hljs-built_in">void</span>;
+  <span class="hljs-comment">// 移除观察者</span>
+  detach(observer: Observer): <span class="hljs-built_in">void</span>;
+  <span class="hljs-comment">// 通知所有观察者</span>
+  notify(): <span class="hljs-built_in">void</span>;
+}
+<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612691563906">interface Subject {
+  // 添加观察者
+  attach(observer: Observer): void;
+  // 移除观察者
+  detach(observer: Observer): void;
+  // 通知所有观察者
+  notify(): void;
+}
+</textarea>
+<p><strong>具体Subject类</strong></p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612694142474">复制</button><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ConcreteSubject</span> <span class="hljs-title">implements</span> <span class="hljs-title">Subject</span> </span>{
+  <span class="hljs-comment">// 发布者状态，测试使用</span>
+  <span class="hljs-keyword">public</span> state: <span class="hljs-built_in">number</span>;
+
+  <span class="hljs-comment">// 订阅者名单</span>
+  <span class="hljs-keyword">public</span> observers: <span class="hljs-built_in">Array</span>&lt;Observer&gt; = [];
+
+  <span class="hljs-comment">// 管理订阅方法</span>
+  <span class="hljs-keyword">public</span> attach(observer: Observer): <span class="hljs-built_in">void</span> {
+    <span class="hljs-keyword">const</span> observerIndex = <span class="hljs-built_in">this</span>.observers.indexOf(observer);
+    <span class="hljs-keyword">if</span> (observerIndex !== -<span class="hljs-number">1</span>) {
+      <span class="hljs-keyword">return</span> <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;已订阅&#x27;</span>);
+    }
+
+    <span class="hljs-built_in">this</span>.observers.push(observer);
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;订阅成功&#x27;</span>);
+  }
+
+  <span class="hljs-keyword">public</span> detach(observer: Observer): <span class="hljs-built_in">void</span> {
+    <span class="hljs-keyword">const</span> observerIndex = <span class="hljs-built_in">this</span>.observers.indexOf(observer);
+    <span class="hljs-keyword">if</span> (observerIndex === -<span class="hljs-number">1</span>) {
+      <span class="hljs-keyword">return</span> <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;订阅者未订阅&#x27;</span>);
+    }
+
+    <span class="hljs-built_in">this</span>.observers.splice(observerIndex, <span class="hljs-number">1</span>);
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;订阅者已移除&#x27;</span>);
+  }
+
+  <span class="hljs-keyword">public</span> notify(): <span class="hljs-built_in">void</span> {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;通知所有订阅者&#x27;</span>);
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> observer <span class="hljs-keyword">of</span> <span class="hljs-built_in">this</span>.observers) {
+      observer.update(<span class="hljs-built_in">this</span>);
+    }
+  }
+    
+  <span class="hljs-comment">// 订阅管理以外的逻辑</span>
+  <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-title">someLogic</span>(<span class="hljs-params"></span>)</span> {
+    <span class="hljs-built_in">this</span>.state = <span class="hljs-built_in">Math</span>.floor(<span class="hljs-built_in">Math</span>.random() * <span class="hljs-number">10</span> + <span class="hljs-number">1</span>);
+
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`我更改了我的状态：state=<span class="hljs-subst">${<span class="hljs-built_in">this</span>.state}</span>`</span>);
+    <span class="hljs-built_in">this</span>.notify();
+  }
+}
+<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612694142474">class ConcreteSubject implements Subject {
+  // 发布者状态，测试使用
+  public state: number;
+
+  // 订阅者名单
+  public observers: Array<Observer> = [];
+
+  // 管理订阅方法
+  public attach(observer: Observer): void {
+    const observerIndex = this.observers.indexOf(observer);
+    if (observerIndex !== -1) {
+      return console.log('已订阅');
+    }
+
+    this.observers.push(observer);
+    console.log('订阅成功');
+  }
+
+  public detach(observer: Observer): void {
+    const observerIndex = this.observers.indexOf(observer);
+    if (observerIndex === -1) {
+      return console.log('订阅者未订阅');
+    }
+
+    this.observers.splice(observerIndex, 1);
+    console.log('订阅者已移除');
+  }
+
+  public notify(): void {
+    console.log('通知所有订阅者');
+    for (const observer of this.observers) {
+      observer.update(this);
+    }
+  }
+    
+  // 订阅管理以外的逻辑
+  public someLogic() {
+    this.state = Math.floor(Math.random() * 10 + 1);
+
+    console.log(`我更改了我的状态：state=${this.state}`);
+    this.notify();
+  }
+}
+</textarea>
+<h3 id="observer部分">Observer部分</h3>
+<p>观察者只需要根据发布者的发出的消息来判断自己是否需要做出回应即可。</p>
+<p><strong>Observer接口</strong></p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612694234671">复制</button><span class="hljs-keyword">interface</span> Observer {
+  <span class="hljs-comment">// 对发布者发出的更新消息作出回应</span>
+  update(subject: Subject): <span class="hljs-built_in">void</span>;
+}
+<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612694234671">interface Observer {
+  // 对发布者发出的更新消息作出回应
+  update(subject: Subject): void;
+}
+</textarea>
+<p><strong>具体Observer类</strong></p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612696227520">复制</button><span class="hljs-comment">//具体观察者A</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ConcreteObserverA</span> <span class="hljs-title">implements</span> <span class="hljs-title">Observer</span> </span>{
+  <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-title">update</span>(<span class="hljs-params">subject: ConcreteSubject</span>)</span> {
+    <span class="hljs-keyword">if</span> (subject.state &lt;= <span class="hljs-number">5</span>) {
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;观察者A作出回应&#x27;</span>);
+    }
+  }
+}
+
+<span class="hljs-comment">// 具体观察者B</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ConcreteObserverB</span> <span class="hljs-title">implements</span> <span class="hljs-title">Observer</span> </span>{
+  <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-title">update</span>(<span class="hljs-params">subject: ConcreteSubject</span>)</span> {
+    <span class="hljs-keyword">if</span> (subject.state &gt; <span class="hljs-number">5</span>) {
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;观察者B作出回应&#x27;</span>);
+    }
+  }
+}
+<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612696227520">//具体观察者A
+class ConcreteObserverA implements Observer {
+  public update(subject: ConcreteSubject) {
+    if (subject.state <= 5) {
+      console.log('观察者A作出回应');
+    }
+  }
+}
+
+// 具体观察者B
+class ConcreteObserverB implements Observer {
+  public update(subject: ConcreteSubject) {
+    if (subject.state > 5) {
+      console.log('观察者B作出回应');
+    }
+  }
+}
+</textarea>
+<h3 id="测试代码">测试代码</h3>
+<p>因为是随机数，可能会得不到想要的结果，可以多尝试几次</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612692631431">复制</button><span class="hljs-keyword">const</span> subject = <span class="hljs-keyword">new</span> ConcreteSubject();
+
+<span class="hljs-keyword">const</span> observerA = <span class="hljs-keyword">new</span> ConcreteObserverA();
+subject.attach(observerA);
+
+<span class="hljs-keyword">const</span> observerB = <span class="hljs-keyword">new</span> ConcreteObserverB();
+subject.attach(observerB);
+
+subject.someLogic();
+
+subject.detach(observerB);
+
+subject.someLogic();
+<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612692631431">const subject = new ConcreteSubject();
+
+const observerA = new ConcreteObserverA();
+subject.attach(observerA);
+
+const observerB = new ConcreteObserverB();
+subject.attach(observerB);
+
+subject.someLogic();
+
+subject.detach(observerB);
+
+subject.someLogic();
+</textarea>
+
+    </div>
+    
+  </div>
+
+        <footer>
+        
+  <div class="footer">
+  
+  <div class="theme">
+    博客主题为 <a href="https://github.com/Tuzilow/CoinRailgun">CoinRailgun</a> 默认主题
+  </div>
+  <div class="copyright">
+    <span>© 2019-2021 Tuzilow.</span>
+    <span>Powered by <a href="https://github.com/Tuzilow/CoinRailgun">CoinRailgun</a></span>
+  </div>
+</div>
+
+        </footer>
+      </main>
+    </div>
+  </body>
+</html>

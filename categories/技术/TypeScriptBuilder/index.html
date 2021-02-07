@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="author" content="Tuzilow">
+    <meta name="description" content="想要成为大佬">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.5.0/styles/default.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.5.0/styles/github-gist.min.css">
+    <link rel="stylesheet" href="/assets/lib/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/css/layout.css" />
+    <script defer src="https://cdn.bootcdn.net/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"></script>
+    <script defer src="/assets/js/copyCode.js"></script>
+    <script defer src="/assets/js/backTop.js"></script>
+
+    
+  <link rel="stylesheet" href="/assets/css/page.css" />
+  <link rel="stylesheet" href="/assets/css/sidebar.css" />
+  <link rel="stylesheet" href="/assets/css/footer.css" />
+  <link rel="stylesheet" href="/assets/css/post.css" />
+  <script defer src="/assets/js/backHome.js"></script>
+  <script defer src="/assets/js/toc.js"></script>
+  <script defer src="/assets/js/copyright.js"></script>
+
+
+    <title>TypeScript实现设计模式——生成器模式</title>
+  </head>
+  <body>
+    <div class="container">
+      <aside>
+        
+  <div class="sidebar">
+  <header>Tuzilow的小站</header>
+  <div class="info">
+    <div class="avatar">
+      <img src="https://cdn.jsdelivr.net/gh/Tuzilow/Tuzilow.github.io/images/avatar.png" alt="头像">
+    </div>
+    <div class="author">Tuzilow</div>
+    <div class="description">想要成为大佬</div>
+    <div class="about">
+      <a href="/about">about me.</a>
+    </div>
+  </div>
+  <div class="links">
+    <ul>
+    
+      <li class="links-item">
+        <a href="https://github.com/Tuzilow" target="_blank">
+          <i class="fa fa-github-alt" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="links-item">
+        <a href="tencent://message/?uin=1176281967" target="_blank">
+          <i class="fa fa-qq" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+    </ul>
+  </div>
+  <nav>
+    <ul>
+    
+      <li class="nav-item">
+        <a href="/archives">
+          <span class="nav-item__count">27</span>
+          <span class="nav-item__label">归档</span>
+        </a>
+      </li>
+    
+      <li class="nav-item">
+        <a href="/categories">
+          <span class="nav-item__count">2</span>
+          <span class="nav-item__label">分类</span>
+        </a>
+      </li>
+    
+      <li class="nav-item">
+        <a href="/tags">
+          <span class="nav-item__count">35</span>
+          <span class="nav-item__label">标签</span>
+        </a>
+      </li>
+    
+    </ul>
+  </nav>
+  <div class="catalogue" id="catalogue"></div>
+</div>
+
+      </aside>
+      <main>
+        
+  <div class="post">
+    <div class="post-front">
+      <h1 class="post-front__title">TypeScript实现设计模式——生成器模式</h1>
+      <div class="post-front__desc">
+        
+        <p class="post-front__desc-date">
+          <i class="fa fa-calendar" aria-hidden="true"></i>
+          2020/09/28 13:47:16
+        </p>
+        
+        
+        <p class="post-front__desc-category">
+          <i class="fa fa-folder-o" aria-hidden="true"></i>
+          <a href="/categories/技术">
+            技术
+          </a>
+        </p>
+        
+          <div class="post-front__desc-tags">
+          
+          <a href="/tags/TypeScript">
+            <i class="fa fa-tag" aria-hidden="true"></i>
+            TypeScript
+          </a>
+          
+          <a href="/tags/设计模式">
+            <i class="fa fa-tag" aria-hidden="true"></i>
+            设计模式
+          </a>
+          
+        </div>
+      </div>
+    </div>
+    <div class="post-content">
+      <nav id="toc" class="toc"><ol><li><a href="#问题">问题</a></li><li><a href="#创建想要生成的产品类">创建想要生成的产品类</a></li><li><a href="#创建生成器类">创建生成器类</a></li><li><a href="#测试代码">测试代码</a></li></ol></nav><p><strong>生成器模式</strong>是一种在TypeScript/JavaScript中非常常见的创建型设计模式，它使你能够分步骤创建复杂对象。当你需要创建一个可能有许多配置选项的对象时， 该模式会特别有用。</p>
+<h3 id="问题">问题</h3>
+<p>假设我们需要构造一个复杂对象，构造时需要给这个对象的诸多成员变量进行初始化工作，如果使用传统的构造函数创建这个对象，那么它的构造函数将十分复杂，比如<code>new Product(partA, partB, partC, ...)</code>，这样的构造函数不仅缺乏灵活性还会严重的影响代码的可读性，因此我们需要一种更优秀的方法来创建复杂对象。</p>
+<h3 id="创建想要生成的产品类">创建想要生成的产品类</h3>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612695468340">复制</button><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Product</span> </span>{
+  <span class="hljs-keyword">public</span> partA: <span class="hljs-built_in">string</span>;
+  <span class="hljs-keyword">public</span> partB: <span class="hljs-built_in">string</span>;
+  <span class="hljs-keyword">public</span> partC: <span class="hljs-built_in">string</span>;
+  <span class="hljs-keyword">public</span> partD: <span class="hljs-built_in">string</span>;
+}
+<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612695468340">class Product {
+  public partA: string;
+  public partB: string;
+  public partC: string;
+  public partD: string;
+}
+</textarea>
+<h3 id="创建生成器类">创建生成器类</h3>
+<p>可以将基本生成器定义为一个接口，再为每个形式的产品创建具体的生成类，这里只定义一个生成器类作为演示</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612692141094">复制</button><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ProductBuilder</span> </span>{
+  <span class="hljs-keyword">private</span> product: Product;
+
+  <span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params"></span>)</span> {
+    <span class="hljs-comment">// 创建要生成的对象</span>
+    <span class="hljs-built_in">this</span>.product = <span class="hljs-keyword">new</span> Product();
+  }
+
+  <span class="hljs-comment">// 以下为给对象添加各部分的方法</span>
+  <span class="hljs-keyword">public</span> setPartA(partA: <span class="hljs-built_in">string</span>): <span class="hljs-built_in">this</span> {
+    <span class="hljs-built_in">this</span>.product.partA = partA;
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>;
+  }
+
+  <span class="hljs-keyword">public</span> setPartB(partB: <span class="hljs-built_in">string</span>): <span class="hljs-built_in">this</span> {
+    <span class="hljs-built_in">this</span>.product.partB = partB;
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>;
+  }
+
+  <span class="hljs-keyword">public</span> setPartC(partC: <span class="hljs-built_in">string</span>): <span class="hljs-built_in">this</span> {
+    <span class="hljs-built_in">this</span>.product.partC = partC;
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>;
+  }
+
+  <span class="hljs-keyword">public</span> setPartD(partD: <span class="hljs-built_in">string</span>): <span class="hljs-built_in">this</span> {
+    <span class="hljs-built_in">this</span>.product.partD = partD;
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>;
+  }
+
+  <span class="hljs-comment">// 完成产品生成</span>
+  <span class="hljs-keyword">public</span> build(): <span class="hljs-built_in">void</span> {
+    <span class="hljs-comment">// 这里可以写具体的构建完成后要执行的操作</span>
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">this</span>.product);
+  }
+}
+<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612692141094">class ProductBuilder {
+  private product: Product;
+
+  constructor() {
+    // 创建要生成的对象
+    this.product = new Product();
+  }
+
+  // 以下为给对象添加各部分的方法
+  public setPartA(partA: string): this {
+    this.product.partA = partA;
+    return this;
+  }
+
+  public setPartB(partB: string): this {
+    this.product.partB = partB;
+    return this;
+  }
+
+  public setPartC(partC: string): this {
+    this.product.partC = partC;
+    return this;
+  }
+
+  public setPartD(partD: string): this {
+    this.product.partD = partD;
+    return this;
+  }
+
+  // 完成产品生成
+  public build(): void {
+    // 这里可以写具体的构建完成后要执行的操作
+    console.log(this.product);
+  }
+}
+</textarea>
+<h3 id="测试代码">测试代码</h3>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612687927855">复制</button><span class="hljs-keyword">const</span> product = <span class="hljs-keyword">new</span> ProductBuilder()
+  .setPartA(<span class="hljs-string">&#x27;这是Part A&#x27;</span>)
+  .setPartB(<span class="hljs-string">&#x27;这是Part B&#x27;</span>)
+  .setPartD(<span class="hljs-string">&#x27;这是Part D&#x27;</span>)
+  .build();
+<span class="hljs-comment">// Product { partA: &#x27;这是Part A&#x27;, partB: &#x27;这是Part B&#x27;, partD: &#x27;这是Part D&#x27; }</span>
+<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612687927855">const product = new ProductBuilder()
+  .setPartA('这是Part A')
+  .setPartB('这是Part B')
+  .setPartD('这是Part D')
+  .build();
+// Product { partA: '这是Part A', partB: '这是Part B', partD: '这是Part D' }
+</textarea>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612692963018">复制</button><span class="hljs-keyword">const</span> product = <span class="hljs-keyword">new</span> ProductBuilder()
+  .setPartA(<span class="hljs-string">&#x27;这是Part A&#x27;</span>)
+  .setPartB(<span class="hljs-string">&#x27;这是Part B&#x27;</span>)
+  .build();
+<span class="hljs-comment">// Product { partA: &#x27;这是Part A&#x27;, partB: &#x27;这是Part B&#x27; }</span>
+<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612692963018">const product = new ProductBuilder()
+  .setPartA('这是Part A')
+  .setPartB('这是Part B')
+  .build();
+// Product { partA: '这是Part A', partB: '这是Part B' }
+</textarea>
+
+    </div>
+    
+  </div>
+
+        <footer>
+        
+  <div class="footer">
+  
+  <div class="theme">
+    博客主题为 <a href="https://github.com/Tuzilow/CoinRailgun">CoinRailgun</a> 默认主题
+  </div>
+  <div class="copyright">
+    <span>© 2019-2021 Tuzilow.</span>
+    <span>Powered by <a href="https://github.com/Tuzilow/CoinRailgun">CoinRailgun</a></span>
+  </div>
+</div>
+
+        </footer>
+      </main>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="author" content="Tuzilow">
+    <meta name="description" content="想要成为大佬">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.5.0/styles/default.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.5.0/styles/github-gist.min.css">
+    <link rel="stylesheet" href="/assets/lib/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/css/layout.css" />
+    <script defer src="https://cdn.bootcdn.net/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"></script>
+    <script defer src="/assets/js/copyCode.js"></script>
+    <script defer src="/assets/js/backTop.js"></script>
+
+    
+  <link rel="stylesheet" href="/assets/css/page.css" />
+  <link rel="stylesheet" href="/assets/css/sidebar.css" />
+  <link rel="stylesheet" href="/assets/css/footer.css" />
+  <link rel="stylesheet" href="/assets/css/post.css" />
+  <script defer src="/assets/js/backHome.js"></script>
+  <script defer src="/assets/js/toc.js"></script>
+  <script defer src="/assets/js/copyright.js"></script>
+
+
+    <title>深入学习JavaScript数据类型</title>
+  </head>
+  <body>
+    <div class="container">
+      <aside>
+        
+  <div class="sidebar">
+  <header>Tuzilow的小站</header>
+  <div class="info">
+    <div class="avatar">
+      <img src="https://cdn.jsdelivr.net/gh/Tuzilow/Tuzilow.github.io/images/avatar.png" alt="头像">
+    </div>
+    <div class="author">Tuzilow</div>
+    <div class="description">想要成为大佬</div>
+    <div class="about">
+      <a href="/about">about me.</a>
+    </div>
+  </div>
+  <div class="links">
+    <ul>
+    
+      <li class="links-item">
+        <a href="https://github.com/Tuzilow" target="_blank">
+          <i class="fa fa-github-alt" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="links-item">
+        <a href="tencent://message/?uin=1176281967" target="_blank">
+          <i class="fa fa-qq" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+    </ul>
+  </div>
+  <nav>
+    <ul>
+    
+      <li class="nav-item">
+        <a href="/archives">
+          <span class="nav-item__count">27</span>
+          <span class="nav-item__label">归档</span>
+        </a>
+      </li>
+    
+      <li class="nav-item">
+        <a href="/categories">
+          <span class="nav-item__count">2</span>
+          <span class="nav-item__label">分类</span>
+        </a>
+      </li>
+    
+      <li class="nav-item">
+        <a href="/tags">
+          <span class="nav-item__count">35</span>
+          <span class="nav-item__label">标签</span>
+        </a>
+      </li>
+    
+    </ul>
+  </nav>
+  <div class="catalogue" id="catalogue"></div>
+</div>
+
+      </aside>
+      <main>
+        
+  <div class="post">
+    <div class="post-front">
+      <h1 class="post-front__title">深入学习JavaScript数据类型</h1>
+      <div class="post-front__desc">
+        
+        <p class="post-front__desc-date">
+          <i class="fa fa-calendar" aria-hidden="true"></i>
+          2020/07/06 19:44:50
+        </p>
+        
+        
+        <p class="post-front__desc-category">
+          <i class="fa fa-folder-o" aria-hidden="true"></i>
+          <a href="/categories/技术">
+            技术
+          </a>
+        </p>
+        
+          <div class="post-front__desc-tags">
+          
+          <a href="/tags/JavaScript">
+            <i class="fa fa-tag" aria-hidden="true"></i>
+            JavaScript
+          </a>
+          
+        </div>
+      </div>
+    </div>
+    <div class="post-content">
+      <nav id="toc" class="toc"><ol><li><a href="#数据类型">数据类型</a></li><li><a href="#基本类型和引用类型的区别">基本类型和引用类型的区别</a><ol><li><a href="#存放位置不同">存放位置不同</a></li><li><a href="#基本类型具有不可变性">基本类型具有不可变性</a></li><li><a href="#值比较和引用比较">值比较和引用比较</a></li><li><a href="#赋值">赋值</a></li></ol></li><li><a href="#null与undefined">null与undefined</a></li><li><a href="#symbol类型">Symbol类型</a></li><li><a href="#数据类型转换">数据类型转换</a><ol><li><a href="#宽松等号的隐式转换">宽松等号（==）的隐式转换</a><ol></ol></li></ol></li><li><a href="#判断数据类型">判断数据类型</a><ol><li><a href="#typeof">typeof</a></li><li><a href="#instanceof">instanceof</a></li><li><a href="#objectprototypetostringcall">Object.prototype.toString.call()</a></li></ol></li><li><a href="#参考资料">参考资料</a></li></ol></nav><p>数据类型是我们学习<code>JavaScript</code>时最先接触的东西，它是<code>JavaScript</code>中最基础的知识，这些知识看似简单，但实则有着许多初学者甚至是部分学习了多年<code>JavaScript</code>的老手所不了解的知识。</p>
+<h2 id="数据类型">数据类型</h2>
+<p>ECSMAScript标准中规定了7种数据类型，这7种数据类型又分为基本类型和引用类型。</p>
+<p><strong>基本类型</strong>：</p>
+<ul>
+<li><code>Null</code>：只包含一个值：<code>null</code></li>
+<li><code>Undefined</code>：只包含一个值：<code>undefined</code></li>
+<li><code>Boolean</code>：包含<code>true</code>和<code>false</code></li>
+<li><code>Number</code>：整数或浮点数，还有一些特殊值（<code>-Infinity</code>、<code>+Infinity</code>、<code>NaN</code>）</li>
+<li><code>String</code>：字符串</li>
+<li><code>Symbol</code>：表示独一无二的值（ES6加入）</li>
+</ul>
+<p>ES10(ES2019)中新增了一种基本类型<code>BigInt</code>，可以用来表示超出<code>number</code>安全范围的任意精度整数。</p>
+<p><strong>引用类型</strong>：</p>
+<ul>
+<li><code>Object</code>对象：包含对象、数组、函数等。</li>
+</ul>
+<h2 id="基本类型和引用类型的区别">基本类型和引用类型的区别</h2>
+<h3 id="存放位置不同">存放位置不同</h3>
+<p>内存空间被分为两种：栈内存和堆内存。</p>
+<p><strong>栈内存</strong>：</p>
+<ul>
+<li>存储的值大小固定</li>
+<li>空间较小</li>
+<li>可以直接操作，效率高</li>
+</ul>
+<p><strong>堆内存</strong>：</p>
+<ul>
+<li>存储的值大小不确定，可以动态调整</li>
+<li>空间较大，运行效率低</li>
+<li>无法直接操作其内部，使用引用地址读取</li>
+</ul>
+<p>基本类型就属于较为简单的数据，且会被频繁使用，因此通常存放在栈中。</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612693320319">复制</button><span class="hljs-keyword">var</span> a = <span class="hljs-number">10</span>;
+<span class="hljs-keyword">var</span> b = <span class="hljs-string">&#x27;hello&#x27;</span>;
+<span class="hljs-keyword">var</span> c = <span class="hljs-literal">true</span>;
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612693320319">var a = 10;
+var b = 'hello';
+var c = true;
+</textarea>
+<p><img src="https://cdn.jsdelivr.net/gh/Tuzilow/blog-image/img/2020070702stack.png" alt="基本类型存储"></p>
+<p>引用类型则是<strong>同时</strong>保存在栈和堆当中：引用类型的实际值存储在堆当中，同时它会在栈中存储一个指向堆内存中的值的地址。</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612687753761">复制</button><span class="hljs-keyword">var</span> a = <span class="hljs-number">10</span>;
+<span class="hljs-keyword">var</span> obj1 = { <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;nihao&#x27;</span> };
+<span class="hljs-keyword">var</span> obj2 = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+    <span class="hljs-comment">// do something</span>
+}
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612687753761">var a = 10;
+var obj1 = { name: 'nihao' };
+var obj2 = function () {
+    // do something
+}
+</textarea>
+<p><img src="https://cdn.jsdelivr.net/gh/Tuzilow/blog-image/img/20200707heap2.png" alt="引用类型存储"></p>
+<h3 id="基本类型具有不可变性">基本类型具有不可变性</h3>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612692774527">复制</button><span class="hljs-keyword">var</span> name = <span class="hljs-string">&#x27;hello&#x27;</span>;
+name.toUpperCase(); <span class="hljs-comment">// &quot;HELLO&quot;</span>
+<span class="hljs-built_in">console</span>.log(name); <span class="hljs-comment">// &quot;hello&quot;</span>
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612692774527">var name = 'hello';
+name.toUpperCase(); // "HELLO"
+console.log(name); // "hello"
+</textarea>
+<p>由以上代码我们会发现，如果不使用<code>name</code>变量本身去接收<code>toUpperCase()</code>的返回值，那么<code>name</code>的值不会被改变。</p>
+<p>由于栈中的内存空间大小固定，所以存储在栈中的变量就是不可变的，但在使用<code>JavaScript</code>时我们会发现可以改变基本类型的值，例如：</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612695465789">复制</button><span class="hljs-keyword">var</span> c = <span class="hljs-literal">true</span>;
+c = <span class="hljs-literal">false</span>;
+<span class="hljs-built_in">console</span>.log(c); <span class="hljs-comment">// false</span>
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612695465789">var c = true;
+c = false;
+console.log(c); // false
+</textarea>
+<p>这实际上是相当于在栈中开辟了一片新的空间用来存储<code>false</code>这个值，然后用变量<code>c</code>指向这个值，并非改变原本的<code>true</code>。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Tuzilow/blog-image/img/2020070703stack.png" alt="更改基本类型的值"></p>
+<p>引用类型就可以很轻易的改变了，它不需要使用变量本身(<code>obj1</code>)去再次接收新的值就可以改变，例如：</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612694457199">复制</button><span class="hljs-keyword">var</span> obj1 = { <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;nihao&#x27;</span> };
+obj1.name = <span class="hljs-string">&#x27;nibuhao&#x27;</span>;
+<span class="hljs-built_in">console</span>.log(obj1); <span class="hljs-comment">// { name: &#x27;nibuhao&#x27; }</span>
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612694457199">var obj1 = { name: 'nihao' };
+obj1.name = 'nibuhao';
+console.log(obj1); // { name: 'nibuhao' }
+</textarea>
+<h3 id="值比较和引用比较">值比较和引用比较</h3>
+<p>对于基本类型，比较时会直接比较它们的值，相等返回<code>true</code></p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612696223231">复制</button><span class="hljs-keyword">var</span> str1 = <span class="hljs-string">&#x27;Hello&#x27;</span>;
+<span class="hljs-keyword">var</span> str2 = <span class="hljs-string">&#x27;Hello&#x27;</span>;
+<span class="hljs-built_in">console</span>.log(str1 === str2); <span class="hljs-comment">// true</span>
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612696223231">var str1 = 'Hello';
+var str2 = 'Hello';
+console.log(str1 === str2); // true
+</textarea>
+<p>对于引用类型，比较时会比较它们的引用地址，哪怕两个变量具有同名属性，且同名属性的值相同，但是因为存储位置不同，两者仍然不相等</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612688773802">复制</button><span class="hljs-keyword">var</span> obj1 = { <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;obj&#x27;</span> };
+<span class="hljs-keyword">var</span> obj2 = { <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;obj&#x27;</span> };
+<span class="hljs-built_in">console</span>.log(obj1 === obj2); <span class="hljs-comment">// false</span>
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612688773802">var obj1 = { name: 'obj' };
+var obj2 = { name: 'obj' };
+console.log(obj1 === obj2); // false
+</textarea>
+<p><img src="https://cdn.jsdelivr.net/gh/Tuzilow/blog-image/img/20200707diff.png" alt=""></p>
+<h3 id="赋值">赋值</h3>
+<p>与上面的两种比较类似，基本类型赋值时是直接将值给另一个变量，而引用类型则是将地址给另一个变量</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612687714389">复制</button><span class="hljs-keyword">var</span> str1 = <span class="hljs-string">&#x27;Hello&#x27;</span>;
+<span class="hljs-keyword">var</span> str2 = str1;
+str2 = <span class="hljs-string">&#x27;World&#x27;</span>;
+<span class="hljs-built_in">console</span>.log(str1); <span class="hljs-comment">// &quot;Hello&quot;</span>
+<span class="hljs-comment">//str1的值没变</span>
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612687714389">var str1 = 'Hello';
+var str2 = str1;
+str2 = 'World';
+console.log(str1); // "Hello"
+//str1的值没变
+</textarea>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612690467511">复制</button><span class="hljs-keyword">var</span> obj1 = { <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;obj1&#x27;</span> };
+<span class="hljs-keyword">var</span> obj2 = obj1;
+obj2.name = <span class="hljs-string">&#x27;obj2&#x27;</span>;
+<span class="hljs-built_in">console</span>.log(obj1.name); <span class="hljs-comment">// &quot;obj2&quot;</span>
+<span class="hljs-comment">// obj1的值改变</span>
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612690467511">var obj1 = { name: 'obj1' };
+var obj2 = obj1;
+obj2.name = 'obj2';
+console.log(obj1.name); // "obj2"
+// obj1的值改变
+</textarea>
+<h2 id="null与undefined">null与undefined</h2>
+<ul>
+<li><code>null</code>表示空值</li>
+<li><code>undefined</code>表示“缺少值”，即此处应该有值，但是还未定义</li>
+</ul>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612692464479">复制</button><span class="hljs-keyword">var</span> a = <span class="hljs-literal">null</span>;
+<span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">typeof</span> a); <span class="hljs-comment">// object</span>
+<span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">typeof</span> b); <span class="hljs-comment">// undefined</span>
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612692464479">var a = null;
+console.log(typeof a); // object
+console.log(typeof b); // undefined
+</textarea>
+<p>如果学过<code>C#</code>、<code>Java</code>之类的静态类型语言就会知道，直接使用未声明的变量会直接报错，而<code>JavaScript</code>是动态类型语言，成员除了存在空值外，还有可能根本就不存在（因为只有在运行时才会知道是否存在）。</p>
+<h2 id="symbol类型">Symbol类型</h2>
+<p><code>symbol</code>变量需要使用<code>Symbol()</code>创建</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612691552906">复制</button><span class="hljs-keyword">var</span> s = <span class="hljs-built_in">Symbol</span>(); <span class="hljs-comment">// 注意没有new</span>
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612691552906">var s = Symbol(); // 注意没有new
+</textarea>
+<p><code>Symbol()</code>函数接受一个可选参数，用来描述即将创建的<code>symbol</code>变量，无论传入的描述是否相同，最后生成的<code>symbol</code>一定是独一无二的</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612686648209">复制</button><span class="hljs-keyword">var</span> name1 = <span class="hljs-built_in">Symbol</span>(<span class="hljs-string">&#x27;Tom&#x27;</span>);
+<span class="hljs-keyword">var</span> name2 = <span class="hljs-built_in">Symbol</span>(<span class="hljs-string">&#x27;Tom&#x27;</span>);
+<span class="hljs-built_in">console</span>.log(name1 === name2); <span class="hljs-comment">// false</span>
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612686648209">var name1 = Symbol('Tom');
+var name2 = Symbol('Tom');
+console.log(name1 === name2); // false
+</textarea>
+<p>如果一定要创建两个一模一样的<code>symbol</code>，需要使用<code>Symbol.for()</code></p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612689038220">复制</button><span class="hljs-keyword">var</span> name1 = <span class="hljs-built_in">Symbol</span>.for(<span class="hljs-string">&#x27;Tom&#x27;</span>);
+<span class="hljs-keyword">var</span> name2 = <span class="hljs-built_in">Symbol</span>.for(<span class="hljs-string">&#x27;Tom&#x27;</span>);
+<span class="hljs-built_in">console</span>.log(name1 === name2); <span class="hljs-comment">// true</span>
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612689038220">var name1 = Symbol.for('Tom');
+var name2 = Symbol.for('Tom');
+console.log(name1 === name2); // true
+</textarea>
+<p><code>Symbol</code>类型可以用作对象属性，使用该类型可以保证对象不会出现同名属性</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612688125225">复制</button><span class="hljs-keyword">var</span> obj = {
+    [<span class="hljs-built_in">Symbol</span>(<span class="hljs-string">&#x27;name&#x27;</span>)]: <span class="hljs-string">&#x27;Tom&#x27;</span>
+};
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612688125225">var obj = {
+    [Symbol('name')]: 'Tom'
+};
+</textarea>
+<p>使用<code>Symbol</code>类型作为对象的属性名时，是无法是用<code>for ... in</code>、<code>Object.getOwnPropertyNames</code>和<code>Object.keys()</code>获取到该属性的，可以调用用来专门获取<code>Symbol</code>的方法<code>Object.getOwnPropertySymbols()</code>来获取</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612693870537">复制</button><span class="hljs-keyword">var</span> obj = {
+    [<span class="hljs-built_in">Symbol</span>(<span class="hljs-string">&#x27;name&#x27;</span>)]: <span class="hljs-string">&#x27;Tom&#x27;</span>
+};
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> key <span class="hljs-keyword">in</span> obj) {
+   <span class="hljs-built_in">console</span>.log(key); <span class="hljs-comment">// undefined</span>
+}
+<span class="hljs-built_in">Object</span>.getOwnPropertySymbols(obj); <span class="hljs-comment">// [Symbol(name)]</span>
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612693870537">var obj = {
+    [Symbol('name')]: 'Tom'
+};
+for (var key in obj) {
+   console.log(key); // undefined
+}
+Object.getOwnPropertySymbols(obj); // [Symbol(name)]
+</textarea>
+<h2 id="数据类型转换">数据类型转换</h2>
+<p><img src="https://cdn.jsdelivr.net/gh/Tuzilow/blog-image/img/20200707table.png" alt=""></p>
+<p>图片来源：https://juejin.im/post/5cec1bcff265da1b8f1aa08f#heading-23</p>
+<h3 id="宽松等号的隐式转换">宽松等号（==）的隐式转换</h3>
+<p>使用<code>==</code>时，如果等号两侧的数据类型相同，那么比较结果与<code>===</code>相同，否则会发生隐式转换</p>
+<h4>NaN</h4>
+<p><code>NaN</code>和任何类型比较都会返回<code>false</code>，包括他自己</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612696364858">复制</button><span class="hljs-literal">NaN</span> == <span class="hljs-literal">NaN</span> <span class="hljs-comment">// false</span>
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612696364858">NaN == NaN // false
+</textarea>
+<h4>Boolean类型与其他类型进行比较</h4>
+<p>只要<code>Boolean</code>类型参与比较，该<code>Boolean</code>类型的值都会被转换为<code>Number</code>类型，<code>1</code>转为<code>true</code>，<code>0</code>转为<code>false</code></p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612695854907">复制</button><span class="hljs-literal">false</span> == <span class="hljs-number">0</span> <span class="hljs-comment">// true</span>
+<span class="hljs-literal">true</span> == <span class="hljs-number">1</span> <span class="hljs-comment">// true</span>
+<span class="hljs-literal">true</span> == <span class="hljs-number">2</span> <span class="hljs-comment">// false</span>
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612695854907">false == 0 // true
+true == 1 // true
+true == 2 // false
+</textarea>
+<p>如果在使用<code>if</code>判断时，我们使用数字作为判断条件</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612692876817">复制</button><span class="hljs-keyword">var</span> x = <span class="hljs-number">10</span>;
+<span class="hljs-keyword">if</span> (x) {
+	<span class="hljs-comment">// ...</span>
+}
+<span class="hljs-keyword">if</span> (x == <span class="hljs-literal">true</span>) {
+    <span class="hljs-comment">// ...</span>
+}
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612692876817">var x = 10;
+if (x) {
+	// ...
+}
+if (x == true) {
+    // ...
+}
+</textarea>
+<p>我们会发现，第一个判断结果为<code>true</code>，而第二个的结果为<code>false</code>，这就是因为<code>true</code>被转换为了<code>1</code>，判断条件变为了<code>x == 1</code></p>
+<h4>Number类型和String类型进行比较</h4>
+<p>这两者进行比较时，<code>String</code>类型会被转为<code>Number</code>类型，除了纯数字字符串正常转换为<code>Number</code>类型外，空字符串<code>''</code>转为<code>0</code>，科学计数法（例如<code>1e11</code>）正常转换，<code>Infinity</code>正常转换，其他全部转换为<code>NaN</code></p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612687228389">复制</button><span class="hljs-string">&#x27;&#x27;</span> == <span class="hljs-number">0</span> <span class="hljs-comment">// true</span>
+<span class="hljs-string">&#x27;123&#x27;</span> == <span class="hljs-number">123</span> <span class="hljs-comment">// true</span>
+<span class="hljs-string">&#x27;1e11&#x27;</span> == <span class="hljs-number">1e11</span> <span class="hljs-comment">// true</span>
+<span class="hljs-literal">Infinity</span> == <span class="hljs-string">&#x27;Infinity&#x27;</span> <span class="hljs-comment">// true</span>
+<span class="hljs-literal">true</span> == <span class="hljs-string">&#x27;1&#x27;</span> <span class="hljs-comment">// true</span>
+<span class="hljs-literal">false</span> == <span class="hljs-string">&#x27;0&#x27;</span> <span class="hljs-comment">// true</span>
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612687228389">'' == 0 // true
+'123' == 123 // true
+'1e11' == 1e11 // true
+Infinity == 'Infinity' // true
+true == '1' // true
+false == '0' // true
+</textarea>
+<h4>null与undefined</h4>
+<p>除<code>null == undefined</code>结果为<code>true</code>外，其他任何类型和<code>null</code>或<code>undefined</code>比较都为<code>false</code></p>
+<h4>基本类型与引用类型比较</h4>
+<p><strong>ToPrimitive规则</strong></p>
+<p>首先我们要先了解<code>ToPrimitive</code>规则，即引用类型转为基本类型</p>
+<ul>
+<li>当引用类型需要被转为基本类型时，它会先查找对象的<code>valueOf</code>方法，如果该方法返回基本类型的值，则<code>ToPrimitive</code>的结果就是这个值</li>
+<li>如果<code>valueOf</code>不存在或者<code>valueOf</code>方法返回的不是基本类型，就会尝试调用对象的<code>toString</code>方法，然后使用<code>toString</code>的返回值作为<code>ToPrimitive</code>的结果</li>
+<li>若<code>valueOf</code>和<code>toString</code>都不存在，或者没有返回基本类型，则抛出<code>TypeError</code>异常</li>
+</ul>
+<blockquote>
+<p>对于不同的引用类型，该过程会有些许不同，比如<code>Date</code>会先调用<code>toString</code></p>
+<p>引用类型转换为不同的基本类型也会有一些不同，比如：</p>
+<ul>
+<li>引用类型转换为<code>Number</code>类型，先调用<code>valueOf</code>，再调用<code>toString</code></li>
+<li>引用类型转换为<code>String</code>类型，先调用<code>toString</code>，再调用<code>valueOf</code></li>
+</ul>
+<p>具体请参考<a href="https://www.ecma-international.org/ecma-262/6.0/#sec-toprimitive">ECMA标准</a></p>
+</blockquote>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612693451871">复制</button><span class="hljs-built_in">Number</span>([]); <span class="hljs-comment">// 0</span>
+<span class="hljs-built_in">Number</span>([<span class="hljs-number">10</span>]); <span class="hljs-comment">// 10</span>
+
+<span class="hljs-keyword">var</span> obj = {
+    <span class="hljs-attr">valueOf</span>: <span class="hljs-function">() =&gt;</span> { <span class="hljs-keyword">return</span> <span class="hljs-number">10</span>; },
+    <span class="hljs-attr">toString</span>: <span class="hljs-function">() =&gt;</span> { <span class="hljs-keyword">return</span> -<span class="hljs-number">10</span>; }
+};
+<span class="hljs-built_in">Number</span>(obj); <span class="hljs-comment">// 10</span>
+<span class="hljs-built_in">String</span>(obj); <span class="hljs-comment">// -10</span>
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612693451871">Number([]); // 0
+Number([10]); // 10
+
+var obj = {
+    valueOf: () => { return 10; },
+    toString: () => { return -10; }
+};
+Number(obj); // 10
+String(obj); // -10
+</textarea>
+<p><strong>基本类型与引用类型比较</strong></p>
+<p>比较时，引用类型会依据<code>ToPrimitive</code>规则转换为基本类型</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612689800361">复制</button><span class="hljs-keyword">var</span> a = {};
+<span class="hljs-keyword">var</span> b = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>];
+
+a == <span class="hljs-string">&#x27;[object Object]&#x27;</span>; <span class="hljs-comment">// true</span>
+a.toString(); <span class="hljs-comment">// [object Object]</span>
+b == <span class="hljs-string">&#x27;1,2,3&#x27;</span> <span class="hljs-comment">// true</span>
+b.toString(); <span class="hljs-comment">// &quot;1,2,3&quot;</span>
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612689800361">var a = {};
+var b = [1, 2, 3];
+
+a == '[object Object]'; // true
+a.toString(); // [object Object]
+b == '1,2,3' // true
+b.toString(); // "1,2,3"
+</textarea>
+<h2 id="判断数据类型">判断数据类型</h2>
+<h3 id="typeof">typeof</h3>
+<p><code>typeof</code>只能用来判断以下几个类型</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612690780800">复制</button><span class="hljs-keyword">typeof</span> <span class="hljs-string">&#x27;str&#x27;</span>;  <span class="hljs-comment">// string</span>
+<span class="hljs-keyword">typeof</span> <span class="hljs-number">123</span>;  <span class="hljs-comment">// number</span>
+<span class="hljs-keyword">typeof</span> <span class="hljs-literal">true</span>;  <span class="hljs-comment">// boolean</span>
+<span class="hljs-keyword">typeof</span> <span class="hljs-built_in">Symbol</span>();  <span class="hljs-comment">// symbol</span>
+<span class="hljs-keyword">typeof</span> <span class="hljs-literal">undefined</span>;  <span class="hljs-comment">// undefined</span>
+<span class="hljs-keyword">typeof</span> <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{} <span class="hljs-comment">// function</span>
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612690780800">typeof 'str';  // string
+typeof 123;  // number
+typeof true;  // boolean
+typeof Symbol();  // symbol
+typeof undefined;  // undefined
+typeof function () {} // function
+</textarea>
+<p>对于引用类型（数组、对象等）以及<code>null</code>，<code>typeof</code>的返回值均为<code>object</code></p>
+<h3 id="instanceof">instanceof</h3>
+<p><code>instanceof</code>可以判断引用类型的具体类型</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612695940482">复制</button>[] <span class="hljs-keyword">instanceof</span> <span class="hljs-built_in">Array</span>; <span class="hljs-comment">// true</span>
+<span class="hljs-regexp">/1/</span> <span class="hljs-keyword">instanceof</span> <span class="hljs-built_in">RegExp</span>; <span class="hljs-comment">// true</span>
+<span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>() <span class="hljs-keyword">instanceof</span> <span class="hljs-built_in">Date</span>; <span class="hljs-comment">// true</span>
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612695940482">[] instanceof Array; // true
+/1/ instanceof RegExp; // true
+new Date() instanceof Date; // true
+</textarea>
+<p>但是，<code>instanceof</code>同样没法判断<code>null</code></p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612688312986">复制</button><span class="hljs-literal">null</span> <span class="hljs-keyword">instanceof</span> <span class="hljs-literal">null</span>; <span class="hljs-comment">// Uncaught TypeError: Right-hand side of &#x27;instanceof&#x27; is not an object</span>
+<span class="hljs-literal">null</span> <span class="hljs-keyword">instanceof</span> <span class="hljs-built_in">Object</span>; <span class="hljs-comment">// false</span>
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612688312986">null instanceof null; // Uncaught TypeError: Right-hand side of 'instanceof' is not an object
+null instanceof Object; // false
+</textarea>
+<p>在<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/instanceof">MDN</a>中，<code>instanceof</code>被这样描述：</p>
+<blockquote>
+<p><strong><code>instanceof</code></strong> <strong>运算符</strong>用于检测构造函数的 <code>prototype</code> 属性是否出现在某个实例对象的原型链上。</p>
+</blockquote>
+<p>也就是说<code>instanceof</code>设计的初衷并不是用来检测数据类型的，因此很多类型它也无法判断</p>
+<h3 id="objectprototypetostringcall">Object.prototype.toString.call()</h3>
+<p><code>Object.prototype.toString.call()</code>利用<code>call</code>来改变<code>this</code>的指向，可以让该方法能够获取到任意变量的<code>[[class]]</code>属性，通过该属性可以判断所有<code>JavaScript</code>的内置类型</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612694628243">复制</button><span class="hljs-built_in">Object</span>.prototype.toString.call(<span class="hljs-literal">null</span>); <span class="hljs-comment">// [object Null]</span>
+<span class="hljs-built_in">Object</span>.prototype.toString.call(<span class="hljs-literal">undefined</span>); <span class="hljs-comment">// [object Undefined]</span>
+<span class="hljs-built_in">Object</span>.prototype.toString.call(<span class="hljs-number">123</span>); <span class="hljs-comment">// [object Number]</span>
+<span class="hljs-built_in">Object</span>.prototype.toString.call(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>()); <span class="hljs-comment">// [object Date]</span>
+<span class="hljs-comment">// ...</span>
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612694628243">Object.prototype.toString.call(null); // [object Null]
+Object.prototype.toString.call(undefined); // [object Undefined]
+Object.prototype.toString.call(123); // [object Number]
+Object.prototype.toString.call(new Date()); // [object Date]
+// ...
+</textarea>
+<p>但是该方法并不能判断自定义类型，而<code>instanceof</code>可以实现对自定义类型的判断</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612691289937">复制</button><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Person</span>(<span class="hljs-params"></span>) </span>{}
+<span class="hljs-built_in">Object</span>.prototype.toString.call(<span class="hljs-keyword">new</span> Person()); <span class="hljs-comment">// [object Object]</span>
+<span class="hljs-keyword">new</span> Person() <span class="hljs-keyword">instanceof</span> Person; <span class="hljs-comment">// true</span>
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612691289937">function Person() {}
+Object.prototype.toString.call(new Person()); // [object Object]
+new Person() instanceof Person; // true
+</textarea>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li>
+<p><a href="https://juejin.im/post/5cec1bcff265da1b8f1aa08f#heading-34">【JS 进阶】你真的掌握变量和类型了吗</a></p>
+</li>
+<li>
+<p><a href="https://juejin.im/post/5bbda2b36fb9a05cfd27f55e">JavaScript的数据类型及其检测</a></p>
+</li>
+<li>
+<p><a href="https://www.ruanyifeng.com/blog/2014/03/undefined-vs-null.html">undefined与null的区别</a></p>
+</li>
+<li>
+<p><a href="https://juejin.im/post/5bc5c752f265da0a9a399a62">从一道面试题说起—js隐式转换踩坑合集</a></p>
+</li>
+</ul>
+
+    </div>
+    
+  </div>
+
+        <footer>
+        
+  <div class="footer">
+  
+  <div class="theme">
+    博客主题为 <a href="https://github.com/Tuzilow/CoinRailgun">CoinRailgun</a> 默认主题
+  </div>
+  <div class="copyright">
+    <span>© 2019-2021 Tuzilow.</span>
+    <span>Powered by <a href="https://github.com/Tuzilow/CoinRailgun">CoinRailgun</a></span>
+  </div>
+</div>
+
+        </footer>
+      </main>
+    </div>
+  </body>
+</html>

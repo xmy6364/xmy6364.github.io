@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="author" content="Tuzilow">
+    <meta name="description" content="想要成为大佬">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.5.0/styles/default.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.5.0/styles/github-gist.min.css">
+    <link rel="stylesheet" href="/assets/lib/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/css/layout.css" />
+    <script defer src="https://cdn.bootcdn.net/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"></script>
+    <script defer src="/assets/js/copyCode.js"></script>
+    <script defer src="/assets/js/backTop.js"></script>
+
+    
+  <link rel="stylesheet" href="/assets/css/page.css" />
+  <link rel="stylesheet" href="/assets/css/sidebar.css" />
+  <link rel="stylesheet" href="/assets/css/footer.css" />
+  <link rel="stylesheet" href="/assets/css/post.css" />
+  <script defer src="/assets/js/backHome.js"></script>
+  <script defer src="/assets/js/toc.js"></script>
+  <script defer src="/assets/js/copyright.js"></script>
+
+
+    <title>利用JavaScript实现倒计时</title>
+  </head>
+  <body>
+    <div class="container">
+      <aside>
+        
+  <div class="sidebar">
+  <header>Tuzilow的小站</header>
+  <div class="info">
+    <div class="avatar">
+      <img src="https://cdn.jsdelivr.net/gh/Tuzilow/Tuzilow.github.io/images/avatar.png" alt="头像">
+    </div>
+    <div class="author">Tuzilow</div>
+    <div class="description">想要成为大佬</div>
+    <div class="about">
+      <a href="/about">about me.</a>
+    </div>
+  </div>
+  <div class="links">
+    <ul>
+    
+      <li class="links-item">
+        <a href="https://github.com/Tuzilow" target="_blank">
+          <i class="fa fa-github-alt" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="links-item">
+        <a href="tencent://message/?uin=1176281967" target="_blank">
+          <i class="fa fa-qq" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+    </ul>
+  </div>
+  <nav>
+    <ul>
+    
+      <li class="nav-item">
+        <a href="/archives">
+          <span class="nav-item__count">27</span>
+          <span class="nav-item__label">归档</span>
+        </a>
+      </li>
+    
+      <li class="nav-item">
+        <a href="/categories">
+          <span class="nav-item__count">2</span>
+          <span class="nav-item__label">分类</span>
+        </a>
+      </li>
+    
+      <li class="nav-item">
+        <a href="/tags">
+          <span class="nav-item__count">35</span>
+          <span class="nav-item__label">标签</span>
+        </a>
+      </li>
+    
+    </ul>
+  </nav>
+  <div class="catalogue" id="catalogue"></div>
+</div>
+
+      </aside>
+      <main>
+        
+  <div class="post">
+    <div class="post-front">
+      <h1 class="post-front__title">利用JavaScript实现倒计时</h1>
+      <div class="post-front__desc">
+        
+        <p class="post-front__desc-date">
+          <i class="fa fa-calendar" aria-hidden="true"></i>
+          2019/08/17 19:59:18
+        </p>
+        
+        
+        <p class="post-front__desc-category">
+          <i class="fa fa-folder-o" aria-hidden="true"></i>
+          <a href="/categories/技术">
+            技术
+          </a>
+        </p>
+        
+          <div class="post-front__desc-tags">
+          
+          <a href="/tags/JavaScript">
+            <i class="fa fa-tag" aria-hidden="true"></i>
+            JavaScript
+          </a>
+          
+        </div>
+      </div>
+    </div>
+    <div class="post-content">
+      <p>${toc}利用JS中的Date对象即可实现，创建目标时间和当前时间，利用getTime函数将两个时间转换成距离1970-01-01的秒数，相减后转化为年月日即可</p>
+<blockquote>
+<p>利用JS中的Date对象即可实现</p>
+</blockquote>
+<h3 id="js代码">js代码</h3>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612695376151">复制</button>&lt;script&gt;
+    <span class="hljs-built_in">window</span>.onload = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+        <span class="hljs-built_in">setInterval</span>(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+            <span class="hljs-keyword">var</span> nowTime = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>();<span class="hljs-comment">//获取当前时间</span>
+            <span class="hljs-comment">//创建日期对象</span>
+            <span class="hljs-keyword">var</span> endTime = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-string">&quot;2019-9-1 00:00:00&quot;</span>);
+            <span class="hljs-keyword">var</span> seconds = <span class="hljs-built_in">parseInt</span>((endTime.getTime() - nowTime.getTime()) / <span class="hljs-number">1000</span>);<span class="hljs-comment">//两个时间点的时间差(秒)</span>
+            <span class="hljs-keyword">var</span> d = <span class="hljs-built_in">parseInt</span>(seconds / <span class="hljs-number">3600</span> / <span class="hljs-number">24</span>);<span class="hljs-comment">//得到天数</span>
+            <span class="hljs-keyword">var</span> h = <span class="hljs-built_in">parseInt</span>(seconds / <span class="hljs-number">3600</span> % <span class="hljs-number">24</span>);<span class="hljs-comment">//小时</span>
+            <span class="hljs-keyword">var</span> m = <span class="hljs-built_in">parseInt</span>(seconds / <span class="hljs-number">60</span> % <span class="hljs-number">60</span>);<span class="hljs-comment">//分钟</span>
+            <span class="hljs-keyword">var</span> s = <span class="hljs-built_in">parseInt</span>(seconds % <span class="hljs-number">60</span>);<span class="hljs-comment">//秒</span>
+            <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;djs&quot;</span>).innerHTML = <span class="hljs-string">&quot;距离开学还有&quot;</span> + d +<span class="hljs-string">&quot;天&quot;</span> + h + <span class="hljs-string">&quot;小时&quot;</span> + m + <span class="hljs-string">&quot;分钟&quot;</span> + s + <span class="hljs-string">&quot;秒&quot;</span>;
+        }, <span class="hljs-number">1000</span>);
+    }
+&lt;/script&gt;
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612695376151"><script>
+    window.onload = function() {
+        setInterval(function() {
+            var nowTime = new Date();//获取当前时间
+            //创建日期对象
+            var endTime = new Date("2019-9-1 00:00:00");
+            var seconds = parseInt((endTime.getTime() - nowTime.getTime()) / 1000);//两个时间点的时间差(秒)
+            var d = parseInt(seconds / 3600 / 24);//得到天数
+            var h = parseInt(seconds / 3600 % 24);//小时
+            var m = parseInt(seconds / 60 % 60);//分钟
+            var s = parseInt(seconds % 60);//秒
+            document.getElementById("djs").innerHTML = "距离开学还有" + d +"天" + h + "小时" + m + "分钟" + s + "秒";
+        }, 1000);
+    }
+</script>
+</textarea>
+<h3 id="html及样式">HTML及样式</h3>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612690404211">复制</button><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-meta-keyword">html</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">&quot;UTF-8&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;viewport&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">http-equiv</span>=<span class="hljs-string">&quot;X-UA-Compatible&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;ie=edge&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Document<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="css">
+        <span class="hljs-selector-tag">p</span> {
+            <span class="hljs-attribute">font-size</span>: <span class="hljs-number">24px</span>;
+            <span class="hljs-attribute">color</span>: red;
+            <span class="hljs-attribute">border</span>: <span class="hljs-number">1px</span> solid red;
+            <span class="hljs-attribute">text-align</span>: center;
+            <span class="hljs-attribute">width</span>: <span class="hljs-number">600px</span>;
+            <span class="hljs-attribute">margin</span>: <span class="hljs-number">20%</span> auto;
+            <span class="hljs-attribute">line-height</span>: <span class="hljs-number">50px</span>;
+        }
+    </span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;djs&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+<b class="name">html</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612690404211"><!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        p {
+            font-size: 24px;
+            color: red;
+            border: 1px solid red;
+            text-align: center;
+            width: 600px;
+            margin: 20% auto;
+            line-height: 50px;
+        }
+    </style>
+</head>
+<body>
+    <p id="djs"></p>
+</body>
+</html>
+</textarea>
+
+    </div>
+    
+  </div>
+
+        <footer>
+        
+  <div class="footer">
+  
+  <div class="theme">
+    博客主题为 <a href="https://github.com/Tuzilow/CoinRailgun">CoinRailgun</a> 默认主题
+  </div>
+  <div class="copyright">
+    <span>© 2019-2021 Tuzilow.</span>
+    <span>Powered by <a href="https://github.com/Tuzilow/CoinRailgun">CoinRailgun</a></span>
+  </div>
+</div>
+
+        </footer>
+      </main>
+    </div>
+  </body>
+</html>

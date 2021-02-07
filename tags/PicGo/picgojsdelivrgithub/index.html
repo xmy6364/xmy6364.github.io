@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="author" content="Tuzilow">
+    <meta name="description" content="想要成为大佬">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.5.0/styles/default.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.5.0/styles/github-gist.min.css">
+    <link rel="stylesheet" href="/assets/lib/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/css/layout.css" />
+    <script defer src="https://cdn.bootcdn.net/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"></script>
+    <script defer src="/assets/js/copyCode.js"></script>
+    <script defer src="/assets/js/backTop.js"></script>
+
+    
+  <link rel="stylesheet" href="/assets/css/page.css" />
+  <link rel="stylesheet" href="/assets/css/sidebar.css" />
+  <link rel="stylesheet" href="/assets/css/footer.css" />
+  <link rel="stylesheet" href="/assets/css/post.css" />
+  <script defer src="/assets/js/backHome.js"></script>
+  <script defer src="/assets/js/toc.js"></script>
+  <script defer src="/assets/js/copyright.js"></script>
+
+
+    <title>利用PicGo、GitHub和jsDelivr搭建图床</title>
+  </head>
+  <body>
+    <div class="container">
+      <aside>
+        
+  <div class="sidebar">
+  <header>Tuzilow的小站</header>
+  <div class="info">
+    <div class="avatar">
+      <img src="https://cdn.jsdelivr.net/gh/Tuzilow/Tuzilow.github.io/images/avatar.png" alt="头像">
+    </div>
+    <div class="author">Tuzilow</div>
+    <div class="description">想要成为大佬</div>
+    <div class="about">
+      <a href="/about">about me.</a>
+    </div>
+  </div>
+  <div class="links">
+    <ul>
+    
+      <li class="links-item">
+        <a href="https://github.com/Tuzilow" target="_blank">
+          <i class="fa fa-github-alt" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="links-item">
+        <a href="tencent://message/?uin=1176281967" target="_blank">
+          <i class="fa fa-qq" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+    </ul>
+  </div>
+  <nav>
+    <ul>
+    
+      <li class="nav-item">
+        <a href="/archives">
+          <span class="nav-item__count">27</span>
+          <span class="nav-item__label">归档</span>
+        </a>
+      </li>
+    
+      <li class="nav-item">
+        <a href="/categories">
+          <span class="nav-item__count">2</span>
+          <span class="nav-item__label">分类</span>
+        </a>
+      </li>
+    
+      <li class="nav-item">
+        <a href="/tags">
+          <span class="nav-item__count">35</span>
+          <span class="nav-item__label">标签</span>
+        </a>
+      </li>
+    
+    </ul>
+  </nav>
+  <div class="catalogue" id="catalogue"></div>
+</div>
+
+      </aside>
+      <main>
+        
+  <div class="post">
+    <div class="post-front">
+      <h1 class="post-front__title">利用PicGo、GitHub和jsDelivr搭建图床</h1>
+      <div class="post-front__desc">
+        
+        <p class="post-front__desc-date">
+          <i class="fa fa-calendar" aria-hidden="true"></i>
+          2020/01/28 23:24:12
+        </p>
+        
+        
+        <p class="post-front__desc-category">
+          <i class="fa fa-folder-o" aria-hidden="true"></i>
+          <a href="/categories/技术">
+            技术
+          </a>
+        </p>
+        
+          <div class="post-front__desc-tags">
+          
+          <a href="/tags/GitHub">
+            <i class="fa fa-tag" aria-hidden="true"></i>
+            GitHub
+          </a>
+          
+          <a href="/tags/jsDelivr">
+            <i class="fa fa-tag" aria-hidden="true"></i>
+            jsDelivr
+          </a>
+          
+          <a href="/tags/PicGo">
+            <i class="fa fa-tag" aria-hidden="true"></i>
+            PicGo
+          </a>
+          
+          <a href="/tags/CDN">
+            <i class="fa fa-tag" aria-hidden="true"></i>
+            CDN
+          </a>
+          
+        </div>
+      </div>
+    </div>
+    <div class="post-content">
+      <nav id="toc" class="toc"><ol><li><a href="#准备">准备</a></li><li><a href="#具体步骤">具体步骤</a><ol><li><a href="#新建一个github仓库">新建一个GItHub仓库</a></li><li><a href="#生成token">生成Token</a></li><li><a href="#配置picgo">配置PicGo</a></li></ol></li><li><a href="#参考文章">参考文章</a></li></ol></nav><p>一个高速稳定的图床对于每一个写博客的人来说都很重要，之前大部分人的选择可能都是利用微博搭建图床，但是从2019年4月开始微博开启了防盗链，导致所有依赖微博图床的图片全部无法显示。</p>
+<p>利用PicGo将图片上传到GitHub仓库，再使用jsDelivr优化对于我们来说会是一个不错的选择。</p>
+<h2 id="准备">准备</h2>
+<ul>
+<li><a href="https://github.com/Molunerfinn/PicGo">PicGo</a> PicGo在GitHub上提供了MacOS、Linux、Windows三个系统版本的下载</li>
+<li>一个用来存放图片的GitHub仓库</li>
+</ul>
+<h2 id="具体步骤">具体步骤</h2>
+<h3 id="新建一个github仓库">新建一个GItHub仓库</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/Tuzilow/blog-image/img/newrepo.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Tuzilow/blog-image/img/nreponame.png" alt=""></p>
+<h3 id="生成token">生成Token</h3>
+<p><strong>github</strong>--<strong>setting</strong>--<strong>developer settings</strong>--<strong>personal access token</strong></p>
+<p><strong>Note</strong>随便填一下，在<strong>Select scopes</strong>中勾选<strong>repo</strong>（当然也可以全选</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Tuzilow/blog-image/img/settingnewtoken.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Tuzilow/blog-image/img/newtokendevset.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Tuzilow/blog-image/img/settokenlist.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Tuzilow/blog-image/img/settokenselect.png" alt=""></p>
+<p>点击<strong>Generate token</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Tuzilow/blog-image/img/finishgithubtoken.png" alt=""></p>
+<p>请务必保存好生成的Token，它只会显示这一次</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Tuzilow/blog-image/img/finishgithubtoken02.png" alt=""></p>
+<h3 id="配置picgo">配置PicGo</h3>
+<ul>
+<li>仓库名要按照<strong>用户名/仓库名</strong>的方式填写</li>
+<li>分支名填<strong>master</strong></li>
+<li>Token就填刚刚生成的</li>
+<li>指定存储路径，如果填写**img/**就会在仓库下创建一个img文件夹，图片会存在其中</li>
+<li>设置自定义域名，我们这里要使用jsDelivr加速访问，所以要填上<strong>https://cdn.jsdelivr.net/gh/用户名/图床仓库名</strong></li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Tuzilow/blog-image/img/picgoconfig.png" alt=""></p>
+<p>配置完成后，就可以在PicGo上传区上传图片了，上传图片成功后就可以通过<strong>https://cdn.jsdelivr.net/gh/用户名/图床仓库名/图片名.后缀</strong>访问到图片了，速度很快。</p>
+<p>在PicGo设置中可以开启上传提示。</p>
+<p>如果家里网络不太好，上传图片时可能需要多试几次，可以将网址打开刷新几次观察图片是否上传成功，PicGo有时候会通知上传失败但是实际上传成功了。</p>
+<h2 id="参考文章">参考文章</h2>
+<p><a href="https://removeif.github.io/removeif-demo/theme/%E5%8D%9A%E5%AE%A2%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0picgo%E5%B7%A5%E5%85%B7github%E5%9B%BE%E4%BC%A0%E4%BD%BF%E7%94%A8.html">博客图片上传picgo工具github图传使用</a></p>
+
+    </div>
+    
+  </div>
+
+        <footer>
+        
+  <div class="footer">
+  
+  <div class="theme">
+    博客主题为 <a href="https://github.com/Tuzilow/CoinRailgun">CoinRailgun</a> 默认主题
+  </div>
+  <div class="copyright">
+    <span>© 2019-2021 Tuzilow.</span>
+    <span>Powered by <a href="https://github.com/Tuzilow/CoinRailgun">CoinRailgun</a></span>
+  </div>
+</div>
+
+        </footer>
+      </main>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="author" content="Tuzilow">
+    <meta name="description" content="想要成为大佬">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.5.0/styles/default.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.5.0/styles/github-gist.min.css">
+    <link rel="stylesheet" href="/assets/lib/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/css/layout.css" />
+    <script defer src="https://cdn.bootcdn.net/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"></script>
+    <script defer src="/assets/js/copyCode.js"></script>
+    <script defer src="/assets/js/backTop.js"></script>
+
+    
+  <link rel="stylesheet" href="/assets/css/page.css" />
+  <link rel="stylesheet" href="/assets/css/sidebar.css" />
+  <link rel="stylesheet" href="/assets/css/footer.css" />
+  <link rel="stylesheet" href="/assets/css/post.css" />
+  <script defer src="/assets/js/backHome.js"></script>
+  <script defer src="/assets/js/toc.js"></script>
+  <script defer src="/assets/js/copyright.js"></script>
+
+
+    <title>JS实现可用滑块滑动的缓动图</title>
+  </head>
+  <body>
+    <div class="container">
+      <aside>
+        
+  <div class="sidebar">
+  <header>Tuzilow的小站</header>
+  <div class="info">
+    <div class="avatar">
+      <img src="https://cdn.jsdelivr.net/gh/Tuzilow/Tuzilow.github.io/images/avatar.png" alt="头像">
+    </div>
+    <div class="author">Tuzilow</div>
+    <div class="description">想要成为大佬</div>
+    <div class="about">
+      <a href="/about">about me.</a>
+    </div>
+  </div>
+  <div class="links">
+    <ul>
+    
+      <li class="links-item">
+        <a href="https://github.com/Tuzilow" target="_blank">
+          <i class="fa fa-github-alt" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="links-item">
+        <a href="tencent://message/?uin=1176281967" target="_blank">
+          <i class="fa fa-qq" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+    </ul>
+  </div>
+  <nav>
+    <ul>
+    
+      <li class="nav-item">
+        <a href="/archives">
+          <span class="nav-item__count">27</span>
+          <span class="nav-item__label">归档</span>
+        </a>
+      </li>
+    
+      <li class="nav-item">
+        <a href="/categories">
+          <span class="nav-item__count">2</span>
+          <span class="nav-item__label">分类</span>
+        </a>
+      </li>
+    
+      <li class="nav-item">
+        <a href="/tags">
+          <span class="nav-item__count">35</span>
+          <span class="nav-item__label">标签</span>
+        </a>
+      </li>
+    
+    </ul>
+  </nav>
+  <div class="catalogue" id="catalogue"></div>
+</div>
+
+      </aside>
+      <main>
+        
+  <div class="post">
+    <div class="post-front">
+      <h1 class="post-front__title">JS实现可用滑块滑动的缓动图</h1>
+      <div class="post-front__desc">
+        
+        <p class="post-front__desc-date">
+          <i class="fa fa-calendar" aria-hidden="true"></i>
+          2019/08/31 12:48:44
+        </p>
+        
+        
+        <p class="post-front__desc-category">
+          <i class="fa fa-folder-o" aria-hidden="true"></i>
+          <a href="/categories/技术">
+            技术
+          </a>
+        </p>
+        
+          <div class="post-front__desc-tags">
+          
+          <a href="/tags/JavaScript">
+            <i class="fa fa-tag" aria-hidden="true"></i>
+            JavaScript
+          </a>
+          
+        </div>
+      </div>
+    </div>
+    <div class="post-content">
+      <nav id="toc" class="toc"><ol><li><a href="#js代码">JS代码</a></li><li><a href="#html代码">HTML代码</a></li><li><a href="#css代码">CSS代码</a></li></ol></nav><p>尝试模仿京东的“发现好货”模块的可用滑块滑动的缓动图</p>
+<h2 id="js代码">JS代码</h2>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612694420475">复制</button><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">$</span>(<span class="hljs-params">id</span>) </span>{ <span class="hljs-keyword">return</span> <span class="hljs-built_in">document</span>.getElementById(id); }
+<span class="hljs-comment">//缓动轮播图</span>
+<span class="hljs-keyword">var</span> fhTimer;
+<span class="hljs-keyword">var</span> fhNum = <span class="hljs-number">0</span>;
+<span class="hljs-keyword">var</span> barNum = <span class="hljs-number">0</span>;
+fhTimer = <span class="hljs-built_in">setInterval</span>(marquee, <span class="hljs-number">20</span>);
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">marquee</span>(<span class="hljs-params"></span>) </span>{
+    fhNum--;
+    barNum = fhNum;
+    <span class="hljs-keyword">if</span>(fhNum &lt; -<span class="hljs-number">2400</span>) {
+        fhNum = <span class="hljs-number">0</span>;
+    }
+    $(<span class="hljs-string">&quot;fhc_ul&quot;</span>).style.left = fhNum + <span class="hljs-string">&quot;px&quot;</span>;
+    <span class="hljs-keyword">if</span>(fhNum &lt; -<span class="hljs-number">2400</span>) {
+        barNum = fhNum + <span class="hljs-number">2400</span>;
+    }
+    $(<span class="hljs-string">&quot;fhc_dBar&quot;</span>).style.left = -(barNum / <span class="hljs-number">2.75</span>) + <span class="hljs-string">&quot;px&quot;</span>;
+}
+$(<span class="hljs-string">&quot;fhcShow&quot;</span>).onmouseover = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    $(<span class="hljs-string">&quot;fhc_d_box&quot;</span>).style.display = <span class="hljs-string">&quot;block&quot;</span>;
+    <span class="hljs-built_in">clearInterval</span>(fhTimer);
+}
+$(<span class="hljs-string">&quot;fhc_d_box&quot;</span>).onmouseover = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    $(<span class="hljs-string">&quot;fhc_d_box&quot;</span>).style.display = <span class="hljs-string">&quot;block&quot;</span>;
+}
+$(<span class="hljs-string">&quot;fhcShow&quot;</span>).onmouseout = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    $(<span class="hljs-string">&quot;fhc_d_box&quot;</span>).style.display = <span class="hljs-string">&quot;none&quot;</span>;
+    fhTimer = <span class="hljs-built_in">setInterval</span>(marquee, <span class="hljs-number">20</span>);
+}
+<span class="hljs-comment">//鼠标悬浮在标题也在暂停滚动</span>
+$(<span class="hljs-string">&quot;fhTit&quot;</span>).onmouseover = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-built_in">clearInterval</span>(fhTimer);
+}
+$(<span class="hljs-string">&quot;fhTit&quot;</span>).onmouseout = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    fhTimer = <span class="hljs-built_in">setInterval</span>(marquee, <span class="hljs-number">20</span>);
+}
+<span class="hljs-comment">//滑块</span>
+$(<span class="hljs-string">&quot;fhc_dBar&quot;</span>).onmousedown = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">event</span>) </span>{
+    <span class="hljs-keyword">var</span> event = event || <span class="hljs-built_in">window</span>.event;
+    <span class="hljs-keyword">var</span> leftValue = event.clientX - <span class="hljs-built_in">this</span>.offsetLeft;
+    <span class="hljs-built_in">document</span>.onmousemove = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">event</span>) </span>{
+        <span class="hljs-keyword">var</span> evt = event || <span class="hljs-built_in">window</span>.event;
+        <span class="hljs-keyword">var</span> locationX = evt.clientX - leftValue;
+        <span class="hljs-keyword">if</span>(locationX &lt; <span class="hljs-number">0</span>) {
+            locationX = <span class="hljs-number">0</span>;
+        }
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(locationX &gt; <span class="hljs-number">960</span> - <span class="hljs-number">99</span>) {
+            locationX = <span class="hljs-number">960</span> - <span class="hljs-number">99</span>;
+        }
+        $(<span class="hljs-string">&quot;fhc_dBar&quot;</span>).style.left = locationX + <span class="hljs-string">&quot;px&quot;</span>;
+        fhNum = -locationX * <span class="hljs-number">2.75</span>;
+        <span class="hljs-comment">//如果选中了，就取消选中，防止出现bug</span>
+        <span class="hljs-built_in">window</span>.getSelection ? <span class="hljs-built_in">window</span>.getSelection().removeAllRanges() : <span class="hljs-built_in">document</span>.selection.empty();
+    }
+    <span class="hljs-built_in">document</span>.onmouseup = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+        <span class="hljs-built_in">document</span>.onmousemove = <span class="hljs-literal">null</span>;<span class="hljs-comment">//取消注册的这个事件</span>
+    }
+}
+<b class="name">JavaScript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612694420475">function $(id) { return document.getElementById(id); }
+//缓动轮播图
+var fhTimer;
+var fhNum = 0;
+var barNum = 0;
+fhTimer = setInterval(marquee, 20);
+function marquee() {
+    fhNum--;
+    barNum = fhNum;
+    if(fhNum < -2400) {
+        fhNum = 0;
+    }
+    $("fhc_ul").style.left = fhNum + "px";
+    if(fhNum < -2400) {
+        barNum = fhNum + 2400;
+    }
+    $("fhc_dBar").style.left = -(barNum / 2.75) + "px";
+}
+$("fhcShow").onmouseover = function() {
+    $("fhc_d_box").style.display = "block";
+    clearInterval(fhTimer);
+}
+$("fhc_d_box").onmouseover = function() {
+    $("fhc_d_box").style.display = "block";
+}
+$("fhcShow").onmouseout = function() {
+    $("fhc_d_box").style.display = "none";
+    fhTimer = setInterval(marquee, 20);
+}
+//鼠标悬浮在标题也在暂停滚动
+$("fhTit").onmouseover = function() {
+    clearInterval(fhTimer);
+}
+$("fhTit").onmouseout = function() {
+    fhTimer = setInterval(marquee, 20);
+}
+//滑块
+$("fhc_dBar").onmousedown = function(event) {
+    var event = event || window.event;
+    var leftValue = event.clientX - this.offsetLeft;
+    document.onmousemove = function(event) {
+        var evt = event || window.event;
+        var locationX = evt.clientX - leftValue;
+        if(locationX < 0) {
+            locationX = 0;
+        }
+        else if(locationX > 960 - 99) {
+            locationX = 960 - 99;
+        }
+        $("fhc_dBar").style.left = locationX + "px";
+        fhNum = -locationX * 2.75;
+        //如果选中了，就取消选中，防止出现bug
+        window.getSelection ? window.getSelection().removeAllRanges() : document.selection.empty();
+    }
+    document.onmouseup = function() {
+        document.onmousemove = null;//取消注册的这个事件
+    }
+}
+</textarea>
+<h2 id="html代码">HTML代码</h2>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612686784271">复制</button><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;fxhh_ctt&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;fh_c_show&quot;</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;fhcShow&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;fh_c_under&quot;</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;fhc_ul&quot;</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot; &quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;topTit&quot;</span>&gt;</span>商品1<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;&quot;</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;&quot;</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot; &quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;&quot;</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;&quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;botTit&quot;</span>&gt;</span>商品2<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot; &quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;topTit&quot;</span>&gt;</span>商品3<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;&quot;</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;&quot;</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot; &quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;&quot;</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;&quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;botTit&quot;</span>&gt;</span>商品4<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot; &quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;topTit&quot;</span>&gt;</span>商品5<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;&quot;</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;&quot;</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot; &quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;&quot;</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;&quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;botTit&quot;</span>&gt;</span>商品6<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot; &quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;topTit&quot;</span>&gt;</span>商品7<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;&quot;</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;&quot;</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot; &quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;&quot;</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;&quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;botTit&quot;</span>&gt;</span>商品8<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot; &quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;topTit&quot;</span>&gt;</span>商品9<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;&quot;</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;&quot;</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot; &quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;&quot;</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;&quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;botTit&quot;</span>&gt;</span>商品10<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot; &quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;topTit&quot;</span>&gt;</span>商品11<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;&quot;</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;&quot;</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot; &quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;&quot;</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;&quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;botTit&quot;</span>&gt;</span>商品12<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot; &quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;topTit&quot;</span>&gt;</span>商品1<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;&quot;</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;&quot;</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot; &quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;&quot;</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;&quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;botTit&quot;</span>&gt;</span>商品2<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot; &quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;topTit&quot;</span>&gt;</span>商品3<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;&quot;</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;&quot;</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot; &quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;&quot;</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;&quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;botTit&quot;</span>&gt;</span>商品4<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot; &quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;topTit&quot;</span>&gt;</span>商品5<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;&quot;</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;&quot;</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-comment">&lt;!-- 滑块 --&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;fhc_box&quot;</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;fhc_d_box&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;fhc_drop&quot;</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;fhc_dBar&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-comment">&lt;!-- 滑块end --&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<b class="name">HTML</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612686784271"><div class="fxhh_ctt">
+    <div class="fh_c_show" id="fhcShow">
+        <ul class="fh_c_under" id="fhc_ul">
+            <li><a href=" ">
+                <p class="topTit">商品1</p>
+                <img src="" alt="">
+            </a></li>
+            <li><a href=" ">
+                <img src="" alt="">
+                <p class="botTit">商品2</p>
+            </a></li>
+            <li><a href=" ">
+                <p class="topTit">商品3</p>
+                <img src="" alt="">
+            </a></li>
+            <li><a href=" ">
+                <img src="" alt="">
+                <p class="botTit">商品4</p>
+            </a></li>
+            <li><a href=" ">
+                <p class="topTit">商品5</p>
+                <img src="" alt="">
+            </a></li>
+            <li><a href=" ">
+                <img src="" alt="">
+                <p class="botTit">商品6</p>
+            </a></li>
+            <li><a href=" ">
+                <p class="topTit">商品7</p>
+                <img src="" alt="">
+            </a></li>
+            <li><a href=" ">
+                <img src="" alt="">
+                <p class="botTit">商品8</p>
+            </a></li>
+            <li><a href=" ">
+                <p class="topTit">商品9</p>
+                <img src="" alt="">
+            </a></li>
+            <li><a href=" ">
+                <img src="" alt="">
+                <p class="botTit">商品10</p>
+            </a></li>
+            <li><a href=" ">
+                <p class="topTit">商品11</p>
+                <img src="" alt="">
+            </a></li>
+            <li><a href=" ">
+                <img src="" alt="">
+                <p class="botTit">商品12</p>
+            </a></li>
+            <li><a href=" ">
+                <p class="topTit">商品1</p>
+                <img src="" alt="">
+            </a></li>
+            <li><a href=" ">
+                <img src="" alt="">
+                <p class="botTit">商品2</p>
+            </a></li>
+            <li><a href=" ">
+                <p class="topTit">商品3</p>
+                <img src="" alt="">
+            </a></li>
+            <li><a href=" ">
+                <img src="" alt="">
+                <p class="botTit">商品4</p>
+            </a></li>
+            <li><a href=" ">
+                <p class="topTit">商品5</p>
+                <img src="" alt="">
+            </a></li>
+        </ul>
+    </div>
+    <!-- 滑块 -->
+    <div class="fhc_box" id="fhc_d_box">
+        <div class="fhc_drop" id="fhc_dBar"></div>
+    </div>
+    <!-- 滑块end -->
+</div>
+</textarea>
+<h2 id="css代码">CSS代码</h2>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612690852310">复制</button><span class="hljs-selector-class">.fxhh</span> <span class="hljs-selector-class">.fxhh_ctt</span> {
+    <span class="hljs-attribute">width</span>: <span class="hljs-number">990px</span>;
+    <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#fff</span>;
+    <span class="hljs-attribute">float</span>: left;
+}
+<span class="hljs-selector-class">.fxhh</span> <span class="hljs-selector-class">.fxhh_ctt</span> <span class="hljs-selector-class">.fh_c_show</span> <span class="hljs-selector-class">.fh_c_under</span> <span class="hljs-selector-tag">img</span> {
+    <span class="hljs-attribute">width</span>: <span class="hljs-number">150px</span>;
+    <span class="hljs-attribute">height</span>: <span class="hljs-number">150px</span>;
+}
+<span class="hljs-selector-class">.fxhh</span> <span class="hljs-selector-class">.fxhh_ctt</span> <span class="hljs-selector-class">.fh_c_show</span> {
+    <span class="hljs-attribute">width</span>: <span class="hljs-number">990px</span>;
+    <span class="hljs-attribute">height</span>: <span class="hljs-number">260px</span>;
+    <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#fff</span>;
+    <span class="hljs-attribute">overflow</span>: hidden;
+    <span class="hljs-attribute">position</span>: relative;
+}
+<span class="hljs-selector-class">.fxhh</span> <span class="hljs-selector-class">.fxhh_ctt</span> <span class="hljs-selector-class">.fh_c_show</span> <span class="hljs-selector-class">.fh_c_under</span> {
+    <span class="hljs-attribute">width</span>: <span class="hljs-number">2000%</span>;
+    <span class="hljs-attribute">position</span>: absolute;
+}
+<span class="hljs-selector-class">.fxhh</span> <span class="hljs-selector-class">.fxhh_ctt</span> <span class="hljs-selector-class">.fh_c_show</span> <span class="hljs-selector-class">.fh_c_under</span> <span class="hljs-selector-tag">li</span> {
+    <span class="hljs-attribute">float</span>: left;
+    <span class="hljs-attribute">text-align</span>: center;
+    <span class="hljs-attribute">width</span>: <span class="hljs-number">150px</span>;
+    <span class="hljs-attribute">height</span>: <span class="hljs-number">180px</span>;
+    <span class="hljs-attribute">margin-top</span>: <span class="hljs-number">40px</span>;
+    <span class="hljs-attribute">margin-right</span>: <span class="hljs-number">50px</span>;
+}
+<span class="hljs-selector-class">.fxhh</span> <span class="hljs-selector-class">.fxhh_ctt</span> <span class="hljs-selector-class">.fh_c_show</span> <span class="hljs-selector-class">.fh_c_under</span> <span class="hljs-selector-tag">li</span> <span class="hljs-selector-class">.topTit</span> {
+    <span class="hljs-attribute">margin-bottom</span>: <span class="hljs-number">10px</span>;
+}
+<span class="hljs-selector-class">.fxhh</span> <span class="hljs-selector-class">.fxhh_ctt</span> <span class="hljs-selector-class">.fh_c_show</span> <span class="hljs-selector-class">.fh_c_under</span> <span class="hljs-selector-tag">li</span> <span class="hljs-selector-class">.botTit</span> {
+    <span class="hljs-attribute">margin-top</span>: <span class="hljs-number">10px</span>;
+}
+<span class="hljs-selector-class">.fxhh</span> <span class="hljs-selector-class">.fxhh_ctt</span> <span class="hljs-selector-class">.fhc_box</span> {
+    <span class="hljs-attribute">display</span>: none;
+    <span class="hljs-attribute">width</span>: <span class="hljs-number">960px</span>;
+    <span class="hljs-attribute">height</span>: <span class="hljs-number">4px</span>;
+    <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#f3f3f3</span>;
+    <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span> auto;
+    <span class="hljs-attribute">position</span>: absolute;
+    <span class="hljs-attribute">top</span>: <span class="hljs-number">250px</span>;
+    <span class="hljs-attribute">left</span>: <span class="hljs-number">210px</span>;
+}
+<span class="hljs-selector-class">.fxhh</span> <span class="hljs-selector-class">.fxhh_ctt</span> <span class="hljs-selector-class">.fhc_drop</span> {
+    <span class="hljs-attribute">width</span>: <span class="hljs-number">99px</span>;
+    <span class="hljs-attribute">height</span>: <span class="hljs-number">9px</span>;
+    <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">4px</span>;
+    <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#d8d8d8</span>;
+    <span class="hljs-attribute">position</span>: absolute;
+    <span class="hljs-attribute">top</span>: -<span class="hljs-number">3px</span>;
+}
+<b class="name">CSS</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612690852310">.fxhh .fxhh_ctt {
+    width: 990px;
+    background-color: #fff;
+    float: left;
+}
+.fxhh .fxhh_ctt .fh_c_show .fh_c_under img {
+    width: 150px;
+    height: 150px;
+}
+.fxhh .fxhh_ctt .fh_c_show {
+    width: 990px;
+    height: 260px;
+    background-color: #fff;
+    overflow: hidden;
+    position: relative;
+}
+.fxhh .fxhh_ctt .fh_c_show .fh_c_under {
+    width: 2000%;
+    position: absolute;
+}
+.fxhh .fxhh_ctt .fh_c_show .fh_c_under li {
+    float: left;
+    text-align: center;
+    width: 150px;
+    height: 180px;
+    margin-top: 40px;
+    margin-right: 50px;
+}
+.fxhh .fxhh_ctt .fh_c_show .fh_c_under li .topTit {
+    margin-bottom: 10px;
+}
+.fxhh .fxhh_ctt .fh_c_show .fh_c_under li .botTit {
+    margin-top: 10px;
+}
+.fxhh .fxhh_ctt .fhc_box {
+    display: none;
+    width: 960px;
+    height: 4px;
+    background-color: #f3f3f3;
+    margin: 0 auto;
+    position: absolute;
+    top: 250px;
+    left: 210px;
+}
+.fxhh .fxhh_ctt .fhc_drop {
+    width: 99px;
+    height: 9px;
+    border-radius: 4px;
+    background-color: #d8d8d8;
+    position: absolute;
+    top: -3px;
+}
+</textarea>
+
+    </div>
+    
+  </div>
+
+        <footer>
+        
+  <div class="footer">
+  
+  <div class="theme">
+    博客主题为 <a href="https://github.com/Tuzilow/CoinRailgun">CoinRailgun</a> 默认主题
+  </div>
+  <div class="copyright">
+    <span>© 2019-2021 Tuzilow.</span>
+    <span>Powered by <a href="https://github.com/Tuzilow/CoinRailgun">CoinRailgun</a></span>
+  </div>
+</div>
+
+        </footer>
+      </main>
+    </div>
+  </body>
+</html>

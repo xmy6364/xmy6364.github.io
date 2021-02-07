@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="author" content="Tuzilow">
+    <meta name="description" content="想要成为大佬">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.5.0/styles/default.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.5.0/styles/github-gist.min.css">
+    <link rel="stylesheet" href="/assets/lib/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/css/layout.css" />
+    <script defer src="https://cdn.bootcdn.net/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"></script>
+    <script defer src="/assets/js/copyCode.js"></script>
+    <script defer src="/assets/js/backTop.js"></script>
+
+    
+  <link rel="stylesheet" href="/assets/css/page.css" />
+  <link rel="stylesheet" href="/assets/css/sidebar.css" />
+  <link rel="stylesheet" href="/assets/css/footer.css" />
+  <link rel="stylesheet" href="/assets/css/post.css" />
+  <script defer src="/assets/js/backHome.js"></script>
+  <script defer src="/assets/js/toc.js"></script>
+  <script defer src="/assets/js/copyright.js"></script>
+
+
+    <title>JavaScript实现常见的数据结构</title>
+  </head>
+  <body>
+    <div class="container">
+      <aside>
+        
+  <div class="sidebar">
+  <header>Tuzilow的小站</header>
+  <div class="info">
+    <div class="avatar">
+      <img src="https://cdn.jsdelivr.net/gh/Tuzilow/Tuzilow.github.io/images/avatar.png" alt="头像">
+    </div>
+    <div class="author">Tuzilow</div>
+    <div class="description">想要成为大佬</div>
+    <div class="about">
+      <a href="/about">about me.</a>
+    </div>
+  </div>
+  <div class="links">
+    <ul>
+    
+      <li class="links-item">
+        <a href="https://github.com/Tuzilow" target="_blank">
+          <i class="fa fa-github-alt" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="links-item">
+        <a href="tencent://message/?uin=1176281967" target="_blank">
+          <i class="fa fa-qq" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+    </ul>
+  </div>
+  <nav>
+    <ul>
+    
+      <li class="nav-item">
+        <a href="/archives">
+          <span class="nav-item__count">27</span>
+          <span class="nav-item__label">归档</span>
+        </a>
+      </li>
+    
+      <li class="nav-item">
+        <a href="/categories">
+          <span class="nav-item__count">2</span>
+          <span class="nav-item__label">分类</span>
+        </a>
+      </li>
+    
+      <li class="nav-item">
+        <a href="/tags">
+          <span class="nav-item__count">35</span>
+          <span class="nav-item__label">标签</span>
+        </a>
+      </li>
+    
+    </ul>
+  </nav>
+  <div class="catalogue" id="catalogue"></div>
+</div>
+
+      </aside>
+      <main>
+        
+  <div class="post">
+    <div class="post-front">
+      <h1 class="post-front__title">JavaScript实现常见的数据结构</h1>
+      <div class="post-front__desc">
+        
+        <p class="post-front__desc-date">
+          <i class="fa fa-calendar" aria-hidden="true"></i>
+          2020/01/29 15:26:47
+        </p>
+        
+        
+        <p class="post-front__desc-category">
+          <i class="fa fa-folder-o" aria-hidden="true"></i>
+          <a href="/categories/技术">
+            技术
+          </a>
+        </p>
+        
+          <div class="post-front__desc-tags">
+          
+          <a href="/tags/JavaScript">
+            <i class="fa fa-tag" aria-hidden="true"></i>
+            JavaScript
+          </a>
+          
+          <a href="/tags/数据结构">
+            <i class="fa fa-tag" aria-hidden="true"></i>
+            数据结构
+          </a>
+          
+        </div>
+      </div>
+    </div>
+    <div class="post-content">
+      <nav id="toc" class="toc"><ol><li><a href="#栈stack">栈(Stack)</a></li><li><a href="#队列queue">队列(Queue)</a><ol><li><a href="#优先队列">优先队列</a></li><li><a href="#循环队列">循环队列</a></li></ol></li><li><a href="#链表linked-list">链表(Linked List)</a></li><li><a href="#集合set">集合(Set)</a></li><li><a href="#字典dictionary">字典(Dictionary)</a></li><li><a href="#哈希表hash-table">哈希表(Hash Table)</a></li><li><a href="#树tree">树(tree)</a></li><li><a href="#图graph">图(Graph)</a></li><li><a href="#参考文章">参考文章</a></li></ol></nav><p>使用JavaScript实现栈、队列、链表、集合等常见数据结构。可能会有点用？</p>
+<p>水</p>
+<h2 id="栈stack">栈(Stack)</h2>
+<p>实际上JavaScript的Array本身就具有栈和队列的特性，所以我们可以借助Array来实现它们。</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612691785114">复制</button><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Stack</span> </span>{
+    <span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params"></span>)</span> {
+        <span class="hljs-built_in">this</span>.items = [];
+    }
+    <span class="hljs-keyword">get</span> <span class="hljs-title">length</span>() {
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.items.length;
+    }
+    <span class="hljs-comment">// 获取栈顶元素</span>
+    <span class="hljs-keyword">get</span> <span class="hljs-title">peek</span>() {
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.items[<span class="hljs-built_in">this</span>.items.length - <span class="hljs-number">1</span>];
+    }
+    <span class="hljs-function"><span class="hljs-title">push</span>(<span class="hljs-params">element</span>)</span> {
+        <span class="hljs-built_in">this</span>.items.push(element);
+    }
+    <span class="hljs-function"><span class="hljs-title">pop</span>(<span class="hljs-params"></span>)</span> {
+        <span class="hljs-built_in">this</span>.items.pop();
+    }
+}
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612691785114">class Stack {
+    constructor() {
+        this.items = [];
+    }
+    get length() {
+        return this.items.length;
+    }
+    // 获取栈顶元素
+    get peek() {
+        return this.items[this.items.length - 1];
+    }
+    push(element) {
+        this.items.push(element);
+    }
+    pop() {
+        this.items.pop();
+    }
+}
+</textarea>
+<h2 id="队列queue">队列(Queue)</h2>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612695450761">复制</button><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Queue</span> </span>{
+    <span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params"></span>)</span> {
+        <span class="hljs-built_in">this</span>.items = [];
+    }
+    <span class="hljs-keyword">get</span> <span class="hljs-title">isEmpty</span>() {
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.items.length === <span class="hljs-number">0</span>;
+    }
+    <span class="hljs-keyword">get</span> <span class="hljs-title">length</span>() {
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.items.length;
+    }
+    <span class="hljs-comment">// 入队</span>
+    <span class="hljs-function"><span class="hljs-title">enqueue</span>(<span class="hljs-params">element</span>)</span> {
+        <span class="hljs-built_in">this</span>.items.push(element);
+    }
+    <span class="hljs-comment">// 出队</span>
+    <span class="hljs-function"><span class="hljs-title">dequeue</span>(<span class="hljs-params"></span>)</span> {
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.items.shift();
+    }
+}
+<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612695450761">class Queue {
+    constructor() {
+        this.items = [];
+    }
+    get isEmpty() {
+        return this.items.length === 0;
+    }
+    get length() {
+        return this.items.length;
+    }
+    // 入队
+    enqueue(element) {
+        this.items.push(element);
+    }
+    // 出队
+    dequeue() {
+        return this.items.shift();
+    }
+}
+</textarea>
+<h3 id="优先队列">优先队列</h3>
+<p>队列的升级版本，给每个元素一个优先级，入队时会先排序。这里<code>PriorityQueue</code>继承自<code>Queue</code>，所以只需要重写<code>enqueue</code>方法。</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612692135594">复制</button><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PriorityQueue</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Queue</span> </span>{
+    <span class="hljs-comment">/**
+     * 入队
+     * <span class="hljs-doctag">@param <span class="hljs-type">{*}</span> </span>element 元素
+     * <span class="hljs-doctag">@param <span class="hljs-type">{*}</span> </span>priority 优先级
+     */</span>
+    <span class="hljs-function"><span class="hljs-title">enqueue</span>(<span class="hljs-params">element, priority</span>)</span> {
+        <span class="hljs-keyword">const</span> queueElement = { element, priority };
+        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.isEmpty) {
+            <span class="hljs-built_in">super</span>.enqueue(queueElement);
+        } <span class="hljs-keyword">else</span> {
+            <span class="hljs-keyword">const</span> preIndex = <span class="hljs-built_in">this</span>.items.findIndex(<span class="hljs-function"><span class="hljs-params">items</span> =&gt;</span> queueElement.priority &lt; items.priority);
+            <span class="hljs-keyword">if</span> (preIndex &gt; -<span class="hljs-number">1</span>) {
+                <span class="hljs-built_in">this</span>.items.splice(preIndex, <span class="hljs-number">0</span>, queueElement);
+            } <span class="hljs-keyword">else</span> {
+                <span class="hljs-built_in">super</span>.enqueue(queueElement);
+            }
+        }
+    }
+}
+<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612692135594">class PriorityQueue extends Queue {
+    /**
+     * 入队
+     * @param {*} element 元素
+     * @param {*} priority 优先级
+     */
+    enqueue(element, priority) {
+        const queueElement = { element, priority };
+        if (this.isEmpty) {
+            super.enqueue(queueElement);
+        } else {
+            const preIndex = this.items.findIndex(items => queueElement.priority < items.priority);
+            if (preIndex > -1) {
+                this.items.splice(preIndex, 0, queueElement);
+            } else {
+                super.enqueue(queueElement);
+            }
+        }
+    }
+}
+</textarea>
+<h3 id="循环队列">循环队列</h3>
+<p>循环队列可以想象为一个首尾相连的圆环，相较于普通队列，它更节省空间。</p>
+<p>虽然同样继承自<code>Queue</code>，但基本上所有方法都重写了。</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612691807126">复制</button><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LoopQueue</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Queue</span> </span>{
+    <span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params">maxSize</span>)</span> {
+        <span class="hljs-built_in">super</span>();
+        <span class="hljs-built_in">this</span>.maxSize = maxSize;
+        <span class="hljs-built_in">this</span>.head = -<span class="hljs-number">1</span>; <span class="hljs-comment">//头指针</span>
+        <span class="hljs-built_in">this</span>.tail = -<span class="hljs-number">1</span>; <span class="hljs-comment">//尾指针</span>
+    }
+    <span class="hljs-keyword">get</span> <span class="hljs-title">isFull</span>(){
+        <span class="hljs-keyword">return</span> (<span class="hljs-built_in">this</span>.tail + <span class="hljs-number">1</span>) % <span class="hljs-built_in">this</span>.maxSize === <span class="hljs-built_in">this</span>.head;
+    }
+    <span class="hljs-keyword">get</span> <span class="hljs-title">isEmpty</span>(){
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.tail === -<span class="hljs-number">1</span> &amp;&amp; <span class="hljs-built_in">this</span>.head === -<span class="hljs-number">1</span>;
+    }
+    <span class="hljs-function"><span class="hljs-title">enqueue</span>(<span class="hljs-params">element</span>)</span> {
+        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.isFull) {
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+        }
+        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.isEmpty) {
+            <span class="hljs-built_in">this</span>.head = <span class="hljs-number">0</span>;
+        }
+        <span class="hljs-built_in">this</span>.tail = (<span class="hljs-built_in">this</span>.tail + <span class="hljs-number">1</span>) % <span class="hljs-built_in">this</span>.maxSize;
+        <span class="hljs-built_in">this</span>.items[<span class="hljs-built_in">this</span>.tail] = element;
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+    }
+    <span class="hljs-function"><span class="hljs-title">dequeue</span>(<span class="hljs-params"></span>)</span>{
+        <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.isEmpty) {
+            <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.tail === <span class="hljs-built_in">this</span>.head) {
+                <span class="hljs-built_in">this</span>.tail = -<span class="hljs-number">1</span>;
+                <span class="hljs-built_in">this</span>.head = -<span class="hljs-number">1</span>;
+            } <span class="hljs-keyword">else</span> {
+                <span class="hljs-built_in">this</span>.head = (<span class="hljs-built_in">this</span>.head + <span class="hljs-number">1</span>) % <span class="hljs-built_in">this</span>.maxSize;
+            }
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+        }
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    }
+}
+<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612691807126">class LoopQueue extends Queue {
+    constructor(maxSize) {
+        super();
+        this.maxSize = maxSize;
+        this.head = -1; //头指针
+        this.tail = -1; //尾指针
+    }
+    get isFull(){
+        return (this.tail + 1) % this.maxSize === this.head;
+    }
+    get isEmpty(){
+        return this.tail === -1 && this.head === -1;
+    }
+    enqueue(element) {
+        if (this.isFull) {
+            return false;
+        }
+        if (this.isEmpty) {
+            this.head = 0;
+        }
+        this.tail = (this.tail + 1) % this.maxSize;
+        this.items[this.tail] = element;
+        return true;
+    }
+    dequeue(){
+        if (!this.isEmpty) {
+            if (this.tail === this.head) {
+                this.tail = -1;
+                this.head = -1;
+            } else {
+                this.head = (this.head + 1) % this.maxSize;
+            }
+            return true;
+        }
+        return false;
+    }
+}
+</textarea>
+<h2 id="链表linked-list">链表(Linked List)</h2>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612688772250">复制</button><span class="hljs-comment">// 节点</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Node</span> </span>{
+    <span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params">element</span>)</span> {
+        <span class="hljs-built_in">this</span>.element = element;
+        <span class="hljs-built_in">this</span>.next = <span class="hljs-literal">null</span>;
+    }
+}
+
+<span class="hljs-comment">// 链表</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LinkedList</span> </span>{
+    <span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params"></span>)</span> {
+        <span class="hljs-built_in">this</span>.head = <span class="hljs-literal">null</span>;
+        <span class="hljs-built_in">this</span>.length = <span class="hljs-number">0</span>;
+    }
+    <span class="hljs-comment">// 追加</span>
+    <span class="hljs-function"><span class="hljs-title">append</span>(<span class="hljs-params">element</span>)</span> {
+        <span class="hljs-keyword">const</span> node = <span class="hljs-keyword">new</span> Node(element);
+        <span class="hljs-keyword">let</span> current = <span class="hljs-literal">null</span>;
+        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.head === <span class="hljs-literal">null</span>) {
+            <span class="hljs-built_in">this</span>.head = node;
+        } <span class="hljs-keyword">else</span> {
+            current = <span class="hljs-built_in">this</span>.head;
+            <span class="hljs-keyword">while</span> (current.next) {
+                current = current.next;
+            }
+            current.next = node;
+        }
+        <span class="hljs-built_in">this</span>.length++;
+    }
+    <span class="hljs-comment">/**
+     * 插入
+     * <span class="hljs-doctag">@param <span class="hljs-type">{*}</span> </span>element 元素
+     * <span class="hljs-doctag">@param <span class="hljs-type">{*}</span> </span>position 位置
+     */</span>
+    <span class="hljs-function"><span class="hljs-title">insert</span>(<span class="hljs-params">element, position</span>)</span> {
+        <span class="hljs-keyword">if</span> (position &gt;= <span class="hljs-number">0</span> &amp;&amp; position &lt;= <span class="hljs-built_in">this</span>.length) {
+            <span class="hljs-keyword">const</span> node = <span class="hljs-keyword">new</span> Node(element);
+            <span class="hljs-keyword">let</span> current = <span class="hljs-built_in">this</span>.head;
+            <span class="hljs-keyword">let</span> previous = <span class="hljs-literal">null</span>;
+            <span class="hljs-keyword">if</span> (position === <span class="hljs-number">0</span>) {
+                <span class="hljs-built_in">this</span>.head = node;
+                <span class="hljs-built_in">this</span>.head.next = current;
+            } <span class="hljs-keyword">else</span> {
+                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> index = <span class="hljs-number">0</span>; index &lt; position; index++) {
+                    previous = current;
+                    current = current.next;
+                }
+                node.next = current;
+                previous.next = node;
+            }
+            <span class="hljs-built_in">this</span>.length++;
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+        }
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    }
+    <span class="hljs-comment">/**
+     * 删除
+     * <span class="hljs-doctag">@param <span class="hljs-type">{*}</span> </span>position 位置
+     */</span>
+    <span class="hljs-function"><span class="hljs-title">removeAt</span>(<span class="hljs-params">position</span>)</span> {
+        <span class="hljs-keyword">if</span> (position &gt;= <span class="hljs-number">0</span> &amp;&amp; position &lt; <span class="hljs-built_in">this</span>.length) {
+            <span class="hljs-keyword">let</span> current = <span class="hljs-built_in">this</span>.head;
+            <span class="hljs-keyword">let</span> previous = <span class="hljs-literal">null</span>;
+            <span class="hljs-keyword">if</span> (position === <span class="hljs-number">0</span>) {
+                <span class="hljs-built_in">this</span>.head = current.next;
+            } <span class="hljs-keyword">else</span> {
+                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> index = <span class="hljs-number">0</span>; index &lt; position; index++) {
+                    previous = current;
+                    current = current.next;
+                }
+                previous.next = current.next;
+            }
+            <span class="hljs-built_in">this</span>.length--;
+            <span class="hljs-keyword">return</span> current.element;
+        }
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
+    }
+    <span class="hljs-comment">// 查找元素所在位置</span>
+    <span class="hljs-function"><span class="hljs-title">indexOf</span>(<span class="hljs-params">element</span>)</span> {
+        <span class="hljs-keyword">let</span> current = <span class="hljs-built_in">this</span>.head;
+        <span class="hljs-keyword">let</span> index = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">while</span> (current) {
+            <span class="hljs-keyword">if</span> (element === current.element) {
+                <span class="hljs-keyword">return</span> index;
+            }
+            index++;
+            current = current.next;
+        }
+        <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;
+    }
+    <span class="hljs-comment">// 根据元素删除</span>
+    <span class="hljs-function"><span class="hljs-title">remove</span>(<span class="hljs-params">element</span>)</span> {
+        <span class="hljs-keyword">const</span> index = <span class="hljs-built_in">this</span>.indexOf(element);
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.removeAt(index);
+    }
+    <span class="hljs-function"><span class="hljs-title">toString</span>(<span class="hljs-params"></span>)</span> {
+        <span class="hljs-keyword">let</span> current = <span class="hljs-built_in">this</span>.head;
+        <span class="hljs-keyword">let</span> string = <span class="hljs-string">&#x27;&#x27;</span>;
+        <span class="hljs-keyword">while</span> (current) {
+            string += <span class="hljs-string">`<span class="hljs-subst">${current.element}</span> -- `</span>;
+            current = current.next;
+        }
+        string += <span class="hljs-string">&#x27;*&#x27;</span>;
+
+        <span class="hljs-keyword">return</span> string;
+    }
+}
+<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612688772250">// 节点
+class Node {
+    constructor(element) {
+        this.element = element;
+        this.next = null;
+    }
+}
+
+// 链表
+class LinkedList {
+    constructor() {
+        this.head = null;
+        this.length = 0;
+    }
+    // 追加
+    append(element) {
+        const node = new Node(element);
+        let current = null;
+        if (this.head === null) {
+            this.head = node;
+        } else {
+            current = this.head;
+            while (current.next) {
+                current = current.next;
+            }
+            current.next = node;
+        }
+        this.length++;
+    }
+    /**
+     * 插入
+     * @param {*} element 元素
+     * @param {*} position 位置
+     */
+    insert(element, position) {
+        if (position >= 0 && position <= this.length) {
+            const node = new Node(element);
+            let current = this.head;
+            let previous = null;
+            if (position === 0) {
+                this.head = node;
+                this.head.next = current;
+            } else {
+                for (let index = 0; index < position; index++) {
+                    previous = current;
+                    current = current.next;
+                }
+                node.next = current;
+                previous.next = node;
+            }
+            this.length++;
+            return true;
+        }
+        return false;
+    }
+    /**
+     * 删除
+     * @param {*} position 位置
+     */
+    removeAt(position) {
+        if (position >= 0 && position < this.length) {
+            let current = this.head;
+            let previous = null;
+            if (position === 0) {
+                this.head = current.next;
+            } else {
+                for (let index = 0; index < position; index++) {
+                    previous = current;
+                    current = current.next;
+                }
+                previous.next = current.next;
+            }
+            this.length--;
+            return current.element;
+        }
+        return null;
+    }
+    // 查找元素所在位置
+    indexOf(element) {
+        let current = this.head;
+        let index = 0;
+        while (current) {
+            if (element === current.element) {
+                return index;
+            }
+            index++;
+            current = current.next;
+        }
+        return -1;
+    }
+    // 根据元素删除
+    remove(element) {
+        const index = this.indexOf(element);
+        return this.removeAt(index);
+    }
+    toString() {
+        let current = this.head;
+        let string = '';
+        while (current) {
+            string += `${current.element} -- `;
+            current = current.next;
+        }
+        string += '*';
+
+        return string;
+    }
+}
+</textarea>
+<h2 id="集合set">集合(Set)</h2>
+<p>ES6中引入了集合类型，可以参考一下。</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612691521213">复制</button><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Set</span> </span>{
+    <span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params"></span>)</span> {
+        <span class="hljs-built_in">this</span>.items = {};
+    }
+    <span class="hljs-keyword">get</span> <span class="hljs-title">size</span>() {
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">Object</span>.keys(<span class="hljs-built_in">this</span>.items).length;
+    }
+    <span class="hljs-keyword">get</span> <span class="hljs-title">values</span>() {
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">Object</span>.keys(<span class="hljs-built_in">this</span>.items);
+    }
+    <span class="hljs-comment">// 判断元素是否存在</span>
+    <span class="hljs-function"><span class="hljs-title">has</span>(<span class="hljs-params">value</span>)</span> {
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.items.hasOwnProperty(value);
+    }
+    <span class="hljs-function"><span class="hljs-title">add</span>(<span class="hljs-params">value</span>)</span> {
+        <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.has(value)) {
+            <span class="hljs-built_in">this</span>.items[value] = value;
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+        }
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    }
+    <span class="hljs-function"><span class="hljs-title">remove</span>(<span class="hljs-params">value</span>)</span> {
+        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.has(value)) {
+            <span class="hljs-keyword">delete</span> <span class="hljs-built_in">this</span>.items[value]
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+        }
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    }
+    <span class="hljs-comment">// 并集</span>
+    <span class="hljs-function"><span class="hljs-title">union</span>(<span class="hljs-params">otherSet</span>)</span> {
+        <span class="hljs-keyword">const</span> unionSet = <span class="hljs-keyword">new</span> MySet();
+        <span class="hljs-built_in">this</span>.values.forEach(<span class="hljs-function">(<span class="hljs-params">value</span>) =&gt;</span> unionSet.add(<span class="hljs-built_in">this</span>.value));
+        otherSet.values.forEach(<span class="hljs-function">(<span class="hljs-params">value</span>) =&gt;</span> unionSet.add(otherSet.value));
+        <span class="hljs-keyword">return</span> unionSet;
+    }
+    <span class="hljs-comment">// 交集</span>
+    <span class="hljs-function"><span class="hljs-title">intersection</span>(<span class="hljs-params">otherSet</span>)</span> {
+        <span class="hljs-keyword">const</span> intersectionSet = <span class="hljs-keyword">new</span> MySet();
+        <span class="hljs-built_in">this</span>.values.forEach(<span class="hljs-function">(<span class="hljs-params">value, index</span>) =&gt;</span> {
+            <span class="hljs-keyword">if</span> (otherSet.has(value)) {
+                intersectionSet.add(value);
+            }
+        });
+        <span class="hljs-keyword">return</span> intersectionSet;
+    }
+    <span class="hljs-comment">// 差集</span>
+    <span class="hljs-function"><span class="hljs-title">difference</span>(<span class="hljs-params">otherSet</span>)</span> {
+        <span class="hljs-keyword">const</span> differenceSet = <span class="hljs-keyword">new</span> MySet();
+        <span class="hljs-built_in">this</span>.values.forEach(<span class="hljs-function">(<span class="hljs-params">value</span>) =&gt;</span> {
+            <span class="hljs-keyword">if</span> (!otherSet.has(value)) {
+                differenceSet.add(value);
+            }
+        });
+        <span class="hljs-keyword">return</span> differenceSet;
+    }
+    <span class="hljs-comment">// 子集</span>
+    <span class="hljs-function"><span class="hljs-title">subset</span>(<span class="hljs-params">otherSet</span>)</span> {
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.values.every(<span class="hljs-function">(<span class="hljs-params">value</span>) =&gt;</span> otherSet.has(value));
+    }
+}
+<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612691521213">class Set {
+    constructor() {
+        this.items = {};
+    }
+    get size() {
+        return Object.keys(this.items).length;
+    }
+    get values() {
+        return Object.keys(this.items);
+    }
+    // 判断元素是否存在
+    has(value) {
+        return this.items.hasOwnProperty(value);
+    }
+    add(value) {
+        if (!this.has(value)) {
+            this.items[value] = value;
+            return true;
+        }
+        return false;
+    }
+    remove(value) {
+        if (this.has(value)) {
+            delete this.items[value]
+            return true;
+        }
+        return false;
+    }
+    // 并集
+    union(otherSet) {
+        const unionSet = new MySet();
+        this.values.forEach((value) => unionSet.add(this.value));
+        otherSet.values.forEach((value) => unionSet.add(otherSet.value));
+        return unionSet;
+    }
+    // 交集
+    intersection(otherSet) {
+        const intersectionSet = new MySet();
+        this.values.forEach((value, index) => {
+            if (otherSet.has(value)) {
+                intersectionSet.add(value);
+            }
+        });
+        return intersectionSet;
+    }
+    // 差集
+    difference(otherSet) {
+        const differenceSet = new MySet();
+        this.values.forEach((value) => {
+            if (!otherSet.has(value)) {
+                differenceSet.add(value);
+            }
+        });
+        return differenceSet;
+    }
+    // 子集
+    subset(otherSet) {
+        return this.values.every((value) => otherSet.has(value));
+    }
+}
+</textarea>
+<h2 id="字典dictionary">字典(Dictionary)</h2>
+<p>在JavaScript中，<code>Object</code>对象实际上就是字典，都是以<code>{ key: value }</code>的形式存储数据的。</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612691007014">复制</button><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Dictionary</span> </span>{
+    <span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params"></span>)</span> {
+        <span class="hljs-built_in">this</span>.items = {};
+    }
+    <span class="hljs-keyword">get</span> <span class="hljs-title">keys</span>() {
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">Object</span>.keys(<span class="hljs-built_in">this</span>.items);
+    }
+    <span class="hljs-keyword">get</span> <span class="hljs-title">values</span>() {
+        <span class="hljs-keyword">const</span> r = [];
+        <span class="hljs-built_in">Object</span>.keys(<span class="hljs-built_in">this</span>.items).forEach(<span class="hljs-function">(<span class="hljs-params">value</span>) =&gt;</span> {
+            r.push(<span class="hljs-built_in">this</span>.items[value]);
+        });
+        <span class="hljs-keyword">return</span> r;
+    }
+    <span class="hljs-function"><span class="hljs-title">set</span>(<span class="hljs-params">key, value</span>)</span> {
+        <span class="hljs-built_in">this</span>.items[key] = value;
+    }
+    <span class="hljs-function"><span class="hljs-title">get</span>(<span class="hljs-params">key</span>)</span> {
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.items[key];
+    }
+    <span class="hljs-function"><span class="hljs-title">remove</span>(<span class="hljs-params">key</span>)</span> {
+        <span class="hljs-keyword">delete</span> <span class="hljs-built_in">this</span>.items[key];
+    }
+}
+<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612691007014">class Dictionary {
+    constructor() {
+        this.items = {};
+    }
+    get keys() {
+        return Object.keys(this.items);
+    }
+    get values() {
+        const r = [];
+        Object.keys(this.items).forEach((value) => {
+            r.push(this.items[value]);
+        });
+        return r;
+    }
+    set(key, value) {
+        this.items[key] = value;
+    }
+    get(key) {
+        return this.items[key];
+    }
+    remove(key) {
+        delete this.items[key];
+    }
+}
+</textarea>
+<h2 id="哈希表hash-table">哈希表(Hash Table)</h2>
+<p>哈希表也是以键值对的形式存储数据的，但是因为每个数据都会根据<code>key</code>生成唯一的哈希值，所以查询速度非常快。</p>
+<p>这里散列函数就是用来生成哈希值的，随便写的，常用的构造散列函数的方法在网上能查到很多。</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612693387977">复制</button><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HashTable</span> </span>{
+    <span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params"></span>)</span> {
+        <span class="hljs-built_in">this</span>.table = [];
+    }
+    <span class="hljs-comment">// 散列函数</span>
+    <span class="hljs-function"><span class="hljs-title">getHashCode</span>(<span class="hljs-params">key</span>)</span> {
+        <span class="hljs-keyword">let</span> hash = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; key.length; i++) {
+            hash += key.charCodeAt(i);
+        }
+        <span class="hljs-keyword">return</span> hash % <span class="hljs-number">64</span> * <span class="hljs-number">0xffffff</span>;
+    }
+    <span class="hljs-function"><span class="hljs-title">put</span>(<span class="hljs-params">key, value</span>)</span> {
+        <span class="hljs-keyword">const</span> position = <span class="hljs-built_in">this</span>.getHashCode(key);
+        <span class="hljs-built_in">this</span>.table[position] = value;
+    }
+    <span class="hljs-function"><span class="hljs-title">get</span>(<span class="hljs-params">key</span>)</span> {
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.table[<span class="hljs-built_in">this</span>.getHashCode(key)];
+    }
+    <span class="hljs-function"><span class="hljs-title">remove</span>(<span class="hljs-params">key</span>)</span> {
+        <span class="hljs-built_in">this</span>.table[<span class="hljs-built_in">this</span>.getHashCode(key)] = <span class="hljs-literal">undefined</span>;
+    }
+}
+<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612693387977">class HashTable {
+    constructor() {
+        this.table = [];
+    }
+    // 散列函数
+    getHashCode(key) {
+        let hash = 0;
+        for (let i = 0; i < key.length; i++) {
+            hash += key.charCodeAt(i);
+        }
+        return hash % 64 * 0xffffff;
+    }
+    put(key, value) {
+        const position = this.getHashCode(key);
+        this.table[position] = value;
+    }
+    get(key) {
+        return this.table[this.getHashCode(key)];
+    }
+    remove(key) {
+        this.table[this.getHashCode(key)] = undefined;
+    }
+}
+</textarea>
+<h2 id="树tree">树(tree)</h2>
+<p>正常的二叉树没有必要实现，这里实现一下二叉搜索树。</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612687252223">复制</button><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Node</span> </span>{
+    <span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params">data</span>)</span> {
+        <span class="hljs-built_in">this</span>.data = data;
+        <span class="hljs-built_in">this</span>.left = <span class="hljs-literal">null</span>;
+        <span class="hljs-built_in">this</span>.right = <span class="hljs-literal">null</span>;
+    }
+}
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BinarySearchTree</span> </span>{
+    <span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params"></span>)</span> {
+        <span class="hljs-built_in">this</span>.root = <span class="hljs-literal">null</span>;
+    }
+    <span class="hljs-function"><span class="hljs-title">insert</span>(<span class="hljs-params">data</span>)</span> {
+        <span class="hljs-keyword">const</span> newNode = <span class="hljs-keyword">new</span> Node(data);
+        <span class="hljs-keyword">const</span> insertNode = <span class="hljs-function">(<span class="hljs-params">node, newNode</span>) =&gt;</span> {
+            <span class="hljs-keyword">if</span> (newNode.data &lt; node.data) {
+                <span class="hljs-keyword">if</span> (node.left === <span class="hljs-literal">null</span>) {
+                    node.left = newNode;
+                } <span class="hljs-keyword">else</span> {
+                    insertNode(node.left, newNode);
+                }
+            } <span class="hljs-keyword">else</span> {
+                <span class="hljs-keyword">if</span> (node.right === <span class="hljs-literal">null</span>) {
+                    node.right = newNode;
+                } <span class="hljs-keyword">else</span> {
+                    insertNode(node.right, newNode);
+                }
+            }
+        }
+        <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.root) {
+            <span class="hljs-built_in">this</span>.root = newNode;
+        } <span class="hljs-keyword">else</span> {
+            insertNode(<span class="hljs-built_in">this</span>.root, newNode);
+        }
+    }
+    <span class="hljs-comment">// 中序遍历</span>
+    <span class="hljs-function"><span class="hljs-title">inOrderTraverse</span>(<span class="hljs-params">callback</span>)</span> {
+        <span class="hljs-keyword">const</span> inOrderTraverseNode = <span class="hljs-function">(<span class="hljs-params">node, callback</span>) =&gt;</span> {
+            <span class="hljs-keyword">if</span> (node !== <span class="hljs-literal">null</span>) {
+                inOrderTraverseNode(node.left, callback);
+                callback(node.data);
+                inOrderTraverseNode(node.right, callback);
+            }
+        }
+        inOrderTraverseNode(<span class="hljs-built_in">this</span>.root, callback);
+    }
+    <span class="hljs-comment">// 先序遍历</span>
+    <span class="hljs-function"><span class="hljs-title">preOrderTraverse</span>(<span class="hljs-params">callback</span>)</span> {
+        <span class="hljs-keyword">const</span> preOrderTraverseNode = <span class="hljs-function">(<span class="hljs-params">node, callback</span>) =&gt;</span> {
+            <span class="hljs-keyword">if</span> (node !== <span class="hljs-literal">null</span>) {
+                callback(node.data);
+                preOrderTraverseNode(node.left, callback);
+                preOrderTraverseNode(node.right, callback);
+            }
+        }
+        preOrderTraverseNode(<span class="hljs-built_in">this</span>.root, callback);
+    }
+    <span class="hljs-comment">// 后序遍历</span>
+    <span class="hljs-function"><span class="hljs-title">postOrderTraverse</span>(<span class="hljs-params">callback</span>)</span> {
+        <span class="hljs-keyword">const</span> postOrderTraverseNode = <span class="hljs-function">(<span class="hljs-params">node, callback</span>) =&gt;</span> {
+            <span class="hljs-keyword">if</span> (node !== <span class="hljs-literal">null</span>) {
+                postOrderTraverseNode(node.left, callback);
+                postOrderTraverseNode(node.right, callback);
+                callback(node.data);
+            }
+        }
+        postOrderTraverseNode(<span class="hljs-built_in">this</span>.root, callback);
+    }
+    <span class="hljs-function"><span class="hljs-title">min</span>(<span class="hljs-params"></span>)</span> {
+        <span class="hljs-keyword">let</span> current = <span class="hljs-built_in">this</span>.root;
+        <span class="hljs-keyword">while</span> (current.left !== <span class="hljs-literal">null</span>) {
+            current = current.left;
+        }
+        <span class="hljs-keyword">return</span> current.data;
+    }
+    <span class="hljs-function"><span class="hljs-title">max</span>(<span class="hljs-params"></span>)</span> {
+        <span class="hljs-keyword">let</span> current = <span class="hljs-built_in">this</span>.root;
+        <span class="hljs-keyword">while</span> (current.right !== <span class="hljs-literal">null</span>) {
+            current = current.right;
+        }
+        <span class="hljs-keyword">return</span> current.data;
+    }
+    <span class="hljs-function"><span class="hljs-title">search</span>(<span class="hljs-params">data</span>)</span> {
+        <span class="hljs-keyword">let</span> current = <span class="hljs-built_in">this</span>.root;
+        <span class="hljs-keyword">while</span> (current.data !== data) {
+            <span class="hljs-keyword">if</span>(data &lt; current.data) {
+                current = current.left;
+            } <span class="hljs-keyword">else</span> {
+                current = current.right;
+            }
+            <span class="hljs-keyword">if</span> (current == <span class="hljs-literal">null</span>) {
+                <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
+            }
+        }
+        <span class="hljs-keyword">return</span> current;
+    }
+    <span class="hljs-function"><span class="hljs-title">remove</span>(<span class="hljs-params">data</span>)</span> {
+        <span class="hljs-keyword">const</span> removeNode = <span class="hljs-function">(<span class="hljs-params">node, data</span>) =&gt;</span> {
+            <span class="hljs-keyword">if</span> (node === <span class="hljs-literal">null</span>) {
+                <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+            }
+            <span class="hljs-keyword">if</span> (node.data === data) {
+                <span class="hljs-keyword">if</span> (node.left === <span class="hljs-literal">null</span> &amp;&amp; node.right === <span class="hljs-literal">null</span>) {
+                    <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
+                }
+                <span class="hljs-keyword">if</span> (node.left === <span class="hljs-literal">null</span>) {
+                    <span class="hljs-keyword">return</span> node.right;
+                }
+                <span class="hljs-keyword">if</span> (node.right === <span class="hljs-literal">null</span>) {
+                    <span class="hljs-keyword">return</span> node.left;
+                }
+
+                <span class="hljs-keyword">let</span> tempNode = node.right;
+                <span class="hljs-keyword">while</span>(tempNode.left !== <span class="hljs-literal">null</span>) {
+                    tempNode = tempNode.left;
+                }
+                node.data = tempNode.data;
+                node.right = removeNode(node.right, tempNode.data);
+                <span class="hljs-keyword">return</span> node;
+            }
+            <span class="hljs-keyword">if</span> (node.data &gt; data) {
+                node.left = removeNode(node.left, data);
+                <span class="hljs-keyword">return</span> node;
+            } 
+            <span class="hljs-keyword">if</span>(node.data &lt; data) {
+                node.right = removeNode(node.right, data);
+                <span class="hljs-keyword">return</span> node;
+            }
+        }
+        <span class="hljs-built_in">this</span>.root = removeNode(<span class="hljs-built_in">this</span>.root, data);
+    }
+}
+<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612687252223">class Node {
+    constructor(data) {
+        this.data = data;
+        this.left = null;
+        this.right = null;
+    }
+}
+class BinarySearchTree {
+    constructor() {
+        this.root = null;
+    }
+    insert(data) {
+        const newNode = new Node(data);
+        const insertNode = (node, newNode) => {
+            if (newNode.data < node.data) {
+                if (node.left === null) {
+                    node.left = newNode;
+                } else {
+                    insertNode(node.left, newNode);
+                }
+            } else {
+                if (node.right === null) {
+                    node.right = newNode;
+                } else {
+                    insertNode(node.right, newNode);
+                }
+            }
+        }
+        if (!this.root) {
+            this.root = newNode;
+        } else {
+            insertNode(this.root, newNode);
+        }
+    }
+    // 中序遍历
+    inOrderTraverse(callback) {
+        const inOrderTraverseNode = (node, callback) => {
+            if (node !== null) {
+                inOrderTraverseNode(node.left, callback);
+                callback(node.data);
+                inOrderTraverseNode(node.right, callback);
+            }
+        }
+        inOrderTraverseNode(this.root, callback);
+    }
+    // 先序遍历
+    preOrderTraverse(callback) {
+        const preOrderTraverseNode = (node, callback) => {
+            if (node !== null) {
+                callback(node.data);
+                preOrderTraverseNode(node.left, callback);
+                preOrderTraverseNode(node.right, callback);
+            }
+        }
+        preOrderTraverseNode(this.root, callback);
+    }
+    // 后序遍历
+    postOrderTraverse(callback) {
+        const postOrderTraverseNode = (node, callback) => {
+            if (node !== null) {
+                postOrderTraverseNode(node.left, callback);
+                postOrderTraverseNode(node.right, callback);
+                callback(node.data);
+            }
+        }
+        postOrderTraverseNode(this.root, callback);
+    }
+    min() {
+        let current = this.root;
+        while (current.left !== null) {
+            current = current.left;
+        }
+        return current.data;
+    }
+    max() {
+        let current = this.root;
+        while (current.right !== null) {
+            current = current.right;
+        }
+        return current.data;
+    }
+    search(data) {
+        let current = this.root;
+        while (current.data !== data) {
+            if(data < current.data) {
+                current = current.left;
+            } else {
+                current = current.right;
+            }
+            if (current == null) {
+                return null;
+            }
+        }
+        return current;
+    }
+    remove(data) {
+        const removeNode = (node, data) => {
+            if (node === null) {
+                return false;
+            }
+            if (node.data === data) {
+                if (node.left === null && node.right === null) {
+                    return null;
+                }
+                if (node.left === null) {
+                    return node.right;
+                }
+                if (node.right === null) {
+                    return node.left;
+                }
+
+                let tempNode = node.right;
+                while(tempNode.left !== null) {
+                    tempNode = tempNode.left;
+                }
+                node.data = tempNode.data;
+                node.right = removeNode(node.right, tempNode.data);
+                return node;
+            }
+            if (node.data > data) {
+                node.left = removeNode(node.left, data);
+                return node;
+            } 
+            if(node.data < data) {
+                node.right = removeNode(node.right, data);
+                return node;
+            }
+        }
+        this.root = removeNode(this.root, data);
+    }
+}
+</textarea>
+<h2 id="图graph">图(Graph)</h2>
+<p>这里实现的无向图。</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612689503595">复制</button><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Graph</span> </span>{
+    <span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params"></span>)</span> {
+        <span class="hljs-built_in">this</span>.vertices = []; <span class="hljs-comment">// 存顶点</span>
+        <span class="hljs-built_in">this</span>.adjList = {}; <span class="hljs-comment">// 存边</span>
+    }
+    <span class="hljs-comment">// 顶点</span>
+    <span class="hljs-function"><span class="hljs-title">addVertex</span>(<span class="hljs-params">v</span>)</span> {
+        <span class="hljs-built_in">this</span>.vertices.push(v);
+        <span class="hljs-built_in">this</span>.adjList[v] = [];
+    }
+    <span class="hljs-comment">// 边</span>
+    <span class="hljs-function"><span class="hljs-title">addEdge</span>(<span class="hljs-params">v, w</span>)</span> {
+        <span class="hljs-built_in">this</span>.adjList[v].push(w);
+        <span class="hljs-built_in">this</span>.adjList[w].push(v);
+    }
+    <span class="hljs-comment">// 转化成邻接表的形式的字符串</span>
+    <span class="hljs-function"><span class="hljs-title">toString</span>(<span class="hljs-params"></span>)</span> {
+        <span class="hljs-keyword">let</span> str = <span class="hljs-string">&#x27;\n&#x27;</span>;
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-built_in">this</span>.vertices.length; i++) {
+            <span class="hljs-keyword">const</span> v = <span class="hljs-built_in">this</span>.vertices[i];
+            str += v + <span class="hljs-string">&#x27; =&gt; &#x27;</span>;
+            <span class="hljs-keyword">const</span> e = <span class="hljs-built_in">this</span>.adjList[v];
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> j = <span class="hljs-number">0</span>; j &lt; e.length; j++) {
+                str += <span class="hljs-string">&#x27; &#x27;</span> + e[j] + <span class="hljs-string">&#x27; &#x27;</span>;
+            }
+            str += <span class="hljs-string">&#x27;\n&#x27;</span>;
+        }
+        <span class="hljs-keyword">return</span> str;
+    }
+}
+<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612689503595">class Graph {
+    constructor() {
+        this.vertices = []; // 存顶点
+        this.adjList = {}; // 存边
+    }
+    // 顶点
+    addVertex(v) {
+        this.vertices.push(v);
+        this.adjList[v] = [];
+    }
+    // 边
+    addEdge(v, w) {
+        this.adjList[v].push(w);
+        this.adjList[w].push(v);
+    }
+    // 转化成邻接表的形式的字符串
+    toString() {
+        let str = '\n';
+        for (let i = 0; i < this.vertices.length; i++) {
+            const v = this.vertices[i];
+            str += v + ' => ';
+            const e = this.adjList[v];
+            for (let j = 0; j < e.length; j++) {
+                str += ' ' + e[j] + ' ';
+            }
+            str += '\n';
+        }
+        return str;
+    }
+}
+</textarea>
+<h2 id="参考文章">参考文章</h2>
+<ul>
+<li>
+<p><a href="https://juejin.im/post/594dfe795188250d725a220a#heading-14">在 JavaScript 中学习数据结构与算法</a></p>
+</li>
+<li>
+<p><a href="https://segmentfault.com/a/1190000020011987">常见数据结构和Javascript实现总结</a></p>
+</li>
+</ul>
+
+    </div>
+    
+  </div>
+
+        <footer>
+        
+  <div class="footer">
+  
+  <div class="theme">
+    博客主题为 <a href="https://github.com/Tuzilow/CoinRailgun">CoinRailgun</a> 默认主题
+  </div>
+  <div class="copyright">
+    <span>© 2019-2021 Tuzilow.</span>
+    <span>Powered by <a href="https://github.com/Tuzilow/CoinRailgun">CoinRailgun</a></span>
+  </div>
+</div>
+
+        </footer>
+      </main>
+    </div>
+  </body>
+</html>

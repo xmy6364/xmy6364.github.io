@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="author" content="Tuzilow">
+    <meta name="description" content="想要成为大佬">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.5.0/styles/default.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.5.0/styles/github-gist.min.css">
+    <link rel="stylesheet" href="/assets/lib/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/css/layout.css" />
+    <script defer src="https://cdn.bootcdn.net/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"></script>
+    <script defer src="/assets/js/copyCode.js"></script>
+    <script defer src="/assets/js/backTop.js"></script>
+
+    
+  <link rel="stylesheet" href="/assets/css/page.css" />
+  <link rel="stylesheet" href="/assets/css/sidebar.css" />
+  <link rel="stylesheet" href="/assets/css/footer.css" />
+  <link rel="stylesheet" href="/assets/css/post.css" />
+  <script defer src="/assets/js/backHome.js"></script>
+  <script defer src="/assets/js/toc.js"></script>
+  <script defer src="/assets/js/copyright.js"></script>
+
+
+    <title>C#中使用XML存储数据</title>
+  </head>
+  <body>
+    <div class="container">
+      <aside>
+        
+  <div class="sidebar">
+  <header>Tuzilow的小站</header>
+  <div class="info">
+    <div class="avatar">
+      <img src="https://cdn.jsdelivr.net/gh/Tuzilow/Tuzilow.github.io/images/avatar.png" alt="头像">
+    </div>
+    <div class="author">Tuzilow</div>
+    <div class="description">想要成为大佬</div>
+    <div class="about">
+      <a href="/about">about me.</a>
+    </div>
+  </div>
+  <div class="links">
+    <ul>
+    
+      <li class="links-item">
+        <a href="https://github.com/Tuzilow" target="_blank">
+          <i class="fa fa-github-alt" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="links-item">
+        <a href="tencent://message/?uin=1176281967" target="_blank">
+          <i class="fa fa-qq" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+    </ul>
+  </div>
+  <nav>
+    <ul>
+    
+      <li class="nav-item">
+        <a href="/archives">
+          <span class="nav-item__count">27</span>
+          <span class="nav-item__label">归档</span>
+        </a>
+      </li>
+    
+      <li class="nav-item">
+        <a href="/categories">
+          <span class="nav-item__count">2</span>
+          <span class="nav-item__label">分类</span>
+        </a>
+      </li>
+    
+      <li class="nav-item">
+        <a href="/tags">
+          <span class="nav-item__count">35</span>
+          <span class="nav-item__label">标签</span>
+        </a>
+      </li>
+    
+    </ul>
+  </nav>
+  <div class="catalogue" id="catalogue"></div>
+</div>
+
+      </aside>
+      <main>
+        
+  <div class="post">
+    <div class="post-front">
+      <h1 class="post-front__title">C#中使用XML存储数据</h1>
+      <div class="post-front__desc">
+        
+        <p class="post-front__desc-date">
+          <i class="fa fa-calendar" aria-hidden="true"></i>
+          2019/07/29 10:05:13
+        </p>
+        
+        
+        <p class="post-front__desc-category">
+          <i class="fa fa-folder-o" aria-hidden="true"></i>
+          <a href="/categories/技术">
+            技术
+          </a>
+        </p>
+        
+          <div class="post-front__desc-tags">
+          
+          <a href="/tags/CSharp">
+            <i class="fa fa-tag" aria-hidden="true"></i>
+            CSharp
+          </a>
+          
+        </div>
+      </div>
+    </div>
+    <div class="post-content">
+      <p>${toc}使用微软所封装的XML方法</p>
+<h2 id="创建xml文档">创建XML文档</h2>
+<p><strong>首先引用<code>System.Xml</code>命名空间</strong></p>
+<h3 id="1初始化一个实例">1.初始化一个实例</h3>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612688606279">复制</button>XmlDocument xd = <span class="hljs-keyword">new</span> XmlDocument();
+<b class="name">cs</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612688606279">XmlDocument xd = new XmlDocument();
+</textarea>
+<h3 id="2创建xml头文件声明">2.创建XML头文件声明</h3>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612693128268">复制</button>XmlDeclaration xdt = xd.CreateXmlDeclaration(<span class="hljs-string">&quot;1.0&quot;</span>, <span class="hljs-string">&quot;utf-8&quot;</span>, <span class="hljs-literal">null</span>);
+xd.AppendChild(xdt);
+<b class="name">cs</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612693128268">XmlDeclaration xdt = xd.CreateXmlDeclaration("1.0", "utf-8", null);
+xd.AppendChild(xdt);
+</textarea>
+<h3 id="3创建唯一根节点">3.创建唯一根节点</h3>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612688369227">复制</button>XmlElement Students = xd.CreateElement(<span class="hljs-string">&quot;Students&quot;</span>);
+<b class="name">cs</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612688369227">XmlElement Students = xd.CreateElement("Students");
+</textarea>
+<h3 id="4给根节点添加属性也可以不添加">4.给根节点添加属性(也可以不添加)</h3>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612694994868">复制</button>Students.SetAttribute(<span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;学生信息&quot;</span>);
+<b class="name">cs</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612694994868">Students.SetAttribute("name", "学生信息");
+</textarea>
+<h3 id="5将根节点加入到xml文件中">5.将根节点加入到XML文件中</h3>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612690719322">复制</button>xd.AppendChild(Students);
+<b class="name">cs</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612690719322">xd.AppendChild(Students);
+</textarea>
+<h3 id="6创建二级节点">6.创建二级节点</h3>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612687282775">复制</button>XmlElement student = xd.CreateElement(<span class="hljs-string">&quot;student&quot;</span>);
+student.SetAttribute(<span class="hljs-string">&quot;stuNum&quot;</span>, <span class="hljs-string">&quot;100100100&quot;</span>);
+Students.AppendChild(student);
+<b class="name">cs</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612687282775">XmlElement student = xd.CreateElement("student");
+student.SetAttribute("stuNum", "100100100");
+Students.AppendChild(student);
+</textarea>
+<h3 id="7给二级节点填充值">7.给二级节点填充值</h3>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612691614281">复制</button>XmlElement name = xd.CreateElement(<span class="hljs-string">&quot;name&quot;</span>);
+name.InnerText = <span class="hljs-string">&quot;小明&quot;</span>;
+XmlElement sex = xd.CreateElement(<span class="hljs-string">&quot;sex&quot;</span>);
+sex.InnerText = <span class="hljs-string">&quot;男&quot;</span>;
+student.AppendChild(name);
+student.AppendChild(sex);
+<b class="name">cs</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612691614281">XmlElement name = xd.CreateElement("name");
+name.InnerText = "小明";
+XmlElement sex = xd.CreateElement("sex");
+sex.InnerText = "男";
+student.AppendChild(name);
+student.AppendChild(sex);
+</textarea>
+<h3 id="8保存">8.保存</h3>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612691096924">复制</button>xd.Save(<span class="hljs-string">&quot;StuMS.xml&quot;</span>);
+<b class="name">cs</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612691096924">xd.Save("StuMS.xml");
+</textarea>
+<h3 id="9结果">9.结果</h3>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612688952090">复制</button><span class="hljs-meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">Students</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;学生信息&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">student</span> <span class="hljs-attr">stuNum</span>=<span class="hljs-string">&quot;100100100&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>小明<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">sex</span>&gt;</span>男<span class="hljs-tag">&lt;/<span class="hljs-name">sex</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">student</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">Students</span>&gt;</span>
+<b class="name">xml</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612688952090"><?xml version="1.0" encoding="utf-8"?>
+<Students name="学生信息">
+  <student stuNum="100100100">
+    <name>小明</name>
+    <sex>男</sex>
+  </student>
+</Students>
+</textarea>
+<h2 id="读取xml文档里的信息">读取XML文档里的信息</h2>
+<p><strong>首先要先加载XML文档</strong></p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612689435733">复制</button>XmlDocument xd = <span class="hljs-keyword">new</span> XmlDocument();
+xd.Load(<span class="hljs-string">&quot;StuMS.xml&quot;</span>);
+<b class="name">cs</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612689435733">XmlDocument xd = new XmlDocument();
+xd.Load("StuMS.xml");
+</textarea>
+<h3 id="1利用索引器读取">1.利用索引器读取</h3>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612695207086">复制</button><span class="hljs-comment">//查找标签值</span>
+<span class="hljs-built_in">string</span> Name = stuNode.ChildNodes[<span class="hljs-number">0</span>].InnerText;
+<span class="hljs-comment">//查找标签属性</span>
+<span class="hljs-built_in">string</span> StuNum = stuNode.Attributes[<span class="hljs-number">0</span>].Value;
+<b class="name">cs</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612695207086">//查找标签值
+string Name = stuNode.ChildNodes[0].InnerText;
+//查找标签属性
+string StuNum = stuNode.Attributes[0].Value;
+</textarea>
+<h3 id="2利用xpath查询">2.利用Xpath查询</h3>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612690360031">复制</button><span class="hljs-comment">// 常用查询方式</span>
+<span class="hljs-comment">//1. &quot;根节点/父节点/子节点&quot;</span>
+<span class="hljs-comment">//2. &quot;//节点&quot;</span>
+<span class="hljs-comment">//3. &quot;根节点/父节点[@父节点属性 = &#x27;value&#x27; ]&quot;</span>
+<span class="hljs-comment">//4. &quot;根节点/父节点[子节点 = &#x27;value&#x27; ]&quot;</span>
+
+XmlNode stuNode = xd.SelectSingleNode(<span class="hljs-string">&quot;Students/student[@stuNum =&quot;</span> + stuNum + <span class="hljs-string">&quot;]&quot;</span>);<span class="hljs-comment">//可以获得指定stuNum的一个节点</span>
+XmlNodeList stuNodeList = xd.SelectNodes(<span class="hljs-string">&quot;Students/student[sex = &#x27;男&#x27; ]&quot;</span>);<span class="hljs-comment">//可以获得指定性别的集合</span>
+<b class="name">cs</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612690360031">// 常用查询方式
+//1. "根节点/父节点/子节点"
+//2. "//节点"
+//3. "根节点/父节点[@父节点属性 = 'value' ]"
+//4. "根节点/父节点[子节点 = 'value' ]"
+
+XmlNode stuNode = xd.SelectSingleNode("Students/student[@stuNum =" + stuNum + "]");//可以获得指定stuNum的一个节点
+XmlNodeList stuNodeList = xd.SelectNodes("Students/student[sex = '男' ]");//可以获得指定性别的集合
+</textarea>
+<h2 id="修改xml文档里的信息">修改XML文档里的信息</h2>
+<p>找到-&gt;修改-&gt;<strong>保存</strong></p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612686725183">复制</button><span class="hljs-comment">//节点信息修改</span>
+stuNode.SelectSingleNode(<span class="hljs-string">&quot;name&quot;</span>).InnerText = <span class="hljs-keyword">value</span>;
+stuNode.SelectSingleNode(<span class="hljs-string">&quot;name&quot;</span>).InnerXml = <span class="hljs-keyword">value</span>;
+<span class="hljs-comment">//属性信息修改</span>
+student.Attributes[<span class="hljs-string">&quot;stuNum&quot;</span>].Value = <span class="hljs-keyword">value</span>;
+<b class="name">cs</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612686725183">//节点信息修改
+stuNode.SelectSingleNode("name").InnerText = value;
+stuNode.SelectSingleNode("name").InnerXml = value;
+//属性信息修改
+student.Attributes["stuNum"].Value = value;
+</textarea>
+<p>InnerText只显示内容<code>小明 男</code><br>
+InnerXml将标签一同显示出来<code> &lt;name&gt;小明&lt;/name&gt;&lt;sex&gt;男&lt;/sex&gt;</code></p>
+<h2 id="删除xml文档里的信息">删除XML文档里的信息</h2>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612691884785">复制</button><span class="hljs-comment">//从当前节点获取父节点，从父节点删除当前节点</span>
+stuNode.ParentNode.RemoveChild(studentNode);
+<span class="hljs-comment">//从父节点直接删除子节点</span>
+stuNode.RemoveChild(studentNode)
+<b class="name">cs</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612691884785">//从当前节点获取父节点，从父节点删除当前节点
+stuNode.ParentNode.RemoveChild(studentNode);
+//从父节点直接删除子节点
+stuNode.RemoveChild(studentNode)
+</textarea>
+
+    </div>
+    
+  </div>
+
+        <footer>
+        
+  <div class="footer">
+  
+  <div class="theme">
+    博客主题为 <a href="https://github.com/Tuzilow/CoinRailgun">CoinRailgun</a> 默认主题
+  </div>
+  <div class="copyright">
+    <span>© 2019-2021 Tuzilow.</span>
+    <span>Powered by <a href="https://github.com/Tuzilow/CoinRailgun">CoinRailgun</a></span>
+  </div>
+</div>
+
+        </footer>
+      </main>
+    </div>
+  </body>
+</html>

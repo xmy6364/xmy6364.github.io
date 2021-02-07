@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="author" content="Tuzilow">
+    <meta name="description" content="想要成为大佬">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.5.0/styles/default.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.5.0/styles/github-gist.min.css">
+    <link rel="stylesheet" href="/assets/lib/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/css/layout.css" />
+    <script defer src="https://cdn.bootcdn.net/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"></script>
+    <script defer src="/assets/js/copyCode.js"></script>
+    <script defer src="/assets/js/backTop.js"></script>
+
+    
+  <link rel="stylesheet" href="/assets/css/page.css" />
+  <link rel="stylesheet" href="/assets/css/sidebar.css" />
+  <link rel="stylesheet" href="/assets/css/footer.css" />
+  <link rel="stylesheet" href="/assets/css/post.css" />
+  <script defer src="/assets/js/backHome.js"></script>
+  <script defer src="/assets/js/toc.js"></script>
+  <script defer src="/assets/js/copyright.js"></script>
+
+
+    <title>C# HtmlAgilityPack爬取静态页面</title>
+  </head>
+  <body>
+    <div class="container">
+      <aside>
+        
+  <div class="sidebar">
+  <header>Tuzilow的小站</header>
+  <div class="info">
+    <div class="avatar">
+      <img src="https://cdn.jsdelivr.net/gh/Tuzilow/Tuzilow.github.io/images/avatar.png" alt="头像">
+    </div>
+    <div class="author">Tuzilow</div>
+    <div class="description">想要成为大佬</div>
+    <div class="about">
+      <a href="/about">about me.</a>
+    </div>
+  </div>
+  <div class="links">
+    <ul>
+    
+      <li class="links-item">
+        <a href="https://github.com/Tuzilow" target="_blank">
+          <i class="fa fa-github-alt" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="links-item">
+        <a href="tencent://message/?uin=1176281967" target="_blank">
+          <i class="fa fa-qq" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+    </ul>
+  </div>
+  <nav>
+    <ul>
+    
+      <li class="nav-item">
+        <a href="/archives">
+          <span class="nav-item__count">27</span>
+          <span class="nav-item__label">归档</span>
+        </a>
+      </li>
+    
+      <li class="nav-item">
+        <a href="/categories">
+          <span class="nav-item__count">2</span>
+          <span class="nav-item__label">分类</span>
+        </a>
+      </li>
+    
+      <li class="nav-item">
+        <a href="/tags">
+          <span class="nav-item__count">35</span>
+          <span class="nav-item__label">标签</span>
+        </a>
+      </li>
+    
+    </ul>
+  </nav>
+  <div class="catalogue" id="catalogue"></div>
+</div>
+
+      </aside>
+      <main>
+        
+  <div class="post">
+    <div class="post-front">
+      <h1 class="post-front__title">C# HtmlAgilityPack爬取静态页面</h1>
+      <div class="post-front__desc">
+        
+        <p class="post-front__desc-date">
+          <i class="fa fa-calendar" aria-hidden="true"></i>
+          2019/09/04 22:10:24
+        </p>
+        
+        
+        <p class="post-front__desc-category">
+          <i class="fa fa-folder-o" aria-hidden="true"></i>
+          <a href="/categories/技术">
+            技术
+          </a>
+        </p>
+        
+          <div class="post-front__desc-tags">
+          
+          <a href="/tags/CSharp">
+            <i class="fa fa-tag" aria-hidden="true"></i>
+            CSharp
+          </a>
+          
+          <a href="/tags/Web Crawler">
+            <i class="fa fa-tag" aria-hidden="true"></i>
+            Web Crawler
+          </a>
+          
+        </div>
+      </div>
+    </div>
+    <div class="post-content">
+      <nav id="toc" class="toc"><ol><li><a href="#htmlagilitypack简介">HtmlAgilityPack简介</a></li><li><a href="#c安装htmlagilitypack">C#安装HtmlAgilityPack</a></li><li><a href="#实例获取某页面图片">实例(获取某页面图片)</a><ol><li><a href="#加载html页面">加载HTML页面</a></li><li><a href="#利用webclient写一个图片下载器">利用WebClient写一个图片下载器</a></li><li><a href="#通过xpath获取img标签中的图片">通过Xpath获取img标签中的图片</a></li><li><a href="#通过xpath获取背景图">通过Xpath获取背景图</a></li><li><a href="#完整代码">完整代码</a></li></ol></li><li><a href="#参考文章">参考文章</a></li></ol></nav><p>最近对爬虫很感兴趣，稍微研究了一下，利用HtmlAgilityPack制作了一个十分简单的爬虫，这个简易爬虫只能获取静态页面的Html</p>
+<h2 id="htmlagilitypack简介">HtmlAgilityPack简介</h2>
+<p>HtmlAgilityPack是一个解析速度十分快，并且开源的Html解析工具。HtmlAgilityPack支持使用Xpath解析Html，能够帮助我们解析Html文档就像解析Xml文档一样轻松、方便。</p>
+<ul>
+<li><a href="https://html-agility-pack.net">HtmlAgilityPack官网</a></li>
+<li><a href="https://github.com/zzzprojects/html-agility-pack">HtmlAgilityPack的Github地址</a></li>
+</ul>
+<h2 id="c安装htmlagilitypack">C#安装HtmlAgilityPack</h2>
+<ol>
+<li>如果VS安装有Nuget，在Nuget直接搜索安装即可。</li>
+<li>下载后解压缩后有3个文件，这里只需要将其中的HtmlAgilityPack.dll、HtmlAgilityPack.xml引入解决方案中即可使用</li>
+</ol>
+<h2 id="实例获取某页面图片">实例(获取某页面图片)</h2>
+<h3 id="加载html页面">加载HTML页面</h3>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612692833447">复制</button><span class="hljs-comment">//从网页中加载</span>
+<span class="hljs-built_in">string</span> url = <span class="hljs-string">&quot;https://www.bilibili.com&quot;</span>;
+HtmlWeb web = <span class="hljs-keyword">new</span> HtmlWeb();
+HtmlDocument hd = web.Load(url);
+<b class="name">csharp</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612692833447">//从网页中加载
+string url = "https://www.bilibili.com";
+HtmlWeb web = new HtmlWeb();
+HtmlDocument hd = web.Load(url);
+</textarea>
+<h3 id="利用webclient写一个图片下载器">利用WebClient写一个图片下载器</h3>
+<p>需要<code>using System.Net</code>和<code>using System.IO</code></p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612692284933">复制</button><span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;summary&gt;</span></span>
+<span class="hljs-comment"><span class="hljs-doctag">///</span> 图片下载器</span>
+<span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;/summary&gt;</span></span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ImgDownloader</span>
+{
+    <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;summary&gt;</span></span>
+    <span class="hljs-comment"><span class="hljs-doctag">///</span> 下载图片</span>
+    <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;/summary&gt;</span></span>
+    <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;param name=&quot;webClient&quot;&gt;</span><span class="hljs-doctag">&lt;/param&gt;</span></span>
+    <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;param name=&quot;url&quot;&gt;</span>图片url<span class="hljs-doctag">&lt;/param&gt;</span></span>
+    <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;param name=&quot;folderPath&quot;&gt;</span>文件夹路径<span class="hljs-doctag">&lt;/param&gt;</span></span>
+    <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;param name=&quot;fileName&quot;&gt;</span>图片名<span class="hljs-doctag">&lt;/param&gt;</span></span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">DownloadImg</span>(<span class="hljs-params">WebClient webClient, <span class="hljs-built_in">string</span> url, <span class="hljs-built_in">string</span> folderPath, <span class="hljs-built_in">string</span> fileName</span>)</span>
+    {
+        <span class="hljs-comment">//如果文件夹不存在，则创建一个</span>
+        <span class="hljs-keyword">if</span> (!Directory.Exists(folderPath))
+        {
+            Directory.CreateDirectory(folderPath);
+        }
+        <span class="hljs-comment">//判断路径是否完整，补全不完整的路径</span>
+        <span class="hljs-keyword">if</span> (url.IndexOf(<span class="hljs-string">&quot;https:&quot;</span>) == <span class="hljs-number">-1</span> &amp;&amp; url.IndexOf(<span class="hljs-string">&quot;http:&quot;</span>) == <span class="hljs-number">-1</span>)
+        {
+            url = <span class="hljs-string">&quot;https:&quot;</span> + url;
+        }
+        <span class="hljs-comment">//下载图片</span>
+        <span class="hljs-keyword">try</span>
+        {
+            webClient.DownloadFile(url, folderPath + fileName);
+            Console.WriteLine(fileName + <span class="hljs-string">&quot;下载成功&quot;</span>);
+        }
+        catch (Exception ex)
+        {
+            Console.Write(ex.Message);
+            Console.WriteLine(url);
+        }
+    }
+}
+<b class="name">csharp</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612692284933">/// <summary>
+/// 图片下载器
+/// </summary>
+public class ImgDownloader
+{
+    /// <summary>
+    /// 下载图片
+    /// </summary>
+    /// <param name="webClient"></param>
+    /// <param name="url">图片url</param>
+    /// <param name="folderPath">文件夹路径</param>
+    /// <param name="fileName">图片名</param>
+    public static void DownloadImg(WebClient webClient, string url, string folderPath, string fileName)
+    {
+        //如果文件夹不存在，则创建一个
+        if (!Directory.Exists(folderPath))
+        {
+            Directory.CreateDirectory(folderPath);
+        }
+        //判断路径是否完整，补全不完整的路径
+        if (url.IndexOf("https:") == -1 && url.IndexOf("http:") == -1)
+        {
+            url = "https:" + url;
+        }
+        //下载图片
+        try
+        {
+            webClient.DownloadFile(url, folderPath + fileName);
+            Console.WriteLine(fileName + "下载成功");
+        }
+        catch (Exception ex)
+        {
+            Console.Write(ex.Message);
+            Console.WriteLine(url);
+        }
+    }
+}
+</textarea>
+<h3 id="通过xpath获取img标签中的图片">通过Xpath获取img标签中的图片</h3>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612696120475">复制</button><span class="hljs-built_in">string</span> imgPath = <span class="hljs-string">&quot;//img&quot;</span>;<span class="hljs-comment">//选择img</span>
+<span class="hljs-built_in">int</span> imgNum = <span class="hljs-number">0</span>;<span class="hljs-comment">//图片编号</span>
+<span class="hljs-comment">//获取img标签中的图片</span>
+<span class="hljs-keyword">foreach</span> (HtmlNode node <span class="hljs-keyword">in</span> hd.DocumentNode.SelectNodes(imgPath))
+{
+    <span class="hljs-keyword">if</span> (node.Attributes[<span class="hljs-string">&quot;src&quot;</span>] != <span class="hljs-literal">null</span>)
+    {
+        <span class="hljs-built_in">string</span> imgUrl = node.Attributes[<span class="hljs-string">&quot;src&quot;</span>].Value.ToString();
+        <span class="hljs-keyword">if</span> (imgUrl != <span class="hljs-string">&quot;&quot;</span> &amp;&amp; imgUrl != <span class="hljs-string">&quot; &quot;</span>)
+        {
+            imgNum++;
+            <span class="hljs-comment">//生成文件名，自动获取后缀</span>
+            <span class="hljs-built_in">string</span> fileName = imgNum + imgUrl.Substring(imgUrl.LastIndexOf(<span class="hljs-string">&quot;.&quot;</span>));
+            ImgDownloader.DownloadImg(wc, imgUrl, <span class="hljs-string">&quot;images/&quot;</span>, fileName);
+        }
+    }
+}
+<b class="name">csharp</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612696120475">string imgPath = "//img";//选择img
+int imgNum = 0;//图片编号
+//获取img标签中的图片
+foreach (HtmlNode node in hd.DocumentNode.SelectNodes(imgPath))
+{
+    if (node.Attributes["src"] != null)
+    {
+        string imgUrl = node.Attributes["src"].Value.ToString();
+        if (imgUrl != "" && imgUrl != " ")
+        {
+            imgNum++;
+            //生成文件名，自动获取后缀
+            string fileName = imgNum + imgUrl.Substring(imgUrl.LastIndexOf("."));
+            ImgDownloader.DownloadImg(wc, imgUrl, "images/", fileName);
+        }
+    }
+}
+</textarea>
+<h3 id="通过xpath获取背景图">通过Xpath获取背景图</h3>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612688228976">复制</button><span class="hljs-comment">//获取背景图</span>
+<span class="hljs-built_in">string</span> bgImgPath = <span class="hljs-string">&quot;//*[@style]&quot;</span>;<span class="hljs-comment">//选择具有style属性的节点</span>
+<span class="hljs-keyword">foreach</span> (HtmlNode node <span class="hljs-keyword">in</span> hd.DocumentNode.SelectNodes(bgImgPath))
+{
+    <span class="hljs-keyword">if</span> (node.Attributes[<span class="hljs-string">&quot;style&quot;</span>].Value.Contains(<span class="hljs-string">&quot;background-image:url&quot;</span>))
+    {
+        imgNum++;
+        <span class="hljs-built_in">string</span> bgImgUrl = node.Attributes[<span class="hljs-string">&quot;style&quot;</span>].Value;
+        bgImgUrl = Regex.Match(bgImgUrl, <span class="hljs-string">@&quot;(?&lt;=\().+?(?=\))&quot;</span>).Value;<span class="hljs-comment">//读取url()的内容</span>
+        <span class="hljs-comment">//Console.WriteLine(bgImgUrl);</span>
+        <span class="hljs-comment">//生成文件名，自动获取后缀</span>
+        <span class="hljs-built_in">string</span> fileName = imgNum + bgImgUrl.Substring(bgImgUrl.LastIndexOf(<span class="hljs-string">&quot;.&quot;</span>));
+
+        ImgDownloader.DownloadImg(wc, bgImgUrl, <span class="hljs-string">&quot;images/bgcImg/&quot;</span>, fileName);
+    }
+}
+<b class="name">csharp</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612688228976">//获取背景图
+string bgImgPath = "//*[@style]";//选择具有style属性的节点
+foreach (HtmlNode node in hd.DocumentNode.SelectNodes(bgImgPath))
+{
+    if (node.Attributes["style"].Value.Contains("background-image:url"))
+    {
+        imgNum++;
+        string bgImgUrl = node.Attributes["style"].Value;
+        bgImgUrl = Regex.Match(bgImgUrl, @"(?<=\().+?(?=\))").Value;//读取url()的内容
+        //Console.WriteLine(bgImgUrl);
+        //生成文件名，自动获取后缀
+        string fileName = imgNum + bgImgUrl.Substring(bgImgUrl.LastIndexOf("."));
+
+        ImgDownloader.DownloadImg(wc, bgImgUrl, "images/bgcImg/", fileName);
+    }
+}
+</textarea>
+<h3 id="完整代码">完整代码</h3>
+<p>&lt;details&gt;</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612691647827">复制</button><span class="hljs-keyword">using</span> System.Linq;
+<span class="hljs-keyword">using</span> System.Text;
+<span class="hljs-keyword">using</span> System.Threading.Tasks;
+<span class="hljs-keyword">using</span> System.Net;
+<span class="hljs-keyword">using</span> System.IO;
+<span class="hljs-keyword">using</span> HtmlAgilityPack;
+<span class="hljs-keyword">using</span> System.Text.RegularExpressions;
+
+<span class="hljs-keyword">namespace</span> <span class="hljs-title">WebCrawlerDemo</span>
+{
+    <span class="hljs-keyword">class</span> <span class="hljs-title">Program</span>
+    {
+        <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>(<span class="hljs-params"><span class="hljs-built_in">string</span>[] args</span>)</span>
+        {
+            WebClient wc = <span class="hljs-keyword">new</span> WebClient();
+            
+
+            <span class="hljs-built_in">string</span> url = <span class="hljs-string">&quot;https://www.bilibili.com&quot;</span>;
+            HtmlWeb web = <span class="hljs-keyword">new</span> HtmlWeb();
+            HtmlDocument hd = web.Load(url);<span class="hljs-comment">//下载html页面</span>
+
+            <span class="hljs-built_in">string</span> imgPath = <span class="hljs-string">&quot;//img&quot;</span>;<span class="hljs-comment">//选择img</span>
+            
+            <span class="hljs-built_in">int</span> imgNum = <span class="hljs-number">0</span>;<span class="hljs-comment">//图片编号</span>
+            
+            <span class="hljs-comment">//获取img标签中的图片</span>
+            <span class="hljs-keyword">foreach</span> (HtmlNode node <span class="hljs-keyword">in</span> hd.DocumentNode.SelectNodes(imgPath))
+            {
+                <span class="hljs-keyword">if</span> (node.Attributes[<span class="hljs-string">&quot;src&quot;</span>] != <span class="hljs-literal">null</span>)
+                {
+                    <span class="hljs-built_in">string</span> imgUrl = node.Attributes[<span class="hljs-string">&quot;src&quot;</span>].Value.ToString();
+                    <span class="hljs-keyword">if</span> (imgUrl != <span class="hljs-string">&quot;&quot;</span> &amp;&amp; imgUrl != <span class="hljs-string">&quot; &quot;</span>)
+                    {
+                        imgNum++;
+                        <span class="hljs-comment">//生成文件名，自动获取后缀</span>
+                        <span class="hljs-built_in">string</span> fileName = imgNum + imgUrl.Substring(imgUrl.LastIndexOf(<span class="hljs-string">&quot;.&quot;</span>));
+
+                        ImgDownloader.DownloadImg(wc, imgUrl, <span class="hljs-string">&quot;images/&quot;</span>, fileName);
+                    }
+                }
+            }
+            <span class="hljs-comment">//获取背景图</span>
+            <span class="hljs-built_in">string</span> bgImgPath = <span class="hljs-string">&quot;//*[@style]&quot;</span>;<span class="hljs-comment">//选择具有style属性的节点</span>
+            <span class="hljs-keyword">foreach</span> (HtmlNode node <span class="hljs-keyword">in</span> hd.DocumentNode.SelectNodes(bgImgPath))
+            {
+                <span class="hljs-keyword">if</span> (node.Attributes[<span class="hljs-string">&quot;style&quot;</span>].Value.Contains(<span class="hljs-string">&quot;background-image:url&quot;</span>))
+                {
+                    imgNum++;
+                    <span class="hljs-built_in">string</span> bgImgUrl = node.Attributes[<span class="hljs-string">&quot;style&quot;</span>].Value;
+                    bgImgUrl = Regex.Match(bgImgUrl, <span class="hljs-string">@&quot;(?&lt;=\().+?(?=\))&quot;</span>).Value;<span class="hljs-comment">//读取url()的内容</span>
+                    <span class="hljs-comment">//生成文件名，自动获取后缀</span>
+                    <span class="hljs-built_in">string</span> fileName = imgNum + bgImgUrl.Substring(bgImgUrl.LastIndexOf(<span class="hljs-string">&quot;.&quot;</span>));
+
+                    ImgDownloader.DownloadImg(wc, bgImgUrl, <span class="hljs-string">&quot;images/bgcImg/&quot;</span>, fileName);
+                }
+            }
+
+            Console.WriteLine(<span class="hljs-string">&quot;----------END----------&quot;</span>);
+            Console.ReadKey();
+        }
+    }
+    <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;summary&gt;</span></span>
+    <span class="hljs-comment"><span class="hljs-doctag">///</span> 图片下载器</span>
+    <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;/summary&gt;</span></span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ImgDownloader</span>
+    {
+        <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;summary&gt;</span></span>
+        <span class="hljs-comment"><span class="hljs-doctag">///</span> 下载图片</span>
+        <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;/summary&gt;</span></span>
+        <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;param name=&quot;webClient&quot;&gt;</span><span class="hljs-doctag">&lt;/param&gt;</span></span>
+        <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;param name=&quot;url&quot;&gt;</span>图片url<span class="hljs-doctag">&lt;/param&gt;</span></span>
+        <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;param name=&quot;folderPath&quot;&gt;</span>文件夹路径<span class="hljs-doctag">&lt;/param&gt;</span></span>
+        <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;param name=&quot;fileName&quot;&gt;</span>图片名<span class="hljs-doctag">&lt;/param&gt;</span></span>
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">DownloadImg</span>(<span class="hljs-params">WebClient webClient, <span class="hljs-built_in">string</span> url, <span class="hljs-built_in">string</span> folderPath, <span class="hljs-built_in">string</span> fileName</span>)</span>
+        {
+            <span class="hljs-comment">//如果文件夹不存在，则创建一个</span>
+            <span class="hljs-keyword">if</span> (!Directory.Exists(folderPath))
+            {
+                Directory.CreateDirectory(folderPath);
+            }
+            <span class="hljs-comment">//判断路径是否完整，补全不完整的路径</span>
+            <span class="hljs-keyword">if</span> (url.IndexOf(<span class="hljs-string">&quot;https:&quot;</span>) == <span class="hljs-number">-1</span> &amp;&amp; url.IndexOf(<span class="hljs-string">&quot;http:&quot;</span>) == <span class="hljs-number">-1</span>)
+            {
+                url = <span class="hljs-string">&quot;https:&quot;</span> + url;
+            }
+            <span class="hljs-comment">//下载图片</span>
+            <span class="hljs-keyword">try</span>
+            {
+                webClient.DownloadFile(url, folderPath + fileName);
+                Console.WriteLine(fileName + <span class="hljs-string">&quot;下载成功&quot;</span>);
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.Message);
+                Console.WriteLine(url);
+            }
+        }
+    }
+}
+<b class="name">csharp</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612691647827">using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Net;
+using System.IO;
+using HtmlAgilityPack;
+using System.Text.RegularExpressions;
+
+namespace WebCrawlerDemo
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            WebClient wc = new WebClient();
+            
+
+            string url = "https://www.bilibili.com";
+            HtmlWeb web = new HtmlWeb();
+            HtmlDocument hd = web.Load(url);//下载html页面
+
+            string imgPath = "//img";//选择img
+            
+            int imgNum = 0;//图片编号
+            
+            //获取img标签中的图片
+            foreach (HtmlNode node in hd.DocumentNode.SelectNodes(imgPath))
+            {
+                if (node.Attributes["src"] != null)
+                {
+                    string imgUrl = node.Attributes["src"].Value.ToString();
+                    if (imgUrl != "" && imgUrl != " ")
+                    {
+                        imgNum++;
+                        //生成文件名，自动获取后缀
+                        string fileName = imgNum + imgUrl.Substring(imgUrl.LastIndexOf("."));
+
+                        ImgDownloader.DownloadImg(wc, imgUrl, "images/", fileName);
+                    }
+                }
+            }
+            //获取背景图
+            string bgImgPath = "//*[@style]";//选择具有style属性的节点
+            foreach (HtmlNode node in hd.DocumentNode.SelectNodes(bgImgPath))
+            {
+                if (node.Attributes["style"].Value.Contains("background-image:url"))
+                {
+                    imgNum++;
+                    string bgImgUrl = node.Attributes["style"].Value;
+                    bgImgUrl = Regex.Match(bgImgUrl, @"(?<=\().+?(?=\))").Value;//读取url()的内容
+                    //生成文件名，自动获取后缀
+                    string fileName = imgNum + bgImgUrl.Substring(bgImgUrl.LastIndexOf("."));
+
+                    ImgDownloader.DownloadImg(wc, bgImgUrl, "images/bgcImg/", fileName);
+                }
+            }
+
+            Console.WriteLine("----------END----------");
+            Console.ReadKey();
+        }
+    }
+    /// <summary>
+    /// 图片下载器
+    /// </summary>
+    public class ImgDownloader
+    {
+        /// <summary>
+        /// 下载图片
+        /// </summary>
+        /// <param name="webClient"></param>
+        /// <param name="url">图片url</param>
+        /// <param name="folderPath">文件夹路径</param>
+        /// <param name="fileName">图片名</param>
+        public static void DownloadImg(WebClient webClient, string url, string folderPath, string fileName)
+        {
+            //如果文件夹不存在，则创建一个
+            if (!Directory.Exists(folderPath))
+            {
+                Directory.CreateDirectory(folderPath);
+            }
+            //判断路径是否完整，补全不完整的路径
+            if (url.IndexOf("https:") == -1 && url.IndexOf("http:") == -1)
+            {
+                url = "https:" + url;
+            }
+            //下载图片
+            try
+            {
+                webClient.DownloadFile(url, folderPath + fileName);
+                Console.WriteLine(fileName + "下载成功");
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.Message);
+                Console.WriteLine(url);
+            }
+        }
+    }
+}
+</textarea>
+<p>&lt;/details&gt;</p>
+<h2 id="参考文章">参考文章</h2>
+<ul>
+<li><a href="https://www.cnblogs.com/xuliangxing/p/8004403.html">C#网络爬虫利器之HtmlAgilityPack如何快速实现解析Html</a></li>
+<li><a href="https://blog.csdn.net/Ylcacsdn/article/details/78314297">.Net解析html文档使用类库HtmlAgilityPack</a></li>
+</ul>
+
+    </div>
+    
+  </div>
+
+        <footer>
+        
+  <div class="footer">
+  
+  <div class="theme">
+    博客主题为 <a href="https://github.com/Tuzilow/CoinRailgun">CoinRailgun</a> 默认主题
+  </div>
+  <div class="copyright">
+    <span>© 2019-2021 Tuzilow.</span>
+    <span>Powered by <a href="https://github.com/Tuzilow/CoinRailgun">CoinRailgun</a></span>
+  </div>
+</div>
+
+        </footer>
+      </main>
+    </div>
+  </body>
+</html>
