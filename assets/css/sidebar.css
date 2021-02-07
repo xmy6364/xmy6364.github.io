@@ -8,8 +8,24 @@
   transition: all 0.25s;
   background: var(--white) url('/assets/logo.png') no-repeat bottom center;
   background-size: 100px 100px;
-  margin-bottom: 1rem;
+  transition: all 0.25s;
 }
+
+@media (max-width: 1000px) {
+  .sidebar {
+    width: 15rem;
+    transition: all 0.25s;
+  }
+}
+
+@media (max-width: 750px) {
+  .sidebar {
+    position: fixed;
+    left: -15rem;
+    transition: all 0.25s;
+  }
+}
+
 .sidebar:hover {
   box-shadow: var(--shadow-spread-dark);
   transition: all 0.25s;

@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="author" content="Tuzilow">
     <meta name="description" content="想要成为大佬">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
 
     <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -16,6 +16,7 @@
     <script defer src="https://cdn.bootcdn.net/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"></script>
     <script defer src="/assets/js/copyCode.js"></script>
     <script defer src="/assets/js/backTop.js"></script>
+    <script defer src="/assets/js/tool.js"></script>
 
     
   <link rel="stylesheet" href="/assets/css/page.css" />
@@ -133,7 +134,7 @@
 <p><strong>核心要点：</strong></p>
 <p>把一个静态私有变量确立为唯一的实例，外部通过静态方法访问这个唯一的实例，并把构造函数设为私有。</p>
 <h2 id="懒汉单例模式">懒汉单例模式</h2>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612694152601">复制</button><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PeopleSingle</span> </span>{
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612696340865">复制</button><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PeopleSingle</span> </span>{
   <span class="hljs-comment">/**核心 - 一个接收实例的静态成员 */</span>
   <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> people: PeopleSingle;
   <span class="hljs-keyword">private</span> name: <span class="hljs-built_in">string</span>;
@@ -155,7 +156,7 @@
     <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`I&#x27;m <span class="hljs-subst">${<span class="hljs-built_in">this</span>.name}</span>.`</span>);
   }
 }
-<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612694152601">class PeopleSingle {
+<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612696340865">class PeopleSingle {
   /**核心 - 一个接收实例的静态成员 */
   private static people: PeopleSingle;
   private name: string;
@@ -179,13 +180,13 @@
 }
 </textarea>
 <p>测试</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612687477110">复制</button><span class="hljs-keyword">let</span> people = PeopleSingle.getInstance();
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612704902591">复制</button><span class="hljs-keyword">let</span> people = PeopleSingle.getInstance();
 people.say();
-<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612687477110">let people = PeopleSingle.getInstance();
+<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612704902591">let people = PeopleSingle.getInstance();
 people.say();
 </textarea>
 <h2 id="饿汉单例模式">饿汉单例模式</h2>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612695531170">复制</button><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PeopleSingle</span> </span>{
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612699855101">复制</button><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PeopleSingle</span> </span>{
   <span class="hljs-comment">/**核心 - 一个接收实例的静态成员，直接创建好实例 */</span>
   <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> people: PeopleSingle = <span class="hljs-keyword">new</span> PeopleSingle(<span class="hljs-string">&#x27;金闪闪&#x27;</span>);
   <span class="hljs-keyword">private</span> name: <span class="hljs-built_in">string</span>;
@@ -204,7 +205,7 @@ people.say();
     <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`I&#x27;m <span class="hljs-subst">${<span class="hljs-built_in">this</span>.name}</span>.`</span>);
   }
 }
-<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612695531170">class PeopleSingle {
+<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612699855101">class PeopleSingle {
   /**核心 - 一个接收实例的静态成员，直接创建好实例 */
   private static people: PeopleSingle = new PeopleSingle('金闪闪');
   private name: string;
@@ -225,9 +226,9 @@ people.say();
 }
 </textarea>
 <p>测试</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612687938691">复制</button><span class="hljs-keyword">let</span> people = PeopleSingle.getInstance();
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612703730131">复制</button><span class="hljs-keyword">let</span> people = PeopleSingle.getInstance();
 people.say();
-<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612687938691">let people = PeopleSingle.getInstance();
+<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612703730131">let people = PeopleSingle.getInstance();
 people.say();
 </textarea>
 <p>举的例子不是特别好，但是意思是这个意思。</p>
