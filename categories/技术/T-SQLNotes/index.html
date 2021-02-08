@@ -38,7 +38,7 @@
   <header>Tuzilow的小站</header>
   <div class="info">
     <div class="avatar">
-      <img src="https://cdn.jsdelivr.net/gh/Tuzilow/Tuzilow.github.io/images/avatar.png" alt="头像">
+      <img src="https://cdn.jsdelivr.net/gh/Tuzilow/blog-image/img/20200914avatar.jpg" alt="头像">
     </div>
     <div class="author">Tuzilow</div>
     <div class="description">想要成为大佬</div>
@@ -131,7 +131,7 @@
     <div class="post-content">
       <nav id="toc" class="toc"><ol><li><a href="#if和while语句">if和while语句</a></li><li><a href="#自定义函数">自定义函数</a><ol><li><a href="#标量函数只返回一个基础类型数据的值">标量函数：只返回一个基础类型数据的值</a></li><li><a href="#表值函数返回一个table类型的结果集">表值函数：返回一个table类型的结果集</a><ol></ol></li><li><a href="#注意">注意</a></li></ol></li><li><a href="#存储过程">存储过程</a><ol><li><a href="#自定义存储过程">自定义存储过程</a></li><li><a href="#注意-1">注意:</a></li></ol></li><li><a href="#索引">索引</a></li><li><a href="#事务">事务</a></li><li><a href="#触发器">触发器</a></li></ol></nav><p>学习T-SQL时记录的笔记，记得并不全也不详细</p>
 <h2 id="if和while语句">if和while语句</h2>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612760056526">复制</button><span class="hljs-keyword">declare</span> <span class="hljs-variable">@age</span> <span class="hljs-type">int</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612755675631">复制</button><span class="hljs-keyword">declare</span> <span class="hljs-variable">@age</span> <span class="hljs-type">int</span>
 <span class="hljs-keyword">select</span> <span class="hljs-variable">@age</span> <span class="hljs-operator">=</span> DATEDIFF(<span class="hljs-keyword">year</span>,stuAge,getdate()) <span class="hljs-keyword">from</span> TbStudent <span class="hljs-keyword">where</span> stuName <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;孙悟空&#x27;</span>
 
 if(<span class="hljs-variable">@age</span><span class="hljs-operator">&gt;=</span><span class="hljs-number">18</span>)
@@ -142,7 +142,7 @@ if(<span class="hljs-variable">@age</span><span class="hljs-operator">&gt;=</spa
 <span class="hljs-keyword">begin</span>
 	print N<span class="hljs-string">&#x27;未成年&#x27;</span>
 <span class="hljs-keyword">end</span>
-<b class="name">SQL</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612760056526">declare @age int
+<b class="name">SQL</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612755675631">declare @age int
 select @age = DATEDIFF(year,stuAge,getdate()) from TbStudent where stuName = '孙悟空'
 
 if(@age>=18)
@@ -154,7 +154,7 @@ begin
 	print N'未成年'
 end
 </textarea>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612756517394">复制</button><span class="hljs-keyword">declare</span> <span class="hljs-variable">@sum</span> <span class="hljs-type">int</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612759011917">复制</button><span class="hljs-keyword">declare</span> <span class="hljs-variable">@sum</span> <span class="hljs-type">int</span>
 <span class="hljs-keyword">set</span> <span class="hljs-variable">@sum</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>
 <span class="hljs-keyword">declare</span> <span class="hljs-variable">@i</span> <span class="hljs-type">int</span>
 <span class="hljs-keyword">set</span> <span class="hljs-variable">@i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>
@@ -167,7 +167,7 @@ while(<span class="hljs-variable">@i</span> <span class="hljs-operator">&lt;=</s
 	<span class="hljs-keyword">set</span> <span class="hljs-variable">@i</span> <span class="hljs-operator">=</span> <span class="hljs-variable">@i</span> <span class="hljs-operator">+</span> <span class="hljs-number">1</span>
 <span class="hljs-keyword">end</span>
 print <span class="hljs-variable">@sum</span>
-<b class="name">SQL</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612756517394">declare @sum int
+<b class="name">SQL</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612759011917">declare @sum int
 set @sum = 0
 declare @i int
 set @i = 1
@@ -184,7 +184,7 @@ print @sum
 <h2 id="自定义函数">自定义函数</h2>
 <p>分为标量函数、表值函数（内联表值函数和多语句表值函数）</p>
 <h3 id="标量函数只返回一个基础类型数据的值">标量函数：只返回一个基础类型数据的值</h3>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612760971249">复制</button><span class="hljs-comment">-- 语法</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612760048986">复制</button><span class="hljs-comment">-- 语法</span>
 <span class="hljs-keyword">create</span> <span class="hljs-keyword">function</span> 函数名
 ([参数列表])  可以不写参数,先写变量名再写类型
 <span class="hljs-keyword">returns</span> 返回值类型
@@ -193,7 +193,7 @@ print @sum
 <span class="hljs-comment">--	······函数体语句</span>
 	<span class="hljs-keyword">return</span> 返回值
 <span class="hljs-keyword">end</span>
-<b class="name">SQL</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612760971249">-- 语法
+<b class="name">SQL</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612760048986">-- 语法
 create function 函数名
 ([参数列表])  可以不写参数,先写变量名再写类型
 returns 返回值类型
@@ -205,13 +205,13 @@ end
 </textarea>
 <h3 id="表值函数返回一个table类型的结果集">表值函数：返回一个table类型的结果集</h3>
 <h4>内联表值函数</h4>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612755068952">复制</button><span class="hljs-comment">-- 语法</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612756106262">复制</button><span class="hljs-comment">-- 语法</span>
 <span class="hljs-keyword">create</span> <span class="hljs-keyword">function</span> 函数名
 ([参数名])
 <span class="hljs-keyword">returns</span> <span class="hljs-keyword">table</span>
 <span class="hljs-keyword">as</span>
 <span class="hljs-keyword">return</span> (一条<span class="hljs-keyword">select</span>语句)
-<b class="name">SQL</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612755068952">-- 语法
+<b class="name">SQL</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612756106262">-- 语法
 create function 函数名
 ([参数名])
 returns table
@@ -220,7 +220,7 @@ return (一条select语句)
 </textarea>
 <h4>多语句表值函数</h4>
 <p>多语句表值函数可以看作是标量函数和内联表值函数的结合体</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612754226681">复制</button><span class="hljs-comment">-- 语法</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612756217681">复制</button><span class="hljs-comment">-- 语法</span>
 <span class="hljs-keyword">create</span> <span class="hljs-keyword">function</span> 函数名([参数列表])
 <span class="hljs-keyword">returns</span> 表变量名 <span class="hljs-keyword">table</span>
 (表变量的字段定义)
@@ -229,7 +229,7 @@ return (一条select语句)
 	<span class="hljs-keyword">SQL</span>
 	<span class="hljs-keyword">return</span> 这里啥都不写
 <span class="hljs-keyword">end</span>
-<b class="name">SQL</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612754226681">-- 语法
+<b class="name">SQL</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612756217681">-- 语法
 create function 函数名([参数列表])
 returns 表变量名 table
 (表变量的字段定义)
@@ -250,13 +250,13 @@ end
 <p>存储过程时存储在服务器上的一组T-SQL语句的集合，用来完成一个特定功能。
 分为系统存储过程(系统自带)和自定义存储过程</p>
 <h3 id="自定义存储过程">自定义存储过程</h3>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612759960019">复制</button><span class="hljs-comment">-- 语法</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612755325924">复制</button><span class="hljs-comment">-- 语法</span>
 <span class="hljs-keyword">create</span> <span class="hljs-keyword">procedure</span>(或proc) 存储过程名(up_)
 [参数列表] <span class="hljs-comment">--这里的参数列表不能使用圆括号</span>
 <span class="hljs-keyword">begin</span>
 	存储过程代码
 <span class="hljs-keyword">end</span>
-<b class="name">SQL</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612759960019">-- 语法
+<b class="name">SQL</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612755325924">-- 语法
 create procedure(或proc) 存储过程名(up_)
 [参数列表] --这里的参数列表不能使用圆括号
 begin
@@ -282,11 +282,11 @@ end
 <h2 id="事务">事务</h2>
 <p>事务时并发控制的单位，他是用户定义的一个操作，这些操作要么都做要么都不做，不可分割。
 分为：SQL Server事务和ADO.NET事务</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612761138156">复制</button><span class="hljs-comment">-- 语法</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612757748296">复制</button><span class="hljs-comment">-- 语法</span>
 <span class="hljs-keyword">begin</span> tran  <span class="hljs-comment">--开始一个事务操作</span>
 <span class="hljs-keyword">commit</span> tran <span class="hljs-comment">--提交</span>
 <span class="hljs-keyword">rollback</span>    <span class="hljs-comment">--回滚</span>
-<b class="name">SQL</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612761138156">-- 语法
+<b class="name">SQL</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612757748296">-- 语法
 begin tran  --开始一个事务操作
 commit tran --提交
 rollback    --回滚
@@ -301,7 +301,7 @@ rollback    --回滚
 <li>只能在触发器中访问</li>
 <li>触发器是附着在一张表上的</li>
 </ul>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612752732175">复制</button><span class="hljs-comment">-- 语法</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612756579543">复制</button><span class="hljs-comment">-- 语法</span>
 <span class="hljs-keyword">create</span> <span class="hljs-keyword">trigger</span> 触发器名字
 <span class="hljs-keyword">on</span> 表名
 after(或<span class="hljs-keyword">for</span>) 之后触发 <span class="hljs-operator">/</span> instead <span class="hljs-keyword">of</span> 之前触发 [<span class="hljs-keyword">insert</span><span class="hljs-operator">/</span><span class="hljs-keyword">delete</span><span class="hljs-operator">/</span><span class="hljs-keyword">update</span>]
@@ -309,7 +309,7 @@ after(或<span class="hljs-keyword">for</span>) 之后触发 <span class="hljs-o
 <span class="hljs-keyword">begin</span>
 <span class="hljs-comment">-- ······</span>
 <span class="hljs-keyword">end</span>
-<b class="name">SQL</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612752732175">-- 语法
+<b class="name">SQL</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612756579543">-- 语法
 create trigger 触发器名字
 on 表名
 after(或for) 之后触发 / instead of 之前触发 [insert/delete/update]
@@ -319,7 +319,7 @@ begin
 end
 </textarea>
 <p>触发器的触发条件：insert，delete，update</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612755929627">复制</button><span class="hljs-keyword">create</span> <span class="hljs-keyword">trigger</span> tr_Bank_insert
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612754679313">复制</button><span class="hljs-keyword">create</span> <span class="hljs-keyword">trigger</span> tr_Bank_insert
 <span class="hljs-keyword">on</span> Bank
 after <span class="hljs-keyword">insert</span>
 <span class="hljs-keyword">as</span>
@@ -343,7 +343,7 @@ after <span class="hljs-keyword">delete</span>
 <span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> BankBak
 
 <span class="hljs-keyword">delete</span> <span class="hljs-keyword">from</span> Bank <span class="hljs-keyword">where</span> id <span class="hljs-operator">=</span> <span class="hljs-number">3</span>
-<b class="name">SQL</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612755929627">create trigger tr_Bank_insert
+<b class="name">SQL</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612754679313">create trigger tr_Bank_insert
 on Bank
 after insert
 as

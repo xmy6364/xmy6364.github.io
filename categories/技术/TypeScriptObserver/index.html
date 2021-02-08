@@ -38,7 +38,7 @@
   <header>Tuzilow的小站</header>
   <div class="info">
     <div class="avatar">
-      <img src="https://cdn.jsdelivr.net/gh/Tuzilow/Tuzilow.github.io/images/avatar.png" alt="头像">
+      <img src="https://cdn.jsdelivr.net/gh/Tuzilow/blog-image/img/20200914avatar.jpg" alt="头像">
     </div>
     <div class="author">Tuzilow</div>
     <div class="description">想要成为大佬</div>
@@ -138,7 +138,7 @@
 <h3 id="subject部分">Subject部分</h3>
 <p>Subject类所具有的公共部分是对订阅者的管理和向所有订阅者发布消息，而具体Subject所负责的业务逻辑需要放到各自的Subject类中。</p>
 <p><strong>Subject接口</strong></p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612754789787">复制</button><span class="hljs-keyword">interface</span> Subject {
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612759950440">复制</button><span class="hljs-keyword">interface</span> Subject {
   <span class="hljs-comment">// 添加观察者</span>
   attach(observer: Observer): <span class="hljs-built_in">void</span>;
   <span class="hljs-comment">// 移除观察者</span>
@@ -146,7 +146,7 @@
   <span class="hljs-comment">// 通知所有观察者</span>
   notify(): <span class="hljs-built_in">void</span>;
 }
-<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612754789787">interface Subject {
+<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612759950440">interface Subject {
   // 添加观察者
   attach(observer: Observer): void;
   // 移除观察者
@@ -156,7 +156,7 @@
 }
 </textarea>
 <p><strong>具体Subject类</strong></p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612759731735">复制</button><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ConcreteSubject</span> <span class="hljs-title">implements</span> <span class="hljs-title">Subject</span> </span>{
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612761438222">复制</button><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ConcreteSubject</span> <span class="hljs-title">implements</span> <span class="hljs-title">Subject</span> </span>{
   <span class="hljs-comment">// 发布者状态，测试使用</span>
   <span class="hljs-keyword">public</span> state: <span class="hljs-built_in">number</span>;
 
@@ -199,7 +199,7 @@
     <span class="hljs-built_in">this</span>.notify();
   }
 }
-<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612759731735">class ConcreteSubject implements Subject {
+<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612761438222">class ConcreteSubject implements Subject {
   // 发布者状态，测试使用
   public state: number;
 
@@ -246,17 +246,17 @@
 <h3 id="observer部分">Observer部分</h3>
 <p>观察者只需要根据发布者的发出的消息来判断自己是否需要做出回应即可。</p>
 <p><strong>Observer接口</strong></p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612760243879">复制</button><span class="hljs-keyword">interface</span> Observer {
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612753376560">复制</button><span class="hljs-keyword">interface</span> Observer {
   <span class="hljs-comment">// 对发布者发出的更新消息作出回应</span>
   update(subject: Subject): <span class="hljs-built_in">void</span>;
 }
-<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612760243879">interface Observer {
+<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612753376560">interface Observer {
   // 对发布者发出的更新消息作出回应
   update(subject: Subject): void;
 }
 </textarea>
 <p><strong>具体Observer类</strong></p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612755627846">复制</button><span class="hljs-comment">//具体观察者A</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612761614245">复制</button><span class="hljs-comment">//具体观察者A</span>
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ConcreteObserverA</span> <span class="hljs-title">implements</span> <span class="hljs-title">Observer</span> </span>{
   <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-title">update</span>(<span class="hljs-params">subject: ConcreteSubject</span>)</span> {
     <span class="hljs-keyword">if</span> (subject.state &lt;= <span class="hljs-number">5</span>) {
@@ -273,7 +273,7 @@
     }
   }
 }
-<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612755627846">//具体观察者A
+<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612761614245">//具体观察者A
 class ConcreteObserverA implements Observer {
   public update(subject: ConcreteSubject) {
     if (subject.state <= 5) {
@@ -293,7 +293,7 @@ class ConcreteObserverB implements Observer {
 </textarea>
 <h3 id="测试代码">测试代码</h3>
 <p>因为是随机数，可能会得不到想要的结果，可以多尝试几次</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612761299954">复制</button><span class="hljs-keyword">const</span> subject = <span class="hljs-keyword">new</span> ConcreteSubject();
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612759876562">复制</button><span class="hljs-keyword">const</span> subject = <span class="hljs-keyword">new</span> ConcreteSubject();
 
 <span class="hljs-keyword">const</span> observerA = <span class="hljs-keyword">new</span> ConcreteObserverA();
 subject.attach(observerA);
@@ -306,7 +306,7 @@ subject.someLogic();
 subject.detach(observerB);
 
 subject.someLogic();
-<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612761299954">const subject = new ConcreteSubject();
+<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612759876562">const subject = new ConcreteSubject();
 
 const observerA = new ConcreteObserverA();
 subject.attach(observerA);
