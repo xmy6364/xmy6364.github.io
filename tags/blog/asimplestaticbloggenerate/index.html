@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="author" content="Tuzilow">
+    <meta name="description" content="想要成为大佬">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+
+    <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.5.0/styles/default.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.5.0/styles/github-gist.min.css">
+    <link rel="stylesheet" href="/assets/lib/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/css/layout.css" />
+    <script defer src="https://cdn.bootcdn.net/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"></script>
+    <script defer src="/assets/js/copyCode.js"></script>
+    <script defer src="/assets/js/backTop.js"></script>
+    <script defer src="/assets/js/tool.js"></script>
+
+    
+  <link rel="stylesheet" href="/assets/css/page.css" />
+  <link rel="stylesheet" href="/assets/css/sidebar.css" />
+  <link rel="stylesheet" href="/assets/css/footer.css" />
+  <link rel="stylesheet" href="/assets/css/post.css" />
+  <script defer src="/assets/js/backHome.js"></script>
+  <script defer src="/assets/js/toc.js"></script>
+  <script defer src="/assets/js/copyright.js"></script>
+
+
+    <title>实现一个简单的静态博客生成器</title>
+  </head>
+  <body>
+    <div class="container">
+      <aside>
+        
+  <div class="sidebar">
+  <header>Tuzilow的小站</header>
+  <div class="info">
+    <div class="avatar">
+      <img src="https://cdn.jsdelivr.net/gh/Tuzilow/Tuzilow.github.io/images/avatar.png" alt="头像">
+    </div>
+    <div class="author">Tuzilow</div>
+    <div class="description">想要成为大佬</div>
+    <div class="about">
+      <a href="/about">about me.</a>
+    </div>
+  </div>
+  <div class="links">
+    <ul>
+    
+      <li class="links-item">
+        <a href="https://github.com/Tuzilow" target="_blank">
+          <i class="fa fa-github-alt" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="links-item">
+        <a href="tencent://message/?uin=1176281967" target="_blank">
+          <i class="fa fa-qq" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+    </ul>
+  </div>
+  <nav>
+    <ul>
+    
+      <li class="nav-item">
+        <a href="/archives">
+          <span class="nav-item__count">28</span>
+          <span class="nav-item__label">归档</span>
+        </a>
+      </li>
+    
+      <li class="nav-item">
+        <a href="/categories">
+          <span class="nav-item__count">2</span>
+          <span class="nav-item__label">分类</span>
+        </a>
+      </li>
+    
+      <li class="nav-item">
+        <a href="/tags">
+          <span class="nav-item__count">40</span>
+          <span class="nav-item__label">标签</span>
+        </a>
+      </li>
+    
+    </ul>
+  </nav>
+  <div class="catalogue" id="catalogue"></div>
+</div>
+
+      </aside>
+      <main>
+        
+  <div class="post">
+    <div class="post-front">
+      <h1 class="post-front__title">实现一个简单的静态博客生成器</h1>
+      <div class="post-front__desc">
+        
+        <p class="post-front__desc-date">
+          <i class="fa fa-calendar" aria-hidden="true"></i>
+          2021/02/07 19:55:00
+        </p>
+        
+        
+        <p class="post-front__desc-category">
+          <i class="fa fa-folder-o" aria-hidden="true"></i>
+          <a href="/categories/技术">
+            技术
+          </a>
+        </p>
+        
+          <div class="post-front__desc-tags">
+          
+          <a href="/tags/nodejs">
+            <i class="fa fa-tag" aria-hidden="true"></i>
+            nodejs
+          </a>
+          
+          <a href="/tags/javascript">
+            <i class="fa fa-tag" aria-hidden="true"></i>
+            javascript
+          </a>
+          
+          <a href="/tags/blog">
+            <i class="fa fa-tag" aria-hidden="true"></i>
+            blog
+          </a>
+          
+          <a href="/tags/website">
+            <i class="fa fa-tag" aria-hidden="true"></i>
+            website
+          </a>
+          
+          <a href="/tags/cli">
+            <i class="fa fa-tag" aria-hidden="true"></i>
+            cli
+          </a>
+          
+        </div>
+      </div>
+    </div>
+    <div class="post-content">
+      <nav id="toc" class="toc"><ol><li><a href="#明确需求">明确需求</a></li><li><a href="#开始编写">开始编写</a><ol><li><a href="#安装依赖">安装依赖</a></li><li><a href="#搭建项目结构">搭建项目结构</a></li><li><a href="#crnjs">crn.js</a></li><li><a href="#init">init</a></li><li><a href="#new">new</a></li><li><a href="#build">build</a></li><li><a href="#server">server</a></li></ol></li><li><a href="#参考文章">参考文章</a></li></ol></nav><p>作为一名程序员，写博客是积累知识、提升水平必不可少的一个方法。我们写博客主要有三种方法，一种是使用掘金、博客园、CSDN等博客网站，第二种是自己搭建网站，存放自己的博客，第三种就是使用静态博客生成器，将生成的网页部署到服务器或者github pages、gitee pages等服务上。</p>
+<p>这三种方法中，第一种自由度太低，并且定制样式很麻烦；第二种每写一篇博客都要新建个页面，非常麻烦。因此我选择了第三种方法，在使用了hexo、vuepress，gridea等多种静态博客生成器后，我决定自己写一个来提升自己的能力。</p>
+<blockquote>
+<p>项目地址：<a href="https://github.com/Tuzilow/CoinRailgun">https://github.com/Tuzilow/CoinRailgun</a></p>
+</blockquote>
+<h2 id="明确需求">明确需求</h2>
+<p>首先我们要明确需求，确定我们想要的效果</p>
+<ol>
+<li>初始化博客文件夹，载入模板<code>crn init</code></li>
+<li>根据模板创建markdown文件，<code>crn new &quot;Hello CoinRailgun&quot;</code></li>
+<li>根据markdown文件生成html文件，<code>crn build</code></li>
+<li>本地运行网站，<code>crn server</code></li>
+</ol>
+<h2 id="开始编写">开始编写</h2>
+<h3 id="安装依赖">安装依赖</h3>
+<p>根据上面我们分析出来的需求，确定出我们所需要的依赖，并且安装好他们</p>
+<ul>
+<li><code>art-template</code>编写模板所用的模板引擎</li>
+<li><code>commander</code>用来编写cli</li>
+<li><code>dayjs</code>处理时间</li>
+<li><code>front-matter</code>处理markdown顶部的yml声明</li>
+<li><code>fs-extra</code>fs的扩充模块</li>
+<li><code>glob</code>匹配指定文件名</li>
+<li><code>highlight.js</code>高亮代码块</li>
+<li><code>koa</code>和<code>koa-static</code>启动本地服务</li>
+<li><code>markdown-it</code>、<code>markdown-it-anchor</code>、<code>markdown-it-toc-done-right</code>解析markdown</li>
+<li><code>uslug</code>解析锚点的汉字</li>
+</ul>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612760989789">复制</button><span class="hljs-string">&quot;dependencies&quot;</span>: {
+  <span class="hljs-attr">&quot;art-template&quot;</span>: <span class="hljs-string">&quot;^4.13.2&quot;</span>,
+  <span class="hljs-attr">&quot;commander&quot;</span>: <span class="hljs-string">&quot;^7.0.0&quot;</span>,
+  <span class="hljs-attr">&quot;dayjs&quot;</span>: <span class="hljs-string">&quot;^1.10.4&quot;</span>,
+  <span class="hljs-attr">&quot;front-matter&quot;</span>: <span class="hljs-string">&quot;^4.0.2&quot;</span>,
+  <span class="hljs-attr">&quot;fs-extra&quot;</span>: <span class="hljs-string">&quot;^9.1.0&quot;</span>,
+  <span class="hljs-attr">&quot;glob&quot;</span>: <span class="hljs-string">&quot;^7.1.6&quot;</span>,
+  <span class="hljs-attr">&quot;highlight.js&quot;</span>: <span class="hljs-string">&quot;^10.5.0&quot;</span>,
+  <span class="hljs-attr">&quot;koa&quot;</span>: <span class="hljs-string">&quot;^2.13.1&quot;</span>,
+  <span class="hljs-attr">&quot;koa-static&quot;</span>: <span class="hljs-string">&quot;^5.0.0&quot;</span>,
+  <span class="hljs-attr">&quot;markdown-it&quot;</span>: <span class="hljs-string">&quot;^12.0.4&quot;</span>,
+  <span class="hljs-attr">&quot;markdown-it-anchor&quot;</span>: <span class="hljs-string">&quot;^7.0.1&quot;</span>,
+  <span class="hljs-attr">&quot;markdown-it-toc-done-right&quot;</span>: <span class="hljs-string">&quot;^4.2.0&quot;</span>,
+  <span class="hljs-attr">&quot;uslug&quot;</span>: <span class="hljs-string">&quot;^1.0.4&quot;</span>
+}
+<b class="name">json</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612760989789">"dependencies": {
+  "art-template": "^4.13.2",
+  "commander": "^7.0.0",
+  "dayjs": "^1.10.4",
+  "front-matter": "^4.0.2",
+  "fs-extra": "^9.1.0",
+  "glob": "^7.1.6",
+  "highlight.js": "^10.5.0",
+  "koa": "^2.13.1",
+  "koa-static": "^5.0.0",
+  "markdown-it": "^12.0.4",
+  "markdown-it-anchor": "^7.0.1",
+  "markdown-it-toc-done-right": "^4.2.0",
+  "uslug": "^1.0.4"
+}
+</textarea>
+<h3 id="搭建项目结构">搭建项目结构</h3>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612759511199">复制</button>.
+├─ bin
+│    └─ crn.js  <span class="hljs-comment"># 执行文件</span>
+├─ lib	<span class="hljs-comment"># crn.js调用的各个函数</span>
+│    ├─ build.js
+│    ├─ clean.js
+│    ├─ new.js
+│    ├─ preview.js
+│    └─ init.js
+├─ package.json
+└─ template <span class="hljs-comment"># 模板</span>
+       ├─ site.config.json <span class="hljs-comment"># 配置文件</span>
+       └─ theme <span class="hljs-comment"># 主题</span>
+              └─ default <span class="hljs-comment"># 默认主题</span>
+                     ├─ assets
+                     └─ layout
+<b class="name">bash</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612759511199">.
+├─ bin
+│    └─ crn.js  # 执行文件
+├─ lib	# crn.js调用的各个函数
+│    ├─ build.js
+│    ├─ clean.js
+│    ├─ new.js
+│    ├─ preview.js
+│    └─ init.js
+├─ package.json
+└─ template # 模板
+       ├─ site.config.json # 配置文件
+       └─ theme # 主题
+              └─ default # 默认主题
+                     ├─ assets
+                     └─ layout
+</textarea>
+<h3 id="crnjs">crn.js</h3>
+<p>同样，根据需求将各个命令、命令的参数和说明先写出来</p>
+<p>关于<code>commander</code>具体如何使用，可以查看<a href="https://github.com/tj/commander.js/blob/master/Readme_zh-CN.md">commander文档</a></p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612756174471">复制</button><span class="hljs-meta">#! /usr/bin/env node</span>
+
+<span class="hljs-keyword">const</span> program = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;commander&#x27;</span>);
+<span class="hljs-keyword">const</span> version = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;../package.json&#x27;</span>).version;
+
+program
+  .version(version)
+  .command(<span class="hljs-string">&#x27;init [dir]&#x27;</span>)
+  .description(<span class="hljs-string">&#x27;初始化博客&#x27;</span>)
+  .action(<span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;../lib/init&#x27;</span>));
+
+program
+  .command(<span class="hljs-string">&#x27;new &lt;name&gt;&#x27;</span>)
+  .description(<span class="hljs-string">&#x27;创建新的文章&#x27;</span>)
+  .action(<span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;../lib/new.js&#x27;</span>));
+
+program
+  .command(<span class="hljs-string">&#x27;server [dir]&#x27;</span>)
+  .description(<span class="hljs-string">&#x27;本地预览网站&#x27;</span>)
+  .option(<span class="hljs-string">&#x27;-d, --dir &lt;dir&gt;&#x27;</span>, <span class="hljs-string">&#x27;build时输出的目录&#x27;</span>)
+  .action(<span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;../lib/preview.js&#x27;</span>));
+
+program
+  .command(<span class="hljs-string">&#x27;build [dir]&#x27;</span>)
+  .description(<span class="hljs-string">&#x27;将文章渲染为html&#x27;</span>)
+  .option(<span class="hljs-string">&#x27;-o, --output &lt;dir&gt;&#x27;</span>, <span class="hljs-string">&#x27;输出目录&#x27;</span>)
+  .action(<span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;../lib/build&#x27;</span>));
+
+program
+  .command(<span class="hljs-string">&#x27;clean&#x27;</span>)
+  .description(<span class="hljs-string">&#x27;清空build出来的静态文件&#x27;</span>)
+  .option(<span class="hljs-string">&#x27;-d, --dir &lt;dir&gt;&#x27;</span>, <span class="hljs-string">&#x27;build时输出的目录&#x27;</span>)
+  .action(<span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;../lib/clean.js&#x27;</span>));
+
+program.parse(process.argv);
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612756174471">#! /usr/bin/env node
+
+const program = require('commander');
+const version = require('../package.json').version;
+
+program
+  .version(version)
+  .command('init [dir]')
+  .description('初始化博客')
+  .action(require('../lib/init'));
+
+program
+  .command('new <name>')
+  .description('创建新的文章')
+  .action(require('../lib/new.js'));
+
+program
+  .command('server [dir]')
+  .description('本地预览网站')
+  .option('-d, --dir <dir>', 'build时输出的目录')
+  .action(require('../lib/preview.js'));
+
+program
+  .command('build [dir]')
+  .description('将文章渲染为html')
+  .option('-o, --output <dir>', '输出目录')
+  .action(require('../lib/build'));
+
+program
+  .command('clean')
+  .description('清空build出来的静态文件')
+  .option('-d, --dir <dir>', 'build时输出的目录')
+  .action(require('../lib/clean.js'));
+
+program.parse(process.argv);
+</textarea>
+<h3 id="init">init</h3>
+<p>初始化的时候可以传入一个目录，表示准备初始化的目录，这里我用了<code>ES2020</code>的新语法<code>dir = dir ?? '.'</code>，当<code>dir</code>为<code>null</code>或<code>undefined</code>时，使用问号右边的值。</p>
+<p>在初始化的时候，需要明确好用户使用的目录应该是什么样的</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612752554158">复制</button>Blog
+├─ build
+├─ site.config.json
+├─ <span class="hljs-built_in">source</span>
+│    └─ _posts
+│           └─ blog.md
+└─ theme
+       └─ default
+              ├─ assets
+              └─ layout
+<b class="name">bash</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612752554158">Blog
+├─ build
+├─ site.config.json
+├─ source
+│    └─ _posts
+│           └─ blog.md
+└─ theme
+       └─ default
+              ├─ assets
+              └─ layout
+</textarea>
+<p>将预先准备好的模板根据设计的目录拷贝到目标目录下，而不是直接调用项目中的，因为拷贝到目标目录下后，使用者就可以更方便的自定义模板，可以更方便的写自己的样式。</p>
+<p>关于<code>fs-extra</code>模块的各种API可以查看<a href="https://github.com/jprichardson/node-fs-extra">fs-extra文档</a></p>
+<p>关于<code>dayjs</code>可以查看<a href="https://dayjs.gitee.io/zh-CN/">dayjs文档</a></p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612755315855">复制</button><span class="hljs-keyword">const</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;path&#x27;</span>);
+<span class="hljs-keyword">const</span> fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;fs-extra&#x27;</span>);
+<span class="hljs-keyword">const</span> dayjs = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;dayjs&#x27;</span>);
+
+<span class="hljs-built_in">module</span>.exports = <span class="hljs-function">(<span class="hljs-params">dir</span>) =&gt;</span> {
+  dir = dir ?? <span class="hljs-string">&#x27;.&#x27;</span>;
+
+  <span class="hljs-keyword">const</span> templateDir = path.resolve(__dirname, <span class="hljs-string">&#x27;..&#x27;</span>, <span class="hljs-string">&#x27;template&#x27;</span>);
+  fs.copySync(templateDir, path.resolve(dir));
+  fs.ensureDirSync(path.resolve(dir, <span class="hljs-string">&#x27;source&#x27;</span>));
+
+  newPost(dir);
+};
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">newPost</span>(<span class="hljs-params">dir</span>) </span>{
+  <span class="hljs-keyword">const</span> firstPost = [
+    <span class="hljs-string">&#x27;---&#x27;</span>,
+    <span class="hljs-string">&#x27;title: Hello World&#x27;</span>,
+    <span class="hljs-string">&#x27;date: &#x27;</span> + dayjs().format(<span class="hljs-string">&#x27;YYYY/MM/DD HH:mm:ss&#x27;</span>),
+    <span class="hljs-string">&#x27;tags: &#x27;</span> + <span class="hljs-string">&#x27;[blog,CoinRailgunn]&#x27;</span>,
+    <span class="hljs-string">&#x27;category: &#x27;</span> + <span class="hljs-string">&#x27;welcome&#x27;</span>,
+    <span class="hljs-string">&#x27;---&#x27;</span>,
+    <span class="hljs-string">&#x27;&#x27;</span>,
+    <span class="hljs-string">&#x27;Welcome to my blog, this is my first post&#x27;</span>,
+    <span class="hljs-string">&#x27;&#x27;</span>
+  ].join(<span class="hljs-string">&#x27;\n&#x27;</span>);
+
+  <span class="hljs-keyword">const</span> file = path.resolve(dir, <span class="hljs-string">&#x27;source&#x27;</span>, <span class="hljs-string">&#x27;_posts&#x27;</span>, <span class="hljs-string">&#x27;hello.md&#x27;</span>);
+  fs.outputFileSync(file, firstPost);
+
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;博客初始化完成，键入&#x27;crn new &lt;postName&gt;&#x27;即可创建新的文章&quot;</span>);
+}
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612755315855">const path = require('path');
+const fs = require('fs-extra');
+const dayjs = require('dayjs');
+
+module.exports = (dir) => {
+  dir = dir ?? '.';
+
+  const templateDir = path.resolve(__dirname, '..', 'template');
+  fs.copySync(templateDir, path.resolve(dir));
+  fs.ensureDirSync(path.resolve(dir, 'source'));
+
+  newPost(dir);
+};
+
+function newPost(dir) {
+  const firstPost = [
+    '---',
+    'title: Hello World',
+    'date: ' + dayjs().format('YYYY/MM/DD HH:mm:ss'),
+    'tags: ' + '[blog,CoinRailgunn]',
+    'category: ' + 'welcome',
+    '---',
+    '',
+    'Welcome to my blog, this is my first post',
+    ''
+  ].join('\n');
+
+  const file = path.resolve(dir, 'source', '_posts', 'hello.md');
+  fs.outputFileSync(file, firstPost);
+
+  console.log("博客初始化完成，键入'crn new <postName>'即可创建新的文章");
+}
+</textarea>
+<h3 id="new">new</h3>
+<p>创建新文章的函数和初始化函数有部分的逻辑是相同的，这里我没有将他们封装起来，如果感兴趣的话你们可以试试。创建文章需要传入一个name，为创建的文章名，然后将其保存至<code>source/_post</code>下</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612755129695">复制</button><span class="hljs-keyword">const</span> fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;fs-extra&#x27;</span>);
+<span class="hljs-keyword">const</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;path&#x27;</span>);
+<span class="hljs-keyword">const</span> dayjs = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;dayjs&#x27;</span>);
+
+<span class="hljs-built_in">module</span>.exports = <span class="hljs-function">(<span class="hljs-params">name</span>) =&gt;</span> {
+  <span class="hljs-keyword">const</span> post = [
+    <span class="hljs-string">&#x27;---&#x27;</span>,
+    <span class="hljs-string">`title: <span class="hljs-subst">${name}</span>`</span>,
+    <span class="hljs-string">&#x27;date: &#x27;</span> + dayjs().format(<span class="hljs-string">&#x27;YYYY/MM/DD HH:mm:ss&#x27;</span>),
+    <span class="hljs-string">&#x27;tags: &#x27;</span> + <span class="hljs-string">&#x27;[blog]&#x27;</span>,
+    <span class="hljs-string">&#x27;category: &#x27;</span> + <span class="hljs-string">&#x27;code&#x27;</span>,
+    <span class="hljs-string">&#x27;---&#x27;</span>,
+    <span class="hljs-string">&#x27;&#x27;</span>,
+  ].join(<span class="hljs-string">&#x27;\n&#x27;</span>);
+
+  <span class="hljs-keyword">const</span> file = path.resolve(<span class="hljs-string">&#x27;source&#x27;</span>, <span class="hljs-string">&#x27;_posts&#x27;</span>, <span class="hljs-string">`<span class="hljs-subst">${name}</span>.md`</span>);
+  fs.outputFileSync(file, post);
+
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`source/_posts/<span class="hljs-subst">${name}</span>.md 创建成功！`</span>);
+};
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612755129695">const fs = require('fs-extra');
+const path = require('path');
+const dayjs = require('dayjs');
+
+module.exports = (name) => {
+  const post = [
+    '---',
+    `title: ${name}`,
+    'date: ' + dayjs().format('YYYY/MM/DD HH:mm:ss'),
+    'tags: ' + '[blog]',
+    'category: ' + 'code',
+    '---',
+    '',
+  ].join('\n');
+
+  const file = path.resolve('source', '_posts', `${name}.md`);
+  fs.outputFileSync(file, post);
+
+  console.log(`source/_posts/${name}.md 创建成功！`);
+};
+</textarea>
+<h3 id="build">build</h3>
+<p>生成静态页是整个项目最关键的部分，因为代码很多这里讲一下我的思路，详细代码可以查看<a href="https://github.com/Tuzilow/CoinRailgun">项目仓库</a></p>
+<p>首先我们要设计好各个页面的url，以下为我的设计：</p>
+<ul>
+<li>首页：<code>/index.html</code>和<code>/page/1/index.html</code></li>
+<li>不同页码：<code>/page/页码/index.html</code></li>
+<li>文章页：<code>/categories/分类名/文章名/index.html</code></li>
+<li>关于我页面：<code>/about/index.html</code></li>
+<li>归档页：<code>/archives/index.html</code></li>
+<li>分类页：<code>/categories/index.html</code></li>
+<li>标签页：<code>/tags/index.html</code></li>
+<li>404页：<code>/404/index.html</code>（这个我忘了做了</li>
+</ul>
+<p>目前的浏览器会自动隐藏<code>index.html</code>，因此使用<code>目录名/index.html</code>的方式可以美化页面的地址栏</p>
+<p>第一步，根据设计好的url编写好各个页面<a href="https://github.com/Tuzilow/CoinRailgun/tree/main/template/theme/default/layout">模板</a>，这里我使用的是<a href="https://aui.github.io/art-template/zh-cn/docs/index.html">art-template</a></p>
+<ul>
+<li><code>template/theme/default/layout/layout.art</code></li>
+<li><code>template/theme/default/layout/page.art</code></li>
+<li>其他请查看<a href="https://github.com/Tuzilow/CoinRailgun/tree/main/template/theme/default/layout">CoinRailgun默认主题模板</a></li>
+</ul>
+<p>然后，一些网站的基础数据，比如author、keywords、description等，是不会发生改变的，因此需要将他们写在统一的配置文件里<a href="https://github.com/Tuzilow/CoinRailgun/blob/main/template/site.config.json">site.config.json</a>，下面是我的部分配置文件</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612752123944">复制</button>{
+  <span class="hljs-attr">&quot;basic&quot;</span>: {
+    <span class="hljs-attr">&quot;icon&quot;</span>: <span class="hljs-string">&quot;&quot;</span>,
+    <span class="hljs-attr">&quot;avatar&quot;</span>: <span class="hljs-string">&quot;&quot;</span>,
+    <span class="hljs-attr">&quot;title&quot;</span>: <span class="hljs-string">&quot;&quot;</span>,
+    <span class="hljs-attr">&quot;author&quot;</span>: <span class="hljs-string">&quot;&quot;</span>,
+    <span class="hljs-attr">&quot;description&quot;</span>: <span class="hljs-string">&quot;&quot;</span>,
+    <span class="hljs-attr">&quot;keywords&quot;</span>: []
+  },
+  <span class="hljs-attr">&quot;theme&quot;</span>: {
+    <span class="hljs-attr">&quot;name&quot;</span>: <span class="hljs-string">&quot;default&quot;</span>,
+    <span class="hljs-attr">&quot;highlight&quot;</span>: <span class="hljs-string">&quot;github-gist&quot;</span>,
+    <span class="hljs-attr">&quot;pageSize&quot;</span>: <span class="hljs-number">7</span>,
+    <span class="hljs-attr">&quot;exclude&quot;</span>: [
+      <span class="hljs-string">&quot;life&quot;</span>
+    ],
+    <span class="hljs-attr">&quot;friends&quot;</span>: [],
+    <span class="hljs-attr">&quot;about&quot;</span>: {
+      <span class="hljs-attr">&quot;label&quot;</span>: <span class="hljs-string">&quot;about me.&quot;</span>,
+      <span class="hljs-attr">&quot;url&quot;</span>: <span class="hljs-string">&quot;/about&quot;</span>
+    },
+    <span class="hljs-attr">&quot;nav&quot;</span>: [
+      {
+        <span class="hljs-attr">&quot;name&quot;</span>: <span class="hljs-string">&quot;archives&quot;</span>,
+        <span class="hljs-attr">&quot;label&quot;</span>: <span class="hljs-string">&quot;归档&quot;</span>,
+        <span class="hljs-attr">&quot;url&quot;</span>: <span class="hljs-string">&quot;/archives&quot;</span>
+      },
+      {
+        <span class="hljs-attr">&quot;name&quot;</span>: <span class="hljs-string">&quot;categories&quot;</span>,
+        <span class="hljs-attr">&quot;label&quot;</span>: <span class="hljs-string">&quot;分类&quot;</span>,
+        <span class="hljs-attr">&quot;url&quot;</span>: <span class="hljs-string">&quot;/categories&quot;</span>
+      },
+      {
+        <span class="hljs-attr">&quot;name&quot;</span>: <span class="hljs-string">&quot;tags&quot;</span>,
+        <span class="hljs-attr">&quot;label&quot;</span>: <span class="hljs-string">&quot;标签&quot;</span>,
+        <span class="hljs-attr">&quot;url&quot;</span>: <span class="hljs-string">&quot;/tags&quot;</span>
+      }
+    ],
+    <span class="hljs-attr">&quot;links&quot;</span>: [],
+    <span class="hljs-attr">&quot;footer&quot;</span>: {
+      <span class="hljs-attr">&quot;beian&quot;</span>: <span class="hljs-string">&quot;&quot;</span>,
+      <span class="hljs-attr">&quot;copyright&quot;</span>: {
+        <span class="hljs-attr">&quot;year&quot;</span>: <span class="hljs-string">&quot;2019-2021&quot;</span>
+      }
+    }
+  },
+  <span class="hljs-attr">&quot;dev_server&quot;</span>: {
+    <span class="hljs-attr">&quot;port&quot;</span>: <span class="hljs-number">3000</span>
+  }
+}
+<b class="name">json</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612752123944">{
+  "basic": {
+    "icon": "",
+    "avatar": "",
+    "title": "",
+    "author": "",
+    "description": "",
+    "keywords": []
+  },
+  "theme": {
+    "name": "default",
+    "highlight": "github-gist",
+    "pageSize": 7,
+    "exclude": [
+      "life"
+    ],
+    "friends": [],
+    "about": {
+      "label": "about me.",
+      "url": "/about"
+    },
+    "nav": [
+      {
+        "name": "archives",
+        "label": "归档",
+        "url": "/archives"
+      },
+      {
+        "name": "categories",
+        "label": "分类",
+        "url": "/categories"
+      },
+      {
+        "name": "tags",
+        "label": "标签",
+        "url": "/tags"
+      }
+    ],
+    "links": [],
+    "footer": {
+      "beian": "",
+      "copyright": {
+        "year": "2019-2021"
+      }
+    }
+  },
+  "dev_server": {
+    "port": 3000
+  }
+}
+</textarea>
+<p>在根据markdown和模板生成html时，我们要确定模板上需要的数据，并且将配置文件和markdown的内容转换为模板上的数据</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612761865416">复制</button><span class="hljs-comment">&lt;!-- layout/post_item.art --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;post-item__title&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;{{url}}&quot;</span>&gt;</span>
+    {{title}}
+  <span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;post-item__desc&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;post-item__desc-date&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">i</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;fa fa-calendar&quot;</span> <span class="hljs-attr">aria-hidden</span>=<span class="hljs-string">&quot;true&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">i</span>&gt;</span>
+    {{date}}
+  <span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;post-item__desc-category&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">i</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;fa fa-folder-o&quot;</span> <span class="hljs-attr">aria-hidden</span>=<span class="hljs-string">&quot;true&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">i</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;/categories&quot;</span>&gt;</span>
+      {{category || &#x27;&#x27;}}
+    <span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;post-item__abstract&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;post-item__abstract-content&quot;</span>&gt;</span>{{@ abstracts}}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;more&quot;</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;display:none;&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;{{url}}&quot;</span>&gt;</span>查看更多<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;post-item__tags&quot;</span>&gt;</span>
+  {{each tags}}
+  <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;/tags&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">i</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;fa fa-tag&quot;</span> <span class="hljs-attr">aria-hidden</span>=<span class="hljs-string">&quot;true&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">i</span>&gt;</span>
+    {{$value}}
+  <span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+  {{/each}}
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<b class="name">html</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612761865416"><!-- layout/post_item.art -->
+<div class="post-item__title">
+  <a href="{{url}}">
+    {{title}}
+  </a>
+</div>
+<div class="post-item__desc">
+  <p class="post-item__desc-date">
+    <i class="fa fa-calendar" aria-hidden="true"></i>
+    {{date}}
+  </p>
+  <p class="post-item__desc-category">
+    <i class="fa fa-folder-o" aria-hidden="true"></i>
+    <a href="/categories">
+      {{category || ''}}
+    </a>
+  </p>
+</div>
+<div class="post-item__abstract">
+  <p class="post-item__abstract-content">{{@ abstracts}}</p>
+  <p class="more" style="display:none;">
+    <a href="{{url}}">查看更多</a>
+  </p>
+</div>
+<div class="post-item__tags">
+  {{each tags}}
+  <a href="/tags">
+    <i class="fa fa-tag" aria-hidden="true"></i>
+    {{$value}}
+  </a>
+  {{/each}}
+</div>
+</textarea>
+<p>以文章列表项为例，这个模板需要<code>title</code>、<code>date</code>、<code>category</code>、<code>url</code>、<code>abstracts</code>和<code>tags</code>，其中<code>url</code>是根据设计好的<code>/categories/分类名/文章名/index.html</code>生成出来的，其他的参数都是从markdown文件中解析出来的，并且这些参数都写在文件头部的yml配置中，而<code>abstracts</code>一般是使用<code>&lt;!--more--&gt;</code>分割出来。</p>
+<p>明确了以上内容后，我们就需要获取这些参数然后传递给模板渲染出来</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612758994580">复制</button><span class="hljs-keyword">const</span> template = fs.readFileSync(postTemplate, <span class="hljs-string">&#x27;utf-8&#x27;</span>);
+<span class="hljs-keyword">const</span> content = fs.readFileSync(fullPath, <span class="hljs-string">&#x27;utf-8&#x27;</span>);
+<span class="hljs-keyword">const</span> fm = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;front-matter&#x27;</span>);
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">renderAbstracts</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-comment">// ....</span>
+}
+
+<span class="hljs-keyword">const</span> postItem = art.render(template, {
+  ...fm(content).attributes,
+  <span class="hljs-attr">abstracts</span>: renderAbstracts(),
+});
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612758994580">const template = fs.readFileSync(postTemplate, 'utf-8');
+const content = fs.readFileSync(fullPath, 'utf-8');
+const fm = require('front-matter');
+
+function renderAbstracts() {
+  // ....
+}
+
+const postItem = art.render(template, {
+  ...fm(content).attributes,
+  abstracts: renderAbstracts(),
+});
+</textarea>
+<p>这样我们就得到了渲染后的文章列表项，然后再传入<code>post_list.art</code> 渲染出来文章列表后传入<code>page.art</code>中，与其他的数据相组合拿到完整的一个页面。渲染出页面后使用<code>fs.outputFileSync</code>将页面保存到一开始设计好的目录中<code>build/page/1/index.html</code></p>
+<p>大致思路就是这样，更多具体实现可以查看<a href="https://github.com/Tuzilow/CoinRailgun">项目仓库</a></p>
+<h3 id="server">server</h3>
+<p>生成所有页面后，就可以开启本地预览了，这里我使用的是<code>koa</code>，使用<code>express</code>或者其他的框架都是大差不差的。直接将build目录设置为静态资源即可访问。</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612757963261">复制</button><span class="hljs-keyword">const</span> Koa = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;koa&#x27;</span>);
+<span class="hljs-keyword">const</span> staticServe = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;koa-static&#x27;</span>);
+<span class="hljs-keyword">const</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;path&#x27;</span>);
+
+<span class="hljs-built_in">module</span>.exports = <span class="hljs-function">(<span class="hljs-params">dir, options</span>) =&gt;</span> {
+  dir = dir ?? <span class="hljs-string">&#x27;.&#x27;</span>;
+  <span class="hljs-keyword">const</span> app = <span class="hljs-keyword">new</span> Koa();
+
+  <span class="hljs-keyword">const</span> siteConfig = <span class="hljs-built_in">require</span>(path.resolve(dir, <span class="hljs-string">&#x27;site.config.json&#x27;</span>));
+
+  <span class="hljs-keyword">const</span> outputDir = path.resolve(dir, options.dir ?? <span class="hljs-string">&#x27;build&#x27;</span>);
+  app.use(staticServe(outputDir));
+
+  app.listen(siteConfig.dev_server.port, <span class="hljs-function">() =&gt;</span> {
+    <span class="hljs-built_in">console</span>.log(
+      <span class="hljs-string">`在浏览器中打开 http://localhost:<span class="hljs-subst">${siteConfig.dev_server.port}</span> 以预览网页`</span>
+    );
+  });
+};
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612757963261">const Koa = require('koa');
+const staticServe = require('koa-static');
+const path = require('path');
+
+module.exports = (dir, options) => {
+  dir = dir ?? '.';
+  const app = new Koa();
+
+  const siteConfig = require(path.resolve(dir, 'site.config.json'));
+
+  const outputDir = path.resolve(dir, options.dir ?? 'build');
+  app.use(staticServe(outputDir));
+
+  app.listen(siteConfig.dev_server.port, () => {
+    console.log(
+      `在浏览器中打开 http://localhost:${siteConfig.dev_server.port} 以预览网页`
+    );
+  });
+};
+</textarea>
+<p>这样我们就了解了制作一个静态博客生成器的思路和过程。</p>
+<h2 id="参考文章">参考文章</h2>
+<ul>
+<li><a href="https://qiankaijie.com/13.%E6%89%8B%E6%91%B8%E6%89%8B%E6%95%99%E4%BD%A0%E6%92%B8%E4%B8%80%E4%B8%AA%E9%9D%99%E6%80%81%E7%BD%91%E7%AB%99%E7%94%9F%E6%88%90%E5%99%A8.html">手摸手教你撸一个静态网站生成器</a></li>
+<li><a href="https://juejin.cn/post/6844903503651930119">自己动手撸一个静态博客生成器</a></li>
+</ul>
+
+    </div>
+    
+  </div>
+
+        <footer>
+        
+  <div class="footer">
+  
+  <div class="theme">
+    博客主题为 <a href="https://github.com/Tuzilow/CoinRailgun">CoinRailgun</a> 默认主题
+  </div>
+  <div class="copyright">
+    <span>© 2019-2021 Tuzilow.</span>
+    <span>Powered by <a href="https://github.com/Tuzilow/CoinRailgun">CoinRailgun</a></span>
+  </div>
+</div>
+
+        </footer>
+      </main>
+    </div>
+  </body>
+</html>

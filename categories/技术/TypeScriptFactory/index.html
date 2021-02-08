@@ -68,7 +68,7 @@
     
       <li class="nav-item">
         <a href="/archives">
-          <span class="nav-item__count">27</span>
+          <span class="nav-item__count">28</span>
           <span class="nav-item__label">归档</span>
         </a>
       </li>
@@ -82,7 +82,7 @@
     
       <li class="nav-item">
         <a href="/tags">
-          <span class="nav-item__count">35</span>
+          <span class="nav-item__count">40</span>
           <span class="nav-item__label">标签</span>
         </a>
       </li>
@@ -133,17 +133,17 @@
 <h2 id="简单工厂模式">简单工厂模式</h2>
 <p>简单工厂模式通常在业务比较简单的情况下使用，它有三个部分组成：工厂类、抽象产品类、具体产品类。</p>
 <p><strong>抽象产品类</strong></p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612703129554">复制</button><span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Pizza</span> </span>{
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612756133823">复制</button><span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Pizza</span> </span>{
   <span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> show(): <span class="hljs-built_in">void</span>;
   <span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> cut(): <span class="hljs-built_in">void</span>;
 }
-<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612703129554">abstract class Pizza {
+<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612756133823">abstract class Pizza {
   public abstract show(): void;
   public abstract cut(): void;
 }
 </textarea>
 <p><strong>具体产品类</strong></p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612700101584">复制</button><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">KFCPizza</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Pizza</span> </span>{
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612756359332">复制</button><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">KFCPizza</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Pizza</span> </span>{
   <span class="hljs-keyword">public</span> show(): <span class="hljs-built_in">void</span> {
     <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;This is KFCPizza!&#x27;</span>);
   }
@@ -160,7 +160,7 @@
     <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;Cut MCPizza!&#x27;</span>);
   }
 }
-<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612700101584">class KFCPizza extends Pizza {
+<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612756359332">class KFCPizza extends Pizza {
   public show(): void {
     console.log('This is KFCPizza!');
   }
@@ -179,7 +179,7 @@ class MCPizza extends Pizza {
 }
 </textarea>
 <p><strong>工厂类</strong></p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612699162225">复制</button><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PizzaFactory</span> </span>{
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612757360380">复制</button><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PizzaFactory</span> </span>{
   <span class="hljs-comment">/**
    * 静态工厂方法
    * <span class="hljs-doctag">@param </span>pizzaType 限制传入的参数为类，而非类的实例
@@ -196,7 +196,7 @@ class MCPizza extends Pizza {
     <span class="hljs-keyword">return</span> pizza;
   }
 }
-<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612699162225">class PizzaFactory {
+<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612757360380">class PizzaFactory {
   /**
    * 静态工厂方法
    * @param pizzaType 限制传入的参数为类，而非类的实例
@@ -215,12 +215,12 @@ class MCPizza extends Pizza {
 }
 </textarea>
 <p><strong>测试</strong></p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612705174670">复制</button><span class="hljs-keyword">let</span> pizza = PizzaFactory.createPizza(KFCPizza);
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612752385435">复制</button><span class="hljs-keyword">let</span> pizza = PizzaFactory.createPizza(KFCPizza);
 pizza.show();
 
 pizza = PizzaFactory.createPizza(MCPizza);
 pizza.show();
-<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612705174670">let pizza = PizzaFactory.createPizza(KFCPizza);
+<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612752385435">let pizza = PizzaFactory.createPizza(KFCPizza);
 pizza.show();
 
 pizza = PizzaFactory.createPizza(MCPizza);
@@ -230,17 +230,17 @@ pizza.show();
 <p>正常情况下，简单工厂模式每次增加新的产品都需要在工厂类中增加对应的逻辑，这样就违背了开闭原则（但因为ts和我举的例子的原因体现不出这个缺点）。工厂方法模式就解决了这个问题，同时它能更好的解决复杂的业务环境。</p>
 <p>工厂方法模式具有四个部分：抽象工厂类、具体工厂类、抽象产品类、具体产品类。</p>
 <p><strong>抽象产品类</strong></p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612699113106">复制</button><span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Pizza</span> </span>{
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612760296218">复制</button><span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Pizza</span> </span>{
   <span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> show(): <span class="hljs-built_in">void</span>;
   <span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> cut(): <span class="hljs-built_in">void</span>;
 }
-<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612699113106">abstract class Pizza {
+<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612760296218">abstract class Pizza {
   public abstract show(): void;
   public abstract cut(): void;
 }
 </textarea>
 <p><strong>具体产品类</strong></p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612696348704">复制</button><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">KFCPizza</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Pizza</span> </span>{
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612755679886">复制</button><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">KFCPizza</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Pizza</span> </span>{
   <span class="hljs-keyword">public</span> show(): <span class="hljs-built_in">void</span> {
     <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;This is KFCPizza!&#x27;</span>);
   }
@@ -257,7 +257,7 @@ pizza.show();
     <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;Cut MCPizza!&#x27;</span>);
   }
 }
-<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612696348704">class KFCPizza extends Pizza {
+<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612755679886">class KFCPizza extends Pizza {
   public show(): void {
     console.log('This is KFCPizza!');
   }
@@ -276,15 +276,15 @@ class MCPizza extends Pizza {
 }
 </textarea>
 <p><strong>抽象工厂类</strong></p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612697293974">复制</button><span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PizzaFactory</span> </span>{
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612757275068">复制</button><span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PizzaFactory</span> </span>{
   <span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> createPizza(): Pizza;
 }
-<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612697293974">abstract class PizzaFactory {
+<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612757275068">abstract class PizzaFactory {
   public abstract createPizza(): Pizza;
 }
 </textarea>
 <p><strong>具体工厂类</strong></p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612696271624">复制</button><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">KFCPizzaFactory</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">PizzaFactory</span> </span>{
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612753353731">复制</button><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">KFCPizzaFactory</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">PizzaFactory</span> </span>{
   <span class="hljs-keyword">public</span> createPizza(): Pizza {
     <span class="hljs-keyword">try</span> {
       <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> KFCPizza();
@@ -303,7 +303,7 @@ class MCPizza extends Pizza {
     }
   }
 }
-<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612696271624">class KFCPizzaFactory extends PizzaFactory {
+<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612753353731">class KFCPizzaFactory extends PizzaFactory {
   public createPizza(): Pizza {
     try {
       return new KFCPizza();
@@ -324,10 +324,10 @@ class MCPizzaFactory extends PizzaFactory {
 }
 </textarea>
 <p><strong>测试</strong></p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612705216566">复制</button><span class="hljs-keyword">let</span> factory: PizzaFactory = <span class="hljs-keyword">new</span> KFCPizzaFactory();
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612752219429">复制</button><span class="hljs-keyword">let</span> factory: PizzaFactory = <span class="hljs-keyword">new</span> KFCPizzaFactory();
 <span class="hljs-keyword">let</span> pizza = factory.createPizza();
 pizza.show();
-<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612705216566">let factory: PizzaFactory = new KFCPizzaFactory();
+<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612752219429">let factory: PizzaFactory = new KFCPizzaFactory();
 let pizza = factory.createPizza();
 pizza.show();
 </textarea>
@@ -346,7 +346,7 @@ pizza.show();
 </ul>
 <p>抽象工厂模式具有和工厂方法模式一样的四个部分：抽象工厂类、具体工厂类、抽象产品类、具体产品类。</p>
 <p><strong>抽象产品类</strong></p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612700978219">复制</button><span class="hljs-comment">// KFC产品父类</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612755290675">复制</button><span class="hljs-comment">// KFC产品父类</span>
 <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">KFCPizza</span> </span>{
   <span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> show(): <span class="hljs-built_in">void</span>;
   <span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> cut(): <span class="hljs-built_in">void</span>;
@@ -357,7 +357,7 @@ pizza.show();
   <span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> show(): <span class="hljs-built_in">void</span>;
   <span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> cut(): <span class="hljs-built_in">void</span>;
 }
-<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612700978219">// KFC产品父类
+<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612755290675">// KFC产品父类
 abstract class KFCPizza {
   public abstract show(): void;
   public abstract cut(): void;
@@ -370,7 +370,7 @@ abstract class MCPizza {
 }
 </textarea>
 <p><strong>具体产品类</strong></p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612704399601">复制</button><span class="hljs-comment">// 具体KFCPizza类</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612756147508">复制</button><span class="hljs-comment">// 具体KFCPizza类</span>
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">KFCFruitPizza</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">KFCPizza</span> </span>{
   <span class="hljs-keyword">public</span> show(): <span class="hljs-built_in">void</span> {
     <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;This is KFCFruitPizza!&#x27;</span>);
@@ -407,7 +407,7 @@ abstract class MCPizza {
     <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;Cut MCCheesePizza!&#x27;</span>);
   }
 }
-<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612704399601">// 具体KFCPizza类
+<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612756147508">// 具体KFCPizza类
 class KFCFruitPizza extends KFCPizza {
   public show(): void {
     console.log('This is KFCFruitPizza!');
@@ -446,17 +446,17 @@ class MCCheesePizza extends MCPizza {
 }
 </textarea>
 <p><strong>抽象工厂类</strong></p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612702244251">复制</button><span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PizzaFactory</span> </span>{
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612755792878">复制</button><span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PizzaFactory</span> </span>{
   <span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> createKFCPizza(): KFCPizza;
   <span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> createMCPizza(): MCPizza;
 }
-<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612702244251">abstract class PizzaFactory {
+<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612755792878">abstract class PizzaFactory {
   public abstract createKFCPizza(): KFCPizza;
   public abstract createMCPizza(): MCPizza;
 }
 </textarea>
 <p><strong>具体工厂类</strong></p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612696182402">复制</button><span class="hljs-comment">// 水果披萨工厂</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612757945977">复制</button><span class="hljs-comment">// 水果披萨工厂</span>
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FruitPizzaFactory</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">PizzaFactory</span> </span>{
   <span class="hljs-keyword">public</span> createKFCPizza(): KFCPizza {
     <span class="hljs-keyword">try</span> {
@@ -491,7 +491,7 @@ class MCCheesePizza extends MCPizza {
     }
   }
 }
-<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612696182402">// 水果披萨工厂
+<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612757945977">// 水果披萨工厂
 class FruitPizzaFactory extends PizzaFactory {
   public createKFCPizza(): KFCPizza {
     try {
@@ -528,10 +528,10 @@ class CheesePizzaFactory extends PizzaFactory {
 }
 </textarea>
 <p><strong>测试</strong></p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612696392435">复制</button><span class="hljs-keyword">let</span> factory: PizzaFactory = <span class="hljs-keyword">new</span> CheesePizzaFactory();
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1612758172467">复制</button><span class="hljs-keyword">let</span> factory: PizzaFactory = <span class="hljs-keyword">new</span> CheesePizzaFactory();
 <span class="hljs-keyword">let</span> cheesePizza = factory.createKFCPizza();
 cheesePizza.show();
-<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612696392435">let factory: PizzaFactory = new CheesePizzaFactory();
+<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1612758172467">let factory: PizzaFactory = new CheesePizzaFactory();
 let cheesePizza = factory.createKFCPizza();
 cheesePizza.show();
 </textarea>
