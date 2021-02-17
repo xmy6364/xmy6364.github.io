@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="author" content="Tuzilow">
+    <meta name="description" content="想要成为大佬">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+
+    <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.5.0/styles/default.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.5.0/styles/github-gist.min.css">
+    <link rel="stylesheet" href="/assets/lib/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/css/layout.css" />
+    <script defer src="https://cdn.bootcdn.net/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"></script>
+    <script defer src="/assets/js/copyCode.js"></script>
+    <script defer src="/assets/js/backTop.js"></script>
+    <script defer src="/assets/js/tool.js"></script>
+
+    
+  <link rel="stylesheet" href="/assets/css/page.css" />
+  <link rel="stylesheet" href="/assets/css/sidebar.css" />
+  <link rel="stylesheet" href="/assets/css/footer.css" />
+  <link rel="stylesheet" href="/assets/css/post.css" />
+  <script defer src="/assets/js/backHome.js"></script>
+  <script defer src="/assets/js/toc.js"></script>
+  <script defer src="/assets/js/copyright.js"></script>
+
+
+    <title>React Native中使用Markdown编辑器</title>
+  </head>
+  <body>
+    <div class="container">
+      <aside>
+        
+  <div class="sidebar">
+  <header>Tuzilow的小站</header>
+  <div class="info">
+    <div class="avatar">
+      <img src="https://cdn.jsdelivr.net/gh/Tuzilow/blog-image/img/20200914avatar.jpg" alt="头像">
+    </div>
+    <div class="author">Tuzilow</div>
+    <div class="description">想要成为大佬</div>
+    <div class="about">
+      <a href="/about">about me.</a>
+    </div>
+  </div>
+  <div class="links">
+    <ul>
+    
+      <li class="links-item">
+        <a href="https://github.com/Tuzilow" target="_blank">
+          <i class="fa fa-github-alt" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="links-item">
+        <a href="tencent://message/?uin=1176281967" target="_blank">
+          <i class="fa fa-qq" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+    </ul>
+  </div>
+  <nav>
+    <ul>
+    
+      <li class="nav-item">
+        <a href="/archives">
+          <span class="nav-item__count">29</span>
+          <span class="nav-item__label">归档</span>
+        </a>
+      </li>
+    
+      <li class="nav-item">
+        <a href="/categories">
+          <span class="nav-item__count">2</span>
+          <span class="nav-item__label">分类</span>
+        </a>
+      </li>
+    
+      <li class="nav-item">
+        <a href="/tags">
+          <span class="nav-item__count">42</span>
+          <span class="nav-item__label">标签</span>
+        </a>
+      </li>
+    
+    </ul>
+  </nav>
+  <div class="catalogue" id="catalogue"></div>
+</div>
+
+      </aside>
+      <main>
+        
+  <div class="post">
+    <div class="post-front">
+      <h1 class="post-front__title">React Native中使用Markdown编辑器</h1>
+      <div class="post-front__desc">
+        
+        <p class="post-front__desc-date">
+          <i class="fa fa-calendar" aria-hidden="true"></i>
+          2021/02/17 11:31:32
+        </p>
+        
+        
+        <p class="post-front__desc-category">
+          <i class="fa fa-folder-o" aria-hidden="true"></i>
+          <a href="/categories/技术">
+            技术
+          </a>
+        </p>
+        
+          <div class="post-front__desc-tags">
+          
+          <a href="/tags/React Native">
+            <i class="fa fa-tag" aria-hidden="true"></i>
+            React Native
+          </a>
+          
+          <a href="/tags/WebView">
+            <i class="fa fa-tag" aria-hidden="true"></i>
+            WebView
+          </a>
+          
+        </div>
+      </div>
+    </div>
+    <div class="post-content">
+      <nav id="toc" class="toc"><ol><li><a href="#react-native-webview">React Native WebView</a><ol><li><a href="#安装">安装</a></li><li><a href="#基本使用">基本使用</a><ol></ol></li><li><a href="#web和react-native之间的通信">Web和React Native之间的通信</a></li></ol></li><li><a href="#封装vditor">封装Vditor</a><ol><li><a href="#准备html文件">准备HTML文件</a></li><li><a href="#react-native组件">React Native组件</a></li></ol></li><li><a href="#参考文章">参考文章</a></li></ol></nav><p>最近在研究<code>React Native</code>，准备用它写一个笔记APP，但是并没有搜到很好用的编辑器插件，因此准备使用<code>WebView</code>和已有的Web端编辑器自己封装一个。</p>
+<blockquote>
+<p>因本人没有苹果电脑，因此只尝试安卓版本</p>
+</blockquote>
+<p>完整项目地址：<a href="https://github.com/Tuzilow/rn-xnote">Tuzilow/rn-xnote</a></p>
+<h2 id="react-native-webview">React Native WebView</h2>
+<p><code>WebView</code>是一个能够在原生APP上加载HTML页面的组件，不过它没有提供浏览器的地址栏、导航栏等功能。在原生APP的开发中经常会用到。</p>
+<h3 id="安装">安装</h3>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1613581102999">复制</button>npm install react-native-webview
+<span class="hljs-comment"># or yarn add react-native-webview</span>
+<b class="name">bash</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1613581102999">npm install react-native-webview
+# or yarn add react-native-webview
+</textarea>
+<h3 id="基本使用">基本使用</h3>
+<h4>引入URL</h4>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1613578969411">复制</button><span class="hljs-keyword">import</span> React, { Component } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
+<span class="hljs-keyword">import</span> { WebView } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react-native&#x27;</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">MyWeb</span> (<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">return</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">WebView</span>
+      <span class="hljs-attr">source</span>=<span class="hljs-string">{{uri:</span> &#x27;<span class="hljs-attr">https:</span>//<span class="hljs-attr">github.com</span>/<span class="hljs-attr">facebook</span>/<span class="hljs-attr">react-native</span>&#x27;}}
+    /&gt;</span></span>
+  );
+}
+<b class="name">jsx</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1613578969411">import React, { Component } from 'react';
+import { WebView } from 'react-native';
+
+export default function MyWeb () {
+  return (
+    <WebView
+      source={{uri: 'https://github.com/facebook/react-native'}}
+    />
+  );
+}
+</textarea>
+<h4>引入本地文件</h4>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1613579689696">复制</button><span class="hljs-keyword">import</span> React, { Component } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
+<span class="hljs-keyword">import</span> { WebView, Platform } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react-native&#x27;</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">MyWeb</span> (<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">return</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">WebView</span>
+      <span class="hljs-attr">source</span>=<span class="hljs-string">{</span>
+        <span class="hljs-attr">Platform.OS</span> === <span class="hljs-string">&#x27;ios&#x27;</span>
+          ? <span class="hljs-attr">require</span>(&#x27;<span class="hljs-attr">..</span>/<span class="hljs-attr">..</span>/<span class="hljs-attr">..</span>/<span class="hljs-attr">assets</span>/<span class="hljs-attr">vditor.html</span>&#x27;)
+          <span class="hljs-attr">:</span> {<span class="hljs-attr">uri:</span> &#x27;<span class="hljs-attr">file:</span>///<span class="hljs-attr">android_asset</span>/<span class="hljs-attr">vditor.html</span>&#x27;}
+      }
+    /&gt;</span></span>
+  );
+}
+<b class="name">jsx</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1613579689696">import React, { Component } from 'react';
+import { WebView, Platform } from 'react-native';
+
+export default function MyWeb () {
+  return (
+    <WebView
+      source={
+        Platform.OS === 'ios'
+          ? require('../../../assets/vditor.html')
+          : {uri: 'file:///android_asset/vditor.html'}
+      }
+    />
+  );
+}
+</textarea>
+<h3 id="web和react-native之间的通信">Web和React Native之间的通信</h3>
+<p><strong>Web到React Native</strong></p>
+<p><code>window.ReactNativeWebView.postMessage(message)</code>该方法接收一个字符串，并将该字符串发送到React Native中。在React Native中使用<code>WebView</code>组件的<code>onMessage</code>属性接收</p>
+<p><strong>React Native到Web</strong></p>
+<ul>
+<li><code>injectedJavaScript</code>向网页中注入js</li>
+<li><code>injectedJavaScriptBeforeContentLoaded</code>在网页加载之前向网页中注入js</li>
+<li><code>postMessage(message)</code>向网页中发送消息，与<code>window.ReactNativeWebView.postMessage(message)</code>相对应。网页可以通过监听<code>message</code>事件收到消息。</li>
+</ul>
+<blockquote>
+<p>更多API请查看<a href="https://reactnative.cn/docs/webview">WebView文档</a></p>
+</blockquote>
+<h2 id="封装vditor">封装Vditor</h2>
+<h3 id="准备html文件">准备HTML文件</h3>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1613578134233">复制</button><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-meta-keyword">html</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">&quot;UTF-8&quot;</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">http-equiv</span>=<span class="hljs-string">&quot;X-UA-Compatible&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;IE=edge&quot;</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span>
+      <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;viewport&quot;</span>
+      <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;width=device-width, initial-scale=1.0, user-scalable=no&quot;</span>
+    /&gt;</span>
+    <span class="hljs-comment">&lt;!-- 以下文件建议放到本地使用 --&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">&quot;stylesheet&quot;</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;https://cdn.jsdelivr.net/npm/vditor/dist/index.css&quot;</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;https://cdn.jsdelivr.net/npm/vditor/dist/index.min.js&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;vditor&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+      <span class="hljs-comment">// window.options 会在React Native中通过injectedJavaScriptBeforeContentLoaded注入</span>
+      <span class="hljs-keyword">const</span> vditor = <span class="hljs-keyword">new</span> Vditor(<span class="hljs-string">&#x27;vditor&#x27;</span>, {
+        ...window.options,
+        <span class="hljs-comment">// 向编辑器输入时，通过postMessage向React Native发送消息，触发onMessage</span>
+        <span class="hljs-attr">input</span>: <span class="hljs-function">(<span class="hljs-params">value</span>) =&gt;</span> {
+          <span class="hljs-keyword">const</span> message = {
+            <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;onChange&#x27;</span>,
+            <span class="hljs-attr">message</span>: value,
+          };
+          <span class="hljs-built_in">window</span>.ReactNativeWebView.postMessage(<span class="hljs-built_in">JSON</span>.stringify(message));
+        }
+      });
+      <span class="hljs-comment">// 监听React Native发送来的消息</span>
+      <span class="hljs-built_in">window</span>.document.addEventListener(<span class="hljs-string">&#x27;message&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">e</span>) =&gt;</span> {
+        vditor.setValue(e.data);
+      });
+    </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+<b class="name">html</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1613578134233"><!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no"
+    />
+    <!-- 以下文件建议放到本地使用 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vditor/dist/index.css" />
+    <script src="https://cdn.jsdelivr.net/npm/vditor/dist/index.min.js"></script>
+  </head>
+  <body>
+    <div id="vditor"></div>
+    <script>
+      // window.options 会在React Native中通过injectedJavaScriptBeforeContentLoaded注入
+      const vditor = new Vditor('vditor', {
+        ...window.options,
+        // 向编辑器输入时，通过postMessage向React Native发送消息，触发onMessage
+        input: (value) => {
+          const message = {
+            type: 'onChange',
+            message: value,
+          };
+          window.ReactNativeWebView.postMessage(JSON.stringify(message));
+        }
+      });
+      // 监听React Native发送来的消息
+      window.document.addEventListener('message', (e) => {
+        vditor.setValue(e.data);
+      });
+    </script>
+  </body>
+</html>
+</textarea>
+<p>如果是安卓开发，需要将该文件放到<code>your-project/android/app/src/main/assets/</code>下，之后通过<code>{uri: 'file:///android_asset/xxxx.html'}</code>引入</p>
+<h3 id="react-native组件">React Native组件</h3>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1613577971622">复制</button><span class="hljs-keyword">import</span> React, { useRef, useState } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
+<span class="hljs-keyword">import</span> { WebView, WebViewMessageEvent } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react-native-webview&#x27;</span>;
+
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Vditor</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">const</span> webviewRef = useRef&lt;WebView&gt;(<span class="hljs-literal">null</span>);
+  <span class="hljs-keyword">const</span> [content, setContent] = useState(<span class="hljs-string">&#x27;&#x27;</span>);
+
+  <span class="hljs-comment">// 注入到网页中的vditor配置数据</span>
+  <span class="hljs-keyword">const</span> options = <span class="hljs-string">`window.options=<span class="hljs-subst">${<span class="hljs-built_in">JSON</span>.stringify({
+    mode: <span class="hljs-string">&#x27;ir&#x27;</span>,
+    toolbar: [],
+    outline: <span class="hljs-literal">false</span>,
+    <span class="hljs-keyword">debugger</span>: <span class="hljs-literal">false</span>,
+    placeholder: <span class="hljs-string">&#x27;可使用markdown语法...&#x27;</span>,
+  })}</span>`</span>;
+
+  <span class="hljs-comment">//#region 初始化编辑器内容</span>
+  useEffect(<span class="hljs-function">() =&gt;</span> {
+    <span class="hljs-keyword">const</span> fetchData = <span class="hljs-keyword">async</span> () =&gt; {
+      <span class="hljs-comment">// 获取初始化的数据</span>
+      <span class="hljs-keyword">const</span> data = <span class="hljs-keyword">await</span> request();
+      setContent(data);
+    };
+    fetchData();
+  }, []);
+  useEffect(<span class="hljs-function">() =&gt;</span> {
+    webviewRef.current?.postMessage(content);
+  }, [content]);
+  <span class="hljs-comment">//#endregion</span>
+
+  <span class="hljs-keyword">const</span> onMessage = <span class="hljs-function">(<span class="hljs-params">e: WebViewMessageEvent</span>) =&gt;</span> {
+    <span class="hljs-keyword">const</span> data = <span class="hljs-built_in">JSON</span>.parse(e.nativeEvent.data);
+    <span class="hljs-keyword">if</span> (data.type === <span class="hljs-string">&#x27;onChange&#x27;</span>) {
+      setContent(data.message);
+    }
+  };
+
+  <span class="hljs-keyword">return</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">WebView</span>
+      <span class="hljs-attr">ref</span>=<span class="hljs-string">{webviewRef}</span>
+      <span class="hljs-attr">onMessage</span>=<span class="hljs-string">{onMessage}</span>
+      <span class="hljs-attr">javaScriptEnabled</span>
+      <span class="hljs-attr">source</span>=<span class="hljs-string">{</span>
+        <span class="hljs-attr">Platform.OS</span> === <span class="hljs-string">&#x27;ios&#x27;</span>
+          ? <span class="hljs-attr">require</span>(&#x27;<span class="hljs-attr">..</span>/<span class="hljs-attr">..</span>/<span class="hljs-attr">..</span>/<span class="hljs-attr">assets</span>/<span class="hljs-attr">vditor.html</span>&#x27;)
+          <span class="hljs-attr">:</span> {<span class="hljs-attr">uri:</span> &#x27;<span class="hljs-attr">file:</span>///<span class="hljs-attr">android_asset</span>/<span class="hljs-attr">vditor.html</span>&#x27;}
+      }
+      <span class="hljs-attr">injectedJavaScriptBeforeContentLoaded</span>=<span class="hljs-string">{options}</span>
+      <span class="hljs-attr">style</span>=<span class="hljs-string">{{</span>
+        <span class="hljs-attr">height:</span> <span class="hljs-attr">Dimensions.get</span>(&#x27;<span class="hljs-attr">window</span>&#x27;)<span class="hljs-attr">.height</span>,
+        <span class="hljs-attr">width:</span> <span class="hljs-attr">Dimensions.get</span>(&#x27;<span class="hljs-attr">window</span>&#x27;)<span class="hljs-attr">.width</span>,
+      }}
+    /&gt;</span></span>
+  );
+}
+
+<b class="name">jsx</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1613577971622">import React, { useRef, useState } from 'react';
+import { WebView, WebViewMessageEvent } from 'react-native-webview';
+
+
+export default function Vditor() {
+  const webviewRef = useRef<WebView>(null);
+  const [content, setContent] = useState('');
+
+  // 注入到网页中的vditor配置数据
+  const options = `window.options=${JSON.stringify({
+    mode: 'ir',
+    toolbar: [],
+    outline: false,
+    debugger: false,
+    placeholder: '可使用markdown语法...',
+  })}`;
+
+  //#region 初始化编辑器内容
+  useEffect(() => {
+    const fetchData = async () => {
+      // 获取初始化的数据
+      const data = await request();
+      setContent(data);
+    };
+    fetchData();
+  }, []);
+  useEffect(() => {
+    webviewRef.current?.postMessage(content);
+  }, [content]);
+  //#endregion
+
+  const onMessage = (e: WebViewMessageEvent) => {
+    const data = JSON.parse(e.nativeEvent.data);
+    if (data.type === 'onChange') {
+      setContent(data.message);
+    }
+  };
+
+  return (
+    <WebView
+      ref={webviewRef}
+      onMessage={onMessage}
+      javaScriptEnabled
+      source={
+        Platform.OS === 'ios'
+          ? require('../../../assets/vditor.html')
+          : {uri: 'file:///android_asset/vditor.html'}
+      }
+      injectedJavaScriptBeforeContentLoaded={options}
+      style={{
+        height: Dimensions.get('window').height,
+        width: Dimensions.get('window').width,
+      }}
+    />
+  );
+}
+
+</textarea>
+<blockquote>
+<p>注意：React Native中使用WebView必须要给他设置宽和高，不然可能会导致应用卡死</p>
+</blockquote>
+<p>完整项目地址：<a href="https://github.com/Tuzilow/rn-xnote">Tuzilow/rn-xnote</a></p>
+<h2 id="参考文章">参考文章</h2>
+<ul>
+<li><a href="https://juejin.cn/post/6867945949788897288">手摸手带你封装 React Native 富文本编辑器</a></li>
+</ul>
+
+    </div>
+    
+  </div>
+
+        <footer>
+        
+  <div class="footer">
+  
+  <div class="theme">
+    博客主题为 <a href="https://github.com/Tuzilow/CoinRailgun">CoinRailgun</a> 默认主题
+  </div>
+  <div class="copyright">
+    <span>© 2019-2021 Tuzilow.</span>
+    <span>Powered by <a href="https://github.com/Tuzilow/CoinRailgun">CoinRailgun</a></span>
+  </div>
+</div>
+
+        </footer>
+      </main>
+    </div>
+  </body>
+</html>
