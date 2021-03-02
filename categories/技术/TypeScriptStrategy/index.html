@@ -136,7 +136,7 @@
 <p>策略模式主要用来解决当有多种相似算法的时，使用if...else产生的难以维护的问题。它主要由三部分组成：Strategy接口、具体的Strategy类以及用来改变和执行策略的Context类。</p>
 <p>接下来将以一个超市选择优惠活动的例子实现策略模式。</p>
 <p><strong>Strategy接口</strong></p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614698161004">复制</button><span class="hljs-keyword">interface</span> Strategy {
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614697706183">复制</button><span class="hljs-keyword">interface</span> Strategy {
   <span class="hljs-comment">/**
    * 优惠活动
    * <span class="hljs-doctag">@param </span>money 原价
@@ -144,7 +144,7 @@
    */</span>
   discount(money: <span class="hljs-built_in">number</span>): <span class="hljs-built_in">number</span>;
 }
-<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614698161004">interface Strategy {
+<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614697706183">interface Strategy {
   /**
    * 优惠活动
    * @param money 原价
@@ -154,7 +154,7 @@
 }
 </textarea>
 <p><strong>具体的优惠策略</strong></p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614694072997">复制</button><span class="hljs-comment">// 满减优惠</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614691557253">复制</button><span class="hljs-comment">// 满减优惠</span>
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FullAndReduceStrategy</span> <span class="hljs-title">implements</span> <span class="hljs-title">Strategy</span> </span>{
   <span class="hljs-comment">// 满足条件的金额</span>
   <span class="hljs-keyword">private</span> conditionMoney: <span class="hljs-built_in">number</span>;
@@ -191,7 +191,7 @@
     <span class="hljs-keyword">return</span> money * <span class="hljs-built_in">this</span>.moneyRabte;
   }
 }
-<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614694072997">// 满减优惠
+<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614691557253">// 满减优惠
 class FullAndReduceStrategy implements Strategy {
   // 满足条件的金额
   private conditionMoney: number;
@@ -231,7 +231,7 @@ class CashRebateStrategy implements Strategy {
 </textarea>
 <p><strong>Context类</strong></p>
 <p><code>setStrategy</code>方法用来控制要使用的策略，<code>execute</code>方法用来执行策略。</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614691721637">复制</button><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Context</span> </span>{
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614692362873">复制</button><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Context</span> </span>{
   <span class="hljs-keyword">private</span> strategy: Strategy;
   <span class="hljs-keyword">private</span> money: <span class="hljs-built_in">number</span>;
 
@@ -249,7 +249,7 @@ class CashRebateStrategy implements Strategy {
     <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.strategy.discount(<span class="hljs-built_in">this</span>.money);
   }
 }
-<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614691721637">class Context {
+<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614692362873">class Context {
   private strategy: Strategy;
   private money: number;
 
@@ -269,14 +269,14 @@ class CashRebateStrategy implements Strategy {
 }
 </textarea>
 <p><strong>测试</strong></p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614693846299">复制</button><span class="hljs-keyword">const</span> context: Context = <span class="hljs-keyword">new</span> Context(<span class="hljs-number">100</span>);
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614697638715">复制</button><span class="hljs-keyword">const</span> context: Context = <span class="hljs-keyword">new</span> Context(<span class="hljs-number">100</span>);
 
 context.setStrategy(<span class="hljs-keyword">new</span> FullAndReduceStrategy(<span class="hljs-number">50</span>, <span class="hljs-number">2</span>));
 <span class="hljs-built_in">console</span>.log(context.execute()); <span class="hljs-comment">// 96</span>
 
 context.setStrategy(<span class="hljs-keyword">new</span> CashRebateStrategy(<span class="hljs-number">0.5</span>));
 <span class="hljs-built_in">console</span>.log(context.execute()); <span class="hljs-comment">// 50</span>
-<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614693846299">const context: Context = new Context(100);
+<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614697638715">const context: Context = new Context(100);
 
 context.setStrategy(new FullAndReduceStrategy(50, 2));
 console.log(context.execute()); // 96

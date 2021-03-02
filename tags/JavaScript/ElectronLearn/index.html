@@ -138,7 +138,7 @@
 <h2 id="安装">安装</h2>
 <p>在国内安装<code>electron</code>的时候，可能会因为网络原因遇到卡在<code>Building fresh packages...</code>（yarn）或者是卡在<code>node install.js</code>（npm）这一步上。</p>
 <p>在项目的根目录下创建<code>.yarnrc</code>或<code>.npmrc</code>然后输入如下内容更改各依赖的源，即可解决该问题。</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614697200153">复制</button>registry &quot;https://registry.npm.taobao.org&quot;
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614694283019">复制</button>registry &quot;https://registry.npm.taobao.org&quot;
 
 sass_binary_site &quot;https://npm.taobao.org/mirrors/node-sass/&quot;
 phantomjs_cdnurl &quot;http://cnpmjs.org/downloads&quot;
@@ -146,7 +146,7 @@ electron_mirror &quot;https://npm.taobao.org/mirrors/electron/&quot;
 sqlite3_binary_host_mirror &quot;https://foxgis.oss-cn-shanghai.aliyuncs.com/&quot;
 profiler_binary_host_mirror &quot;https://npm.taobao.org/mirrors/node-inspector/&quot;
 chromedriver_cdnurl &quot;https://cdn.npm.taobao.org/dist/chromedriver&quot;
-</code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614697200153">registry "https://registry.npm.taobao.org"
+</code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614694283019">registry "https://registry.npm.taobao.org"
 
 sass_binary_site "https://npm.taobao.org/mirrors/node-sass/"
 phantomjs_cdnurl "http://cnpmjs.org/downloads"
@@ -159,12 +159,12 @@ chromedriver_cdnurl "https://cdn.npm.taobao.org/dist/chromedriver"
 <p>使用electron就避不开要使用一些第三方的C++包，使用这些包的时候需要根据node和electron的版本重新编译。</p>
 <h3 id="手动rebuild">手动rebuild</h3>
 <p>手动编译要根据electron的版本设置target，然后再根据node的版本设置对应的abi值，（详见<a href="https://github.com/mapbox/node-pre-gyp/blob/master/lib/util/abi_crosswalk.json">对应表</a>）</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614691727826">复制</button>$ npm rebuild --runtime=electron --target=6.0.12 --disturl=https://atom.io/download/atom-shell --abi=72
-<b class="name">bash</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614691727826">$ npm rebuild --runtime=electron --target=6.0.12 --disturl=https://atom.io/download/atom-shell --abi=72
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614692034515">复制</button>$ npm rebuild --runtime=electron --target=6.0.12 --disturl=https://atom.io/download/atom-shell --abi=72
+<b class="name">bash</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614692034515">$ npm rebuild --runtime=electron --target=6.0.12 --disturl=https://atom.io/download/atom-shell --abi=72
 </textarea>
 <h3 id="使用electron-rebuild">使用electron-rebuild</h3>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614693963381">复制</button>yarn add electron-rebuild -D <span class="hljs-comment"># or npm install electron-rebuild --save-dev</span>
-<b class="name">bash</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614693963381">yarn add electron-rebuild -D # or npm install electron-rebuild --save-dev
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614693188745">复制</button>yarn add electron-rebuild -D <span class="hljs-comment"># or npm install electron-rebuild --save-dev</span>
+<b class="name">bash</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614693188745">yarn add electron-rebuild -D # or npm install electron-rebuild --save-dev
 </textarea>
 <p>下载后使用<code>npx electron-rebuild</code>即可重新编译，有时候会因为网络原因构建时下载依赖失败，因此可以通过<code>-d=http://npm.taobao.org/mirrors/atom-shell</code>切换为淘宝镜像（好久没更新了）</p>
 <blockquote>
@@ -172,8 +172,8 @@ chromedriver_cdnurl "https://cdn.npm.taobao.org/dist/chromedriver"
 </blockquote>
 <h2 id="打包">打包</h2>
 <p>electron常用的打包工具有两个<code>electron-builder</code>和<code>electron-forge</code>，我使用的是社区活跃度较高的<code>electron-builder</code>，electron打包时会下载一些必要的依赖，因此和安装依赖、rebuild具有同样的问题——网络问题，因此需要更改下载地址，从淘宝镜像下载</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614693971545">复制</button>ELECTRON_BUILDER_BINARIES_MIRROR=https://npm.taobao.org/mirrors/electron-builder-binaries/
-</code><span aria-hidden="true" class="line-numbers-rows"><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614693971545">ELECTRON_BUILDER_BINARIES_MIRROR=https://npm.taobao.org/mirrors/electron-builder-binaries/
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614696522892">复制</button>ELECTRON_BUILDER_BINARIES_MIRROR=https://npm.taobao.org/mirrors/electron-builder-binaries/
+</code><span aria-hidden="true" class="line-numbers-rows"><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614696522892">ELECTRON_BUILDER_BINARIES_MIRROR=https://npm.taobao.org/mirrors/electron-builder-binaries/
 </textarea>
 <p>不过我改完镜像打包依然是显示网络超时，因此我选择了手动添加nsis和winCodeSign</p>
 <p>从淘宝镜像中分别下载所需要版本的nsis和winCodeSign，解压后将nsis的整个文件夹放到<code>C:\Users\admin\AppData\Local\electron-builder\Cache\nsis</code>中，将winCodeSign的整个文件夹放到<code>C:\Users\admin\AppData\Local\electron-builder\Cache\winCodeSign</code>中，即可成功打包。</p>
@@ -183,7 +183,7 @@ chromedriver_cdnurl "https://cdn.npm.taobao.org/dist/chromedriver"
 <li>在ready-to-show的时候再显示</li>
 <li>设置窗口底色</li>
 </ul>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614699670780">复制</button>win = <span class="hljs-keyword">new</span> BrowerWindow({
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614697963719">复制</button>win = <span class="hljs-keyword">new</span> BrowerWindow({
     <span class="hljs-attr">width</span>: <span class="hljs-number">600</span>,
     <span class="hljs-attr">height</span>: <span class="hljs-number">300</span>,
     <span class="hljs-attr">webPreferences</span>: {
@@ -196,7 +196,7 @@ chromedriver_cdnurl "https://cdn.npm.taobao.org/dist/chromedriver"
 win.on(<span class="hljs-string">&#x27;ready-to-show&#x27;</span>, <span class="hljs-function">() =&gt;</span> {
     win.show();
 });
-<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614699670780">win = new BrowerWindow({
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614697963719">win = new BrowerWindow({
     width: 600,
     height: 300,
     webPreferences: {
