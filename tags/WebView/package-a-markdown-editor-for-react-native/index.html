@@ -35,7 +35,7 @@
       <aside>
         
   <div class="sidebar">
-  <header>徐梦宇的博客</header>
+  <header>梦的博客</header>
   <div class="info">
     <div class="avatar">
       <img src="https://cdn.jsdelivr.net/gh/Tuzilow/blog-image/img/20200914avatar.jpg" alt="头像">
@@ -137,14 +137,14 @@
 <h2 id="react-native-webview">React Native WebView</h2>
 <p><code>WebView</code>是一个能够在原生APP上加载HTML页面的组件，不过它没有提供浏览器的地址栏、导航栏等功能。在原生APP的开发中经常会用到。</p>
 <h3 id="安装">安装</h3>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614514812039">复制</button>npm install react-native-webview
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614693214609">复制</button>npm install react-native-webview
 <span class="hljs-comment"># or yarn add react-native-webview</span>
-<b class="name">bash</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614514812039">npm install react-native-webview
+<b class="name">bash</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614693214609">npm install react-native-webview
 # or yarn add react-native-webview
 </textarea>
 <h3 id="基本使用">基本使用</h3>
 <h4>引入URL</h4>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614519389677">复制</button><span class="hljs-keyword">import</span> React, { Component } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614691127507">复制</button><span class="hljs-keyword">import</span> React, { Component } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
 <span class="hljs-keyword">import</span> { WebView } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react-native&#x27;</span>;
 
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">MyWeb</span> (<span class="hljs-params"></span>) </span>{
@@ -154,7 +154,7 @@
     /&gt;</span></span>
   );
 }
-<b class="name">jsx</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614519389677">import React, { Component } from 'react';
+<b class="name">jsx</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614691127507">import React, { Component } from 'react';
 import { WebView } from 'react-native';
 
 export default function MyWeb () {
@@ -166,7 +166,7 @@ export default function MyWeb () {
 }
 </textarea>
 <h4>引入本地文件</h4>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614516179542">复制</button><span class="hljs-keyword">import</span> React, { Component } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614699289062">复制</button><span class="hljs-keyword">import</span> React, { Component } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
 <span class="hljs-keyword">import</span> { WebView, Platform } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react-native&#x27;</span>;
 
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">MyWeb</span> (<span class="hljs-params"></span>) </span>{
@@ -180,7 +180,7 @@ export default function MyWeb () {
     /&gt;</span></span>
   );
 }
-<b class="name">jsx</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614516179542">import React, { Component } from 'react';
+<b class="name">jsx</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614699289062">import React, { Component } from 'react';
 import { WebView, Platform } from 'react-native';
 
 export default function MyWeb () {
@@ -209,7 +209,7 @@ export default function MyWeb () {
 </blockquote>
 <h2 id="封装vditor">封装Vditor</h2>
 <h3 id="准备html文件">准备HTML文件</h3>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614519574460">复制</button><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-meta-keyword">html</span>&gt;</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614694245984">复制</button><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-meta-keyword">html</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">&quot;UTF-8&quot;</span> /&gt;</span>
@@ -244,7 +244,7 @@ export default function MyWeb () {
     </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
-<b class="name">html</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614519574460"><!DOCTYPE html>
+<b class="name">html</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614694245984"><!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8" />
@@ -282,7 +282,7 @@ export default function MyWeb () {
 </textarea>
 <p>如果是安卓开发，需要将该文件放到<code>your-project/android/app/src/main/assets/</code>下，之后通过<code>{uri: 'file:///android_asset/xxxx.html'}</code>引入</p>
 <h3 id="react-native组件">React Native组件</h3>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614520575389">复制</button><span class="hljs-keyword">import</span> React, { useRef, useState } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614693812661">复制</button><span class="hljs-keyword">import</span> React, { useRef, useState } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
 <span class="hljs-keyword">import</span> { WebView, WebViewMessageEvent } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react-native-webview&#x27;</span>;
 
 
@@ -339,7 +339,7 @@ export default function MyWeb () {
   );
 }
 
-<b class="name">jsx</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614520575389">import React, { useRef, useState } from 'react';
+<b class="name">jsx</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614693812661">import React, { useRef, useState } from 'react';
 import { WebView, WebViewMessageEvent } from 'react-native-webview';
 
 

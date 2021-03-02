@@ -35,7 +35,7 @@
       <aside>
         
   <div class="sidebar">
-  <header>徐梦宇的博客</header>
+  <header>梦的博客</header>
   <div class="info">
     <div class="avatar">
       <img src="https://cdn.jsdelivr.net/gh/Tuzilow/blog-image/img/20200914avatar.jpg" alt="头像">
@@ -133,13 +133,13 @@
 <h3 id="问题">问题</h3>
 <p>假设我们需要构造一个复杂对象，构造时需要给这个对象的诸多成员变量进行初始化工作，如果使用传统的构造函数创建这个对象，那么它的构造函数将十分复杂，比如<code>new Product(partA, partB, partC, ...)</code>，这样的构造函数不仅缺乏灵活性还会严重的影响代码的可读性，因此我们需要一种更优秀的方法来创建复杂对象。</p>
 <h3 id="创建想要生成的产品类">创建想要生成的产品类</h3>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614518353741">复制</button><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Product</span> </span>{
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614691230064">复制</button><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Product</span> </span>{
   <span class="hljs-keyword">public</span> partA: <span class="hljs-built_in">string</span>;
   <span class="hljs-keyword">public</span> partB: <span class="hljs-built_in">string</span>;
   <span class="hljs-keyword">public</span> partC: <span class="hljs-built_in">string</span>;
   <span class="hljs-keyword">public</span> partD: <span class="hljs-built_in">string</span>;
 }
-<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614518353741">class Product {
+<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614691230064">class Product {
   public partA: string;
   public partB: string;
   public partC: string;
@@ -148,7 +148,7 @@
 </textarea>
 <h3 id="创建生成器类">创建生成器类</h3>
 <p>可以将基本生成器定义为一个接口，再为每个形式的产品创建具体的生成类，这里只定义一个生成器类作为演示</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614517968710">复制</button><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ProductBuilder</span> </span>{
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614700074803">复制</button><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ProductBuilder</span> </span>{
   <span class="hljs-keyword">private</span> product: Product;
 
   <span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params"></span>)</span> {
@@ -183,7 +183,7 @@
     <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">this</span>.product);
   }
 }
-<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614517968710">class ProductBuilder {
+<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614700074803">class ProductBuilder {
   private product: Product;
 
   constructor() {
@@ -220,25 +220,25 @@
 }
 </textarea>
 <h3 id="测试代码">测试代码</h3>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614519780195">复制</button><span class="hljs-keyword">const</span> product = <span class="hljs-keyword">new</span> ProductBuilder()
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614692371412">复制</button><span class="hljs-keyword">const</span> product = <span class="hljs-keyword">new</span> ProductBuilder()
   .setPartA(<span class="hljs-string">&#x27;这是Part A&#x27;</span>)
   .setPartB(<span class="hljs-string">&#x27;这是Part B&#x27;</span>)
   .setPartD(<span class="hljs-string">&#x27;这是Part D&#x27;</span>)
   .build();
 <span class="hljs-comment">// Product { partA: &#x27;这是Part A&#x27;, partB: &#x27;这是Part B&#x27;, partD: &#x27;这是Part D&#x27; }</span>
-<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614519780195">const product = new ProductBuilder()
+<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614692371412">const product = new ProductBuilder()
   .setPartA('这是Part A')
   .setPartB('这是Part B')
   .setPartD('这是Part D')
   .build();
 // Product { partA: '这是Part A', partB: '这是Part B', partD: '这是Part D' }
 </textarea>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614514104074">复制</button><span class="hljs-keyword">const</span> product = <span class="hljs-keyword">new</span> ProductBuilder()
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614694145701">复制</button><span class="hljs-keyword">const</span> product = <span class="hljs-keyword">new</span> ProductBuilder()
   .setPartA(<span class="hljs-string">&#x27;这是Part A&#x27;</span>)
   .setPartB(<span class="hljs-string">&#x27;这是Part B&#x27;</span>)
   .build();
 <span class="hljs-comment">// Product { partA: &#x27;这是Part A&#x27;, partB: &#x27;这是Part B&#x27; }</span>
-<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614514104074">const product = new ProductBuilder()
+<b class="name">typescript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614694145701">const product = new ProductBuilder()
   .setPartA('这是Part A')
   .setPartB('这是Part B')
   .build();
