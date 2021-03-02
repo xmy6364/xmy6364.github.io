@@ -38,7 +38,7 @@
   <header>梦的博客</header>
   <div class="info">
     <div class="avatar">
-      <img src="https://cdn.jsdelivr.net/gh/Tuzilow/blog-image/img/20200914avatar.jpg" alt="头像">
+      <img src="https://cdn.jsdelivr.net/gh/xmy6364/blog-image/img/20200914avatar.jpg" alt="头像">
     </div>
     <div class="author">xmy6364</div>
     <div class="description">想要成为大佬</div>
@@ -134,19 +134,19 @@
       </div>
     </div>
     <div class="post-content">
-      <nav id="toc" class="toc"><ol><li><a href="#tuzilowexpress-decorator">@tuzilow/express-decorator</a></li><li><a href="#正式开始">正式开始</a><ol><li><a href="#创建packagejson">创建package.json</a></li><li><a href="#创建babelrc">创建.babelrc</a></li><li><a href="#创建indexjs并编写代码">创建index.js并编写代码</a></li></ol></li><li><a href="#项目源码">项目源码</a></li></ol></nav><p>在Java的Spring框架中，我们经常会看到类似于<code>@Controller</code>这样的注解，这类代码能够极大的提高我们代码的可读性和复用性。而在Javascript的ES7提案中，有一种新的语法叫做decorator，它能够在Javascript中实现与注解相同的功能。</p>
-<h2 id="tuzilowexpress-decorator">@tuzilow/express-decorator</h2>
-<p><code>@tuzilow/express-decorator</code>是由本人开发的一个简单的express装饰器包，具有<code>@Controller</code>、<code>@RootUrl</code>、<code>@Get</code>等API，能够方便快捷的构建express后台接口。</p>
+      <nav id="toc" class="toc"><ol><li><a href="#xmy6364express-decorator">@xmy6364/express-decorator</a></li><li><a href="#正式开始">正式开始</a><ol><li><a href="#创建packagejson">创建package.json</a></li><li><a href="#创建babelrc">创建.babelrc</a></li><li><a href="#创建indexjs并编写代码">创建index.js并编写代码</a></li></ol></li><li><a href="#项目源码">项目源码</a></li></ol></nav><p>在Java的Spring框架中，我们经常会看到类似于<code>@Controller</code>这样的注解，这类代码能够极大的提高我们代码的可读性和复用性。而在Javascript的ES7提案中，有一种新的语法叫做decorator，它能够在Javascript中实现与注解相同的功能。</p>
+<h2 id="xmy6364express-decorator">@xmy6364/express-decorator</h2>
+<p><code>@xmy6364/express-decorator</code>是由本人开发的一个简单的express装饰器包，具有<code>@Controller</code>、<code>@RootUrl</code>、<code>@Get</code>等API，能够方便快捷的构建express后台接口。</p>
 <h2 id="正式开始">正式开始</h2>
 <h3 id="创建packagejson">创建package.json</h3>
 <p>执行<code>npm init</code>，并使用<code>npm</code>或<code>yarn</code>添加以下依赖</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614696606118">复制</button>{
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614697595460">复制</button>{
   <span class="hljs-attr">&quot;name&quot;</span>: <span class="hljs-string">&quot;decorator-demo&quot;</span>,
   <span class="hljs-attr">&quot;version&quot;</span>: <span class="hljs-string">&quot;1.0.0&quot;</span>,
   <span class="hljs-attr">&quot;main&quot;</span>: <span class="hljs-string">&quot;index.js&quot;</span>,
   <span class="hljs-attr">&quot;license&quot;</span>: <span class="hljs-string">&quot;MIT&quot;</span>,
   <span class="hljs-attr">&quot;dependencies&quot;</span>: {
-    <span class="hljs-attr">&quot;@tuzilow/express-decorator&quot;</span>: <span class="hljs-string">&quot;^0.0.3&quot;</span>,
+    <span class="hljs-attr">&quot;@xmy6364/express-decorator&quot;</span>: <span class="hljs-string">&quot;^0.0.3&quot;</span>,
     <span class="hljs-attr">&quot;express&quot;</span>: <span class="hljs-string">&quot;^4.17.1&quot;</span>
   },
   <span class="hljs-attr">&quot;devDependencies&quot;</span>: {
@@ -162,13 +162,13 @@
     <span class="hljs-attr">&quot;start&quot;</span>: <span class="hljs-string">&quot;babel-node index&quot;</span>
   }
 }
-<b class="name">json</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614696606118">{
+<b class="name">json</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614697595460">{
   "name": "decorator-demo",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "@tuzilow/express-decorator": "^0.0.3",
+    "@xmy6364/express-decorator": "^0.0.3",
     "express": "^4.17.1"
   },
   "devDependencies": {
@@ -186,14 +186,14 @@
 }
 </textarea>
 <h3 id="创建babelrc">创建.babelrc</h3>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614694642316">复制</button>{
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614699386205">复制</button>{
   <span class="hljs-attr">&quot;plugins&quot;</span>: [
     [<span class="hljs-string">&quot;@babel/plugin-proposal-decorators&quot;</span>, { <span class="hljs-attr">&quot;legacy&quot;</span>: <span class="hljs-literal">true</span> }],
     [<span class="hljs-string">&quot;@babel/plugin-proposal-class-properties&quot;</span>, { <span class="hljs-attr">&quot;loose&quot;</span>: <span class="hljs-literal">true</span> }]
   ],
   <span class="hljs-attr">&quot;presets&quot;</span>: [<span class="hljs-string">&quot;@babel/preset-env&quot;</span>]
 }
-<b class="name">json</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614694642316">{
+<b class="name">json</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614699386205">{
   "plugins": [
     ["@babel/plugin-proposal-decorators", { "legacy": true }],
     ["@babel/plugin-proposal-class-properties", { "loose": true }]
@@ -203,7 +203,7 @@
 </textarea>
 <h3 id="创建indexjs并编写代码">创建index.js并编写代码</h3>
 <p>首先，编写一个普通的express应用</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614693969193">复制</button><span class="hljs-keyword">import</span> express <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;express&#x27;</span>;
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614696636256">复制</button><span class="hljs-keyword">import</span> express <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;express&#x27;</span>;
 
 <span class="hljs-keyword">const</span> Server = express();
 
@@ -216,7 +216,7 @@ Server.get(<span class="hljs-string">&#x27;/&#x27;</span>, <span class="hljs-fun
 Server.listen(<span class="hljs-number">3000</span>, <span class="hljs-function">() =&gt;</span> {
   <span class="hljs-built_in">console</span>.info(<span class="hljs-string">&#x27;running in http://localhost:3000&#x27;</span>);
 });
-<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614693969193">import express from 'express';
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614696636256">import express from 'express';
 
 const Server = express();
 
@@ -230,9 +230,9 @@ Server.listen(3000, () => {
   console.info('running in http://localhost:3000');
 });
 </textarea>
-<p>执行无误后使用<code>@tuzilow/express-decorator</code>对其进行改造</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614699108210">复制</button><span class="hljs-keyword">import</span> express <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;express&#x27;</span>;
-<span class="hljs-keyword">import</span> { Controller, Get } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@tuzilow/express-decorator&#x27;</span>;
+<p>执行无误后使用<code>@xmy6364/express-decorator</code>对其进行改造</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614697169779">复制</button><span class="hljs-keyword">import</span> express <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;express&#x27;</span>;
+<span class="hljs-keyword">import</span> { Controller, Get } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@xmy6364/express-decorator&#x27;</span>;
 
 <span class="hljs-keyword">const</span> Server = express();
 
@@ -251,8 +251,8 @@ Server.use(<span class="hljs-keyword">new</span> User());
 Server.listen(<span class="hljs-number">3000</span>, <span class="hljs-function">() =&gt;</span> {
   <span class="hljs-built_in">console</span>.info(<span class="hljs-string">&#x27;running in http://localhost:3000&#x27;</span>);
 });
-<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614699108210">import express from 'express';
-import { Controller, Get } from '@tuzilow/express-decorator';
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614697169779">import express from 'express';
+import { Controller, Get } from '@xmy6364/express-decorator';
 
 const Server = express();
 
@@ -273,8 +273,8 @@ Server.listen(3000, () => {
 });
 </textarea>
 <p>运行结果与前面普通的express应用的运行结果相同，如果想要设定统一的父级路由，可以使用<code>@RootUrl</code></p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614695143365">复制</button><span class="hljs-keyword">import</span> express <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;express&#x27;</span>;
-<span class="hljs-keyword">import</span> { Controller, Get, RootUrl } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@tuzilow/express-decorator&#x27;</span>;
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614693701784">复制</button><span class="hljs-keyword">import</span> express <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;express&#x27;</span>;
+<span class="hljs-keyword">import</span> { Controller, Get, RootUrl } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@xmy6364/express-decorator&#x27;</span>;
 
 <span class="hljs-keyword">const</span> Server = express();
 
@@ -301,8 +301,8 @@ Server.use(<span class="hljs-keyword">new</span> User());
 
 Server.listen(<span class="hljs-number">3000</span>, <span class="hljs-function">() =&gt;</span> {
   <span class="hljs-built_in">console</span>.info(<span class="hljs-string">&#x27;running in http://localhost:3000&#x27;</span>);
-<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614695143365">import express from 'express';
-import { Controller, Get, RootUrl } from '@tuzilow/express-decorator';
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614693701784">import express from 'express';
+import { Controller, Get, RootUrl } from '@xmy6364/express-decorator';
 
 const Server = express();
 
@@ -331,8 +331,8 @@ Server.listen(3000, () => {
   console.info('running in http://localhost:3000');
 </textarea>
 <p>这样请求路径就会变为<code>http://localhost:3000/user</code>和<code>http://localhost:3000/user/list</code>，因为该装饰器包只提供了简易的API，因此传递参数、设置header等操作需要使用express的方法</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614698709517">复制</button><span class="hljs-keyword">import</span> express <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;express&#x27;</span>;
-<span class="hljs-keyword">import</span> { Controller, Get, RootUrl, Post } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@tuzilow/express-decorator&#x27;</span>;
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614696696429">复制</button><span class="hljs-keyword">import</span> express <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;express&#x27;</span>;
+<span class="hljs-keyword">import</span> { Controller, Get, RootUrl, Post } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@xmy6364/express-decorator&#x27;</span>;
 
 <span class="hljs-keyword">const</span> Server = express();
 
@@ -383,8 +383,8 @@ Server.use(<span class="hljs-keyword">new</span> User());
 Server.listen(<span class="hljs-number">3000</span>, <span class="hljs-function">() =&gt;</span> {
   <span class="hljs-built_in">console</span>.info(<span class="hljs-string">&#x27;running in http://localhost:3000&#x27;</span>);
 });
-<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614698709517">import express from 'express';
-import { Controller, Get, RootUrl, Post } from '@tuzilow/express-decorator';
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614696696429">import express from 'express';
+import { Controller, Get, RootUrl, Post } from '@xmy6364/express-decorator';
 
 const Server = express();
 
@@ -438,8 +438,8 @@ Server.listen(3000, () => {
 </textarea>
 <h2 id="项目源码">项目源码</h2>
 <ul>
-<li>GitHub仓库地址：<a href="https://github.com/Tuzilow">Tuzilow</a>/<a href="https://github.com/Tuzilow/express-decorator">express-decorator</a></li>
-<li>npm地址：<a href="https://www.npmjs.com/package/@tuzilow/express-decorator">@tuzilow/express-decorator</a></li>
+<li>GitHub仓库地址：<a href="https://github.com/xmy6364">xmy6364</a>/<a href="https://github.com/xmy6364/express-decorator">express-decorator</a></li>
+<li>npm地址：<a href="https://www.npmjs.com/package/@xmy6364/express-decorator">@xmy6364/express-decorator</a></li>
 </ul>
 
     </div>
@@ -451,11 +451,11 @@ Server.listen(3000, () => {
   <div class="footer">
   
   <div class="theme">
-    博客主题为 <a href="https://github.com/Tuzilow/CoinRailgun">CoinRailgun</a> 默认主题
+    博客主题为 <a href="https://github.com/xmy6364/CoinRailgun">CoinRailgun</a> 默认主题
   </div>
   <div class="copyright">
     <span>© 2019-2021 xmy6364.</span>
-    <span>Powered by <a href="https://github.com/Tuzilow/CoinRailgun">CoinRailgun</a></span>
+    <span>Powered by <a href="https://github.com/xmy6364/CoinRailgun">CoinRailgun</a></span>
   </div>
 </div>
 

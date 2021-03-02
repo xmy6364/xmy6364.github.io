@@ -38,7 +38,7 @@
   <header>梦的博客</header>
   <div class="info">
     <div class="avatar">
-      <img src="https://cdn.jsdelivr.net/gh/Tuzilow/blog-image/img/20200914avatar.jpg" alt="头像">
+      <img src="https://cdn.jsdelivr.net/gh/xmy6364/blog-image/img/20200914avatar.jpg" alt="头像">
     </div>
     <div class="author">xmy6364</div>
     <div class="description">想要成为大佬</div>
@@ -156,7 +156,7 @@
 </ul>
 <p>直接使用<code>npm install express cheerio superagent eventproxy </code>来安装依赖包，当然你也可以用别的方法。</p>
 <h3 id="创建建好目录">创建建好目录</h3>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614699961856">复制</button>node-spider-csdn
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614697392918">复制</button>node-spider-csdn
 ├─ .gitignore 
 ├─ node_modules 
 ├─ README.md 
@@ -165,7 +165,7 @@
 ├─ package.json
 └─ routes
   └─ csdn.js			爬虫主要代码
-<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614699961856">node-spider-csdn
+<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614697392918">node-spider-csdn
 ├─ .gitignore 
 ├─ node_modules 
 ├─ README.md 
@@ -177,14 +177,14 @@
 </textarea>
 <h3 id="创建一个http服务器">创建一个Http服务器</h3>
 <p>在<code>index.js</code>文件中，实例化一个<code>express</code>对象，启动一个Http服务</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614699614123">复制</button><span class="hljs-keyword">const</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;express&#x27;</span>);
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614698066240">复制</button><span class="hljs-keyword">const</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;express&#x27;</span>);
 
 <span class="hljs-keyword">const</span> app = express();
 
 app.listen(<span class="hljs-number">3000</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
     <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;running in http://127.0.0.1:3000&#x27;</span>);
 });
-<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614699614123">const express = require('express');
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614698066240">const express = require('express');
 
 const app = express();
 
@@ -195,7 +195,7 @@ app.listen(3000, function() {
 <p>这样就启动了一个简单的Http本地服务，执行<code>node index.js</code>后通过<code>http://127.0.0.1:3000</code>就可以访问到这个服务器。有关Express的更多内容可以参考<a href="https://expressjs.com/zh-cn/">官方文档</a>。</p>
 <h3 id="编写csdnjs模块">编写<code>csdn.js</code>模块</h3>
 <p>先引入<code>csdn.js</code>文件并且添加路由</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614699748765">复制</button><span class="hljs-keyword">const</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;express&#x27;</span>);
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614695272496">复制</button><span class="hljs-keyword">const</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;express&#x27;</span>);
 <span class="hljs-keyword">const</span> csdn = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./routes/csdn.js&#x27;</span>);
 
 <span class="hljs-keyword">const</span> app = express();
@@ -205,7 +205,7 @@ app.use(csdn);
 app.listen(<span class="hljs-number">3000</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
     <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;running in http://127.0.0.1:3000&#x27;</span>);
 });
-<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614699748765">const express = require('express');
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614695272496">const express = require('express');
 const csdn = require('./routes/csdn.js');
 
 const app = express();
@@ -218,7 +218,7 @@ app.listen(3000, function() {
 </textarea>
 <p>然后开始编写<code>csdn.js</code></p>
 <h4>整体结构</h4>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614699655895">复制</button><span class="hljs-comment">// 引入需要的第三方包</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614698572224">复制</button><span class="hljs-comment">// 引入需要的第三方包</span>
 <span class="hljs-keyword">const</span> cheerio = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;cheerio&#x27;</span>);
 <span class="hljs-keyword">const</span> superagent = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;superagent&#x27;</span>);
 <span class="hljs-keyword">const</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;express&#x27;</span>);
@@ -234,7 +234,7 @@ router.get(<span class="hljs-string">&#x27;/csdn/:name&#x27;</span>, <span class
 
 <span class="hljs-comment">// 将router暴露出去</span>
 <span class="hljs-built_in">module</span>.exports = router;
-<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614699655895">// 引入需要的第三方包
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614698572224">// 引入需要的第三方包
 const cheerio = require('cheerio');
 const superagent = require('superagent');
 const express = require('express');
@@ -259,19 +259,19 @@ module.exports = router;
 <li>CSDN的文章列表是40篇一页</li>
 <li>分页控件是动态生成的，所以无法直接通过HTML解析获得</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/Tuzilow/blog-image/img/someoneblog.png" alt=""></p>
-<p><img src="https://cdn.jsdelivr.net/gh/Tuzilow/blog-image/img/someoneblog-1.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xmy6364/blog-image/img/someoneblog.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xmy6364/blog-image/img/someoneblog-1.png" alt=""></p>
 <p>然后我们通过开发者工具查看文章列表结构，可以发现：</p>
 <ul>
 <li>文章信息都在类名为<code>article-item-box</code>的盒子中</li>
 <li>id信息在该盒子的<code>data-articleid</code>属性中</li>
 </ul>
 <p>还有一些其他的信息都很容易能查到，比如博主原创文章总数值等，可以在以后需要的时候再过来查看。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Tuzilow/blog-image/img/someoneblog-2.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xmy6364/blog-image/img/someoneblog-2.png" alt=""></p>
 <h4>获取所有文章页面</h4>
 <p>因为无法直接获得分页信息，所以我们通过<code>文章总数 / 每页文章数</code>来获取所有的页面。</p>
 <p>首先获取文章的总数：</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614697133634">复制</button><span class="hljs-comment">/**
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614696998271">复制</button><span class="hljs-comment">/**
  * 获取总文章数目
  * <span class="hljs-doctag">@param <span class="hljs-type">{String}</span> </span>url 页面路径
  * <span class="hljs-doctag">@param <span class="hljs-type">{Function}</span> </span>callback 回调
@@ -287,7 +287,7 @@ module.exports = router;
         callback(num);
     });
 };
-<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614697133634">/**
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614696998271">/**
  * 获取总文章数目
  * @param {String} url 页面路径
  * @param {Function} callback 回调
@@ -305,7 +305,7 @@ let getArticleNum = function (url, callback) {
 };
 </textarea>
 <p>然后利用简单的循环获取所有文章页面：</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614698383465">复制</button><span class="hljs-comment">// ...</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614695640140">复制</button><span class="hljs-comment">// ...</span>
 router.get(<span class="hljs-string">&#x27;/csdn/:name&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">req, res</span>) </span>{
     <span class="hljs-keyword">const</span> name = req.params.name;
     getArticleNum(<span class="hljs-string">`https://blog.csdn.net/<span class="hljs-subst">${name}</span>`</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">num</span>) </span>{
@@ -320,7 +320,7 @@ router.get(<span class="hljs-string">&#x27;/csdn/:name&#x27;</span>, <span class
     });
 });
 <span class="hljs-comment">// ...</span>
-<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614698383465">// ...
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614695640140">// ...
 router.get('/csdn/:name', function(req, res) {
     const name = req.params.name;
     getArticleNum(`https://blog.csdn.net/${name}`, function (num) {
@@ -338,7 +338,7 @@ router.get('/csdn/:name', function(req, res) {
 </textarea>
 <p>我们可以通过<code>console.log()</code>或者<code>res.send()</code>来查看获取的网址是否正确</p>
 <h4>遍历获取所有页面的HTML</h4>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614698106792">复制</button><span class="hljs-comment">// ...</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614696591674">复制</button><span class="hljs-comment">// ...</span>
 router.get(<span class="hljs-string">&#x27;/csdn/:name&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">req, res</span>) </span>{
     <span class="hljs-keyword">const</span> name = req.params.name;
 
@@ -374,7 +374,7 @@ router.get(<span class="hljs-string">&#x27;/csdn/:name&#x27;</span>, <span class
     });
 });
 <span class="hljs-comment">// ...</span>
-<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614698106792">// ...
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614696591674">// ...
 router.get('/csdn/:name', function (req, res) {
     const name = req.params.name;
 
@@ -414,7 +414,7 @@ router.get('/csdn/:name', function (req, res) {
 <h4>解析文章信息</h4>
 <p>因为获取到的有些文本中空格太多，所以需要用到正则表达式来去除多余的空格。</p>
 <p><code>cheerio</code>对于Document的操作和<code>jQuery</code>基本一样，所以有前端基础的可以很轻松上手。</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614692666725">复制</button><span class="hljs-comment">/**
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614691325020">复制</button><span class="hljs-comment">/**
  * 解析html字符串，获取文章信息
  * <span class="hljs-doctag">@param <span class="hljs-type">{String}</span> </span>html 包含文章信息的html
  * <span class="hljs-doctag">@param <span class="hljs-type">{Number}</span> </span>index 文章索引
@@ -430,7 +430,7 @@ router.get('/csdn/:name', function (req, res) {
         <span class="hljs-attr">comment_count</span>: html.eq(index).find(<span class="hljs-string">&#x27;.info-box .read-num .num&#x27;</span>).last().text().replace(<span class="hljs-regexp">/\s+/</span>, <span class="hljs-string">&#x27;&#x27;</span>)
     };
 };
-<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614692666725">/**
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614691325020">/**
  * 解析html字符串，获取文章信息
  * @param {String} html 包含文章信息的html
  * @param {Number} index 文章索引
@@ -447,7 +447,7 @@ let analysisHtml = function (html, index) {
     };
 };
 </textarea>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614694607018">复制</button><span class="hljs-comment">// ...</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614698578429">复制</button><span class="hljs-comment">// ...</span>
 <span class="hljs-comment">// 遍历当前页的文章列表</span>
 <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; articlesHtml.length; i++) {
     <span class="hljs-keyword">let</span> article = analysisHtml(articlesHtml, i);
@@ -455,7 +455,7 @@ let analysisHtml = function (html, index) {
     <span class="hljs-comment">// ...</span>
 }
 <span class="hljs-comment">// ...</span>
-<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614694607018">// ...
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614698578429">// ...
 // 遍历当前页的文章列表
 for (let i = 0; i < articlesHtml.length; i++) {
     let article = analysisHtml(articlesHtml, i);
@@ -467,7 +467,7 @@ for (let i = 0; i < articlesHtml.length; i++) {
 <p>我们已经获取到所有文章的信息数据，但是因为获取各个页面的文章时是并发异步进行的，所以要同时利用这些数据特殊的方法。</p>
 <h4>处理并发异步操作</h4>
 <p>这里我使用的是“计数器”<code>eventproxy</code>，还有很多其他的方法都可以解决这个问题。</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614693651261">复制</button><span class="hljs-comment">// ...</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614697557385">复制</button><span class="hljs-comment">// ...</span>
 pages.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">targetUrl</span>) </span>{
     superagent.get(targetUrl).end(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err, html</span>) </span>{
         <span class="hljs-keyword">if</span> (err) {
@@ -494,7 +494,7 @@ ep.after(<span class="hljs-string">&#x27;blogArtc&#x27;</span>, num, <span class
     });
 });
 <span class="hljs-comment">// ...</span>
-<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614693651261">// ...
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614697557385">// ...
 pages.forEach(function (targetUrl) {
     superagent.get(targetUrl).end(function (err, html) {
         if (err) {
@@ -525,7 +525,7 @@ ep.after('blogArtc', num, function (data) {
 <p>这样，一个简单的node爬虫就写好了，执行<code>node index.js</code>启动服务后，在浏览器中输入<code>http://127.0.0.1:3000/csdn/xxxx</code>就可以获得xxxx（这是id）的全部文章了。</p>
 <h2 id="完整代码">完整代码</h2>
 <ul>
-<li><a href="https://github.com/Tuzilow/node-spider-csdn">node-spider-csdn</a></li>
+<li><a href="https://github.com/xmy6364/node-spider-csdn">node-spider-csdn</a></li>
 </ul>
 <h2 id="参考文章">参考文章</h2>
 <ul>
@@ -552,11 +552,11 @@ ep.after('blogArtc', num, function (data) {
   <div class="footer">
   
   <div class="theme">
-    博客主题为 <a href="https://github.com/Tuzilow/CoinRailgun">CoinRailgun</a> 默认主题
+    博客主题为 <a href="https://github.com/xmy6364/CoinRailgun">CoinRailgun</a> 默认主题
   </div>
   <div class="copyright">
     <span>© 2019-2021 xmy6364.</span>
-    <span>Powered by <a href="https://github.com/Tuzilow/CoinRailgun">CoinRailgun</a></span>
+    <span>Powered by <a href="https://github.com/xmy6364/CoinRailgun">CoinRailgun</a></span>
   </div>
 </div>
 
