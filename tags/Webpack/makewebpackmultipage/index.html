@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="author" content="xmy6364">
+    <meta name="description" content="想要成为大佬">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+
+    <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.5.0/styles/default.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.5.0/styles/github-gist.min.css">
+    <link rel="stylesheet" href="/assets/lib/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/css/layout.css" />
+    <script defer src="https://cdn.bootcdn.net/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"></script>
+    <script defer src="/assets/js/copyCode.js"></script>
+    <script defer src="/assets/js/backTop.js"></script>
+    <script defer src="/assets/js/tool.js"></script>
+
+    
+  <link rel="stylesheet" href="/assets/css/page.css" />
+  <link rel="stylesheet" href="/assets/css/sidebar.css" />
+  <link rel="stylesheet" href="/assets/css/footer.css" />
+  <link rel="stylesheet" href="/assets/css/post.css" />
+  <script defer src="/assets/js/backHome.js"></script>
+  <script defer src="/assets/js/toc.js"></script>
+  <script defer src="/assets/js/copyright.js"></script>
+
+
+    <title>使用Webpack构建多页面程序</title>
+  </head>
+  <body>
+    <div class="container">
+      <aside>
+        
+  <div class="sidebar">
+  <header>梦的博客</header>
+  <div class="info">
+    <div class="avatar">
+      <img src="https://cdn.jsdelivr.net/gh/xmy6364/blog-image/img/20200914avatar.jpg" alt="头像">
+    </div>
+    <div class="author">xmy6364</div>
+    <div class="description">想要成为大佬</div>
+    <div class="about">
+      <a href="/about">about me.</a>
+    </div>
+  </div>
+  <div class="links">
+    <ul>
+    
+      <li class="links-item">
+        <a href="https://github.com/xmy6364" target="_blank">
+          <i class="fa fa-github-alt" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="links-item">
+        <a href="tencent://message/?uin=1176281967" target="_blank">
+          <i class="fa fa-qq" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+    </ul>
+  </div>
+  <nav>
+    <ul>
+    
+      <li class="nav-item">
+        <a href="/archives">
+          <span class="nav-item__count">30</span>
+          <span class="nav-item__label">归档</span>
+        </a>
+      </li>
+    
+      <li class="nav-item">
+        <a href="/categories">
+          <span class="nav-item__count">2</span>
+          <span class="nav-item__label">分类</span>
+        </a>
+      </li>
+    
+      <li class="nav-item">
+        <a href="/tags">
+          <span class="nav-item__count">43</span>
+          <span class="nav-item__label">标签</span>
+        </a>
+      </li>
+    
+    </ul>
+  </nav>
+  <div class="catalogue" id="catalogue"></div>
+</div>
+
+      </aside>
+      <main>
+        
+  <div class="post">
+    <div class="post-front">
+      <h1 class="post-front__title">使用Webpack构建多页面程序</h1>
+      <div class="post-front__desc">
+        
+        <p class="post-front__desc-date">
+          <i class="fa fa-calendar" aria-hidden="true"></i>
+          2021/03/15 20:32:48
+        </p>
+        
+        
+        <p class="post-front__desc-category">
+          <i class="fa fa-folder-o" aria-hidden="true"></i>
+          <a href="/categories/技术">
+            技术
+          </a>
+        </p>
+        
+          <div class="post-front__desc-tags">
+          
+          <a href="/tags/webpack">
+            <i class="fa fa-tag" aria-hidden="true"></i>
+            webpack
+          </a>
+          
+          <a href="/tags/JavaScript">
+            <i class="fa fa-tag" aria-hidden="true"></i>
+            JavaScript
+          </a>
+          
+        </div>
+      </div>
+    </div>
+    <div class="post-content">
+      <nav id="toc" class="toc"><ol><li><a href="#原理">原理</a></li><li><a href="#单页面打包基础配置">单页面打包基础配置</a></li><li><a href="#多页面打包基础配置">多页面打包基础配置</a><ol><li><a href="#改造入口">改造入口</a></li><li><a href="#改造输出">改造输出</a></li><li><a href="#配置多个-html-webpack-plugin">配置多个 html-webpack-plugin</a></li></ol></li><li><a href="#完整配置">完整配置</a></li></ol></nav><p>使用webpack搭建单页面程序十分常见，但在实际开发中我们可能还会有开发多页面程序的需求，因此我研究了一下如何使用webpack搭建多页面程序。</p>
+<h2 id="原理">原理</h2>
+<p>将每个页面所在的文件夹都看作是一个单独的单页面程序目录，配置多个<code>entry</code>以及<code>html-webpack-plugin</code>即可实现多页面打包。</p>
+<p>下面为本项目目录结构</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1615816156842">复制</button>.
+├─ src
+│  └─ pages
+│       ├─ about
+│       │    ├─ index.css
+│       │    ├─ index.html
+│       │    └─ index.js
+│       └─ index
+│            ├─ index.css
+│            ├─ index.html
+│            └─ index.js
+└─ webpack.config.js
+</code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1615816156842">.
+├─ src
+│  └─ pages
+│       ├─ about
+│       │    ├─ index.css
+│       │    ├─ index.html
+│       │    └─ index.js
+│       └─ index
+│            ├─ index.css
+│            ├─ index.html
+│            └─ index.js
+└─ webpack.config.js
+</textarea>
+<h2 id="单页面打包基础配置">单页面打包基础配置</h2>
+<p>首先我们来看一下单页面程序的 webpack 基础配置</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1615817394996">复制</button><span class="hljs-keyword">const</span> HtmlWebpackPlugin = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;html-webpack-plugin&#x27;</span>);
+
+<span class="hljs-built_in">module</span>.exports = {
+  <span class="hljs-attr">entry</span>: <span class="hljs-string">&#x27;./src/index.js&#x27;</span>,
+  <span class="hljs-attr">plugins</span>: [
+    <span class="hljs-keyword">new</span> HtmlWebpackPlugin({
+      <span class="hljs-attr">template</span>: <span class="hljs-string">&#x27;./src/index.html&#x27;</span>,
+      <span class="hljs-attr">filename</span>: <span class="hljs-string">&#x27;index.html&#x27;</span>,
+    }),
+  ],
+  <span class="hljs-attr">output</span>: {
+    <span class="hljs-attr">path</span>: path.resolve(__dirname, <span class="hljs-string">&#x27;./dist&#x27;</span>),
+    <span class="hljs-attr">filename</span>: <span class="hljs-string">&#x27;bundle.js&#x27;</span>,
+  },
+};
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1615817394996">const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+module.exports = {
+  entry: './src/index.js',
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './src/index.html',
+      filename: 'index.html',
+    }),
+  ],
+  output: {
+    path: path.resolve(__dirname, './dist'),
+    filename: 'bundle.js',
+  },
+};
+</textarea>
+<p>要想将其改为多页面程序，就要将它的单入口和单 HTML 模板改为多入口和多 HTML 模板</p>
+<h2 id="多页面打包基础配置">多页面打包基础配置</h2>
+<h3 id="改造入口">改造入口</h3>
+<p>传统的多入口写法可以写成键值对的形式</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1615818604702">复制</button><span class="hljs-built_in">module</span>.exports = {
+  <span class="hljs-attr">entry</span>: {
+    <span class="hljs-attr">index</span>: <span class="hljs-string">&#x27;./src/pages/index/index.js&#x27;</span>,
+    <span class="hljs-attr">about</span>: <span class="hljs-string">&#x27;./src/pages/about/index.js&#x27;</span>,
+  },
+  ...
+}
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1615818604702">module.exports = {
+  entry: {
+    index: './src/pages/index/index.js',
+    about: './src/pages/about/index.js',
+  },
+  ...
+}
+</textarea>
+<p>这样写的话，每增加一个页面就需要手动添加一个入口，比较麻烦，因此我们可以定义一个根据目录生成入口的函数来简化我们的操作</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1615819159774">复制</button><span class="hljs-keyword">const</span> glob = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;glob&#x27;</span>);
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getEntry</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">const</span> entry = {};
+  glob.sync(<span class="hljs-string">&#x27;./src/pages/**/index.js&#x27;</span>).forEach(<span class="hljs-function">(<span class="hljs-params">file</span>) =&gt;</span> {
+    <span class="hljs-keyword">const</span> name = file.match(<span class="hljs-regexp">/\/pages\/(.+)\/index.js/</span>)[<span class="hljs-number">1</span>];
+    entry[name] = file;
+  });
+  <span class="hljs-keyword">return</span> entry;
+}
+
+<span class="hljs-built_in">module</span>.exports = {
+  <span class="hljs-attr">entry</span>: getEntry(),
+  ...
+}
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1615819159774">const glob = require('glob');
+
+function getEntry() {
+  const entry = {};
+  glob.sync('./src/pages/**/index.js').forEach((file) => {
+    const name = file.match(/\/pages\/(.+)\/index.js/)[1];
+    entry[name] = file;
+  });
+  return entry;
+}
+
+module.exports = {
+  entry: getEntry(),
+  ...
+}
+</textarea>
+<h3 id="改造输出">改造输出</h3>
+<p>在输出的配置项中，再将输出的文件名写死显示已经不合适了，因此我们要将名字改为与源文件相匹配的名字</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1615820151181">复制</button><span class="hljs-built_in">module</span>.exports = {
+  ...
+  <span class="hljs-attr">output</span>: {
+    <span class="hljs-attr">path</span>: path.resolve(__dirname, <span class="hljs-string">&#x27;./dist&#x27;</span>),
+    <span class="hljs-attr">filename</span>: <span class="hljs-string">&#x27;js/[name].[contenthash].js&#x27;</span>,
+  },
+  ...
+}
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1615820151181">module.exports = {
+  ...
+  output: {
+    path: path.resolve(__dirname, './dist'),
+    filename: 'js/[name].[contenthash].js',
+  },
+  ...
+}
+</textarea>
+<h3 id="配置多个-html-webpack-plugin">配置多个 html-webpack-plugin</h3>
+<p>与入口相同，可以将不同的 html 模板直接写入插件配置中，这里我们需要为每个插件配置不同的<code>chunks</code>，防止 js 注入到错误的 html 中</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1615812462996">复制</button><span class="hljs-keyword">const</span> HtmlWebpackPlugin = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;html-webpack-plugin&#x27;</span>);
+
+<span class="hljs-built_in">module</span>.exports = {
+  ...
+  <span class="hljs-attr">plugins</span>: [
+    <span class="hljs-keyword">new</span> HtmlWebpackPlugin({
+      <span class="hljs-attr">template</span>: <span class="hljs-string">&#x27;./src/pages/index/index.html&#x27;</span>,
+      <span class="hljs-attr">chunks</span>: [<span class="hljs-string">&#x27;index&#x27;</span>],
+      <span class="hljs-attr">filename</span>: <span class="hljs-string">&#x27;index.html&#x27;</span>,
+    }),
+    <span class="hljs-keyword">new</span> HtmlWebpackPlugin({
+      <span class="hljs-attr">template</span>: <span class="hljs-string">&#x27;./src/pages/about/index.html&#x27;</span>,
+      <span class="hljs-attr">chunks</span>: [<span class="hljs-string">&#x27;about&#x27;</span>],
+      <span class="hljs-attr">filename</span>: <span class="hljs-string">&#x27;about.html&#x27;</span>,
+    }),
+  ],
+  ...
+};
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1615812462996">const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+module.exports = {
+  ...
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './src/pages/index/index.html',
+      chunks: ['index'],
+      filename: 'index.html',
+    }),
+    new HtmlWebpackPlugin({
+      template: './src/pages/about/index.html',
+      chunks: ['about'],
+      filename: 'about.html',
+    }),
+  ],
+  ...
+};
+</textarea>
+<p>这样的做法与入口有着同样的毛病，因此我们再定义一个函数来生成这个配置</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1615818696233">复制</button><span class="hljs-keyword">const</span> HtmlWebpackPlugin = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;html-webpack-plugin&#x27;</span>);
+<span class="hljs-keyword">const</span> glob = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;glob&#x27;</span>);
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getHtmlTemplate</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">return</span> glob
+    .sync(<span class="hljs-string">&#x27;./src/pages/**/index.html&#x27;</span>)
+    .map(<span class="hljs-function">(<span class="hljs-params">file</span>) =&gt;</span> {
+      <span class="hljs-keyword">return</span> { <span class="hljs-attr">name</span>: file.match(<span class="hljs-regexp">/\/pages\/(.+)\/index.html/</span>)[<span class="hljs-number">1</span>], <span class="hljs-attr">path</span>: file };
+    })
+    .map(
+      <span class="hljs-function">(<span class="hljs-params">template</span>) =&gt;</span>
+        <span class="hljs-keyword">new</span> HtmlWebpackPlugin({
+          <span class="hljs-attr">template</span>: template.path,
+          <span class="hljs-attr">chunks</span>: [template.name.toString()],
+          <span class="hljs-attr">filename</span>: <span class="hljs-string">`<span class="hljs-subst">${template.name}</span>.html`</span>,
+        })
+    );
+}
+
+<span class="hljs-built_in">module</span>.exports = {
+  ...
+  <span class="hljs-attr">plugins</span>: [...getHtmlTemplate()],
+  ...
+};
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1615818696233">const HtmlWebpackPlugin = require('html-webpack-plugin');
+const glob = require('glob');
+
+function getHtmlTemplate() {
+  return glob
+    .sync('./src/pages/**/index.html')
+    .map((file) => {
+      return { name: file.match(/\/pages\/(.+)\/index.html/)[1], path: file };
+    })
+    .map(
+      (template) =>
+        new HtmlWebpackPlugin({
+          template: template.path,
+          chunks: [template.name.toString()],
+          filename: `${template.name}.html`,
+        })
+    );
+}
+
+module.exports = {
+  ...
+  plugins: [...getHtmlTemplate()],
+  ...
+};
+</textarea>
+<p>这样一个简单的多页面项目就配置完成了，我们还可以在此基础上添加热更新、代码分割等功能，有兴趣的可以自己尝试一下</p>
+<h2 id="完整配置">完整配置</h2>
+<p>项目地址：<a href="https://github.com/xmy6364/webpack-multipage">xmy6364/webpack-multipage</a></p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1615817638514">复制</button><span class="hljs-comment">// webpack.config.js</span>
+
+<span class="hljs-keyword">const</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;path&#x27;</span>);
+<span class="hljs-keyword">const</span> HtmlWebpackPlugin = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;html-webpack-plugin&#x27;</span>);
+<span class="hljs-keyword">const</span> glob = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;glob&#x27;</span>);
+<span class="hljs-keyword">const</span> { CleanWebpackPlugin } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;clean-webpack-plugin&#x27;</span>);
+
+<span class="hljs-comment">// 多页入口</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getEntry</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">const</span> entry = {};
+  glob.sync(<span class="hljs-string">&#x27;./src/pages/**/index.js&#x27;</span>).forEach(<span class="hljs-function">(<span class="hljs-params">file</span>) =&gt;</span> {
+    <span class="hljs-keyword">const</span> name = file.match(<span class="hljs-regexp">/\/pages\/(.+)\/index.js/</span>)[<span class="hljs-number">1</span>];
+    entry[name] = file;
+  });
+  <span class="hljs-keyword">return</span> entry;
+}
+
+<span class="hljs-comment">// 多页模板</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getHtmlTemplate</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">return</span> glob
+    .sync(<span class="hljs-string">&#x27;./src/pages/**/index.html&#x27;</span>)
+    .map(<span class="hljs-function">(<span class="hljs-params">file</span>) =&gt;</span> {
+      <span class="hljs-keyword">return</span> { <span class="hljs-attr">name</span>: file.match(<span class="hljs-regexp">/\/pages\/(.+)\/index.html/</span>)[<span class="hljs-number">1</span>], <span class="hljs-attr">path</span>: file };
+    })
+    .map(
+      <span class="hljs-function">(<span class="hljs-params">template</span>) =&gt;</span>
+        <span class="hljs-keyword">new</span> HtmlWebpackPlugin({
+          <span class="hljs-attr">template</span>: template.path,
+          <span class="hljs-attr">chunks</span>: [template.name.toString()],
+          <span class="hljs-attr">filename</span>: <span class="hljs-string">`<span class="hljs-subst">${template.name}</span>.html`</span>,
+        })
+    );
+}
+
+<span class="hljs-keyword">const</span> config = {
+  <span class="hljs-attr">mode</span>: <span class="hljs-string">&#x27;production&#x27;</span>,
+  <span class="hljs-attr">entry</span>: getEntry(),
+  <span class="hljs-attr">output</span>: {
+    <span class="hljs-attr">path</span>: path.resolve(__dirname, <span class="hljs-string">&#x27;./dist&#x27;</span>),
+    <span class="hljs-attr">filename</span>: <span class="hljs-string">&#x27;js/[name].[contenthash].js&#x27;</span>,
+  },
+  <span class="hljs-attr">module</span>: {
+    <span class="hljs-attr">rules</span>: [
+      {
+        <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.css$/</span>,
+        use: [<span class="hljs-string">&#x27;style-loader&#x27;</span>, <span class="hljs-string">&#x27;css-loader&#x27;</span>],
+      },
+    ],
+  },
+  <span class="hljs-attr">plugins</span>: [<span class="hljs-keyword">new</span> CleanWebpackPlugin(), ...getHtmlTemplate()],
+  <span class="hljs-attr">devServer</span>: {
+    <span class="hljs-attr">contentBase</span>: path.join(__dirname, <span class="hljs-string">&#x27;dist&#x27;</span>),
+    <span class="hljs-attr">compress</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">port</span>: <span class="hljs-number">3000</span>,
+    <span class="hljs-attr">hot</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">open</span>: <span class="hljs-literal">true</span>,
+  },
+};
+
+<span class="hljs-built_in">module</span>.exports = config;
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1615817638514">// webpack.config.js
+
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const glob = require('glob');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+
+// 多页入口
+function getEntry() {
+  const entry = {};
+  glob.sync('./src/pages/**/index.js').forEach((file) => {
+    const name = file.match(/\/pages\/(.+)\/index.js/)[1];
+    entry[name] = file;
+  });
+  return entry;
+}
+
+// 多页模板
+function getHtmlTemplate() {
+  return glob
+    .sync('./src/pages/**/index.html')
+    .map((file) => {
+      return { name: file.match(/\/pages\/(.+)\/index.html/)[1], path: file };
+    })
+    .map(
+      (template) =>
+        new HtmlWebpackPlugin({
+          template: template.path,
+          chunks: [template.name.toString()],
+          filename: `${template.name}.html`,
+        })
+    );
+}
+
+const config = {
+  mode: 'production',
+  entry: getEntry(),
+  output: {
+    path: path.resolve(__dirname, './dist'),
+    filename: 'js/[name].[contenthash].js',
+  },
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+      },
+    ],
+  },
+  plugins: [new CleanWebpackPlugin(), ...getHtmlTemplate()],
+  devServer: {
+    contentBase: path.join(__dirname, 'dist'),
+    compress: true,
+    port: 3000,
+    hot: true,
+    open: true,
+  },
+};
+
+module.exports = config;
+</textarea>
+
+    </div>
+    
+  </div>
+
+        <footer>
+        
+  <div class="footer">
+  
+  <div class="theme">
+    博客主题为 <a href="https://github.com/xmy6364/CoinRailgun">CoinRailgun</a> 默认主题
+  </div>
+  <div class="copyright">
+    <span>© 2019-2021 xmy6364.</span>
+    <span>Powered by <a href="https://github.com/xmy6364/CoinRailgun">CoinRailgun</a></span>
+  </div>
+</div>
+
+        </footer>
+      </main>
+    </div>
+  </body>
+</html>

@@ -68,7 +68,7 @@
     
       <li class="nav-item">
         <a href="/archives">
-          <span class="nav-item__count">29</span>
+          <span class="nav-item__count">30</span>
           <span class="nav-item__label">归档</span>
         </a>
       </li>
@@ -82,7 +82,7 @@
     
       <li class="nav-item">
         <a href="/tags">
-          <span class="nav-item__count">42</span>
+          <span class="nav-item__count">43</span>
           <span class="nav-item__label">标签</span>
         </a>
       </li>
@@ -133,7 +133,7 @@
 <p>水</p>
 <h2 id="栈stack">栈(Stack)</h2>
 <p>实际上JavaScript的Array本身就具有栈和队列的特性，所以我们可以借助Array来实现它们。</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614696609668">复制</button><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Stack</span> </span>{
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1615813832844">复制</button><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Stack</span> </span>{
     <span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params"></span>)</span> {
         <span class="hljs-built_in">this</span>.items = [];
     }
@@ -151,7 +151,7 @@
         <span class="hljs-built_in">this</span>.items.pop();
     }
 }
-<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614696609668">class Stack {
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1615813832844">class Stack {
     constructor() {
         this.items = [];
     }
@@ -171,7 +171,7 @@
 }
 </textarea>
 <h2 id="队列queue">队列(Queue)</h2>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614698962191">复制</button><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Queue</span> </span>{
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1615816498773">复制</button><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Queue</span> </span>{
     <span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params"></span>)</span> {
         <span class="hljs-built_in">this</span>.items = [];
     }
@@ -190,7 +190,7 @@
         <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.items.shift();
     }
 }
-<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614698962191">class Queue {
+<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1615816498773">class Queue {
     constructor() {
         this.items = [];
     }
@@ -212,7 +212,7 @@
 </textarea>
 <h3 id="优先队列">优先队列</h3>
 <p>队列的升级版本，给每个元素一个优先级，入队时会先排序。这里<code>PriorityQueue</code>继承自<code>Queue</code>，所以只需要重写<code>enqueue</code>方法。</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614694076248">复制</button><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PriorityQueue</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Queue</span> </span>{
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1615819827869">复制</button><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PriorityQueue</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Queue</span> </span>{
     <span class="hljs-comment">/**
      * 入队
      * <span class="hljs-doctag">@param <span class="hljs-type">{*}</span> </span>element 元素
@@ -232,7 +232,7 @@
         }
     }
 }
-<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614694076248">class PriorityQueue extends Queue {
+<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1615819827869">class PriorityQueue extends Queue {
     /**
      * 入队
      * @param {*} element 元素
@@ -256,7 +256,7 @@
 <h3 id="循环队列">循环队列</h3>
 <p>循环队列可以想象为一个首尾相连的圆环，相较于普通队列，它更节省空间。</p>
 <p>虽然同样继承自<code>Queue</code>，但基本上所有方法都重写了。</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614695068295">复制</button><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LoopQueue</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Queue</span> </span>{
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1615814988256">复制</button><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LoopQueue</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Queue</span> </span>{
     <span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params">maxSize</span>)</span> {
         <span class="hljs-built_in">super</span>();
         <span class="hljs-built_in">this</span>.maxSize = maxSize;
@@ -293,7 +293,7 @@
         <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
     }
 }
-<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614695068295">class LoopQueue extends Queue {
+<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1615814988256">class LoopQueue extends Queue {
     constructor(maxSize) {
         super();
         this.maxSize = maxSize;
@@ -332,7 +332,7 @@
 }
 </textarea>
 <h2 id="链表linked-list">链表(Linked List)</h2>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614693750581">复制</button><span class="hljs-comment">// 节点</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1615817110784">复制</button><span class="hljs-comment">// 节点</span>
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Node</span> </span>{
     <span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params">element</span>)</span> {
         <span class="hljs-built_in">this</span>.element = element;
@@ -439,7 +439,7 @@
         <span class="hljs-keyword">return</span> string;
     }
 }
-<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614693750581">// 节点
+<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1615817110784">// 节点
 class Node {
     constructor(element) {
         this.element = element;
@@ -549,7 +549,7 @@ class LinkedList {
 </textarea>
 <h2 id="集合set">集合(Set)</h2>
 <p>ES6中引入了集合类型，可以参考一下。</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614692355371">复制</button><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Set</span> </span>{
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1615820531142">复制</button><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Set</span> </span>{
     <span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params"></span>)</span> {
         <span class="hljs-built_in">this</span>.items = {};
     }
@@ -609,7 +609,7 @@ class LinkedList {
         <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.values.every(<span class="hljs-function">(<span class="hljs-params">value</span>) =&gt;</span> otherSet.has(value));
     }
 }
-<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614692355371">class Set {
+<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1615820531142">class Set {
     constructor() {
         this.items = {};
     }
@@ -672,7 +672,7 @@ class LinkedList {
 </textarea>
 <h2 id="字典dictionary">字典(Dictionary)</h2>
 <p>在JavaScript中，<code>Object</code>对象实际上就是字典，都是以<code>{ key: value }</code>的形式存储数据的。</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614697791247">复制</button><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Dictionary</span> </span>{
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1615814280078">复制</button><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Dictionary</span> </span>{
     <span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params"></span>)</span> {
         <span class="hljs-built_in">this</span>.items = {};
     }
@@ -696,7 +696,7 @@ class LinkedList {
         <span class="hljs-keyword">delete</span> <span class="hljs-built_in">this</span>.items[key];
     }
 }
-<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614697791247">class Dictionary {
+<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1615814280078">class Dictionary {
     constructor() {
         this.items = {};
     }
@@ -724,7 +724,7 @@ class LinkedList {
 <h2 id="哈希表hash-table">哈希表(Hash Table)</h2>
 <p>哈希表也是以键值对的形式存储数据的，但是因为每个数据都会根据<code>key</code>生成唯一的哈希值，所以查询速度非常快。</p>
 <p>这里散列函数就是用来生成哈希值的，随便写的，常用的构造散列函数的方法在网上能查到很多。</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614693917297">复制</button><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HashTable</span> </span>{
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1615814134553">复制</button><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HashTable</span> </span>{
     <span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params"></span>)</span> {
         <span class="hljs-built_in">this</span>.table = [];
     }
@@ -747,7 +747,7 @@ class LinkedList {
         <span class="hljs-built_in">this</span>.table[<span class="hljs-built_in">this</span>.getHashCode(key)] = <span class="hljs-literal">undefined</span>;
     }
 }
-<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614693917297">class HashTable {
+<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1615814134553">class HashTable {
     constructor() {
         this.table = [];
     }
@@ -773,7 +773,7 @@ class LinkedList {
 </textarea>
 <h2 id="树tree">树(tree)</h2>
 <p>正常的二叉树没有必要实现，这里实现一下二叉搜索树。</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614694467103">复制</button><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Node</span> </span>{
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1615821050163">复制</button><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Node</span> </span>{
     <span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params">data</span>)</span> {
         <span class="hljs-built_in">this</span>.data = data;
         <span class="hljs-built_in">this</span>.left = <span class="hljs-literal">null</span>;
@@ -904,7 +904,7 @@ class LinkedList {
         <span class="hljs-built_in">this</span>.root = removeNode(<span class="hljs-built_in">this</span>.root, data);
     }
 }
-<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614694467103">class Node {
+<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1615821050163">class Node {
     constructor(data) {
         this.data = data;
         this.left = null;
@@ -1038,7 +1038,7 @@ class BinarySearchTree {
 </textarea>
 <h2 id="图graph">图(Graph)</h2>
 <p>这里实现的无向图。</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614696368801">复制</button><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Graph</span> </span>{
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1615814254708">复制</button><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Graph</span> </span>{
     <span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params"></span>)</span> {
         <span class="hljs-built_in">this</span>.vertices = []; <span class="hljs-comment">// 存顶点</span>
         <span class="hljs-built_in">this</span>.adjList = {}; <span class="hljs-comment">// 存边</span>
@@ -1068,7 +1068,7 @@ class BinarySearchTree {
         <span class="hljs-keyword">return</span> str;
     }
 }
-<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614696368801">class Graph {
+<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1615814254708">class Graph {
     constructor() {
         this.vertices = []; // 存顶点
         this.adjList = {}; // 存边

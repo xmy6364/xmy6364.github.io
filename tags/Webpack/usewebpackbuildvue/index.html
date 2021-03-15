@@ -68,7 +68,7 @@
     
       <li class="nav-item">
         <a href="/archives">
-          <span class="nav-item__count">29</span>
+          <span class="nav-item__count">30</span>
           <span class="nav-item__label">归档</span>
         </a>
       </li>
@@ -82,7 +82,7 @@
     
       <li class="nav-item">
         <a href="/tags">
-          <span class="nav-item__count">42</span>
+          <span class="nav-item__count">43</span>
           <span class="nav-item__label">标签</span>
         </a>
       </li>
@@ -153,11 +153,11 @@
 </ul>
 <h2 id="构建项目基本目录">构建项目基本目录</h2>
 <p>执行<code>npm init</code>并创建以下目录</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614696007045">复制</button>demo
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1615818266186">复制</button>demo
 ├─ dist
 ├─ public
 └─ src
-</code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614696007045">demo
+</code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1615818266186">demo
 ├─ dist
 ├─ public
 └─ src
@@ -180,11 +180,11 @@
 <h2 id="搭建项目">搭建项目</h2>
 <h3 id="简单实现-webpack-打包">简单实现 webpack 打包</h3>
 <p>新建<code>src/main.js</code>，并写入：</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614698842285">复制</button><span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;Hello Webpack&#x27;</span>);
-<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614698842285">console.log('Hello Webpack');
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1615819499981">复制</button><span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;Hello Webpack&#x27;</span>);
+<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1615819499981">console.log('Hello Webpack');
 </textarea>
 <p>根目录下新建<code>webpack.config.js</code>，并写入：</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614692938365">复制</button><span class="hljs-keyword">const</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;path&#x27;</span>);
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1615814661634">复制</button><span class="hljs-keyword">const</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;path&#x27;</span>);
 
 <span class="hljs-keyword">const</span> config = {
   <span class="hljs-attr">entry</span>: <span class="hljs-string">&#x27;./src/main.js&#x27;</span>, <span class="hljs-comment">// 定义入口文件</span>
@@ -194,7 +194,7 @@
   },
 };
 <span class="hljs-built_in">module</span>.exports = config;
-<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614692938365">const path = require('path');
+<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1615814661634">const path = require('path');
 
 const config = {
   entry: './src/main.js', // 定义入口文件
@@ -206,14 +206,14 @@ const config = {
 module.exports = config;
 </textarea>
 <p>在<code>package.json</code>中的<code>scripts</code>中添加一个脚本：</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614698650658">复制</button>{
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1615818995779">复制</button>{
   ...
   <span class="hljs-attr">&quot;scripts&quot;</span>: {
     <span class="hljs-attr">&quot;build&quot;</span>: <span class="hljs-string">&quot;webpack --mode=production&quot;</span>
   }
   ...
 }
-<b class="name">json</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614698650658">{
+<b class="name">json</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1615818995779">{
   ...
   "scripts": {
     "build": "webpack --mode=production"
@@ -224,7 +224,7 @@ module.exports = config;
 <p>在命令行中执行<code>npm run build</code>，此时项目目录中出现了<code>dist/main.build.js</code>，证明执行成功</p>
 <p>js 文件打包成功后，需要一个 html 文件来引入这个 js 文件，这就需要用到我们一开始下载的<code>html-webpack-plugin</code></p>
 <p>首先新建<code>public/index.html</code>创建一个基础页面：</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614695275273">复制</button><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-meta-keyword">html</span>&gt;</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1615815872703">复制</button><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-meta-keyword">html</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">&quot;UTF-8&quot;</span> /&gt;</span>
@@ -244,7 +244,7 @@ module.exports = config;
     <span class="hljs-comment">&lt;!-- build后的文件会在这之后自动引入 --&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
-<b class="name">html</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614695275273"><!DOCTYPE html>
+<b class="name">html</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1615815872703"><!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8" />
@@ -266,7 +266,7 @@ module.exports = config;
 </html>
 </textarea>
 <p>在<code>public</code>下随便放入一个图标<code>favicon.ico</code>，然后在<code>webpack.config.js</code>中配置插件：</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614697520059">复制</button><span class="hljs-keyword">const</span> HtmlWebpackPlugin = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;html-webpack-plugin&#x27;</span>);
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1615817219760">复制</button><span class="hljs-keyword">const</span> HtmlWebpackPlugin = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;html-webpack-plugin&#x27;</span>);
 
 <span class="hljs-keyword">const</span> config = {
   ...
@@ -279,7 +279,7 @@ module.exports = config;
   ]
 }
 ...
-<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614697520059">const HtmlWebpackPlugin = require('html-webpack-plugin');
+<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1615817219760">const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const config = {
   ...
@@ -294,7 +294,7 @@ const config = {
 ...
 </textarea>
 <p>之后再次执行<code>npm run build</code>，<code>dist</code>下会生成<code>index.html</code>，<code>favicon.ico</code>，<code>main.build.js</code>三个文件，通过浏览器打开<code>index.html</code>，就可以发现控制台输出了<code>Hello Webpack</code>，页面图标也变成了自己设定的图标，通过编辑器打开<code>index.html</code>，我们会发现 webpack 帮助我们自动引入了<code>favicon.ico</code>和<code>main.build.js</code>：</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614695015517">复制</button><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-meta-keyword">html</span>&gt;</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1615818043564">复制</button><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-meta-keyword">html</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
     ...
@@ -306,7 +306,7 @@ const config = {
   <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
 
-<b class="name">html</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614695015517"><!DOCTYPE html>
+<b class="name">html</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1615818043564"><!DOCTYPE html>
 <html>
   <head>
     ...
@@ -321,7 +321,7 @@ const config = {
 </textarea>
 <h3 id="开启热加载">开启热加载</h3>
 <p>webpack 热加载需要用到<code>webpack-dev-server</code>，在开始我们已经安装过了，在<code>webpack.config.js</code>中配置：</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614698615117">复制</button><span class="hljs-keyword">const</span> config = {
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1615815783089">复制</button><span class="hljs-keyword">const</span> config = {
   ...
   <span class="hljs-attr">devServer</span>: {
     <span class="hljs-attr">contentBase</span>: path.join(__dirname, <span class="hljs-string">&#x27;dist&#x27;</span>), <span class="hljs-comment">// html所在路径</span>
@@ -331,7 +331,7 @@ const config = {
     <span class="hljs-attr">open</span>: <span class="hljs-literal">true</span>, <span class="hljs-comment">// 打包完成后自动打开网页</span>
   }
 }
-<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614698615117">const config = {
+<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1615815783089">const config = {
   ...
   devServer: {
     contentBase: path.join(__dirname, 'dist'), // html所在路径
@@ -343,7 +343,7 @@ const config = {
 }
 </textarea>
 <p>增加<code>package.json</code>脚本：</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614694145300">复制</button>{
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1615815561719">复制</button>{
   ...
   <span class="hljs-attr">&quot;scripts&quot;</span>: {
     <span class="hljs-attr">&quot;build&quot;</span>: <span class="hljs-string">&quot;webpack --mode=production&quot;</span>,
@@ -351,7 +351,7 @@ const config = {
   }
   ...
 }
-<b class="name">json</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614694145300">{
+<b class="name">json</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1615815561719">{
   ...
   "scripts": {
     "build": "webpack --mode=production",
@@ -363,7 +363,7 @@ const config = {
 <p>执行<code>npm run serve</code>，打包成功后会自动打开网页，并且当你修改<code>src/main.js</code>或<code>src/index.html</code>的内容的时候，浏览器会自动重新打包并刷新</p>
 <h3 id="配置-vue">配置 Vue</h3>
 <p>让 webpack 打包<code>*.vue</code>文件需要<code>vue-loader</code>和<code>vue-template-compiler</code>，同时为了 webpack 能够解析 vue 中的 css 还需要用到<code>css-loader</code>和<code>vue-style-loader</code>，在<code>webpack.config.js</code>配置以上插件：</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614691941042">复制</button>...
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1615818668773">复制</button>...
 <span class="hljs-keyword">const</span> { VueLoaderPlugin } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;vue-loader&#x27;</span>);
 
 <span class="hljs-keyword">const</span> config = {
@@ -390,7 +390,7 @@ const config = {
   ...
 };
 ...
-<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614691941042">...
+<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1615818668773">...
 const { VueLoaderPlugin } = require('vue-loader');
 
 const config = {
@@ -419,7 +419,7 @@ const config = {
 ...
 </textarea>
 <p>配置完后新建<code>src/App.vue</code>:</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614693723245">复制</button><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1615819930043">复制</button><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;example&quot;</span>&gt;</span>
     {{ msg }}
   <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
@@ -440,7 +440,7 @@ const config = {
   <span class="hljs-attribute">color</span>: red;
 }
 </span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
-<b class="name">html</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614693723245"><template>
+<b class="name">html</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1615819930043"><template>
   <div class="example">
     {{ msg }}
   </div>
@@ -463,14 +463,14 @@ export default {
 </style>
 </textarea>
 <p>修改<code>src/main.js</code>:</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614695722049">复制</button><span class="hljs-keyword">import</span> Vue <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vue&#x27;</span>;
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1615816440233">复制</button><span class="hljs-keyword">import</span> Vue <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vue&#x27;</span>;
 <span class="hljs-keyword">import</span> App <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./App.vue&#x27;</span>;
 
 <span class="hljs-keyword">new</span> Vue({
   <span class="hljs-attr">el</span>: <span class="hljs-string">&#x27;#app&#x27;</span>,
   <span class="hljs-attr">render</span>: <span class="hljs-function">(<span class="hljs-params">h</span>) =&gt;</span> h(App),
 });
-<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614695722049">import Vue from 'vue';
+<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1615816440233">import Vue from 'vue';
 import App from './App.vue';
 
 new Vue({
@@ -484,7 +484,7 @@ new Vue({
 <p>在访问网站时如果图片较多，会发很多 http 请求，会降低页面性能。这个问题可以通过 <code>url-loader</code> 解决。<code>url-loader</code> 会将引入的图片编码，生成 dataURl。相当于把图片数据翻译成一串字符,再把这串字符打包到文件中，最终只需要引入这个文件就能访问图片了。
 当然，如果图片较大，编码会消耗性能。因此 <code>url-loader</code> 提供了一个 limit 参数，小于 limit 字节的文件会被转为 DataURl，大于 limit 的还会使用 file-loader 进行 copy。
 此处我们使用 <code>url-loader</code>,由于它是基于 <code>file-loader</code> 的封装，所以也需要引入 <code>file-loader</code>。</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614696160391">复制</button>...
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1615821547860">复制</button>...
 <span class="hljs-keyword">const</span> config = {
   ...
   <span class="hljs-attr">module</span>: {
@@ -504,7 +504,7 @@ new Vue({
   },
 };
 ...
-<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614696160391">...
+<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1615821547860">...
 const config = {
   ...
   module: {
@@ -526,7 +526,7 @@ const config = {
 ...
 </textarea>
 <p>然后添加一个图片<code>src/assets/logo.png</code>，在<code>App.vue</code>中引入：</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614694906034">复制</button><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1615820893639">复制</button><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;example&quot;</span>&gt;</span>
     {{ msg }}
     <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">:src</span>=<span class="hljs-string">&quot;url&quot;</span> /&gt;</span>
@@ -551,7 +551,7 @@ const config = {
   <span class="hljs-attribute">color</span>: red;
 }
 </span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
-<b class="name">html</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614694906034"><template>
+<b class="name">html</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1615820893639"><template>
   <div class="example">
     {{ msg }}
     <img :src="url" />
@@ -581,7 +581,7 @@ export default {
 <h2 id="配置-babel">配置 babel</h2>
 <p>babel 可以将 js 的高版本(es6)语法转换为低版本，使得项目兼容低版本浏览器</p>
 <p>需要我们注意的是，babel7 与 babel6 不兼容，因此需要使用最新版本的 babel 和 babel 插件，在前面文章开始我们已经安装了 babel7 版本的 babel 插件，下面我们在<code>webpack.config.js</code>中配置它：</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614693849302">复制</button>...
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1615812466536">复制</button>...
 <span class="hljs-keyword">const</span> config = {
   ...
   <span class="hljs-attr">module</span>: {
@@ -597,7 +597,7 @@ export default {
   },
 };
 ...
-<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614693849302">...
+<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1615812466536">...
 const config = {
   ...
   module: {
@@ -615,7 +615,7 @@ const config = {
 ...
 </textarea>
 <p>配置完后在项目根目录下创建一个 babel 的配置文件<code>.babelrc</code>，写入如下内容：</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614696842706">复制</button>{
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1615814649481">复制</button>{
   <span class="hljs-attr">&quot;presets&quot;</span>: [
     [
       <span class="hljs-string">&quot;@babel/preset-env&quot;</span>,
@@ -625,7 +625,7 @@ const config = {
     ]
   ]
 }
-<b class="name">json</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614696842706">{
+<b class="name">json</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1615814649481">{
   "presets": [
     [
       "@babel/preset-env",
@@ -640,19 +640,19 @@ const config = {
 <p>更多 babel 配置请查看<a href="https://www.babeljs.cn/">babel 中文官网</a></p>
 </blockquote>
 <p>配置完成后新建一个<code>src/utils/getData.js</code>测试一下：</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614696575092">复制</button><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getData</span>(<span class="hljs-params"></span>) </span>{
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1615818198932">复制</button><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getData</span>(<span class="hljs-params"></span>) </span>{
   <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve, reject</span>) =&gt;</span> {
     resolve(<span class="hljs-string">&#x27;ok&#x27;</span>);
   });
 }
-<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614696575092">export default function getData() {
+<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1615818198932">export default function getData() {
   return new Promise((resolve, reject) => {
     resolve('ok');
   });
 }
 </textarea>
 <p>在<code>src/App.vue</code>中引入：</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614699803654">复制</button><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1615817231509">复制</button><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;example&quot;</span>&gt;</span>
     {{ msg }}
     <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">:src</span>=<span class="hljs-string">&quot;url&quot;</span> /&gt;</span>
@@ -687,7 +687,7 @@ const config = {
   <span class="hljs-attribute">color</span>: red;
 }
 </span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
-<b class="name">html</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614699803654"><template>
+<b class="name">html</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1615817231509"><template>
   <div class="example">
     {{ msg }}
     <img :src="url" />
@@ -726,7 +726,7 @@ export default {
 <p>重新执行<code>npm run serve</code>后，页面显示<code>ok</code>，babel 引入成功</p>
 <h3 id="设置-src-别名以及省略后缀">设置 src 别名以及省略后缀</h3>
 <p>为了方便开发，我们可以给 src 目录设置别名，以及将常用文件类型的后缀省略</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614694022028">复制</button>...
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1615818827766">复制</button>...
 <span class="hljs-keyword">const</span> config = {
   ...
   <span class="hljs-comment">// 解析路径</span>
@@ -741,7 +741,7 @@ export default {
   ...
 };
 ...
-<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614694022028">...
+<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1615818827766">...
 const config = {
   ...
   // 解析路径
@@ -758,11 +758,11 @@ const config = {
 ...
 </textarea>
 <p>这样我们就可以以如下方式导入 vue 和 js 文件：</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1614694231953">复制</button><span class="hljs-comment">// 导入App.vue</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1615818248070">复制</button><span class="hljs-comment">// 导入App.vue</span>
 <span class="hljs-keyword">import</span> App <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@/App&#x27;</span>;
 <span class="hljs-comment">// 导入getData</span>
 <span class="hljs-keyword">import</span> getData <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@/utils/getData&#x27;</span>;
-<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1614694231953">// 导入App.vue
+<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1615818248070">// 导入App.vue
 import App from '@/App';
 // 导入getData
 import getData from '@/utils/getData';
