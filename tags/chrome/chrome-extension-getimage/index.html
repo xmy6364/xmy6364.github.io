@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="author" content="xmy6364">
+    <meta name="description" content="想要成为大佬">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+
+    <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.5.0/styles/default.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.5.0/styles/github-gist.min.css">
+    <link rel="stylesheet" href="/assets/lib/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/css/layout.css" />
+    <script defer src="https://cdn.bootcdn.net/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"></script>
+    <script defer src="/assets/js/copyCode.js"></script>
+    <script defer src="/assets/js/backTop.js"></script>
+    <script defer src="/assets/js/tool.js"></script>
+
+    
+  <link rel="stylesheet" href="/assets/css/page.css" />
+  <link rel="stylesheet" href="/assets/css/sidebar.css" />
+  <link rel="stylesheet" href="/assets/css/footer.css" />
+  <link rel="stylesheet" href="/assets/css/post.css" />
+  <script defer src="/assets/js/backHome.js"></script>
+  <script defer src="/assets/js/toc.js"></script>
+  <script defer src="/assets/js/copyright.js"></script>
+
+
+    <title>Chrome插件开发入门</title>
+  </head>
+  <body>
+    <div class="container">
+      <aside>
+        
+  <div class="sidebar">
+  <header>梦的博客</header>
+  <div class="info">
+    <div class="avatar">
+      <img src="https://cdn.jsdelivr.net/gh/xmy6364/blog-image/img/20200914avatar.jpg" alt="头像">
+    </div>
+    <div class="author">xmy6364</div>
+    <div class="description">想要成为大佬</div>
+    <div class="about">
+      <a href="/about">about me.</a>
+    </div>
+  </div>
+  <div class="links">
+    <ul>
+    
+      <li class="links-item">
+        <a href="https://github.com/xmy6364" target="_blank">
+          <i class="fa fa-github-alt" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="links-item">
+        <a href="tencent://message/?uin=1176281967" target="_blank">
+          <i class="fa fa-qq" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+    </ul>
+  </div>
+  <nav>
+    <ul>
+    
+      <li class="nav-item">
+        <a href="/archives">
+          <span class="nav-item__count">31</span>
+          <span class="nav-item__label">归档</span>
+        </a>
+      </li>
+    
+      <li class="nav-item">
+        <a href="/categories">
+          <span class="nav-item__count">3</span>
+          <span class="nav-item__label">分类</span>
+        </a>
+      </li>
+    
+      <li class="nav-item">
+        <a href="/tags">
+          <span class="nav-item__count">45</span>
+          <span class="nav-item__label">标签</span>
+        </a>
+      </li>
+    
+    </ul>
+  </nav>
+  <div class="catalogue" id="catalogue"></div>
+</div>
+
+      </aside>
+      <main>
+        
+  <div class="post">
+    <div class="post-front">
+      <h1 class="post-front__title">Chrome插件开发入门</h1>
+      <div class="post-front__desc">
+        
+        <p class="post-front__desc-date">
+          <i class="fa fa-calendar" aria-hidden="true"></i>
+          2021/04/18 17:22:37
+        </p>
+        
+        
+        <p class="post-front__desc-category">
+          <i class="fa fa-folder-o" aria-hidden="true"></i>
+          <a href="/categories/code">
+            code
+          </a>
+        </p>
+        
+          <div class="post-front__desc-tags">
+          
+          <a href="/tags/chrome">
+            <i class="fa fa-tag" aria-hidden="true"></i>
+            chrome
+          </a>
+          
+          <a href="/tags/javascript">
+            <i class="fa fa-tag" aria-hidden="true"></i>
+            javascript
+          </a>
+          
+          <a href="/tags/extension">
+            <i class="fa fa-tag" aria-hidden="true"></i>
+            extension
+          </a>
+          
+        </div>
+      </div>
+    </div>
+    <div class="post-content">
+      <nav id="toc" class="toc"><ol><li><a href="#什么是chrome插件">什么是Chrome插件</a></li><li><a href="#获取页面上的图片">获取页面上的图片</a><ol><li><a href="#创建manifest">创建manifest</a><ol></ol></li></ol></li><li><a href="#参考文章">参考文章</a></li></ol></nav><p>最近学习了Chrome插件的开发，总体来说上手还是很容易的，因为浏览器插件本质上依旧是网页，写几个demo基本就了解了他的开发过程。</p>
+<ul>
+<li>完整项目：<a href="https://github.com/xmy6364/chrome-extension-getimage">xmy6364/chrome-extension-getimage</a></li>
+</ul>
+<h2 id="什么是chrome插件">什么是Chrome插件</h2>
+<p>正如开头所说的，Chrome插件实际上就是一个网页，由HTML、CSS、JS、图片等资源组成，与网页不同的是，Chrome插件是用来增强浏览器功能的，同时它还有一套属于自己的开发规则和API。</p>
+<p>每个插件都由不同的组件构成，这些组件大都包括background scripts，content scripts，options page，UI以及各种逻辑文件，当然，这些文件是否需要是根据插件的功能所决定的。</p>
+<p>接下来我将通过开发一个获取页面图片并保存的插件来介绍如何开发一个Chrome插件。</p>
+<h2 id="获取页面上的图片">获取页面上的图片</h2>
+<p>首先，我们需要一个目录来存放这个插件的各个文件。</p>
+<h3 id="创建manifest">创建manifest</h3>
+<p><code>manifest.json</code>是一个Chrome插件必不可少的文件，它包含了你插件的所有信息。</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618745606389">复制</button>{
+  <span class="hljs-attr">&quot;name&quot;</span>: <span class="hljs-string">&quot;获取图片&quot;</span>,
+  <span class="hljs-attr">&quot;description&quot;</span>: <span class="hljs-string">&quot;获取页面上的所有图片&quot;</span>,
+  <span class="hljs-attr">&quot;version&quot;</span>: <span class="hljs-string">&quot;1.0&quot;</span>,
+  <span class="hljs-attr">&quot;manifest_version&quot;</span>: <span class="hljs-number">3</span>
+}
+<b class="name">json</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618745606389">{
+  "name": "获取图片",
+  "description": "获取页面上的所有图片",
+  "version": "1.0",
+  "manifest_version": 3
+}
+</textarea>
+<p>只要在目录中包含<code>manifest.json</code>，这个目录就可以被作为一个Chrome插件添加到Chrome当中。</p>
+<ol>
+<li>在浏览器地址栏中输入<code>chrome://extensions</code>，回车以打开浏览器的扩展程序界面</li>
+<li>打开开发人员模式</li>
+<li>点击<code>加载已解压的扩展程序</code>，选择manifest文件所在的目录</li>
+</ol>
+<p>这样我们就成功安装了一个扩展，接下来我们要在此基础上完善它。</p>
+<h4>用户界面</h4>
+<p>一个插件可以有多种形式的用户界面，这里我们选择弹出层作为用户界面，在插件根目录下创建一个<code>popup.html</code>，这个页面需要包含两个按钮分别用来触发获取图片和保存图片的事件，以及一个用来展示图片的盒子。</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618741942210">复制</button><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-meta-keyword">html</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">&quot;UTF-8&quot;</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="css">
+      <span class="hljs-selector-tag">body</span>,
+      <span class="hljs-selector-tag">img</span> {
+        <span class="hljs-attribute">width</span>: <span class="hljs-number">400px</span>;
+      }
+    </span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;get&quot;</span>&gt;</span>获取<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;save&quot;</span>&gt;</span>保存<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;app&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+<b class="name">html</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618741942210"><!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      body,
+      img {
+        width: 400px;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="get">获取</button>
+    <button id="save">保存</button>
+    <div id="app"></div>
+  </body>
+</html>
+</textarea>
+<p>注意，如果在<code>popup.html</code>中有中文出现，一定要在head标签中添加<code>&lt;meta charset=&quot;UTF-8&quot; /&gt;</code>，以防止出现乱码。</p>
+<p>创建完成后，我们需要在<code>manifest.json</code>中声明该页面，以保证浏览器能够正确的读取到它。添加一个<code>action</code>对象，同时将<code>popup.html</code>设置为该对象的<code>default_popup</code>。</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618745015061">复制</button>{
+  <span class="hljs-attr">&quot;name&quot;</span>: <span class="hljs-string">&quot;获取图片&quot;</span>,
+  <span class="hljs-attr">&quot;description&quot;</span>: <span class="hljs-string">&quot;获取页面上的所有图片&quot;</span>,
+  <span class="hljs-attr">&quot;version&quot;</span>: <span class="hljs-string">&quot;1.0&quot;</span>,
+  <span class="hljs-attr">&quot;manifest_version&quot;</span>: <span class="hljs-number">3</span>,
+  <span class="hljs-attr">&quot;action&quot;</span>: {
+    <span class="hljs-attr">&quot;default_popup&quot;</span>: <span class="hljs-string">&quot;popup.html&quot;</span>,
+  },
+}
+<b class="name">json</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618745015061">{
+  "name": "获取图片",
+  "description": "获取页面上的所有图片",
+  "version": "1.0",
+  "manifest_version": 3,
+  "action": {
+    "default_popup": "popup.html",
+  },
+}
+</textarea>
+<p>为了让我们的插件像个正经的插件，给他添加上图标。我们需要准备16x16、32x32、48x48以及128x128四种大小的图标图片，将它们放到目录中，之后将它们的路径写入<code>manifest.json</code>中。</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618738883337">复制</button>{
+  <span class="hljs-attr">&quot;name&quot;</span>: <span class="hljs-string">&quot;获取图片&quot;</span>,
+  <span class="hljs-attr">&quot;description&quot;</span>: <span class="hljs-string">&quot;获取页面上的所有图片&quot;</span>,
+  <span class="hljs-attr">&quot;version&quot;</span>: <span class="hljs-string">&quot;1.0&quot;</span>,
+  <span class="hljs-attr">&quot;manifest_version&quot;</span>: <span class="hljs-number">3</span>,
+  <span class="hljs-attr">&quot;action&quot;</span>: {
+    <span class="hljs-attr">&quot;default_popup&quot;</span>: <span class="hljs-string">&quot;popup.html&quot;</span>,
+    <span class="hljs-attr">&quot;default_icon&quot;</span>: {
+      <span class="hljs-attr">&quot;16&quot;</span>: <span class="hljs-string">&quot;/images/logo16.png&quot;</span>,
+      <span class="hljs-attr">&quot;32&quot;</span>: <span class="hljs-string">&quot;/images/logo32.png&quot;</span>,
+      <span class="hljs-attr">&quot;48&quot;</span>: <span class="hljs-string">&quot;/images/logo48.png&quot;</span>,
+      <span class="hljs-attr">&quot;128&quot;</span>: <span class="hljs-string">&quot;/images/logo128.png&quot;</span>
+    }
+  },
+}
+<b class="name">json</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618738883337">{
+  "name": "获取图片",
+  "description": "获取页面上的所有图片",
+  "version": "1.0",
+  "manifest_version": 3,
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "/images/logo16.png",
+      "32": "/images/logo32.png",
+      "48": "/images/logo48.png",
+      "128": "/images/logo128.png"
+    }
+  },
+}
+</textarea>
+<p>为了让图标能够在扩展程序管理页面显示，我们还需要添加一个<code>icons</code>对象。</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618740688314">复制</button>{
+  <span class="hljs-attr">&quot;name&quot;</span>: <span class="hljs-string">&quot;获取图片&quot;</span>,
+  <span class="hljs-attr">&quot;description&quot;</span>: <span class="hljs-string">&quot;获取页面上的所有图片&quot;</span>,
+  <span class="hljs-attr">&quot;version&quot;</span>: <span class="hljs-string">&quot;1.0&quot;</span>,
+  <span class="hljs-attr">&quot;manifest_version&quot;</span>: <span class="hljs-number">3</span>,
+  <span class="hljs-attr">&quot;action&quot;</span>: {
+    <span class="hljs-attr">&quot;default_popup&quot;</span>: <span class="hljs-string">&quot;popup.html&quot;</span>,
+    <span class="hljs-attr">&quot;default_icon&quot;</span>: {
+      <span class="hljs-attr">&quot;16&quot;</span>: <span class="hljs-string">&quot;/images/logo16.png&quot;</span>,
+      <span class="hljs-attr">&quot;32&quot;</span>: <span class="hljs-string">&quot;/images/logo32.png&quot;</span>,
+      <span class="hljs-attr">&quot;48&quot;</span>: <span class="hljs-string">&quot;/images/logo48.png&quot;</span>,
+      <span class="hljs-attr">&quot;128&quot;</span>: <span class="hljs-string">&quot;/images/logo128.png&quot;</span>
+    }
+  }, 
+  <span class="hljs-attr">&quot;icons&quot;</span>: {
+    <span class="hljs-attr">&quot;16&quot;</span>: <span class="hljs-string">&quot;/images/logo16.png&quot;</span>,
+    <span class="hljs-attr">&quot;32&quot;</span>: <span class="hljs-string">&quot;/images/logo32.png&quot;</span>,
+    <span class="hljs-attr">&quot;48&quot;</span>: <span class="hljs-string">&quot;/images/logo48.png&quot;</span>,
+    <span class="hljs-attr">&quot;128&quot;</span>: <span class="hljs-string">&quot;/images/logo128.png&quot;</span>
+  }
+}
+<b class="name">json</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618740688314">{
+  "name": "获取图片",
+  "description": "获取页面上的所有图片",
+  "version": "1.0",
+  "manifest_version": 3,
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "/images/logo16.png",
+      "32": "/images/logo32.png",
+      "48": "/images/logo48.png",
+      "128": "/images/logo128.png"
+    }
+  }, 
+  "icons": {
+    "16": "/images/logo16.png",
+    "32": "/images/logo32.png",
+    "48": "/images/logo48.png",
+    "128": "/images/logo128.png"
+  }
+}
+</textarea>
+<p>点击扩展程序管理页面中的更新按钮，即可看到添加完用户界面的插件信息了。</p>
+<h4>功能逻辑</h4>
+<p>之后我们要为插件添加它应有的功能——获取页面图片。</p>
+<p>首先我们先简单梳理一下需求：</p>
+<ol>
+<li>点击popup.html中的获取按钮，拿到当前页面的图片</li>
+<li>点击popup.html中的保存按钮，将拿到的图片保存下来</li>
+</ol>
+<p>实际上我们的插件与当前正在活动的页面并不是同一个页面，因此我们需要通过某种方式来将获取图片的js代码发送到当前活动页上，并且还需要这段js代码能够在获取到图片之后将图片发送到<code>popup.html</code>中。</p>
+<p>这里我们就需要用到一开始提到的content scripts组件以及content script与popup之间通信的API。content scripts简单来说就是插入页面的脚本，虽说是插入页面的脚本，实际上它与页面原本的js是分割开的，双方不能获取到对方的变量、函数等内容。不过content scripts还是可以获取到dom的。</p>
+<h5>获取图片</h5>
+<p>首先添加一个<code>content-script.js</code>，这个脚本主要有两个功能，一是获取图片，二是监听popup传来的消息，然后将获取到的图片作为回信传回去。</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618739783732">复制</button>chrome.runtime.onMessage.addListener(<span class="hljs-function">(<span class="hljs-params">message, sender, sendResponse</span>) =&gt;</span> {
+  <span class="hljs-comment">// message的数据格式取决于发送时的数据</span>
+  <span class="hljs-keyword">const</span> { start } = message;
+
+  <span class="hljs-keyword">if</span> (start) {
+    <span class="hljs-keyword">const</span> images = <span class="hljs-built_in">document</span>.getElementsByTagName(<span class="hljs-string">&#x27;img&#x27;</span>);
+    <span class="hljs-keyword">const</span> imgSrcList = <span class="hljs-built_in">Array</span>.from(images).map(<span class="hljs-function">(<span class="hljs-params">img</span>) =&gt;</span> img.src);
+    sendResponse(imgSrcList);
+  }
+});
+<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618739783732">chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  // message的数据格式取决于发送时的数据
+  const { start } = message;
+
+  if (start) {
+    const images = document.getElementsByTagName('img');
+    const imgSrcList = Array.from(images).map((img) => img.src);
+    sendResponse(imgSrcList);
+  }
+});
+</textarea>
+<p>之后我们要在<code>manifest.json</code>中声明配置它</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618741791368">复制</button>{
+  ...
+  <span class="hljs-attr">&quot;content_scripts&quot;</span>: [
+    {
+      <span class="hljs-attr">&quot;matches&quot;</span>: [
+        <span class="hljs-string">&quot;&lt;all_urls&gt;&quot;</span>
+      ],
+      <span class="hljs-attr">&quot;js&quot;</span>: [
+        <span class="hljs-string">&quot;js/content-script.js&quot;</span>
+      ]
+    }
+  ]
+}
+<b class="name">json</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618741791368">{
+  ...
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "js/content-script.js"
+      ]
+    }
+  ]
+}
+</textarea>
+<p><code>matches</code>声明了content scripts要注入的页面，<code>&lt;all_urls&gt;</code>表示所有页面，<code>js</code>属性声明了要注入的js脚本，除此之外还有<code>css</code>属性声明要注入的css代码、<code>run_at</code>属性声明注入时机等都可以在官方文档中找到。</p>
+<p>之后添加一个<code>popup.js</code>为界面上的按钮注册点击事件，并在<code>popup.html</code>中引入它</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618743280146">复制</button><span class="hljs-keyword">let</span> srcList;
+<span class="hljs-keyword">const</span> getImageBtn = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&#x27;get&#x27;</span>);
+
+getImageBtn.addEventListener(<span class="hljs-string">&#x27;click&#x27;</span>, <span class="hljs-keyword">async</span> () =&gt; {
+  <span class="hljs-comment">// 获取当前活动页</span>
+  chrome.tabs.query({ <span class="hljs-attr">active</span>: <span class="hljs-literal">true</span>, <span class="hljs-attr">currentWindow</span>: <span class="hljs-literal">true</span> }, <span class="hljs-function">(<span class="hljs-params">[tab]</span>) =&gt;</span> {
+    <span class="hljs-keyword">let</span> message = { <span class="hljs-attr">start</span>: <span class="hljs-literal">true</span> };
+    <span class="hljs-comment">// 向content scripts发送消息</span>
+    chrome.tabs.sendMessage(tab.id, message, <span class="hljs-function">(<span class="hljs-params">res</span>) =&gt;</span> {
+      srcList = <span class="hljs-built_in">Array</span>.from(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Set</span>(res));
+      <span class="hljs-comment">// popup中展示图片</span>
+      <span class="hljs-keyword">const</span> imgList = srcList.map(<span class="hljs-function">(<span class="hljs-params">src</span>) =&gt;</span> <span class="hljs-string">`&lt;img src=&quot;<span class="hljs-subst">${src}</span>&quot; /&gt;`</span>).join(<span class="hljs-string">&#x27;&#x27;</span>);
+
+      <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&#x27;app&#x27;</span>).innerHTML = imgList;
+    });
+  });
+});
+
+<span class="hljs-keyword">const</span> saveImageBtn = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&#x27;save&#x27;</span>);
+
+saveImageBtn.addEventListener(<span class="hljs-string">&#x27;click&#x27;</span>, <span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-comment">// 保存图片</span>
+});
+<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618743280146">let srcList;
+const getImageBtn = document.getElementById('get');
+
+getImageBtn.addEventListener('click', async () => {
+  // 获取当前活动页
+  chrome.tabs.query({ active: true, currentWindow: true }, ([tab]) => {
+    let message = { start: true };
+    // 向content scripts发送消息
+    chrome.tabs.sendMessage(tab.id, message, (res) => {
+      srcList = Array.from(new Set(res));
+      // popup中展示图片
+      const imgList = srcList.map((src) => `<img src="${src}" />`).join('');
+
+      document.getElementById('app').innerHTML = imgList;
+    });
+  });
+});
+
+const saveImageBtn = document.getElementById('save');
+
+saveImageBtn.addEventListener('click', () => {
+  // 保存图片
+});
+</textarea>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618742513901">复制</button><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-meta-keyword">html</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">&quot;UTF-8&quot;</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="css">
+      <span class="hljs-selector-tag">body</span>,
+      <span class="hljs-selector-tag">img</span> {
+        <span class="hljs-attribute">width</span>: <span class="hljs-number">400px</span>;
+      }
+    </span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;get&quot;</span>&gt;</span>获取<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;save&quot;</span>&gt;</span>保存<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;app&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;./js/popup.js&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+<b class="name">html</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618742513901"><!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      body,
+      img {
+        width: 400px;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="get">获取</button>
+    <button id="save">保存</button>
+    <div id="app"></div>
+    <script src="./js/popup.js"></script>
+  </body>
+</html>
+</textarea>
+<p>这里我们需要注意，插件要想和当前活动页面通信就需要首先获取它的tabId，而要获取当前活动页面的tabId则需要给予插件对应的权限，因此我们需要在<code>manifest.json</code>中声明所需要的权限。</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618738939206">复制</button>{
+  ...
+  <span class="hljs-attr">&quot;permissions&quot;</span>: [
+    <span class="hljs-string">&quot;activeTab&quot;</span>
+  ]
+}
+<b class="name">json</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618738939206">{
+  ...
+  "permissions": [
+    "activeTab"
+  ]
+}
+</textarea>
+<p>完成后更新一下插件，然后打开想要获取图片的页面点击获取按钮即可（如果页面已经提前打开请刷新一下）</p>
+<h5>保存图片</h5>
+<p>js可以通过a标签设置href和download属性来实现批量保存图片，但是这里我们要通过调用chrome的download API来实现。</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618745957817">复制</button>...
+
+saveImageBtn.addEventListener(<span class="hljs-string">&#x27;click&#x27;</span>, <span class="hljs-function">() =&gt;</span> {
+  chrome.tabs.query({ <span class="hljs-attr">active</span>: <span class="hljs-literal">true</span>, <span class="hljs-attr">currentWindow</span>: <span class="hljs-literal">true</span> }, <span class="hljs-function">(<span class="hljs-params">[tab]</span>) =&gt;</span> {
+    <span class="hljs-keyword">if</span> (!srcList) {
+      <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&#x27;app&#x27;</span>).innerHTML = <span class="hljs-string">&#x27;未获取图片&#x27;</span>;
+      <span class="hljs-keyword">return</span>;
+    }
+      
+    srcList.forEach(<span class="hljs-function">(<span class="hljs-params">src</span>) =&gt;</span> {
+      chrome.downloads.download({
+        <span class="hljs-attr">url</span>: src,
+      });
+    });
+  });
+});
+<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618745957817">...
+
+saveImageBtn.addEventListener('click', () => {
+  chrome.tabs.query({ active: true, currentWindow: true }, ([tab]) => {
+    if (!srcList) {
+      document.getElementById('app').innerHTML = '未获取图片';
+      return;
+    }
+      
+    srcList.forEach((src) => {
+      chrome.downloads.download({
+        url: src,
+      });
+    });
+  });
+});
+</textarea>
+<p>与获取活动页面相同，download API同样也需要获取权限</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618745391518">复制</button>{
+  ...
+  <span class="hljs-attr">&quot;permissions&quot;</span>: [
+    <span class="hljs-string">&quot;activeTab&quot;</span>,
+    <span class="hljs-string">&quot;downloads&quot;</span>
+  ]
+}
+<b class="name">json</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618745391518">{
+  ...
+  "permissions": [
+    "activeTab",
+    "downloads"
+  ]
+}
+</textarea>
+<p>这样一个获取当前页面图片的插件就完成了。</p>
+<ul>
+<li>完整项目：<a href="https://github.com/xmy6364/chrome-extension-getimage">xmy6364/chrome-extension-getimage</a></li>
+</ul>
+<h2 id="参考文章">参考文章</h2>
+<ul>
+<li><a href="https://developer.chrome.com/docs/extensions/mv3/getstarted/">谷歌官方文档</a></li>
+<li><a href="https://juejin.cn/post/6844903740646899720">一篇文章教你顺利入门和开发chrome扩展程序（插件）</a></li>
+<li><a href="https://juejin.cn/post/6844903985711677453">入门系列3 - background、content、popup的通信</a></li>
+</ul>
+
+    </div>
+    
+  </div>
+
+        <footer>
+        
+  <div class="footer">
+  
+  <div class="theme">
+    博客主题为 <a href="https://github.com/xmy6364/CoinRailgun">CoinRailgun</a> 默认主题
+  </div>
+  <div class="copyright">
+    <span>© 2019-2021 xmy6364.</span>
+    <span>Powered by <a href="https://github.com/xmy6364/CoinRailgun">CoinRailgun</a></span>
+  </div>
+</div>
+
+        </footer>
+      </main>
+    </div>
+  </body>
+</html>
