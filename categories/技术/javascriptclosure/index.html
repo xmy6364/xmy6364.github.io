@@ -75,7 +75,7 @@
     
       <li class="nav-item">
         <a href="/categories">
-          <span class="nav-item__count">3</span>
+          <span class="nav-item__count">2</span>
           <span class="nav-item__label">分类</span>
         </a>
       </li>
@@ -127,36 +127,36 @@
       <nav id="toc" class="toc"><ol><li><a href="#变量作用域">变量作用域</a></li><li><a href="#如何从外部读取函数内部声明的变量">如何从外部读取函数内部声明的变量？</a></li><li><a href="#闭包的特性">闭包的特性</a></li><li><a href="#使用闭包的注意点">使用闭包的注意点</a></li><li><a href="#参考文章">参考文章</a></li></ol></nav><p>闭包是JavaScript中的一个难点，同时也是它的特色，JavaScript的很多高级应用都要依靠闭包来实现。以下是我学习闭包的记录，希望对你有些帮助。</p>
 <h2 id="变量作用域">变量作用域</h2>
 <p>在学习闭包之前，我们首先要理解JavaScript不同与其他语言独特的变量作用域。在JavaScript中，不存在局部作用域的概念，但是有全局作用域以及函数作用域。全局作用域与其他语言的相同，没有需要注意的地方，而函数作用域是指函数内部声明的变量在函数外部无法直接访问。</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618741010177">复制</button><span class="hljs-keyword">var</span> a = <span class="hljs-number">99</span>;
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618741003222">复制</button><span class="hljs-keyword">var</span> a = <span class="hljs-number">99</span>;
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f1</span>(<span class="hljs-params"></span>) </span>{
     <span class="hljs-built_in">console</span>.log(a);
 }
 f1();
-<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618741010177">var a = 99;
+<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618741003222">var a = 99;
 function f1() {
     console.log(a);
 }
 f1();
 </textarea>
 <p>上面的代码中，f1可以读取到全局变量a，而下面的代码中a无法被访问。</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618746567890">复制</button><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f1</span>(<span class="hljs-params"></span>) </span>{
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618740612036">复制</button><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f1</span>(<span class="hljs-params"></span>) </span>{
     <span class="hljs-keyword">var</span> a = <span class="hljs-number">99</span>;
 }
 <span class="hljs-built_in">console</span>.log(a);
-<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618746567890">function f1() {
+<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618740612036">function f1() {
     var a = 99;
 }
 console.log(a);
 </textarea>
 <h2 id="如何从外部读取函数内部声明的变量">如何从外部读取函数内部声明的变量？</h2>
 <p>在某些情况下，我们可能需要得到函数内部的变量，正常情况下是无法做到的，因此需要用特殊的办法。</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618744087657">复制</button><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f1</span>(<span class="hljs-params"></span>) </span>{
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618738417344">复制</button><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f1</span>(<span class="hljs-params"></span>) </span>{
     <span class="hljs-keyword">var</span> a = <span class="hljs-number">99</span>;
     <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f2</span>(<span class="hljs-params"></span>) </span>{
         <span class="hljs-built_in">console</span>.log(a);
     }
 }
-<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618744087657">function f1() {
+<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618738417344">function f1() {
     var a = 99;
     function f2() {
         console.log(a);
@@ -164,7 +164,7 @@ console.log(a);
 }
 </textarea>
 <p>上面代码中，我们在函数f1中定义另一个函数f2，这样f1中的所有变量对于f2来说就是可见的，既然f2可以读取到f1中的变量，那么我们只要把f2作为f1的返回值，我们就可以在f1的外部读取到它内部的变量了。</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618744979169">复制</button><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f1</span>(<span class="hljs-params"></span>) </span>{
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618743586237">复制</button><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f1</span>(<span class="hljs-params"></span>) </span>{
     <span class="hljs-keyword">var</span> a = <span class="hljs-number">99</span>;
     <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f2</span>(<span class="hljs-params"></span>) </span>{
         <span class="hljs-built_in">console</span>.log(a);
@@ -173,7 +173,7 @@ console.log(a);
 }
 <span class="hljs-keyword">var</span> result = f1();
 result();
-<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618744979169">function f1() {
+<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618743586237">function f1() {
     var a = 99;
     function f2() {
         console.log(a);
@@ -186,7 +186,7 @@ result();
 <p>此时，就形成了一个简单的闭包。因此，闭包就可以简单的理解为函数中的函数，而本质上，闭包就是一个连接函数内部和外部的桥梁。</p>
 <h2 id="闭包的特性">闭包的特性</h2>
 <p>闭包会使得函数中的变量都被保存到内存中。首先我们先看一下以下两个例子</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618738421433">复制</button><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">A</span>(<span class="hljs-params"></span>) </span>{
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618744363836">复制</button><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">A</span>(<span class="hljs-params"></span>) </span>{
     <span class="hljs-keyword">var</span> count = <span class="hljs-number">0</span>;
     <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">B</span>(<span class="hljs-params"></span>) </span>{
        count++;
@@ -198,7 +198,7 @@ result();
 C(); <span class="hljs-comment">// 1</span>
 C(); <span class="hljs-comment">// 2</span>
 C(); <span class="hljs-comment">// 3</span>
-<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618738421433">function A() {
+<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618744363836">function A() {
     var count = 0;
     function B() {
        count++;
@@ -212,7 +212,7 @@ C(); // 2
 C(); // 3
 </textarea>
 <p>count是函数A中的一个变量，它的值在函数B中被改变，函数B每执行一次，count的值就在原来的基础上累加1，因此，函数A中的count变量会一直保存在内存中。</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618745287073">复制</button><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">A</span>(<span class="hljs-params">x</span>) </span>{
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618747567220">复制</button><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">A</span>(<span class="hljs-params">x</span>) </span>{
     <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">B</span>(<span class="hljs-params">y</span>) </span>{
         <span class="hljs-built_in">console</span>.log(x+y);
     }
@@ -220,7 +220,7 @@ C(); // 3
 }
 <span class="hljs-keyword">var</span> C = A(<span class="hljs-number">3</span>);
 C(<span class="hljs-number">5</span>); <span class="hljs-comment">//8</span>
-<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618745287073">function A(x) {
+<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618747567220">function A(x) {
     function B(y) {
         console.log(x+y);
     }
@@ -232,7 +232,7 @@ C(5); //8
 <p>当3传入A函数后，B函数就会记住这个值，所以在后面传入5的时候只会对B函数中的y赋值，所以最后会输出8。</p>
 <h2 id="使用闭包的注意点">使用闭包的注意点</h2>
 <p>由于上述闭包的特性，每次使用闭包都会大量增加内存的消耗，所以不能滥用闭包，否则会影响网页的性能。我们也可以在函数退出前，使函数内变量指向null来手动删除变量。我们可以来看下一道经典的面试题来理解。</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618742408838">复制</button><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">outer</span>(<span class="hljs-params"></span>)</span>{
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618747704128">复制</button><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">outer</span>(<span class="hljs-params"></span>)</span>{
     <span class="hljs-keyword">var</span> num = <span class="hljs-number">0</span>; <span class="hljs-comment">//内部变量</span>
     <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">add</span>(<span class="hljs-params"></span>) </span>{ <span class="hljs-comment">//通过return返回add函数，就可以在outer函数外访问了</span>
         num++; <span class="hljs-comment">//内部函数有引用，作为add函数的一部分了</span>
@@ -245,7 +245,7 @@ func1(); <span class="hljs-comment">//输出2 因为outer函数内部的私有�
 <span class="hljs-keyword">var</span> func2 = outer();
 func2(); <span class="hljs-comment">// 输出1  每次重新引用函数的时候，闭包是全新的。</span>
 func2(); <span class="hljs-comment">// 输出2  </span>
-<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618742408838">function outer(){
+<b class="name">javascript</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618747704128">function outer(){
     var num = 0; //内部变量
     return function add() { //通过return返回add函数，就可以在outer函数外访问了
         num++; //内部函数有引用，作为add函数的一部分了

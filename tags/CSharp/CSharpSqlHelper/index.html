@@ -75,7 +75,7 @@
     
       <li class="nav-item">
         <a href="/categories">
-          <span class="nav-item__count">3</span>
+          <span class="nav-item__count">2</span>
           <span class="nav-item__label">分类</span>
         </a>
       </li>
@@ -131,14 +131,14 @@
     <div class="post-content">
       <nav id="toc" class="toc"></nav><p>老师在讲C#实战项目时所使用的SqlHelper，使用的数据库是SQL Server</p>
 <p><strong>注意，连接数据库的连接字符串需要在配置文件中设置好</strong></p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618747256827">复制</button><span class="hljs-tag">&lt;<span class="hljs-name">appSettings</span>&gt;</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618741458368">复制</button><span class="hljs-tag">&lt;<span class="hljs-name">appSettings</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">add</span> <span class="hljs-attr">key</span> = <span class="hljs-string">&quot;connString&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;data source = .; database = CourseSelectionInfo; integrated security = true&quot;</span>/&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">appSettings</span>&gt;</span>
-<b class="name">XML</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618747256827"><appSettings>
+<b class="name">XML</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618741458368"><appSettings>
     <add key = "connString" value="data source = .; database = CourseSelectionInfo; integrated security = true"/>
 </appSettings>
 </textarea>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618740332912">复制</button><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">SqlHelper</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618744431246">复制</button><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">SqlHelper</span>
 {
     <span class="hljs-meta">#<span class="hljs-meta-keyword">region</span> 连接字符串connString</span>
     <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-built_in">string</span> connString;
@@ -269,7 +269,7 @@
     }
     <span class="hljs-meta">#<span class="hljs-meta-keyword">endregion</span></span>
 }
-<b class="name">cs</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618740332912">public class SqlHelper
+<b class="name">cs</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618744431246">public class SqlHelper
 {
     #region 连接字符串connString
     private static string connString;

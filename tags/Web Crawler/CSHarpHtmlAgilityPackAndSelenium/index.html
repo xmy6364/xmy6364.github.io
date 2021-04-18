@@ -75,7 +75,7 @@
     
       <li class="nav-item">
         <a href="/categories">
-          <span class="nav-item__count">3</span>
+          <span class="nav-item__count">2</span>
           <span class="nav-item__label">分类</span>
         </a>
       </li>
@@ -145,18 +145,18 @@
 </ul>
 <h2 id="实例获取某网站主页所有图片">实例(获取某网站主页所有图片)</h2>
 <h3 id="普通获取网页html">普通获取网页Html</h3>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618738978262">复制</button>ChromeDriver driver = <span class="hljs-keyword">new</span> ChromeDriver();
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618747899446">复制</button>ChromeDriver driver = <span class="hljs-keyword">new</span> ChromeDriver();
 driver.Navigate().GoToUrl(url);
 <span class="hljs-built_in">string</span> title = driver.Title;<span class="hljs-comment">//页面title</span>
 <span class="hljs-built_in">string</span> html = driver.PageSource;<span class="hljs-comment">//页面Html</span>
-<b class="name">cs</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618738978262">ChromeDriver driver = new ChromeDriver();
+<b class="name">cs</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618747899446">ChromeDriver driver = new ChromeDriver();
 driver.Navigate().GoToUrl(url);
 string title = driver.Title;//页面title
 string html = driver.PageSource;//页面Html
 </textarea>
 <h3 id="不启动chrome窗口及关闭chrome控制台获取网页">不启动Chrome窗口及关闭Chrome控制台获取网页</h3>
 <p>程序执行时会自动打开Chrome窗口和输出控制台中一些信息，我们不需要这些东西。</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618738720865">复制</button><span class="hljs-comment">//不启动chrome窗口</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618744038494">复制</button><span class="hljs-comment">//不启动chrome窗口</span>
 ChromeOptions options = <span class="hljs-keyword">new</span> ChromeOptions();
 options.AddArgument(<span class="hljs-string">&quot;headless&quot;</span>);
 
@@ -166,7 +166,7 @@ driverService.HideCommandPromptWindow = <span class="hljs-literal">true</span>;
 
 ChromeDriver driver = <span class="hljs-keyword">new</span> ChromeDriver(driverService, options);
 driver.Navigate().GoToUrl(url);
-<b class="name">cs</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618738720865">//不启动chrome窗口
+<b class="name">cs</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618744038494">//不启动chrome窗口
 ChromeOptions options = new ChromeOptions();
 options.AddArgument("headless");
 
@@ -179,7 +179,7 @@ driver.Navigate().GoToUrl(url);
 </textarea>
 <h3 id="将页面滚动到底部">将页面滚动到底部</h3>
 <p>如果使用<code>scrollTo(0, document.body.scrollHeight)</code>，直接让将页面滚动到底部会导致页面中间部分读取失败，所以需要分几次滑动并且给页面足够的时间加载</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618741411921">复制</button><span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">10</span>; i++)
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618745393435">复制</button><span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">10</span>; i++)
 {
     <span class="hljs-built_in">string</span> jsCode = <span class="hljs-string">&quot;window.scrollTo({top: document.body.scrollHeight / 10 * &quot;</span> + i + <span class="hljs-string">&quot;, behavior: \&quot;smooth\&quot;});&quot;</span>;
     <span class="hljs-comment">//使用IJavaScriptExecutor接口运行js代码</span>
@@ -188,7 +188,7 @@ driver.Navigate().GoToUrl(url);
     <span class="hljs-comment">//暂停滚动</span>
     Thread.Sleep(<span class="hljs-number">1000</span>);
 }
-<b class="name">cs</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618741411921">for (int i = 1; i <= 10; i++)
+<b class="name">cs</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618745393435">for (int i = 1; i <= 10; i++)
 {
     string jsCode = "window.scrollTo({top: document.body.scrollHeight / 10 * " + i + ", behavior: \"smooth\"});";
     //使用IJavaScriptExecutor接口运行js代码
@@ -200,7 +200,7 @@ driver.Navigate().GoToUrl(url);
 </textarea>
 <h3 id="使用htmlagilitypack解析读取到的html">使用HtmlAgilityPack解析读取到的Html</h3>
 <p>以下内容与<a href="https://xmy6364.github.io/2019/09/04/CSharpHtmlAgilityPack/">上一篇文章</a>基本相同</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618746787370">复制</button><span class="hljs-built_in">string</span> title = driver.Title;<span class="hljs-comment">//页面title</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618738465457">复制</button><span class="hljs-built_in">string</span> title = driver.Title;<span class="hljs-comment">//页面title</span>
 <span class="hljs-built_in">string</span> html = driver.PageSource;<span class="hljs-comment">//页面Html</span>
 
 HtmlDocument doc = <span class="hljs-keyword">new</span> HtmlDocument();
@@ -211,7 +211,7 @@ doc.LoadHtml(html);<span class="hljs-comment">//解析Html字符串</span>
 {
     ······
 }
-<b class="name">cs</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618746787370">string title = driver.Title;//页面title
+<b class="name">cs</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618738465457">string title = driver.Title;//页面title
 string html = driver.PageSource;//页面Html
 
 HtmlDocument doc = new HtmlDocument();
@@ -225,7 +225,7 @@ foreach (HtmlNode node in doc.DocumentNode.SelectNodes(imgPath))
 </textarea>
 <h3 id="完整代码">完整代码</h3>
 <p>&lt;details&gt;</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618741674901">复制</button><span class="hljs-keyword">using</span> System;
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618740797587">复制</button><span class="hljs-keyword">using</span> System;
 <span class="hljs-keyword">using</span> System.Collections.Generic;
 <span class="hljs-keyword">using</span> System.Linq;
 <span class="hljs-keyword">using</span> System.Text;
@@ -403,7 +403,7 @@ foreach (HtmlNode node in doc.DocumentNode.SelectNodes(imgPath))
         }
     }
 }
-<b class="name">cs</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618741674901">using System;
+<b class="name">cs</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618740797587">using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
