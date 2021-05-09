@@ -68,7 +68,7 @@
     
       <li class="nav-item">
         <a href="/archives">
-          <span class="nav-item__count">30</span>
+          <span class="nav-item__count">31</span>
           <span class="nav-item__label">归档</span>
         </a>
       </li>
@@ -82,7 +82,7 @@
     
       <li class="nav-item">
         <a href="/tags">
-          <span class="nav-item__count">44</span>
+          <span class="nav-item__count">45</span>
           <span class="nav-item__label">标签</span>
         </a>
       </li>
@@ -172,7 +172,7 @@
 <li><code>markdown-it</code>、<code>markdown-it-anchor</code>、<code>markdown-it-toc-done-right</code>解析markdown</li>
 <li><code>uslug</code>解析锚点的汉字</li>
 </ul>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620548571426">复制</button><span class="hljs-string">&quot;dependencies&quot;</span>: {
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620565741164">复制</button><span class="hljs-string">&quot;dependencies&quot;</span>: {
   <span class="hljs-attr">&quot;art-template&quot;</span>: <span class="hljs-string">&quot;^4.13.2&quot;</span>,
   <span class="hljs-attr">&quot;commander&quot;</span>: <span class="hljs-string">&quot;^7.0.0&quot;</span>,
   <span class="hljs-attr">&quot;dayjs&quot;</span>: <span class="hljs-string">&quot;^1.10.4&quot;</span>,
@@ -187,7 +187,7 @@
   <span class="hljs-attr">&quot;markdown-it-toc-done-right&quot;</span>: <span class="hljs-string">&quot;^4.2.0&quot;</span>,
   <span class="hljs-attr">&quot;uslug&quot;</span>: <span class="hljs-string">&quot;^1.0.4&quot;</span>
 }
-<b class="name">json</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620548571426">"dependencies": {
+<b class="name">json</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620565741164">"dependencies": {
   "art-template": "^4.13.2",
   "commander": "^7.0.0",
   "dayjs": "^1.10.4",
@@ -204,7 +204,7 @@
 }
 </textarea>
 <h3 id="搭建项目结构">搭建项目结构</h3>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620548451718">复制</button>.
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620558574173">复制</button>.
 ├─ bin
 │    └─ crn.js  <span class="hljs-comment"># 执行文件</span>
 ├─ lib	<span class="hljs-comment"># crn.js调用的各个函数</span>
@@ -220,7 +220,7 @@
               └─ default <span class="hljs-comment"># 默认主题</span>
                      ├─ assets
                      └─ layout
-<b class="name">bash</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620548451718">.
+<b class="name">bash</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620558574173">.
 ├─ bin
 │    └─ crn.js  # 执行文件
 ├─ lib	# crn.js调用的各个函数
@@ -240,7 +240,7 @@
 <h3 id="crnjs">crn.js</h3>
 <p>同样，根据需求将各个命令、命令的参数和说明先写出来</p>
 <p>关于<code>commander</code>具体如何使用，可以查看<a href="https://github.com/tj/commander.js/blob/master/Readme_zh-CN.md">commander文档</a></p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620553750572">复制</button><span class="hljs-meta">#! /usr/bin/env node</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620561274207">复制</button><span class="hljs-meta">#! /usr/bin/env node</span>
 
 <span class="hljs-keyword">const</span> program = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;commander&#x27;</span>);
 <span class="hljs-keyword">const</span> version = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;../package.json&#x27;</span>).version;
@@ -275,7 +275,7 @@ program
   .action(<span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;../lib/clean.js&#x27;</span>));
 
 program.parse(process.argv);
-<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620553750572">#! /usr/bin/env node
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620561274207">#! /usr/bin/env node
 
 const program = require('commander');
 const version = require('../package.json').version;
@@ -314,7 +314,7 @@ program.parse(process.argv);
 <h3 id="init">init</h3>
 <p>初始化的时候可以传入一个目录，表示准备初始化的目录，这里我用了<code>ES2020</code>的新语法<code>dir = dir ?? '.'</code>，当<code>dir</code>为<code>null</code>或<code>undefined</code>时，使用问号右边的值。</p>
 <p>在初始化的时候，需要明确好用户使用的目录应该是什么样的</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620550647578">复制</button>Blog
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620564956869">复制</button>Blog
 ├─ build
 ├─ site.config.json
 ├─ <span class="hljs-built_in">source</span>
@@ -324,7 +324,7 @@ program.parse(process.argv);
        └─ default
               ├─ assets
               └─ layout
-<b class="name">bash</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620550647578">Blog
+<b class="name">bash</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620564956869">Blog
 ├─ build
 ├─ site.config.json
 ├─ source
@@ -338,7 +338,7 @@ program.parse(process.argv);
 <p>将预先准备好的模板根据设计的目录拷贝到目标目录下，而不是直接调用项目中的，因为拷贝到目标目录下后，使用者就可以更方便的自定义模板，可以更方便的写自己的样式。</p>
 <p>关于<code>fs-extra</code>模块的各种API可以查看<a href="https://github.com/jprichardson/node-fs-extra">fs-extra文档</a></p>
 <p>关于<code>dayjs</code>可以查看<a href="https://dayjs.gitee.io/zh-CN/">dayjs文档</a></p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620547693745">复制</button><span class="hljs-keyword">const</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;path&#x27;</span>);
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620559905106">复制</button><span class="hljs-keyword">const</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;path&#x27;</span>);
 <span class="hljs-keyword">const</span> fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;fs-extra&#x27;</span>);
 <span class="hljs-keyword">const</span> dayjs = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;dayjs&#x27;</span>);
 
@@ -370,7 +370,7 @@ program.parse(process.argv);
 
   <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;博客初始化完成，键入&#x27;crn new &lt;postName&gt;&#x27;即可创建新的文章&quot;</span>);
 }
-<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620547693745">const path = require('path');
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620559905106">const path = require('path');
 const fs = require('fs-extra');
 const dayjs = require('dayjs');
 
@@ -405,7 +405,7 @@ function newPost(dir) {
 </textarea>
 <h3 id="new">new</h3>
 <p>创建新文章的函数和初始化函数有部分的逻辑是相同的，这里我没有将他们封装起来，如果感兴趣的话你们可以试试。创建文章需要传入一个name，为创建的文章名，然后将其保存至<code>source/_post</code>下</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620546617678">复制</button><span class="hljs-keyword">const</span> fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;fs-extra&#x27;</span>);
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620562571832">复制</button><span class="hljs-keyword">const</span> fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;fs-extra&#x27;</span>);
 <span class="hljs-keyword">const</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;path&#x27;</span>);
 <span class="hljs-keyword">const</span> dayjs = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;dayjs&#x27;</span>);
 
@@ -425,7 +425,7 @@ function newPost(dir) {
 
   <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`source/_posts/<span class="hljs-subst">${name}</span>.md 创建成功！`</span>);
 };
-<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620546617678">const fs = require('fs-extra');
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620562571832">const fs = require('fs-extra');
 const path = require('path');
 const dayjs = require('dayjs');
 
@@ -467,7 +467,7 @@ module.exports = (name) => {
 <li>其他请查看<a href="https://github.com/xmy6364/CoinRailgun/tree/main/template/theme/default/layout">CoinRailgun默认主题模板</a></li>
 </ul>
 <p>然后，一些网站的基础数据，比如author、keywords、description等，是不会发生改变的，因此需要将他们写在统一的配置文件里<a href="https://github.com/xmy6364/CoinRailgun/blob/main/template/site.config.json">site.config.json</a>，下面是我的部分配置文件</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620549360941">复制</button>{
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620559148795">复制</button>{
   <span class="hljs-attr">&quot;basic&quot;</span>: {
     <span class="hljs-attr">&quot;icon&quot;</span>: <span class="hljs-string">&quot;&quot;</span>,
     <span class="hljs-attr">&quot;avatar&quot;</span>: <span class="hljs-string">&quot;&quot;</span>,
@@ -517,7 +517,7 @@ module.exports = (name) => {
     <span class="hljs-attr">&quot;port&quot;</span>: <span class="hljs-number">3000</span>
   }
 }
-<b class="name">json</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620549360941">{
+<b class="name">json</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620559148795">{
   "basic": {
     "icon": "",
     "avatar": "",
@@ -569,7 +569,7 @@ module.exports = (name) => {
 }
 </textarea>
 <p>在根据markdown和模板生成html时，我们要确定模板上需要的数据，并且将配置文件和markdown的内容转换为模板上的数据</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620552564294">复制</button><span class="hljs-comment">&lt;!-- layout/post_item.art --&gt;</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620561507854">复制</button><span class="hljs-comment">&lt;!-- layout/post_item.art --&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;post-item__title&quot;</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;{{url}}&quot;</span>&gt;</span>
     {{title}}
@@ -601,7 +601,7 @@ module.exports = (name) => {
   <span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
   {{/each}}
 <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-<b class="name">html</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620552564294"><!-- layout/post_item.art -->
+<b class="name">html</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620561507854"><!-- layout/post_item.art -->
 <div class="post-item__title">
   <a href="{{url}}">
     {{title}}
@@ -636,7 +636,7 @@ module.exports = (name) => {
 </textarea>
 <p>以文章列表项为例，这个模板需要<code>title</code>、<code>date</code>、<code>category</code>、<code>url</code>、<code>abstracts</code>和<code>tags</code>，其中<code>url</code>是根据设计好的<code>/categories/分类名/文章名/index.html</code>生成出来的，其他的参数都是从markdown文件中解析出来的，并且这些参数都写在文件头部的yml配置中，而<code>abstracts</code>一般是使用<code>&lt;!--more--&gt;</code>分割出来。</p>
 <p>明确了以上内容后，我们就需要获取这些参数然后传递给模板渲染出来</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620551076895">复制</button><span class="hljs-keyword">const</span> template = fs.readFileSync(postTemplate, <span class="hljs-string">&#x27;utf-8&#x27;</span>);
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620558098818">复制</button><span class="hljs-keyword">const</span> template = fs.readFileSync(postTemplate, <span class="hljs-string">&#x27;utf-8&#x27;</span>);
 <span class="hljs-keyword">const</span> content = fs.readFileSync(fullPath, <span class="hljs-string">&#x27;utf-8&#x27;</span>);
 <span class="hljs-keyword">const</span> fm = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;front-matter&#x27;</span>);
 
@@ -648,7 +648,7 @@ module.exports = (name) => {
   ...fm(content).attributes,
   <span class="hljs-attr">abstracts</span>: renderAbstracts(),
 });
-<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620551076895">const template = fs.readFileSync(postTemplate, 'utf-8');
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620558098818">const template = fs.readFileSync(postTemplate, 'utf-8');
 const content = fs.readFileSync(fullPath, 'utf-8');
 const fm = require('front-matter');
 
@@ -665,7 +665,7 @@ const postItem = art.render(template, {
 <p>大致思路就是这样，更多具体实现可以查看<a href="https://github.com/xmy6364/CoinRailgun">项目仓库</a></p>
 <h3 id="server">server</h3>
 <p>生成所有页面后，就可以开启本地预览了，这里我使用的是<code>koa</code>，使用<code>express</code>或者其他的框架都是大差不差的。直接将build目录设置为静态资源即可访问。</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620551642341">复制</button><span class="hljs-keyword">const</span> Koa = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;koa&#x27;</span>);
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620563551090">复制</button><span class="hljs-keyword">const</span> Koa = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;koa&#x27;</span>);
 <span class="hljs-keyword">const</span> staticServe = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;koa-static&#x27;</span>);
 <span class="hljs-keyword">const</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;path&#x27;</span>);
 
@@ -684,7 +684,7 @@ const postItem = art.render(template, {
     );
   });
 };
-<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620551642341">const Koa = require('koa');
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620563551090">const Koa = require('koa');
 const staticServe = require('koa-static');
 const path = require('path');
 
