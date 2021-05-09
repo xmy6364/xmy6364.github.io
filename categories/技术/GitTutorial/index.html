@@ -38,7 +38,7 @@
   <header>梦的博客</header>
   <div class="info">
     <div class="avatar">
-      <img src="https://cdn.jsdelivr.net/gh/xmy6364/blog-image/img/20200914avatar.jpg" alt="头像">
+      <img src="https://cdn.jsdelivr.net/gh/xmy6364/blog-image/img/pixelartoc_1.png" alt="头像">
     </div>
     <div class="author">xmy6364</div>
     <div class="description">想要成为大佬</div>
@@ -68,21 +68,21 @@
     
       <li class="nav-item">
         <a href="/archives">
-          <span class="nav-item__count">31</span>
+          <span class="nav-item__count">30</span>
           <span class="nav-item__label">归档</span>
         </a>
       </li>
     
       <li class="nav-item">
         <a href="/categories">
-          <span class="nav-item__count">2</span>
+          <span class="nav-item__count">1</span>
           <span class="nav-item__label">分类</span>
         </a>
       </li>
     
       <li class="nav-item">
         <a href="/tags">
-          <span class="nav-item__count">45</span>
+          <span class="nav-item__count">44</span>
           <span class="nav-item__label">标签</span>
         </a>
       </li>
@@ -148,10 +148,10 @@
 </li>
 <li>
 <p>配置用户信息，安装完成后我们要在Git Bash中输入以下两行命令</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618743031064">复制</button>git config --global user.name &quot;your name&quot;
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620546198693">复制</button>git config --global user.name &quot;your name&quot;
 
 git config --global user.email &quot;email@example.com&quot;
-<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618743031064">git config --global user.name "your name"
+<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620546198693">git config --global user.name "your name"
 
 git config --global user.email "email@example.com"
 </textarea>
@@ -166,65 +166,65 @@ git config --global user.email "email@example.com"
 <p>我们在本地创建的仓库是由三个区域组成，这是Git的核心架构。即：工作区域、暂存区域和Git仓库（版本库）。</p>
 <h3 id="创建版本库">创建版本库</h3>
 <p>首先，选择一个合适的地方，创建一个空目录。</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618743292515">复制</button><span class="hljs-meta">$</span><span class="bash"> mkdir learngit</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620547513018">复制</button><span class="hljs-meta">$</span><span class="bash"> mkdir learngit</span>
 <span class="hljs-meta">$</span><span class="bash"> <span class="hljs-built_in">cd</span> learngit</span>
 <span class="hljs-meta">$</span><span class="bash"> <span class="hljs-built_in">pwd</span></span>
-<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618743292515">$ mkdir learngit
+<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620547513018">$ mkdir learngit
 $ cd learngit
 $ pwd
 </textarea>
 <p><code>pwd</code>命令用于显示当前目录的路径</p>
 <p>第二步，通过<code>git init</code>命令将这个目录变成Git可以管理的仓库</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618741527901">复制</button><span class="hljs-meta">$</span><span class="bash"> git init</span>
-<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618741527901">$ git init
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620553228725">复制</button><span class="hljs-meta">$</span><span class="bash"> git init</span>
+<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620553228725">$ git init
 </textarea>
 <p>这样Git瞬间就将仓库建好了，目录下会多出一个<code>.git</code>隐藏目录，这个目录就是Git的版本库，使用<code>ls -ah</code>就可以看见。</p>
 <h3 id="将文件添加到版本库">将文件添加到版本库</h3>
 <p>手动添加至刚刚创建的目录下即可，但是要注意千万不要使用windows自带的记事本编辑任何文本文件，因为它会给所有UTF-8编码的文件开头添加一个0xefbbf的字符。</p>
 <p>我们我们进入刚刚创建的<code>learngit</code>目录，在做项目的时候我们通常都会有一个<code>README.md</code>来介绍自己的项目，所以在这里我们先编写一个<code>README.md</code>文件，内容如下</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618742773287">复制</button>This is a project to learn git
-<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618742773287">This is a project to learn git
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620549344234">复制</button>This is a project to learn git
+<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620549344234">This is a project to learn git
 </textarea>
 <p>保存后这个文件就存放在了Git的工作区域中，工作区域就是平时我们存放项目代码的地方。</p>
 <p>然后，我们执行<code>git add</code>命令</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618745804764">复制</button><span class="hljs-meta">$</span><span class="bash"> git add README.md</span>
-<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618745804764">$ git add README.md
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620549738529">复制</button><span class="hljs-meta">$</span><span class="bash"> git add README.md</span>
+<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620549738529">$ git add README.md
 </textarea>
 <p>执行完该命令后，是没有任何显示的，这时我们就将文件放入Git的暂存区了，暂存区实际上只是一个文件，保存我们即将提交的文件列表信息。</p>
 <p>接下来使用<code>git commit</code>将文件提交至仓库</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618739417784">复制</button><span class="hljs-meta">$</span><span class="bash"> git commit -m <span class="hljs-string">&quot;wrote a readme file&quot;</span></span>
-<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618739417784">$ git commit -m "wrote a readme file"
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620553495399">复制</button><span class="hljs-meta">$</span><span class="bash"> git commit -m <span class="hljs-string">&quot;wrote a readme file&quot;</span></span>
+<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620553495399">$ git commit -m "wrote a readme file"
 </textarea>
 <p>在这个命令中，<code>-m</code>后面输入的是本次提交的说明，可以输入任何内容，当然最好是有意义的，这样你可以从历史记录中方便的找到改动记录。</p>
 <p><code>git commit</code>执行成功后会告诉你<code>1 file changed</code>一个文件被改动（README.md）<code>1 insertions(+)</code>插入了一行内容（README.md中有一行内容）。</p>
 <p>我们除了可以使用一条add跟一条commit来提交一个文件，还可以用一条commit提交很多个文件，比如：</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618746074084">复制</button><span class="hljs-meta">$</span><span class="bash"> git add code1.cs</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620547232940">复制</button><span class="hljs-meta">$</span><span class="bash"> git add code1.cs</span>
 <span class="hljs-meta">$</span><span class="bash"> git add code2.cs code3.cs</span>
 <span class="hljs-meta">$</span><span class="bash"> git commit -m <span class="hljs-string">&quot;add 3 cs files&quot;</span></span>
-<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618746074084">$ git add code1.cs
+<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620547232940">$ git add code1.cs
 $ git add code2.cs code3.cs
 $ git commit -m "add 3 cs files"
 </textarea>
 <p>至此，我们完成了一次完整的Git工作流程，就是先在工作目录中添加、修改文件，将需要进行版本管理的文件放入暂存区，将暂存区的文件提交到Git仓库。</p>
 <h3 id="查看工作状态">查看工作状态</h3>
 <p>我们应该都清楚，在平时写代码做项目的时候必然会创建许多文件，文件一多，我们就有可能记不住哪些文件添加到暂存区了，哪些文件提交了。这时我们需要用到另一个命令来查看文件的状态<code>git status</code>。首先，我们先来执行一遍</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618739246840">复制</button><span class="hljs-meta">$</span><span class="bash"> git status</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620550074235">复制</button><span class="hljs-meta">$</span><span class="bash"> git status</span>
 On branch master
 nothing to commit, working tree clean
-<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618739246840">$ git status
+<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620550074235">$ git status
 On branch master
 nothing to commit, working tree clean
 </textarea>
 <p>Git告诉我们当前没有需要提交的修改，工作目录是干净的，这就说明commit提交后的文件用<code>git status</code>是不会显示的。</p>
 <p>接下来我们在工作目录中添加一个新的文件<code>LICENSE</code>，然后再次执行<code>git status</code></p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618746403112">复制</button><span class="hljs-meta">$</span><span class="bash"> git status</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620547524005">复制</button><span class="hljs-meta">$</span><span class="bash"> git status</span>
 On branch master
 Untracked files:
   (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)
         LICENSE
 
 nothing added to commit but untracked files present (use &quot;git add&quot; to track)
-<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618746403112">$ git status
+<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620547524005">$ git status
 On branch master
 Untracked files:
   (use "git add <file>..." to include in what will be committed)
@@ -233,13 +233,13 @@ Untracked files:
 nothing added to commit but untracked files present (use "git add" to track)
 </textarea>
 <p>这时我们发现<code>LICENSE</code>文件的状态是<code>Untracked</code>，这就表示这个文件没有添加到暂存区，不参与版本控制。在输出中有一行被圆括号包裹着，这一行是Git给我们的操作建议，我们不妨按照这个建议走下去，执行完<code>git add</code>后再次执行<code>git status</code></p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618743579797">复制</button><span class="hljs-meta">$</span><span class="bash"> git add LICENSE</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620549519814">复制</button><span class="hljs-meta">$</span><span class="bash"> git add LICENSE</span>
 <span class="hljs-meta">$</span><span class="bash"> git status</span>
 On branch master
 Changes to be committed:
   (use &quot;git restore --staged &lt;file&gt;...&quot; to unstage)
         new file:   LICENSE
-<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618743579797">$ git add LICENSE
+<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620549519814">$ git add LICENSE
 $ git status
 On branch master
 Changes to be committed:
@@ -248,7 +248,7 @@ Changes to be committed:
 </textarea>
 <p>这时我们会发现，Git的建议操作变成了<code>use &quot;git restore --staged &lt;file&gt;...&quot; to unstage</code>这个建议的意思是使用这个命令来让文件离开暂存区。</p>
 <p>我们执行这个命令后再次查看状态</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618746116048">复制</button><span class="hljs-meta">$</span><span class="bash"> git restore --staged LICENSE</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620545049817">复制</button><span class="hljs-meta">$</span><span class="bash"> git restore --staged LICENSE</span>
 <span class="hljs-meta">$</span><span class="bash"> git status</span>
 On branch master
 Untracked files:
@@ -256,7 +256,7 @@ Untracked files:
         LICENSE
 
 nothing added to commit but untracked files present (use &quot;git add&quot; to track)
-<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618746116048">$ git restore --staged LICENSE
+<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620545049817">$ git restore --staged LICENSE
 $ git status
 On branch master
 Untracked files:
@@ -267,13 +267,13 @@ nothing added to commit but untracked files present (use "git add" to track)
 </textarea>
 <p>这样<code>LICENSE</code>的状态就变回<code>Untracked</code>了。</p>
 <p>接下来我们对<code>README.md</code>文件进行修改，改成如下内容</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618747763785">复制</button>This is a big project to learn git
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620548309718">复制</button>This is a big project to learn git
 I love git
-<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618747763785">This is a big project to learn git
+<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620548309718">This is a big project to learn git
 I love git
 </textarea>
 <p>然后再次运行<code>git status</code>命令查看结果</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618746755201">复制</button><span class="hljs-meta">$</span><span class="bash"> git status</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620550477052">复制</button><span class="hljs-meta">$</span><span class="bash"> git status</span>
 On branch master
 Changes not staged for commit:
   (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
@@ -281,7 +281,7 @@ Changes not staged for commit:
         modified:   README.md
 
 no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
-<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618746755201">$ git status
+<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620550477052">$ git status
 On branch master
 Changes not staged for commit:
   (use "git add <file>..." to update what will be committed)
@@ -292,7 +292,7 @@ no changes added to commit (use "git add" and/or "git commit -a")
 </textarea>
 <p>我们会发现，在输出中有<code>modified: README.md</code>以及<code>no changes added to commit </code>这个意思就是README.md这个文件被修改过了，但还没有准备提交的修改。<code>modified</code>就是<code>README.md</code>当前的状态。</p>
 <p>这个命令虽然告诉我们<code>README.md</code>文件被修改了，但有时候我们可能想看看具体修改了什么内容，这时候我们就需要<code>git diff</code>命令</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618740728589">复制</button><span class="hljs-meta">$</span><span class="bash"> git diff README.md</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620545982624">复制</button><span class="hljs-meta">$</span><span class="bash"> git diff README.md</span>
 diff --git a/README.md b/README.md
 index ec489ee..3e420a2 100644
 --- a/README.md
@@ -303,7 +303,7 @@ index ec489ee..3e420a2 100644
 +This is a big project to learn git
 +I love git
 \ No newline at end of file
-<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618740728589">$ git diff README.md
+<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620545982624">$ git diff README.md
 diff --git a/README.md b/README.md
 index ec489ee..3e420a2 100644
 --- a/README.md
@@ -316,32 +316,32 @@ index ec489ee..3e420a2 100644
 \ No newline at end of file
 </textarea>
 <p>diff就是difference的意思，在上面的输出中我们可以看到第一行增加了一个big单词，以及新增了一行I love git。在知道了具体修改内容后，我们就可以放心的完成<code>add</code>和<code>commit</code>命令了。我们拐回头去看看上次执行<code>git status</code>时Git给的建议<code>use &quot;git add &lt;file&gt;...&quot; to update what will be committed</code>和<code>use &quot;git restore &lt;file&gt;...&quot; to discard changes in working directory</code>，第一个我们已经十分熟悉了，第二个建议是我们可以使用<code>git restore</code>来放弃更改，我们来执行一下这个命令试试。</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618738368636">复制</button><span class="hljs-meta">$</span><span class="bash"> git restore README.md</span>
-<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618738368636">$ git restore README.md
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620547288864">复制</button><span class="hljs-meta">$</span><span class="bash"> git restore README.md</span>
+<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620547288864">$ git restore README.md
 </textarea>
 <p>没有任何输出，但是这时我们再查看<code>README.md</code>文件会发现我们的更改都消失了，所以在使用这个命令的时候一定要慎重。</p>
 <h3 id="版本回退">版本回退</h3>
 <p>下面我们再修改一次<code>README.md</code>文件</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618740068232">复制</button>This is a big project to learn git
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620549800863">复制</button>This is a big project to learn git
 I love git
 这是一个学习Git的项目
-<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618740068232">This is a big project to learn git
+<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620549800863">This is a big project to learn git
 I love git
 这是一个学习Git的项目
 </textarea>
 <p>然后提交</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618740790784">复制</button><span class="hljs-meta">$</span><span class="bash"> git add README.md</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620553154326">复制</button><span class="hljs-meta">$</span><span class="bash"> git add README.md</span>
 <span class="hljs-meta">$</span><span class="bash"> git commit -m <span class="hljs-string">&quot;add chinese translation&quot;</span></span>
 [master 310d469] add chinese translation
  1 file changed, 2 insertions(+), 1 deletion(-)
-<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618740790784">$ git add README.md
+<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620553154326">$ git add README.md
 $ git commit -m "add chinese translation"
 [master 310d469] add chinese translation
  1 file changed, 2 insertions(+), 1 deletion(-)
 </textarea>
 <p>像我们这样不断对文件进行修改，然后不断提交修改到版本库中，就像我们玩游戏的时候每打到一定程度就存档，这样如果在后面的某一个地方失败了，我们还可以读档从最近的进度开始而不用从头开始。前面我们所做的<code>commit</code>操作就像是存档操作，读档操作我们可以使用<code>git log</code>和<code>git reset</code>命令完成。</p>
 <p>首先我们查看一下我们一共有多少“存档”（&lt;u&gt;上面操作的顺序我改了改，所以这里我的版本顺序有些不对&lt;/u&gt;）</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618742190351">复制</button><span class="hljs-meta">$</span><span class="bash"> git <span class="hljs-built_in">log</span></span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620547869157">复制</button><span class="hljs-meta">$</span><span class="bash"> git <span class="hljs-built_in">log</span></span>
 commit 310d469f13a7f6d4add1edf323ad8ef194e7a70d (HEAD -&gt; master)
 Author: xmy6364 &lt;1176281967@qq.com&gt;
 Date:   Sun Nov 17 10:02:19 2019 +0800
@@ -371,7 +371,7 @@ Author: xmy6364 &lt;1176281967@qq.com&gt;
 Date:   Sat Nov 16 21:36:44 2019 +0800
 
     add a readme file
-<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618742190351">$ git log
+<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620547869157">$ git log
 commit 310d469f13a7f6d4add1edf323ad8ef194e7a70d (HEAD -> master)
 Author: xmy6364 <1176281967@qq.com>
 Date:   Sun Nov 17 10:02:19 2019 +0800
@@ -403,13 +403,13 @@ Date:   Sat Nov 16 21:36:44 2019 +0800
     add a readme file
 </textarea>
 <p><code>git log</code>命令会显示从最近到最远的提交日志，如果觉得输出的信息太多可以尝试加上<code>--pretty=oneline</code>参数</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618738499988">复制</button><span class="hljs-meta">$</span><span class="bash"> git <span class="hljs-built_in">log</span> --pretty=oneline</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620544129356">复制</button><span class="hljs-meta">$</span><span class="bash"> git <span class="hljs-built_in">log</span> --pretty=oneline</span>
 310d469f13a7f6d4add1edf323ad8ef194e7a70d (HEAD -&gt; master) add chinese translation
 3e6ef04eaab69eaf4ece551c5cd76f65b9ab31b2 add a LICENSE file
 4572a22c5f04abe587fa24a41da651cea02a2b55 add a newline
 01c756183d30c82fd54e600e11a36733cf794fd6 change readme
 45b6484663bf370880d470427a1e388a006452e0 add a readme file
-<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618738499988">$ git log --pretty=oneline
+<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620544129356">$ git log --pretty=oneline
 310d469f13a7f6d4add1edf323ad8ef194e7a70d (HEAD -> master) add chinese translation
 3e6ef04eaab69eaf4ece551c5cd76f65b9ab31b2 add a LICENSE file
 4572a22c5f04abe587fa24a41da651cea02a2b55 add a newline
@@ -418,13 +418,13 @@ Date:   Sat Nov 16 21:36:44 2019 +0800
 </textarea>
 <p>这前面的一大串像乱码一样的东西是<code>commit id</code>，就是版本号，为了防止多人协作的时候产生冲突，Git没有采用简单的1、2、3……作为版本号。</p>
 <p>接下来我们读取存档，我们讲<code>README.md</code>退回到上一个版本</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618744606629">复制</button><span class="hljs-meta">$</span><span class="bash"> git reset --hard HEAD^</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620550750951">复制</button><span class="hljs-meta">$</span><span class="bash"> git reset --hard HEAD^</span>
 HEAD is now at 3e6ef04 add a LICENSE file
 <span class="hljs-meta">
 $</span><span class="bash"> cat README.md</span>
 This is a big project to learn git
 I love git
-<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618744606629">$ git reset --hard HEAD^
+<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620550750951">$ git reset --hard HEAD^
 HEAD is now at 3e6ef04 add a LICENSE file
 
 $ cat README.md
@@ -432,26 +432,26 @@ This is a big project to learn git
 I love git
 </textarea>
 <p>在Git中<code>HEAD</code>表示当前版本，<code>HEAD^</code>表示上一个版本，上上一个版本就是<code>HEAD^^</code>，如果是网上100个版本就没必要写100个<code>^</code>，可以写成<code>HEAD~100</code>。我们可以看到<code>README.md</code>文件被成功还原了，这时我们再查看版本库的状态</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618741147855">复制</button><span class="hljs-meta">$</span><span class="bash"> git <span class="hljs-built_in">log</span> --pretty=oneline</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620551341153">复制</button><span class="hljs-meta">$</span><span class="bash"> git <span class="hljs-built_in">log</span> --pretty=oneline</span>
 3e6ef04eaab69eaf4ece551c5cd76f65b9ab31b2 (HEAD -&gt; master) add a LICENSE file
 4572a22c5f04abe587fa24a41da651cea02a2b55 add a newline
 01c756183d30c82fd54e600e11a36733cf794fd6 change readme
 45b6484663bf370880d470427a1e388a006452e0 add a readme file
-<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618741147855">$ git log --pretty=oneline
+<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620551341153">$ git log --pretty=oneline
 3e6ef04eaab69eaf4ece551c5cd76f65b9ab31b2 (HEAD -> master) add a LICENSE file
 4572a22c5f04abe587fa24a41da651cea02a2b55 add a newline
 01c756183d30c82fd54e600e11a36733cf794fd6 change readme
 45b6484663bf370880d470427a1e388a006452e0 add a readme file
 </textarea>
 <p>会发现最新的<code>add chinese translation</code>版本已经找不到了，这个时候如果我们想要重新回到这个版本就需要用到这个版本的<code>commit id</code>了</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618747097846">复制</button><span class="hljs-meta">$</span><span class="bash"> git reset --hard 310d46</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620550000821">复制</button><span class="hljs-meta">$</span><span class="bash"> git reset --hard 310d46</span>
 HEAD is now at 310d469 add chinese translation
 <span class="hljs-meta">
 $</span><span class="bash"> cat README.md</span>
 This is a big project to learn git
 I love git
 这是一个学习Git的项目
-<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618747097846">$ git reset --hard 310d46
+<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620550000821">$ git reset --hard 310d46
 HEAD is now at 310d469 add chinese translation
 
 $ cat README.md
@@ -461,7 +461,7 @@ I love git
 </textarea>
 <p>版本号没必要写全，只需要写前几位Git就会自动去找。Git的版本回退是非常快的，因为在Git内部有一个指向当前版本的<code>HEAD</code>指针，当你回退版本的时候，Git仅仅是把<code>HEAD</code>指针指向你要回退的版本，然后将该版本回退到暂存区并将暂存区还原到工作目录，让你看到回退后的文件。</p>
 <p>现在，如果我们回退到某个版本后想要回去，但是忘记了<code>commit id</code>，命令行还清理了找不到最新版本的<code>commit id</code>，这时我们可以使用<code>git reflog</code>，这个命令会记录我们每一次对版本的操作</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618740394978">复制</button><span class="hljs-meta">$</span><span class="bash"> git reflog</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620551158781">复制</button><span class="hljs-meta">$</span><span class="bash"> git reflog</span>
 310d469 (HEAD -&gt; master) HEAD@{0}: reset: moving to 310d46
 3e6ef04 HEAD@{1}: reset: moving to HEAD^
 310d469 (HEAD -&gt; master) HEAD@{2}: commit: add chinese translation
@@ -469,7 +469,7 @@ I love git
 4572a22 HEAD@{4}: commit: add a newline
 01c7561 HEAD@{5}: commit: change readme
 45b6484 HEAD@{6}: commit (initial): add a readme file
-<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618740394978">$ git reflog
+<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620551158781">$ git reflog
 310d469 (HEAD -> master) HEAD@{0}: reset: moving to 310d46
 3e6ef04 HEAD@{1}: reset: moving to HEAD^
 310d469 (HEAD -> master) HEAD@{2}: commit: add chinese translation
@@ -480,23 +480,23 @@ I love git
 </textarea>
 <h3 id="管理修改">管理修改</h3>
 <p>下面我们继续修改<code>README.md</code>文件</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618747714693">复制</button>This is a big project to learn git
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620545888122">复制</button>This is a big project to learn git
 I love git
 这是一个学习Git的项目
 <span class="hljs-meta">C#</span><span class="bash"> is a good programming language</span>
-<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618747714693">This is a big project to learn git
+<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620545888122">This is a big project to learn git
 I love git
 这是一个学习Git的项目
 C# is a good programming language
 </textarea>
 <p>然后添加</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618738430361">复制</button><span class="hljs-meta">$</span><span class="bash"> git add README.md</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620549314441">复制</button><span class="hljs-meta">$</span><span class="bash"> git add README.md</span>
 <span class="hljs-meta">$</span><span class="bash"> git status</span>
 On branch master
 Changes to be committed:
   (use &quot;git restore --staged &lt;file&gt;...&quot; to unstage)
         modified:   README.md
-<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618738430361">$ git add README.md
+<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620549314441">$ git add README.md
 $ git status
 On branch master
 Changes to be committed:
@@ -504,19 +504,19 @@ Changes to be committed:
         modified:   README.md
 </textarea>
 <p>然后再次修改README.md</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618741129032">复制</button>This is a big project to learn git
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620545700018">复制</button>This is a big project to learn git
 I love git
 这是一个学习Git的项目
 <span class="hljs-meta">C#</span><span class="bash"> is a good programming language</span>
 Java is also a good programming language
-<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618741129032">This is a big project to learn git
+<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620545700018">This is a big project to learn git
 I love git
 这是一个学习Git的项目
 C# is a good programming language
 Java is also a good programming language
 </textarea>
 <p>提交，然后查看状态</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618739813740">复制</button><span class="hljs-meta">$</span><span class="bash"> git commit -m <span class="hljs-string">&quot;C# is good&quot;</span></span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620544104762">复制</button><span class="hljs-meta">$</span><span class="bash"> git commit -m <span class="hljs-string">&quot;C# is good&quot;</span></span>
 [master 61c5ed5] C# is good
  1 file changed, 2 insertions(+), 1 deletion(-)
 <span class="hljs-meta">
@@ -528,7 +528,7 @@ Changes not staged for commit:
         modified:   README.md
 
 no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
-<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618739813740">$ git commit -m "C# is good"
+<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620544104762">$ git commit -m "C# is good"
 [master 61c5ed5] C# is good
  1 file changed, 2 insertions(+), 1 deletion(-)
 
@@ -543,7 +543,7 @@ no changes added to commit (use "git add" and/or "git commit -a")
 </textarea>
 <p>这时我们会发现，<code>README.md</code>仍然显示为修改后未提交。</p>
 <p>我们使用<code>git diff HEAD -- README.md</code>命令查看一下当前仓库中的文件和工作区的文件有什么区别（中文可能会有乱码）</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618738417418">复制</button><span class="hljs-meta">$</span><span class="bash"> git diff HEAD -- README.md</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620545885288">复制</button><span class="hljs-meta">$</span><span class="bash"> git diff HEAD -- README.md</span>
 diff --git a/README.md b/README.md
 index a8963da..08874e0 100644
 --- a/README.md
@@ -557,7 +557,7 @@ index a8963da..08874e0 100644
 +C# is a good programming language
 +Java is also a good programming language
 \ No newline at end of file
-<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618738417418">$ git diff HEAD -- README.md
+<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620545885288">$ git diff HEAD -- README.md
 diff --git a/README.md b/README.md
 index a8963da..08874e0 100644
 --- a/README.md
@@ -576,7 +576,7 @@ index a8963da..08874e0 100644
 <p>第一次修改 -&gt; <code>git add</code> -&gt; 第二次修改 -&gt; <code>git commit</code></p>
 <p>这时我们会发现，第二次的修改并没有被提交成功，因为<code>git commit</code>只会提交被<code>git add</code>添加至暂存区的<strong>修改</strong>，并非是文件。如果我们想要提交第二次修改，只需要再执行一次<code>git add</code>和<code>git commit</code></p>
 <p>有些时候我们可能会遇到<code>commit</code>后发现自己提交的说明不够详细，想要更改说明，这时就要用到<code>git commit --amend</code></p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618747104374">复制</button><span class="hljs-meta">$</span><span class="bash"> git commit --amend</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620547436497">复制</button><span class="hljs-meta">$</span><span class="bash"> git commit --amend</span>
 java is good
 <span class="hljs-meta">
 #</span><span class="bash"> Please enter the commit message <span class="hljs-keyword">for</span> your changes. Lines starting</span>
@@ -590,7 +590,7 @@ java is good
 <span class="hljs-meta">#</span><span class="bash">
 ~</span>
 ~
-<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618747104374">$ git commit --amend
+<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620547436497">$ git commit --amend
 java is good
 
 # Please enter the commit message for your changes. Lines starting
@@ -608,11 +608,11 @@ java is good
 <p>这时会显示一个这样的界面，第一行就是我们添加的说明，按下“I”键，就可以更改。更改完成后，按下“ESC”，然后输入“:” + “wq” + 回车，就可以完成修改，如果不想修改使用“:” + “q!” + 回车即可。或者我们可以直接使用<code>git commit --amend -m &quot;新的说明&quot;</code>即可完成更改。</p>
 <h3 id="删除文件">删除文件</h3>
 <p>接下来我们在文件管理器中删掉<code>LICENSE</code>文件，或者使用<code>rm</code>命令也可以</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618744846855">复制</button>rm LICENSE
-<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618744846855">rm LICENSE
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620544129439">复制</button>rm LICENSE
+<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620544129439">rm LICENSE
 </textarea>
 <p>这个时候，工作区的文件不在了，但是版本库中还存在这个文件，这时我们查看状态：</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618743706483">复制</button><span class="hljs-meta">$</span><span class="bash"> git status</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620550508733">复制</button><span class="hljs-meta">$</span><span class="bash"> git status</span>
 On branch master
 Changes not staged for commit:
   (use &quot;git add/rm &lt;file&gt;...&quot; to update what will be committed)
@@ -620,7 +620,7 @@ Changes not staged for commit:
         deleted:    LICENSE
 
 no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
-<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618743706483">$ git status
+<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620550508733">$ git status
 On branch master
 Changes not staged for commit:
   (use "git add/rm <file>..." to update what will be committed)
@@ -630,13 +630,13 @@ Changes not staged for commit:
 no changes added to commit (use "git add" and/or "git commit -a")
 </textarea>
 <p><code>git status</code>会告诉我们这个文件被删除了，这时我们有两个选择，一是从版本库中删除这个文件，使用<code>git rm</code>并执行<code>git commit</code>。</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618741864842">复制</button><span class="hljs-meta">$</span><span class="bash"> git rm LICENSE</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620550055228">复制</button><span class="hljs-meta">$</span><span class="bash"> git rm LICENSE</span>
 rm &#x27;LICENSE&#x27;
 <span class="hljs-meta">$</span><span class="bash"> git commit -m <span class="hljs-string">&quot;remove LICENSE&quot;</span></span>
 [master d78ec29] remove LICENSE
  1 file changed, 0 insertions(+), 0 deletions(-)
  delete mode 100644 LICENSE
-<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618741864842">$ git rm LICENSE
+<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620550055228">$ git rm LICENSE
 rm 'LICENSE'
 $ git commit -m "remove LICENSE"
 [master d78ec29] remove LICENSE
@@ -644,10 +644,10 @@ $ git commit -m "remove LICENSE"
  delete mode 100644 LICENSE
 </textarea>
 <p>二是使用<code>git restore</code>恢复该文件</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618743313369">复制</button><span class="hljs-meta">$</span><span class="bash"> git restore LICENSE</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620549104052">复制</button><span class="hljs-meta">$</span><span class="bash"> git restore LICENSE</span>
 <span class="hljs-meta">$</span><span class="bash"> ls</span>
 LICENSE  README.md
-<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618743313369">$ git restore LICENSE
+<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620549104052">$ git restore LICENSE
 $ ls
 LICENSE  README.md
 </textarea>
@@ -658,30 +658,30 @@ LICENSE  README.md
 <p>事实上，其他的版本控制系统都支持分支管理，但是这些版本控制系统的分支管理的速度非常慢，而在Git中，无论是创建、切换还是删除分支，无论在你的版本库中有多少文件，它都能在1分钟内完成（因为Git每一个节点都是一个完整的项目副本）。</p>
 <h3 id="创建-切换-合并与删除分支">创建、切换、合并与删除分支</h3>
 <p>首先我们来创建一个分支，并且切换到这个分支</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618742093228">复制</button><span class="hljs-meta">$</span><span class="bash"> git branch dev</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620547801702">复制</button><span class="hljs-meta">$</span><span class="bash"> git branch dev</span>
 <span class="hljs-meta">$</span><span class="bash"> git checkout dev</span>
 Switched to branch &#x27;dev&#x27;
-<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618742093228">$ git branch dev
+<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620547801702">$ git branch dev
 $ git checkout dev
 Switched to branch 'dev'
 </textarea>
 <p>这两行命令可以用<code>git checkout -b dev</code>来代替。接下来我们用<code>git branch</code>来查看分支。</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618747595232">复制</button><span class="hljs-meta">$</span><span class="bash"> git branch</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620547713684">复制</button><span class="hljs-meta">$</span><span class="bash"> git branch</span>
 * dev
   master
-<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618747595232">$ git branch
+<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620547713684">$ git branch
 * dev
   master
 </textarea>
 <p><code>git branch</code>命令会列出所有分支，并且会在当前分支前加一个<code>*</code>，在这个分支列表中我们会发现，这里除了我们刚刚创建的<code>dev</code>分支，还有一个<code>master</code>分支，这个分支是Git为我们创建的一个默认分支。</p>
 <p>接下来我们在当前分支上提交修改。修改<code>README.md</code>文件</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618744180513">复制</button>This is a big project to learn git
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620547535344">复制</button>This is a big project to learn git
 I love git
 这是一个学习Git的项目
 <span class="hljs-meta">C#</span><span class="bash"> is a good programming language</span>
 Java is also a good programming language
 Create a new branch
-<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618744180513">This is a big project to learn git
+<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620547535344">This is a big project to learn git
 I love git
 这是一个学习Git的项目
 C# is a good programming language
@@ -689,17 +689,17 @@ Java is also a good programming language
 Create a new branch
 </textarea>
 <p>然后提交</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618743592216">复制</button><span class="hljs-meta">$</span><span class="bash"> git add README.md</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620548810327">复制</button><span class="hljs-meta">$</span><span class="bash"> git add README.md</span>
 <span class="hljs-meta">$</span><span class="bash"> git commit -m <span class="hljs-string">&quot;new branch test&quot;</span></span>
 [dev 571df6d] new branch test
  1 file changed, 2 insertions(+), 1 deletion(-)
-<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618743592216">$ git add README.md
+<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620548810327">$ git add README.md
 $ git commit -m "new branch test"
 [dev 571df6d] new branch test
  1 file changed, 2 insertions(+), 1 deletion(-)
 </textarea>
 <p>接下来我们切换回<code>master</code>分支，然后查看文件</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618744583922">复制</button><span class="hljs-meta">$</span><span class="bash"> git checkout master</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620548676186">复制</button><span class="hljs-meta">$</span><span class="bash"> git checkout master</span>
 Switched to branch &#x27;master&#x27;
 <span class="hljs-meta">
 $</span><span class="bash"> cat README.md</span>
@@ -708,7 +708,7 @@ I love git
 这是一个学习Git的项目
 <span class="hljs-meta">C#</span><span class="bash"> is a good programming language</span>
 Java is also a good programming language
-<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618744583922">$ git checkout master
+<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620548676186">$ git checkout master
 Switched to branch 'master'
 
 $ cat README.md
@@ -720,26 +720,26 @@ Java is also a good programming language
 </textarea>
 <p>这时我们会发现，刚才添加的内容不见了，这是因为刚才添加的内容在<code>dev</code>分支上，<code>master</code>分支还没有改变。</p>
 <p>接下来我们把<code>dev</code>分支的工作成果合并到<code>master</code>分支上</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618747204178">复制</button><span class="hljs-meta">$</span><span class="bash"> git merge dev</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620551667158">复制</button><span class="hljs-meta">$</span><span class="bash"> git merge dev</span>
 Updating d78ec29..571df6d
 Fast-forward
  README.md | 3 ++-
  1 file changed, 2 insertions(+), 1 deletion(-)
-<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618747204178">$ git merge dev
+<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620551667158">$ git merge dev
 Updating d78ec29..571df6d
 Fast-forward
  README.md | 3 ++-
  1 file changed, 2 insertions(+), 1 deletion(-)
 </textarea>
 <p>然后再查看<code>README.md</code></p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618746976081">复制</button><span class="hljs-meta">$</span><span class="bash"> cat README.md</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620544790713">复制</button><span class="hljs-meta">$</span><span class="bash"> cat README.md</span>
 This is a big project to learn git
 I love git
 这是一个学习Git的项目
 <span class="hljs-meta">C#</span><span class="bash"> is a good programming language</span>
 Java is also a good programming language
 Create a new branch
-<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618746976081">$ cat README.md
+<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620544790713">$ cat README.md
 This is a big project to learn git
 I love git
 这是一个学习Git的项目
@@ -749,12 +749,12 @@ Create a new branch
 </textarea>
 <p>这样<code>master</code>分支就和<code>dev</code>分支完全一样了，在合并分支的输出中有一句<code>Fast-forward</code>，这就表示这次分支模式是“快进模式”，也就是直接将<code>master</code>指向<code>dev</code>的当前提交，所以合并速度非常快。</p>
 <p>合并完成后，我们就可以删除分支了</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618747788603">复制</button><span class="hljs-meta">$</span><span class="bash"> git branch -d dev</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620548463675">复制</button><span class="hljs-meta">$</span><span class="bash"> git branch -d dev</span>
 Deleted branch dev (was 571df6d).
 <span class="hljs-meta">
 $</span><span class="bash"> git branch</span>
 * master
-<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618747788603">$ git branch -d dev
+<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620548463675">$ git branch -d dev
 Deleted branch dev (was 571df6d).
 
 $ git branch
@@ -764,19 +764,19 @@ $ git branch
 <h3 id="解决合并冲突">解决合并冲突</h3>
 <p>有时候我们合并分支并不会这么轻松，分支间经常会出现各种各样的冲突。接下来我们就要解决这些冲突。</p>
 <p>先准备一个新的分支，并在这个分支上提交新的修改</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618744422625">复制</button><span class="hljs-meta">$</span><span class="bash"> git checkout -b feature</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620550764121">复制</button><span class="hljs-meta">$</span><span class="bash"> git checkout -b feature</span>
 Switched to a new branch &#x27;feature&#x27;
-<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618744422625">$ git checkout -b feature
+<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620550764121">$ git checkout -b feature
 Switched to a new branch 'feature'
 </textarea>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618747991718">复制</button>This is a big project to learn git
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620553355108">复制</button>This is a big project to learn git
 I love git
 这是一个学习Git的项目
 <span class="hljs-meta">C#</span><span class="bash"> is a good programming language</span>
 Java is also a good programming language
 Create a new branch
 Create a new feature branch
-<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618747991718">This is a big project to learn git
+<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620553355108">This is a big project to learn git
 I love git
 这是一个学习Git的项目
 C# is a good programming language
@@ -784,29 +784,29 @@ Java is also a good programming language
 Create a new branch
 Create a new feature branch
 </textarea>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618746549654">复制</button><span class="hljs-meta">$</span><span class="bash"> git add README.md</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620551116451">复制</button><span class="hljs-meta">$</span><span class="bash"> git add README.md</span>
 <span class="hljs-meta">$</span><span class="bash"> git commit -m <span class="hljs-string">&quot;new feature branch&quot;</span></span>
 [feature e5c49d4] new feature branch
  1 file changed, 2 insertions(+), 1 deletion(-)
-<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618746549654">$ git add README.md
+<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620551116451">$ git add README.md
 $ git commit -m "new feature branch"
 [feature e5c49d4] new feature branch
  1 file changed, 2 insertions(+), 1 deletion(-)
 </textarea>
 <p>然后切换回<code>master</code>分支，并将修改文件</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618740036174">复制</button><span class="hljs-meta">$</span><span class="bash"> git checkout master</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620550905445">复制</button><span class="hljs-meta">$</span><span class="bash"> git checkout master</span>
 Switched to branch &#x27;master&#x27;
-<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618740036174">$ git checkout master
+<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620550905445">$ git checkout master
 Switched to branch 'master'
 </textarea>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618747217390">复制</button>This is a big project to learn git
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620548149368">复制</button>This is a big project to learn git
 I love git
 这是一个学习Git的项目
 <span class="hljs-meta">C#</span><span class="bash"> is a good programming language</span>
 Java is also a good programming language
 Create a new branch
 Create a new feature branch is easy
-<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618747217390">This is a big project to learn git
+<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620548149368">This is a big project to learn git
 I love git
 这是一个学习Git的项目
 C# is a good programming language
@@ -815,17 +815,17 @@ Create a new branch
 Create a new feature branch is easy
 </textarea>
 <p>提交</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618743262864">复制</button><span class="hljs-meta">$</span><span class="bash"> git add README.md</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620553305747">复制</button><span class="hljs-meta">$</span><span class="bash"> git add README.md</span>
 <span class="hljs-meta">$</span><span class="bash"> git commit -m <span class="hljs-string">&quot;is easy&quot;</span></span>
 [master f730807] is easy
  1 file changed, 2 insertions(+), 1 deletion(-)
-<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618743262864">$ git add README.md
+<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620553305747">$ git add README.md
 $ git commit -m "is easy"
 [master f730807] is easy
  1 file changed, 2 insertions(+), 1 deletion(-)
 </textarea>
 <p>现在，两个分支都有了各自的新提交，我们可以使用<code>git log --decorate --graph --oneline --all</code>将提交历史和所属分支以图形化显示出来</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618745483300">复制</button><span class="hljs-meta">$</span><span class="bash"> git <span class="hljs-built_in">log</span> --decorate --graph --oneline --all</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620546299989">复制</button><span class="hljs-meta">$</span><span class="bash"> git <span class="hljs-built_in">log</span> --decorate --graph --oneline --all</span>
 * f730807 (HEAD -&gt; master) is easy
 | * e5c49d4 (feature) new feature branch
 |/
@@ -838,7 +838,7 @@ $ git commit -m "is easy"
 * 4572a22 add a newline
 * 01c7561 change readme
 * 45b6484 add a readme file
-<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618745483300">$ git log --decorate --graph --oneline --all
+<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620546299989">$ git log --decorate --graph --oneline --all
 * f730807 (HEAD -> master) is easy
 | * e5c49d4 (feature) new feature branch
 |/
@@ -853,18 +853,18 @@ $ git commit -m "is easy"
 * 45b6484 add a readme file
 </textarea>
 <p>在这种情况下，两个分支是无法快速合并的，只能试图把各自的修改合并起来，但这种合并就可能会出现冲突。</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618743497511">复制</button><span class="hljs-meta">$</span><span class="bash"> git merge feature</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620548518076">复制</button><span class="hljs-meta">$</span><span class="bash"> git merge feature</span>
 Auto-merging README.md
 CONFLICT (content): Merge conflict in README.md
 Automatic merge failed; fix conflicts and then commit the result.
-<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618743497511">$ git merge feature
+<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620548518076">$ git merge feature
 Auto-merging README.md
 CONFLICT (content): Merge conflict in README.md
 Automatic merge failed; fix conflicts and then commit the result.
 </textarea>
 <p>这个时候Git就告诉我们<code>README.md</code>文件出现了冲突，必须手动解决冲突后再提交。</p>
 <p><code>git status</code>也会告诉我们冲突文件</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618745091847">复制</button><span class="hljs-meta">$</span><span class="bash"> git status</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620552924028">复制</button><span class="hljs-meta">$</span><span class="bash"> git status</span>
 On branch master
 You have unmerged paths.
   (fix conflicts and run &quot;git commit&quot;)
@@ -875,7 +875,7 @@ Unmerged paths:
         both modified:   README.md
 
 no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
-<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618745091847">$ git status
+<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620552924028">$ git status
 On branch master
 You have unmerged paths.
   (fix conflicts and run "git commit")
@@ -888,7 +888,7 @@ Unmerged paths:
 no changes added to commit (use "git add" and/or "git commit -a")
 </textarea>
 <p>我们可以直接查看<code>README.md</code>的内容</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618743165773">复制</button>This is a big project to learn git
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620553720234">复制</button>This is a big project to learn git
 I love git
 这是一个学习Git的项目
 <span class="hljs-meta">C#</span><span class="bash"> is a good programming language</span>
@@ -899,7 +899,7 @@ Create a new feature branch is easy
 =======
 Create a new feature branch
 <span class="hljs-meta">&gt;</span><span class="bash">&gt;&gt;&gt;&gt;&gt;&gt; feature</span>
-<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618743165773">This is a big project to learn git
+<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620553720234">This is a big project to learn git
 I love git
 这是一个学习Git的项目
 C# is a good programming language
@@ -912,18 +912,18 @@ Create a new feature branch
 >>>>>>> feature
 </textarea>
 <p>Git用<code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>，<code>=======</code>，<code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code>标记出不同分支的内容，我们修改后保存再次提交</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618743706539">复制</button>Create a new feature branch is simple
-<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618743706539">Create a new feature branch is simple
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620549185034">复制</button>Create a new feature branch is simple
+<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620549185034">Create a new feature branch is simple
 </textarea>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618743337530">复制</button><span class="hljs-meta">$</span><span class="bash"> git add README.md</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620545829772">复制</button><span class="hljs-meta">$</span><span class="bash"> git add README.md</span>
 <span class="hljs-meta">$</span><span class="bash"> git commit -m <span class="hljs-string">&quot;is simple&quot;</span></span>
 [master 1ecaa98] is simple
-<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618743337530">$ git add README.md
+<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620545829772">$ git add README.md
 $ git commit -m "is simple"
 [master 1ecaa98] is simple
 </textarea>
 <p>然后我们再次查看分支情况</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618744185553">复制</button><span class="hljs-meta">$</span><span class="bash"> git <span class="hljs-built_in">log</span> --decorate --graph --oneline --all</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620550728469">复制</button><span class="hljs-meta">$</span><span class="bash"> git <span class="hljs-built_in">log</span> --decorate --graph --oneline --all</span>
 *   1ecaa98 (HEAD -&gt; master) is simple
 |\
 | * e5c49d4 (feature) new feature branch
@@ -938,7 +938,7 @@ $ git commit -m "is simple"
 * 4572a22 add a newline
 * 01c7561 change readme
 * 45b6484 add a readme file
-<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618744185553">$ git log --decorate --graph --oneline --all
+<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620550728469">$ git log --decorate --graph --oneline --all
 *   1ecaa98 (HEAD -> master) is simple
 |\
 | * e5c49d4 (feature) new feature branch
@@ -955,9 +955,9 @@ $ git commit -m "is simple"
 * 45b6484 add a readme file
 </textarea>
 <p>这时分支就合并成功了，最后删除<code>feature</code>分支</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1618739159247">复制</button><span class="hljs-meta">$</span><span class="bash"> git branch -d feature</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620549486554">复制</button><span class="hljs-meta">$</span><span class="bash"> git branch -d feature</span>
 Deleted branch feature (was e5c49d4).
-<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1618739159247">$ git branch -d feature
+<b class="name">shell</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620549486554">$ git branch -d feature
 Deleted branch feature (was e5c49d4).
 </textarea>
 <h3 id="分支管理策略">分支管理策略</h3>
