@@ -68,21 +68,21 @@
     
       <li class="nav-item">
         <a href="/archives">
-          <span class="nav-item__count">31</span>
+          <span class="nav-item__count">32</span>
           <span class="nav-item__label">归档</span>
         </a>
       </li>
     
       <li class="nav-item">
         <a href="/categories">
-          <span class="nav-item__count">1</span>
+          <span class="nav-item__count">2</span>
           <span class="nav-item__label">分类</span>
         </a>
       </li>
     
       <li class="nav-item">
         <a href="/tags">
-          <span class="nav-item__count">45</span>
+          <span class="nav-item__count">44</span>
           <span class="nav-item__label">标签</span>
         </a>
       </li>
@@ -133,7 +133,7 @@
 <h2 id="原理">原理</h2>
 <p>将每个页面所在的文件夹都看作是一个单独的单页面程序目录，配置多个<code>entry</code>以及<code>html-webpack-plugin</code>即可实现多页面打包。</p>
 <p>下面为本项目目录结构</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620560718597">复制</button>.
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1621264956614">复制</button>.
 ├─ src
 │  └─ pages
 │       ├─ about
@@ -145,7 +145,7 @@
 │            ├─ index.html
 │            └─ index.js
 └─ webpack.config.js
-</code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620560718597">.
+</code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1621264956614">.
 ├─ src
 │  └─ pages
 │       ├─ about
@@ -160,7 +160,7 @@
 </textarea>
 <h2 id="单页面打包基础配置">单页面打包基础配置</h2>
 <p>首先我们来看一下单页面程序的 webpack 基础配置</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620557958910">复制</button><span class="hljs-keyword">const</span> HtmlWebpackPlugin = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;html-webpack-plugin&#x27;</span>);
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1621264379910">复制</button><span class="hljs-keyword">const</span> HtmlWebpackPlugin = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;html-webpack-plugin&#x27;</span>);
 
 <span class="hljs-built_in">module</span>.exports = {
   <span class="hljs-attr">entry</span>: <span class="hljs-string">&#x27;./src/index.js&#x27;</span>,
@@ -175,7 +175,7 @@
     <span class="hljs-attr">filename</span>: <span class="hljs-string">&#x27;bundle.js&#x27;</span>,
   },
 };
-<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620557958910">const HtmlWebpackPlugin = require('html-webpack-plugin');
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1621264379910">const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: './src/index.js',
@@ -195,14 +195,14 @@ module.exports = {
 <h2 id="多页面打包基础配置">多页面打包基础配置</h2>
 <h3 id="改造入口">改造入口</h3>
 <p>传统的多入口写法可以写成键值对的形式</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620562328335">复制</button><span class="hljs-built_in">module</span>.exports = {
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1621258235425">复制</button><span class="hljs-built_in">module</span>.exports = {
   <span class="hljs-attr">entry</span>: {
     <span class="hljs-attr">index</span>: <span class="hljs-string">&#x27;./src/pages/index/index.js&#x27;</span>,
     <span class="hljs-attr">about</span>: <span class="hljs-string">&#x27;./src/pages/about/index.js&#x27;</span>,
   },
   ...
 }
-<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620562328335">module.exports = {
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1621258235425">module.exports = {
   entry: {
     index: './src/pages/index/index.js',
     about: './src/pages/about/index.js',
@@ -211,7 +211,7 @@ module.exports = {
 }
 </textarea>
 <p>这样写的话，每增加一个页面就需要手动添加一个入口，比较麻烦，因此我们可以定义一个根据目录生成入口的函数来简化我们的操作</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620558509883">复制</button><span class="hljs-keyword">const</span> glob = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;glob&#x27;</span>);
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1621263234094">复制</button><span class="hljs-keyword">const</span> glob = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;glob&#x27;</span>);
 
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getEntry</span>(<span class="hljs-params"></span>) </span>{
   <span class="hljs-keyword">const</span> entry = {};
@@ -226,7 +226,7 @@ module.exports = {
   <span class="hljs-attr">entry</span>: getEntry(),
   ...
 }
-<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620558509883">const glob = require('glob');
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1621263234094">const glob = require('glob');
 
 function getEntry() {
   const entry = {};
@@ -244,7 +244,7 @@ module.exports = {
 </textarea>
 <h3 id="改造输出">改造输出</h3>
 <p>在输出的配置项中，再将输出的文件名写死显示已经不合适了，因此我们要将名字改为与源文件相匹配的名字</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620562803454">复制</button><span class="hljs-built_in">module</span>.exports = {
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1621258295671">复制</button><span class="hljs-built_in">module</span>.exports = {
   ...
   <span class="hljs-attr">output</span>: {
     <span class="hljs-attr">path</span>: path.resolve(__dirname, <span class="hljs-string">&#x27;./dist&#x27;</span>),
@@ -252,7 +252,7 @@ module.exports = {
   },
   ...
 }
-<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620562803454">module.exports = {
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1621258295671">module.exports = {
   ...
   output: {
     path: path.resolve(__dirname, './dist'),
@@ -263,7 +263,7 @@ module.exports = {
 </textarea>
 <h3 id="配置多个-html-webpack-plugin">配置多个 html-webpack-plugin</h3>
 <p>与入口相同，可以将不同的 html 模板直接写入插件配置中，这里我们需要为每个插件配置不同的<code>chunks</code>，防止 js 注入到错误的 html 中</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620565230366">复制</button><span class="hljs-keyword">const</span> HtmlWebpackPlugin = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;html-webpack-plugin&#x27;</span>);
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1621255484315">复制</button><span class="hljs-keyword">const</span> HtmlWebpackPlugin = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;html-webpack-plugin&#x27;</span>);
 
 <span class="hljs-built_in">module</span>.exports = {
   ...
@@ -281,7 +281,7 @@ module.exports = {
   ],
   ...
 };
-<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620565230366">const HtmlWebpackPlugin = require('html-webpack-plugin');
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1621255484315">const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   ...
@@ -301,7 +301,7 @@ module.exports = {
 };
 </textarea>
 <p>这样的做法与入口有着同样的毛病，因此我们再定义一个函数来生成这个配置</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620565738637">复制</button><span class="hljs-keyword">const</span> HtmlWebpackPlugin = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;html-webpack-plugin&#x27;</span>);
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1621264399886">复制</button><span class="hljs-keyword">const</span> HtmlWebpackPlugin = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;html-webpack-plugin&#x27;</span>);
 <span class="hljs-keyword">const</span> glob = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;glob&#x27;</span>);
 
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getHtmlTemplate</span>(<span class="hljs-params"></span>) </span>{
@@ -325,7 +325,7 @@ module.exports = {
   <span class="hljs-attr">plugins</span>: [...getHtmlTemplate()],
   ...
 };
-<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620565738637">const HtmlWebpackPlugin = require('html-webpack-plugin');
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1621264399886">const HtmlWebpackPlugin = require('html-webpack-plugin');
 const glob = require('glob');
 
 function getHtmlTemplate() {
@@ -353,7 +353,7 @@ module.exports = {
 <p>这样一个简单的多页面项目就配置完成了，我们还可以在此基础上添加热更新、代码分割等功能，有兴趣的可以自己尝试一下</p>
 <h2 id="完整配置">完整配置</h2>
 <p>项目地址：<a href="https://github.com/xmy6364/webpack-multipage">xmy6364/webpack-multipage</a></p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620561139801">复制</button><span class="hljs-comment">// webpack.config.js</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1621260713912">复制</button><span class="hljs-comment">// webpack.config.js</span>
 
 <span class="hljs-keyword">const</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;path&#x27;</span>);
 <span class="hljs-keyword">const</span> HtmlWebpackPlugin = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;html-webpack-plugin&#x27;</span>);
@@ -413,7 +413,7 @@ module.exports = {
 };
 
 <span class="hljs-built_in">module</span>.exports = config;
-<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620561139801">// webpack.config.js
+<b class="name">js</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1621260713912">// webpack.config.js
 
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');

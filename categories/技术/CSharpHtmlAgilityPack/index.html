@@ -68,21 +68,21 @@
     
       <li class="nav-item">
         <a href="/archives">
-          <span class="nav-item__count">31</span>
+          <span class="nav-item__count">32</span>
           <span class="nav-item__label">归档</span>
         </a>
       </li>
     
       <li class="nav-item">
         <a href="/categories">
-          <span class="nav-item__count">1</span>
+          <span class="nav-item__count">2</span>
           <span class="nav-item__label">分类</span>
         </a>
       </li>
     
       <li class="nav-item">
         <a href="/tags">
-          <span class="nav-item__count">45</span>
+          <span class="nav-item__count">44</span>
           <span class="nav-item__label">标签</span>
         </a>
       </li>
@@ -143,18 +143,18 @@
 </ol>
 <h2 id="实例获取某页面图片">实例(获取某页面图片)</h2>
 <h3 id="加载html页面">加载HTML页面</h3>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620562488718">复制</button><span class="hljs-comment">//从网页中加载</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1621255768802">复制</button><span class="hljs-comment">//从网页中加载</span>
 <span class="hljs-built_in">string</span> url = <span class="hljs-string">&quot;https://www.bilibili.com&quot;</span>;
 HtmlWeb web = <span class="hljs-keyword">new</span> HtmlWeb();
 HtmlDocument hd = web.Load(url);
-<b class="name">csharp</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620562488718">//从网页中加载
+<b class="name">csharp</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1621255768802">//从网页中加载
 string url = "https://www.bilibili.com";
 HtmlWeb web = new HtmlWeb();
 HtmlDocument hd = web.Load(url);
 </textarea>
 <h3 id="利用webclient写一个图片下载器">利用WebClient写一个图片下载器</h3>
 <p>需要<code>using System.Net</code>和<code>using System.IO</code></p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620557849134">复制</button><span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;summary&gt;</span></span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1621256714664">复制</button><span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;summary&gt;</span></span>
 <span class="hljs-comment"><span class="hljs-doctag">///</span> 图片下载器</span>
 <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;/summary&gt;</span></span>
 <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ImgDownloader</span>
@@ -191,7 +191,7 @@ HtmlDocument hd = web.Load(url);
         }
     }
 }
-<b class="name">csharp</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620557849134">/// <summary>
+<b class="name">csharp</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1621256714664">/// <summary>
 /// 图片下载器
 /// </summary>
 public class ImgDownloader
@@ -230,7 +230,7 @@ public class ImgDownloader
 }
 </textarea>
 <h3 id="通过xpath获取img标签中的图片">通过Xpath获取img标签中的图片</h3>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620559939625">复制</button><span class="hljs-built_in">string</span> imgPath = <span class="hljs-string">&quot;//img&quot;</span>;<span class="hljs-comment">//选择img</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1621264774614">复制</button><span class="hljs-built_in">string</span> imgPath = <span class="hljs-string">&quot;//img&quot;</span>;<span class="hljs-comment">//选择img</span>
 <span class="hljs-built_in">int</span> imgNum = <span class="hljs-number">0</span>;<span class="hljs-comment">//图片编号</span>
 <span class="hljs-comment">//获取img标签中的图片</span>
 <span class="hljs-keyword">foreach</span> (HtmlNode node <span class="hljs-keyword">in</span> hd.DocumentNode.SelectNodes(imgPath))
@@ -247,7 +247,7 @@ public class ImgDownloader
         }
     }
 }
-<b class="name">csharp</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620559939625">string imgPath = "//img";//选择img
+<b class="name">csharp</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1621264774614">string imgPath = "//img";//选择img
 int imgNum = 0;//图片编号
 //获取img标签中的图片
 foreach (HtmlNode node in hd.DocumentNode.SelectNodes(imgPath))
@@ -266,7 +266,7 @@ foreach (HtmlNode node in hd.DocumentNode.SelectNodes(imgPath))
 }
 </textarea>
 <h3 id="通过xpath获取背景图">通过Xpath获取背景图</h3>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620558904107">复制</button><span class="hljs-comment">//获取背景图</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1621255557065">复制</button><span class="hljs-comment">//获取背景图</span>
 <span class="hljs-built_in">string</span> bgImgPath = <span class="hljs-string">&quot;//*[@style]&quot;</span>;<span class="hljs-comment">//选择具有style属性的节点</span>
 <span class="hljs-keyword">foreach</span> (HtmlNode node <span class="hljs-keyword">in</span> hd.DocumentNode.SelectNodes(bgImgPath))
 {
@@ -282,7 +282,7 @@ foreach (HtmlNode node in hd.DocumentNode.SelectNodes(imgPath))
         ImgDownloader.DownloadImg(wc, bgImgUrl, <span class="hljs-string">&quot;images/bgcImg/&quot;</span>, fileName);
     }
 }
-<b class="name">csharp</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620558904107">//获取背景图
+<b class="name">csharp</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1621255557065">//获取背景图
 string bgImgPath = "//*[@style]";//选择具有style属性的节点
 foreach (HtmlNode node in hd.DocumentNode.SelectNodes(bgImgPath))
 {
@@ -301,7 +301,7 @@ foreach (HtmlNode node in hd.DocumentNode.SelectNodes(bgImgPath))
 </textarea>
 <h3 id="完整代码">完整代码</h3>
 <p>&lt;details&gt;</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1620566149784">复制</button><span class="hljs-keyword">using</span> System.Linq;
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1621259758439">复制</button><span class="hljs-keyword">using</span> System.Linq;
 <span class="hljs-keyword">using</span> System.Text;
 <span class="hljs-keyword">using</span> System.Threading.Tasks;
 <span class="hljs-keyword">using</span> System.Net;
@@ -400,7 +400,7 @@ foreach (HtmlNode node in hd.DocumentNode.SelectNodes(bgImgPath))
         }
     }
 }
-<b class="name">csharp</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1620566149784">using System.Linq;
+<b class="name">csharp</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1621259758439">using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Net;

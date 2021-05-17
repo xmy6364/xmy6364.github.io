@@ -28,7 +28,7 @@
   <script defer src="/assets/js/copyright.js"></script>
 
 
-    <title>搭建hexo静态博客</title>
+    <title>JavaScript的事件循环机制（Event Loop）</title>
   </head>
   <body>
     <div class="container">
@@ -97,69 +97,74 @@
         
   <div class="post">
     <div class="post-front">
-      <h1 class="post-front__title">搭建hexo静态博客</h1>
+      <h1 class="post-front__title">JavaScript的事件循环机制（Event Loop）</h1>
       <div class="post-front__desc">
         
         <p class="post-front__desc-date">
           <i class="fa fa-calendar" aria-hidden="true"></i>
-          2019/08/31 09:13:23
+          2021/05/17 17:12:32
         </p>
         
         
         <p class="post-front__desc-category">
           <i class="fa fa-folder-o" aria-hidden="true"></i>
-          <a href="/categories/工具">
-            工具
+          <a href="/categories/技术">
+            技术
           </a>
         </p>
         
           <div class="post-front__desc-tags">
           
-          <a href="/tags/hexo">
+          <a href="/tags/JavaScript">
             <i class="fa fa-tag" aria-hidden="true"></i>
-            hexo
+            JavaScript
           </a>
           
         </div>
       </div>
     </div>
     <div class="post-content">
-      <nav id="toc" class="toc"><ol><li><a href="#需要的工具">需要的工具</a></li><li><a href="#正式开始">正式开始</a></li><li><a href="#添加新的文章">添加新的文章</a></li></ol></nav><p>使用hexo搭建博客，并将博客部署到github</p>
-<h2 id="需要的工具">需要的工具</h2>
+      <nav id="toc" class="toc"><ol><li><a href="#单线程">单线程</a></li><li><a href="#执行栈与任务队列">执行栈与任务队列</a></li><li><a href="#微任务与宏任务">微任务与宏任务</a></li></ol></nav><p>事件循环机制是JavaScript运行的核心，因此要想写出bug少的js代码就必须要了解这个机制是如何运作的，以及为什么会有这个机制。</p>
+<p>本篇文章是我对Event Loop的理解</p>
+<h2 id="单线程">单线程</h2>
+<p>JavaScript是一个单线程的非阻塞的脚本语言，也就是说JavaScript在同一时间只能做一件事。那么，为什么JavaScript不能有多个线程呢？</p>
+<p>在最开始JavaScript还不像现在是一个全能的语言，那个时候它只有一个任务，就是作为浏览器的脚本，与用户互动和操作DOM。这就决定了它只能是单线程的，不然会带来很复杂的问题。比如：如果JavaScript有两个线程，一个线程在某个DOM节点上添加了内容，而另一个线程删除了这个节点，那么这个时候应该以哪个线程为准？</p>
+<p>所以在最开始JavaScript命中注定是单线程的语言。</p>
+<blockquote>
+<p>HTML5之后提出了Web Worker，为JavaScript提供了多线程环境，但是子线程完全受主线程控制并且不能操作DOM，因此并没有改变JavaScript单线程的本质</p>
+</blockquote>
+<h2 id="执行栈与任务队列">执行栈与任务队列</h2>
+<p>为了解决单线程导致的CPU利用率低以及后一个任务必须等待前一个任务结束才能执行的问题，JavaScript将所有任务分成了<strong>同步任务</strong>和<strong>异步任务</strong>，同步任务会在进入主线程<strong>执行栈</strong>，而异步任务会进入<strong>任务队列</strong>等执行栈所有任务执行完毕后才会进入执行栈执行。</p>
+<blockquote>
+<p>JavaScript是单线程的，但是JavaScript的执行环境不是，浏览器会为异步任务单独开一个线程，也就是任务队列</p>
+</blockquote>
+<p>主线程会不断重复以下三个步骤：</p>
+<ol>
+<li>同步任务进入执行栈执行</li>
+<li>异步任务进入主线程之外的任务队列</li>
+<li>执行栈中的所有同步任务执行完毕后，读取任务队列中的任务，放入执行栈中执行</li>
+</ol>
+<h2 id="微任务与宏任务">微任务与宏任务</h2>
+<p>异步任务又被分为<strong>微任务</strong>和<strong>宏任务</strong>，它们之间的执行优先级并不相同，微任务总会在宏任务之前执行，也就是说：同步任务&gt;微任务&gt;宏任务。</p>
+<blockquote>
+<p>在浏览器中，微任务的任务队列会在每个宏任务执行完后执行</p>
+<p>老版本的Nodejs中有所不同，微任务会在事件循环的各个阶段之间执行</p>
+<p>Nodejs V11之后就与浏览器的机制相同了</p>
+</blockquote>
+<p>微任务：</p>
 <ul>
-<li><a href="https://nodejs.org/zh-cn/">Node.js</a></li>
-<li><a href="https://github.com/waylau/git-for-win">Git</a></li>
-<li>一个Github账号</li>
+<li>Promise的<code>Promise.then</code>`Promise.catch<code>\</code>Promise.finally`</li>
+<li>MutationObserver（可以用来监听DOM变动）</li>
+<li><code>proccess.nextTick</code>（nodejs独有）</li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/WindowOrWorkerGlobalScope/queueMicrotask">queueMicrotask</a></li>
 </ul>
-<h2 id="正式开始">正式开始</h2>
-<ol>
-<li>在任意目录下新建一个文件夹，如blog，在该文件夹下右键打开git bash here，执行<code>npm install -g hexo-cli</code>，安装hexo</li>
-<li>执行<code>hexo init</code></li>
-<li>执行<code>npm install</code></li>
-<li>根据提示依次执行<code>npm audit fix</code>和<code>npm audit fix --force</code></li>
-<li>执行<code>hexo g</code>，生成博客</li>
-<li>执行<code>hexo s</code>后，可以在 http://localhost:4000 上预览博客</li>
-<li>在github上新建一个仓库，命名为username.github.io，其中username必须为你github的用户名</li>
-<li>执行<code>npm install hexo-deployer-git --save</code>，安装deployer-git，用来将hexo推送到github</li>
-<li>修改配置文件：在文件夹中找到并打开<code>_config.yml</code>文件，将文件末尾的deploy部分更改如下，repo: 后填写你新建的github仓库的地址。<strong>注意: 请使用英文冒号以及冒号后要有空格</strong></li>
-</ol>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1621256230279">复制</button><span class="hljs-attr">deploy:</span>
-  <span class="hljs-attr">type:</span> <span class="hljs-string">git</span>
-  <span class="hljs-attr">repo:</span> <span class="hljs-string">https://github.com/xmy6364/xmy6364.github.io.git</span>
-  <span class="hljs-attr">branch:</span> <span class="hljs-string">master</span>
-<b class="name">yml</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1621256230279">deploy:
-  type: git
-  repo: https://github.com/xmy6364/xmy6364.github.io.git
-  branch: master
-</textarea>
-<ol start="10">
-<li>分别执行<code>hexo clean</code>，<code>hexo g</code>，<code>hexo d</code>，即可在 https://username.github.io *(username为你的用户名)*中看到自己的博客</li>
-</ol>
-<h2 id="添加新的文章">添加新的文章</h2>
-<ol>
-<li>执行<code>hexo new &quot;文章标题&quot;</code>，会在<code>\source\_posts</code>下生成一个md文件，在该文件中编辑文章即可</li>
-<li>写完文章后，分别执行<code>hexo g</code>，<code>hexo d</code>，即可将文章发布成功，如果网站上没有出现文章可以稍等一会儿再刷新。(<code>hexo clean</code>在发布和修改文章时可以不执行，在修改主题后需要执行)</li>
-</ol>
+<p>宏任务：</p>
+<ul>
+<li>script标签中的代码</li>
+<li>事件触发的回调函数，如：DOM的事件回调、<code>requestAnimationFrame</code>、IO操作</li>
+<li>定时器的回调函数</li>
+</ul>
+<p>可能还会完善...</p>
 
     </div>
     
