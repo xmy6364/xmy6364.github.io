@@ -68,7 +68,7 @@
     
       <li class="nav-item">
         <a href="/archives">
-          <span class="nav-item__count">32</span>
+          <span class="nav-item__count">33</span>
           <span class="nav-item__label">归档</span>
         </a>
       </li>
@@ -82,7 +82,7 @@
     
       <li class="nav-item">
         <a href="/tags">
-          <span class="nav-item__count">44</span>
+          <span class="nav-item__count">45</span>
           <span class="nav-item__label">标签</span>
         </a>
       </li>
@@ -126,21 +126,21 @@
     <div class="post-content">
       <nav id="toc" class="toc"><ol><li><a href="#参考文章">参考文章</a></li></ol></nav><p>src 和 href 都是用来引入外部资源的属性，例如：图片、视频、CSS 文件、JavaScript 文件等。
 那么它们两者之间究竟有什么样的区别呢？</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1621263085484">复制</button><span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;style.css&quot;</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">&quot;stylesheet&quot;</span> /&gt;</span>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1622202802125">复制</button><span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;style.css&quot;</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">&quot;stylesheet&quot;</span> /&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;pic.png&quot;</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;pic&quot;</span> /&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;script.js&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
-<b class="name">html</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1621263085484"><link href="style.css" rel="stylesheet" />
+<b class="name">html</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1622202802125"><link href="style.css" rel="stylesheet" />
 <img src="pic.png" alt="pic" />
 <script src="script.js"></script>
 </textarea>
 <p><strong>href</strong>(Hypertext Reference超文本引用)属性通过指定Web资源的位置，来定义当前元素或者当前文档与目标资源之间的链接或关系。当我们引入CSS文件时：</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1621257295997">复制</button><span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;style.css&quot;</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">&quot;stylesheet&quot;</span> /&gt;</span>
-<b class="name">html</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1621257295997"><link href="style.css" rel="stylesheet" />
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1622202132272">复制</button><span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;style.css&quot;</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">&quot;stylesheet&quot;</span> /&gt;</span>
+<b class="name">html</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1622202132272"><link href="style.css" rel="stylesheet" />
 </textarea>
 <p>浏览器会明白这是一个样式表资源，这时浏览器对于页面（HTML）的解析不会暂停（渲染可能会暂停，因为浏览器需要使用样式表的样式来绘制页面），这是因为它并不会像<code>@import</code>一样将整个CSS文件嵌入到<code>style</code>标签中。</p>
 <p><strong>src</strong>(Source)属性会将资源嵌入到当前文档中元素所在位置。当我们引入JavaScript文件时：</p>
-<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1621257120233">复制</button><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;script.js&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
-<b class="name">html</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1621257120233"><script src="script.js"></script>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1622200385465">复制</button><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;script.js&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<b class="name">html</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1622200385465"><script src="script.js"></script>
 </textarea>
 <p>浏览器解析到这句代码时，页面的加载和解析都会暂停，直到浏览器拿到并执行完这个JavaScript文件，这就相当于将JavaScript文件中的内容全部嵌入到<code>script</code>标签中。</p>
 <p>网上有许多文章依次就认定为使用<code>src</code>属性就代表了资源会阻塞页面，我并不认同这个观点。</p>

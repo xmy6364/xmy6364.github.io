@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="author" content="xmy6364">
+    <meta name="description" content="想要成为大佬">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+
+    <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.5.0/styles/default.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.5.0/styles/github-gist.min.css">
+    <link rel="stylesheet" href="/assets/lib/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/css/layout.css" />
+    <script defer src="https://cdn.bootcdn.net/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"></script>
+    <script defer src="/assets/js/copyCode.js"></script>
+    <script defer src="/assets/js/backTop.js"></script>
+    <script defer src="/assets/js/tool.js"></script>
+
+    
+  <link rel="stylesheet" href="/assets/css/page.css" />
+  <link rel="stylesheet" href="/assets/css/sidebar.css" />
+  <link rel="stylesheet" href="/assets/css/footer.css" />
+  <link rel="stylesheet" href="/assets/css/post.css" />
+  <script defer src="/assets/js/backHome.js"></script>
+  <script defer src="/assets/js/toc.js"></script>
+  <script defer src="/assets/js/copyright.js"></script>
+
+
+    <title>使用Github Actions自动化发布npm包的探索</title>
+  </head>
+  <body>
+    <div class="container">
+      <aside>
+        
+  <div class="sidebar">
+  <header>梦的博客</header>
+  <div class="info">
+    <div class="avatar">
+      <img src="https://cdn.jsdelivr.net/gh/xmy6364/blog-image/img/pixelartoc_1.png" alt="头像">
+    </div>
+    <div class="author">xmy6364</div>
+    <div class="description">想要成为大佬</div>
+    <div class="about">
+      <a href="/about">about me.</a>
+    </div>
+  </div>
+  <div class="links">
+    <ul>
+    
+      <li class="links-item">
+        <a href="https://github.com/xmy6364" target="_blank">
+          <i class="fa fa-github-alt" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="links-item">
+        <a href="tencent://message/?uin=1176281967" target="_blank">
+          <i class="fa fa-qq" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+    </ul>
+  </div>
+  <nav>
+    <ul>
+    
+      <li class="nav-item">
+        <a href="/archives">
+          <span class="nav-item__count">33</span>
+          <span class="nav-item__label">归档</span>
+        </a>
+      </li>
+    
+      <li class="nav-item">
+        <a href="/categories">
+          <span class="nav-item__count">2</span>
+          <span class="nav-item__label">分类</span>
+        </a>
+      </li>
+    
+      <li class="nav-item">
+        <a href="/tags">
+          <span class="nav-item__count">45</span>
+          <span class="nav-item__label">标签</span>
+        </a>
+      </li>
+    
+    </ul>
+  </nav>
+  <div class="catalogue" id="catalogue"></div>
+</div>
+
+      </aside>
+      <main>
+        
+  <div class="post">
+    <div class="post-front">
+      <h1 class="post-front__title">使用Github Actions自动化发布npm包的探索</h1>
+      <div class="post-front__desc">
+        
+        <p class="post-front__desc-date">
+          <i class="fa fa-calendar" aria-hidden="true"></i>
+          2021/05/28 16:31:54
+        </p>
+        
+        
+        <p class="post-front__desc-category">
+          <i class="fa fa-folder-o" aria-hidden="true"></i>
+          <a href="/categories/工具">
+            工具
+          </a>
+        </p>
+        
+          <div class="post-front__desc-tags">
+          
+          <a href="/tags/Github Actions">
+            <i class="fa fa-tag" aria-hidden="true"></i>
+            Github Actions
+          </a>
+          
+          <a href="/tags/CI">
+            <i class="fa fa-tag" aria-hidden="true"></i>
+            CI
+          </a>
+          
+        </div>
+      </div>
+    </div>
+    <div class="post-content">
+      <nav id="toc" class="toc"><ol><li><a href="#semantic-release">semantic-release</a></li><li><a href="#配置自动化发布">配置自动化发布</a><ol><li><a href="#配置-github-actions">配置 Github Actions</a></li><li><a href="#配置-semantic-release">配置 semantic-release</a></li><li><a href="#授权">授权</a></li></ol></li><li><a href="#执行">执行</a></li><li><a href="#参考文章">参考文章</a></li></ol></nav><p>最近编写了一个封装了前端存储 API 的工具库<a href="https://www.npmjs.com/package/symstorage">symstorage</a>，准备将它发布在 npm 上方便以后使用，不过如果每次都手动从本地打包发布的话就会非常麻烦，因此这次尝试一下自动化发布。</p>
+<p>查看了许多相关文章后，我决定使用 Github Actions 配合 semantic-release 进行自动化发布。
+有关<a href="https://semantic-release.gitbook.io/semantic-release/">semantic-release</a>的详细介绍可以阅读官方文档，这里只做一些概述性的总结。</p>
+<h2 id="semantic-release">semantic-release</h2>
+<p>semantic-release 的大致工作流程如下：</p>
+<ul>
+<li>提交到特定的分支触发 release 流程</li>
+<li>验证 commit 信息，生成 release note，打 git tag</li>
+<li>其他后续流程，如生成 CHANGELOG.md，npm publish 等等（通过插件完成）</li>
+</ul>
+<p>它会根据规范化的 commit 信息进行发布并生成发布信息，默认规则：</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1622203493343">复制</button><span class="hljs-comment"># 修复bug，更新小版本1.0.x</span>
+fix: &lt;message&gt;
+
+<span class="hljs-comment"># 添加新功能，更新次版本号1.x.0</span>
+feat: &lt;message&gt;
+
+<span class="hljs-comment"># 如果feat中包含BREAKING CHANGE则会更新主版本x.0.0</span>
+<b class="name">bash</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1622203493343"># 修复bug，更新小版本1.0.x
+fix: <message>
+
+# 添加新功能，更新次版本号1.x.0
+feat: <message>
+
+# 如果feat中包含BREAKING CHANGE则会更新主版本x.0.0
+</textarea>
+<p>当然也可以通过插件配置自定义规则</p>
+<h2 id="配置自动化发布">配置自动化发布</h2>
+<h3 id="配置-github-actions">配置 Github Actions</h3>
+<blockquote>
+<p>往期 Github Actions 相关文章：<a href="https://xmy6364.github.io/categories/%E5%B7%A5%E5%85%B7/useactionstopages/">使用 Github Actions 将 Vue 项目部署到 Github Pages</a></p>
+</blockquote>
+<p>根目录下创建<code>.github/workflows/release.yml</code>，并填入如下内容：</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1622198305611">复制</button><span class="hljs-attr">name:</span> <span class="hljs-string">Release</span>
+<span class="hljs-attr">on:</span>
+  <span class="hljs-attr">push:</span>
+    <span class="hljs-attr">branches:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">main</span>
+<span class="hljs-attr">jobs:</span>
+  <span class="hljs-attr">release:</span>
+    <span class="hljs-attr">name:</span> <span class="hljs-string">Release</span>
+    <span class="hljs-attr">runs-on:</span> <span class="hljs-string">ubuntu-latest</span>
+    <span class="hljs-attr">steps:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Checkout</span>
+        <span class="hljs-attr">uses:</span> <span class="hljs-string">actions/checkout@v2</span>
+        <span class="hljs-attr">with:</span>
+          <span class="hljs-attr">fetch-depth:</span> <span class="hljs-number">0</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Setup</span> <span class="hljs-string">Node.js</span>
+        <span class="hljs-attr">uses:</span> <span class="hljs-string">actions/setup-node@v1</span>
+        <span class="hljs-attr">with:</span>
+          <span class="hljs-attr">node-version:</span> <span class="hljs-number">12</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Install</span> <span class="hljs-string">dependencies</span>
+        <span class="hljs-attr">run:</span> <span class="hljs-string">npm</span> <span class="hljs-string">ci</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Release</span>
+        <span class="hljs-attr">env:</span>
+          <span class="hljs-attr">GITHUB_TOKEN:</span> <span class="hljs-string">${{</span> <span class="hljs-string">secrets.GITHUB_TOKEN</span> <span class="hljs-string">}}</span>
+          <span class="hljs-attr">NPM_TOKEN:</span> <span class="hljs-string">${{</span> <span class="hljs-string">secrets.NPM_TOKEN</span> <span class="hljs-string">}}</span>
+        <span class="hljs-attr">run:</span> <span class="hljs-string">npx</span> <span class="hljs-string">semantic-release</span>
+<b class="name">yml</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1622198305611">name: Release
+on:
+  push:
+    branches:
+      - main
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - name: Install dependencies
+        run: npm ci
+      - name: Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npx semantic-release
+</textarea>
+<p>官方参考文档：<a href="https://github.com/semantic-release/semantic-release/blob/master/docs/recipes/github-actions.md">Using semantic-release with GitHub Actions</a></p>
+<h3 id="配置-semantic-release">配置 semantic-release</h3>
+<p>首先需要安装 semantic-release：</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1622200811050">复制</button>npm i -D semantic-release @semantic-release/changelog @semantic-release/git
+<b class="name">bash</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1622200811050">npm i -D semantic-release @semantic-release/changelog @semantic-release/git
+</textarea>
+<ul>
+<li><code>@semantic-release/changelog</code> 用来生成 CHANGELOG.md 日志文件</li>
+<li><code>@semantic-release/git</code> 用来自动修改 package.json 版本号，并提交到 Github 上</li>
+</ul>
+<p>之后在根目录下创建<code>.releaserc</code>，并填入如下内容：</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1622198179549">复制</button>{
+  <span class="hljs-attr">&quot;branches&quot;</span>: <span class="hljs-string">&quot;main&quot;</span>,
+  <span class="hljs-attr">&quot;plugins&quot;</span>: [
+    <span class="hljs-string">&quot;@semantic-release/commit-analyzer&quot;</span>,
+    <span class="hljs-string">&quot;@semantic-release/release-notes-generator&quot;</span>,
+    <span class="hljs-string">&quot;@semantic-release/changelog&quot;</span>,
+    <span class="hljs-string">&quot;@semantic-release/npm&quot;</span>,
+    [
+      <span class="hljs-string">&quot;@semantic-release/git&quot;</span>,
+      {
+        <span class="hljs-attr">&quot;assets&quot;</span>: [<span class="hljs-string">&quot;package.json&quot;</span>, <span class="hljs-string">&quot;CHANGELOG.md&quot;</span>],
+        <span class="hljs-attr">&quot;message&quot;</span>: <span class="hljs-string">&quot;chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}&quot;</span>
+      }
+    ],
+    <span class="hljs-string">&quot;@semantic-release/github&quot;</span>
+  ]
+}
+<b class="name">json</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1622198179549">{
+  "branches": "main",
+  "plugins": [
+    "@semantic-release/commit-analyzer",
+    "@semantic-release/release-notes-generator",
+    "@semantic-release/changelog",
+    "@semantic-release/npm",
+    [
+      "@semantic-release/git",
+      {
+        "assets": ["package.json", "CHANGELOG.md"],
+        "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+      }
+    ],
+    "@semantic-release/github"
+  ]
+}
+</textarea>
+<p>配置中有一些我们没有手动安装的包已经在安装 semantic-release 时自动安装了</p>
+<h3 id="授权">授权</h3>
+<p>在 npm 官网登陆后，点击头像，选择 Access Tokens，点击 Generate New Token 按钮，之后选择类型为 Publish 生成</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xmy6364/blog-image/img/npmaccesstoken.png" alt="npm授权"></p>
+<p>然后到仓库的<code>Settings/Secret</code>下，点击<code>New repository secret</code>将刚才保存的密钥保存，并命名为<code>NPM_TOKEN</code></p>
+<blockquote>
+<p>如果这里命名不为 NPM_TOKEN，上面的 release.yml 中的${{ secrets.NPM_TOKEN }}也需要修改。GITHUB_TOKEN 会自动生成，不需要手动配置</p>
+</blockquote>
+<h2 id="执行">执行</h2>
+<p>配置完成后就可以尝试提交发布了</p>
+<pre class="hljs"><code><button class="copy-btn" type="button" data-clipboard-action="copy" data-clipboard-target="#copy1622202050151">复制</button>git add .
+git commit -m <span class="hljs-string">&#x27;feat: semantic-release&#x27;</span> <span class="hljs-comment"># 注意feat:后需要一个空格</span>
+git push
+<b class="name">bash</b></code><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre><textarea style="position: absolute;top: -9999px;left: -9999px;z-index: -9999;" id="copy1622202050151">git add .
+git commit -m 'feat: semantic-release' # 注意feat:后需要一个空格
+git push
+</textarea>
+<h2 id="参考文章">参考文章</h2>
+<ul>
+<li><a href="https://blog.dteam.top/posts/2020-05/semantic-release.html">团队敏捷实践 —— 使用 semantic-release 自动管理发布版本</a></li>
+<li><a href="https://meixg.cn/2021/01/20/semantic-release-guide/">Github 自动发版机器人 semantic-release 配置教程</a></li>
+</ul>
+
+    </div>
+    
+  </div>
+
+        <footer>
+        
+  <div class="footer">
+  
+  <div class="theme">
+    博客主题为 <a href="https://github.com/xmy6364/CoinRailgun">CoinRailgun</a> 默认主题
+  </div>
+  <div class="copyright">
+    <span>© 2019-2021 xmy6364.</span>
+    <span>Powered by <a href="https://github.com/xmy6364/CoinRailgun">CoinRailgun</a></span>
+  </div>
+</div>
+
+        </footer>
+      </main>
+    </div>
+  </body>
+</html>
